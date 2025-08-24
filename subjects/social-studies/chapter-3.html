@@ -3,27 +3,1485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 3 - Social Studies</title>
+    <title>Chapter 3: Government & Citizenship Simulations - Social Studies</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <style>
+        /* Government & Citizenship Chapter 3 Specific Styles */
+        .chapter-description {
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Three Branches of Government Styles */
+        .branches-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .government-branch {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .government-branch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .government-branch.visited {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            border: 3px solid #f39c12;
+        }
+
+        .government-branch.expanded {
+            transform: scale(1.02);
+        }
+
+        .branch-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .government-branch h4 {
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .government-branch p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .branch-details {
+            background: rgba(0,0,0,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .branch-details strong {
+            display: inline-block;
+            width: 60px;
+            margin-right: 0.5rem;
+        }
+
+        /* Checks and Balances Game Styles */
+        .checks-balances {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .power-matching {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .power-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .power-card {
+            background: #e74c3c;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: move;
+            text-align: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .power-card:hover {
+            background: #c0392b;
+            transform: translateX(5px);
+        }
+
+        .branch-dropzones {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .drop-zone h5 {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: #34495e;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .drop-area {
+            min-height: 150px;
+            border: 3px dashed #bdc3c7;
+            border-radius: 10px;
+            padding: 1rem;
+            background: rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .drop-zone.drag-over .drop-area {
+            border-color: #3498db;
+            background: rgba(52,152,219,0.1);
+        }
+
+        .check-answers-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .check-answers-btn:hover {
+            background: #2ecc71;
+            transform: scale(1.05);
+        }
+
+        .matching-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background: #ecf0f1;
+        }
+
+        /* Constitution Explorer Styles */
+        .constitution-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .constitution-parts {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .const-section {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .const-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .const-section.visited {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            border: 3px solid #f1c40f;
+        }
+
+        .const-section h4 {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .section-preview {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .constitution-details {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+        }
+
+        .const-explanation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(52,152,219,0.1);
+            border-radius: 10px;
+        }
+
+        .const-explanation h5 {
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .const-explanation ul {
+            margin-left: 1rem;
+        }
+
+        .const-explanation li {
+            margin: 0.5rem 0;
+        }
+
+        /* Bill of Rights Styles */
+        .bill-of-rights {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #e8f5e8, #d5e7d5);
+            border-radius: 15px;
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .right-card {
+            background: white;
+            border: 2px solid #27ae60;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .right-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            border-color: #2ecc71;
+        }
+
+        .right-card.visited {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .amendment-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #27ae60;
+        }
+
+        .right-card.visited .amendment-number {
+            color: white;
+        }
+
+        .right-name {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .right-explanation {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 2px solid #27ae60;
+        }
+
+        .right-explanation h5 {
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+
+        .right-examples {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(39,174,96,0.1);
+            border-radius: 10px;
+        }
+
+        .right-examples h6 {
+            color: #27ae60;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Citizenship Academy Styles */
+        .citizenship-container {
+            background: #ecf0f1;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .citizenship-tabs {
+            display: flex;
+            background: #34495e;
+        }
+
+        .citizen-tab {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            color: #bdc3c7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .citizen-tab:hover {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .citizen-tab.active {
+            background: #e74c3c;
+            color: white;
+            border-bottom-color: #c0392b;
+        }
+
+        .citizenship-content {
+            padding: 2rem;
+        }
+
+        .citizen-panel {
+            display: none;
+        }
+
+        .citizen-panel.active {
+            display: block;
+        }
+
+        /* Rights Checklist Styles */
+        .rights-checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .right-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .right-item:hover {
+            border-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .right-item.checked {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .right-checkbox {
+            font-size: 1.5rem;
+        }
+
+        .right-info {
+            flex: 1;
+        }
+
+        .right-info strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .right-info p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* Responsibilities Styles */
+        .responsibility-game {
+            margin: 1rem 0;
+        }
+
+        .responsibility-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .resp-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .resp-item:hover {
+            border-color: #f39c12;
+            transform: translateX(5px);
+        }
+
+        .resp-item.completed {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .resp-status {
+            font-size: 1.5rem;
+        }
+
+        .resp-content {
+            flex: 1;
+        }
+
+        .resp-content strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .resp-content p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .responsibility-score {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        /* Voting Simulation Styles */
+        .participation-simulator {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+
+        .scenario-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .candidates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .candidate {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid #dee2e6;
+            text-align: center;
+        }
+
+        .candidate-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .candidate-platform {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .voting-booth {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .ballot {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .ballot-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ballot-option:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .ballot-option.selected {
+            background: rgba(46,204,113,0.3);
+            border: 2px solid #2ecc71;
+        }
+
+        .ballot-checkbox {
+            font-size: 1.5rem;
+        }
+
+        .vote-result {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .vote-cast {
+            text-align: center;
+        }
+
+        .vote-cast h5 {
+            margin-bottom: 1rem;
+        }
+
+        /* Democracy Actions Styles */
+        .democracy-actions {
+            margin-top: 3rem;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .action-card {
+            background: white;
+            border: 2px solid #9b59b6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            background: #9b59b6;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .action-card.selected {
+            background: #8e44ad;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .action-name {
+            font-weight: bold;
+        }
+
+        .action-result {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .action-feedback h5 {
+            color: #9b59b6;
+            margin-bottom: 1rem;
+        }
+
+        /* Citizenship Test Styles */
+        .citizenship-test {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .test-question {
+            margin-bottom: 2rem;
+        }
+
+        .start-test-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-test-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .test-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .test-option {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .test-option:hover {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+
+        .test-option:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .test-feedback {
+            margin-top: 2rem;
+        }
+
+        .test-results {
+            text-align: center;
+            background: #ecf0f1;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .score-display {
+            margin: 2rem 0;
+        }
+
+        .score-number {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .score-message {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: #2c3e50;
+        }
+
+        .retry-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .retry-btn:hover {
+            background: #2ecc71;
+            transform: scale(1.05);
+        }
+
+        /* Law Process Styles */
+        .law-process {
+            margin: 2rem 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .process-step {
+            background: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .process-step.active {
+            background: #3498db;
+            color: white;
+            transform: scale(1.05);
+            border-color: #2980b9;
+        }
+
+        .process-step.completed {
+            background: #27ae60;
+            color: white;
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .law-simulation {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .simulation-controls {
+            margin: 2rem 0;
+        }
+
+        .simulation-controls button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .simulation-controls button:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .simulation-status {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+        }
+
+        .step-active h5 {
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        /* Progress Dashboard Styles */
+        .progress-dashboard {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .skill-progress {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 80px;
+            gap: 1rem;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .skill-item span:first-child {
+            font-weight: bold;
+        }
+
+        .skill-item span:last-child {
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease;
+            min-width: 2px;
+        }
+
+        .achievement-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.5s ease;
+            border: 2px solid transparent;
+        }
+
+        .badge.locked {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .badge.unlocked {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            transform: scale(1.05);
+            border-color: #fff;
+            box-shadow: 0 10px 20px rgba(241,196,15,0.3);
+            animation: badgeUnlock 0.6s ease;
+        }
+
+        @keyframes badgeUnlock {
+            0% { transform: scale(0.8) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.15) rotate(5deg); }
+            100% { transform: scale(1.05) rotate(0deg); opacity: 1; }
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .badge-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideIn 0.5s ease, fadeOut 0.5s ease 2.5s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .celebration {
+            font-size: 1.5rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Feedback Styles */
+        .answer-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .answer-feedback.correct {
+            background: rgba(46,204,113,0.2);
+            border: 2px solid #27ae60;
+            color: #27ae60;
+        }
+
+        .answer-feedback.incorrect {
+            background: rgba(231,76,60,0.2);
+            border: 2px solid #c0392b;
+            color: #c0392b;
+        }
+
+        .answer-feedback button {
+            margin-top: 1rem;
+            background: currentColor;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .answer-feedback button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .branches-container {
+                grid-template-columns: 1fr;
+            }
+
+            .constitution-container {
+                grid-template-columns: 1fr;
+            }
+
+            .power-matching {
+                grid-template-columns: 1fr;
+            }
+
+            .branch-dropzones {
+                grid-template-columns: 1fr;
+            }
+
+            .rights-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .citizenship-tabs {
+                flex-direction: column;
+            }
+
+            .candidates {
+                grid-template-columns: 1fr;
+            }
+
+            .action-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .test-options {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-badges {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skill-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-badges {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="header-container"></div>
     <main class="chapter-container">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 3</div>
-            <h1 class="chapter-title">Social Studies Chapter 3</h1>
+            <h1 class="chapter-title">Government & Citizenship Simulations</h1>
+            <p class="chapter-description">Explore American government, learn about the Constitution, and practice being an active citizen through engaging simulations!</p>
         </div>
         <div class="lesson-content">
+            <!-- Three Branches of Government -->
             <div class="lesson-section">
-                <h3>Chapter Content</h3>
-                <p>Content will be enhanced with interactive timelines, maps, and historical activities.</p>
+                <h3>🏛️ Three Branches of Government</h3>
+                <div class="branches-container">
+                    <div class="government-branch" data-branch="executive">
+                        <div class="branch-icon">👨‍💼</div>
+                        <h4>Executive Branch</h4>
+                        <p>Enforces laws</p>
+                        <div class="branch-details">
+                            <strong>Leader:</strong> President<br>
+                            <strong>Term:</strong> 4 years<br>
+                            <strong>Powers:</strong> Signs bills, Commands military, Appoints judges
+                        </div>
+                    </div>
+                    <div class="government-branch" data-branch="legislative">
+                        <div class="branch-icon">🏛️</div>
+                        <h4>Legislative Branch</h4>
+                        <p>Makes laws</p>
+                        <div class="branch-details">
+                            <strong>Parts:</strong> House + Senate<br>
+                            <strong>Term:</strong> 2 years (House), 6 years (Senate)<br>
+                            <strong>Powers:</strong> Writes laws, Controls money, Declares war
+                        </div>
+                    </div>
+                    <div class="government-branch" data-branch="judicial">
+                        <div class="branch-icon">⚖️</div>
+                        <h4>Judicial Branch</h4>
+                        <p>Interprets laws</p>
+                        <div class="branch-details">
+                            <strong>Leader:</strong> Supreme Court<br>
+                            <strong>Term:</strong> Life<br>
+                            <strong>Powers:</strong> Judges cases, Decides if laws are constitutional
+                        </div>
+                    </div>
+                </div>
+                <div class="checks-balances">
+                    <h4>🔄 Checks and Balances Game</h4>
+                    <p>Can you match the power to the correct branch?</p>
+                    <div class="power-matching">
+                        <div class="power-cards">
+                            <div class="power-card" draggable="true" data-branch="executive">Veto bills</div>
+                            <div class="power-card" draggable="true" data-branch="legislative">Impeach president</div>
+                            <div class="power-card" draggable="true" data-branch="judicial">Declare laws unconstitutional</div>
+                            <div class="power-card" draggable="true" data-branch="executive">Appoint judges</div>
+                            <div class="power-card" draggable="true" data-branch="legislative">Override vetoes</div>
+                            <div class="power-card" draggable="true" data-branch="judicial">Interpret Constitution</div>
+                        </div>
+                        <div class="branch-dropzones">
+                            <div class="drop-zone" data-target="executive">
+                                <h5>Executive Powers</h5>
+                                <div class="drop-area">Drop executive powers here</div>
+                            </div>
+                            <div class="drop-zone" data-target="legislative">
+                                <h5>Legislative Powers</h5>
+                                <div class="drop-area">Drop legislative powers here</div>
+                            </div>
+                            <div class="drop-zone" data-target="judicial">
+                                <h5>Judicial Powers</h5>
+                                <div class="drop-area">Drop judicial powers here</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="checkPowerMatching()" class="check-answers-btn">Check Answers</button>
+                    <div id="powerMatchingResult"></div>
+                </div>
+            </div>
+
+            <!-- Constitution Explorer -->
+            <div class="lesson-section">
+                <h3>📜 Constitution Explorer</h3>
+                <div class="constitution-container">
+                    <div class="constitution-parts">
+                        <div class="const-section" data-section="preamble">
+                            <h4>The Preamble</h4>
+                            <p>"We the People..."</p>
+                            <div class="section-preview">The introduction that explains why the Constitution was written</div>
+                        </div>
+                        <div class="const-section" data-section="articles">
+                            <h4>Seven Articles</h4>
+                            <p>The main body</p>
+                            <div class="section-preview">Describes how government works and powers of each branch</div>
+                        </div>
+                        <div class="const-section" data-section="amendments">
+                            <h4>27 Amendments</h4>
+                            <p>Changes and additions</p>
+                            <div class="section-preview">Includes the Bill of Rights and other important changes</div>
+                        </div>
+                    </div>
+                    <div class="constitution-details" id="constitutionDetails">
+                        <h4>Click on a section above to explore!</h4>
+                        <p>Learn about the different parts of the U.S. Constitution and what they mean.</p>
+                    </div>
+                </div>
+                <div class="bill-of-rights">
+                    <h4>🛡️ Bill of Rights Interactive</h4>
+                    <p>The first 10 amendments protect your freedoms! Click each right to learn more:</p>
+                    <div class="rights-grid">
+                        <div class="right-card" data-amendment="1">
+                            <span class="amendment-number">1st</span>
+                            <span class="right-name">Speech & Religion</span>
+                        </div>
+                        <div class="right-card" data-amendment="2">
+                            <span class="amendment-number">2nd</span>
+                            <span class="right-name">Bear Arms</span>
+                        </div>
+                        <div class="right-card" data-amendment="3">
+                            <span class="amendment-number">3rd</span>
+                            <span class="right-name">No Quartering</span>
+                        </div>
+                        <div class="right-card" data-amendment="4">
+                            <span class="amendment-number">4th</span>
+                            <span class="right-name">No Unreasonable Search</span>
+                        </div>
+                        <div class="right-card" data-amendment="5">
+                            <span class="amendment-number">5th</span>
+                            <span class="right-name">Due Process</span>
+                        </div>
+                        <div class="right-card" data-amendment="6">
+                            <span class="amendment-number">6th</span>
+                            <span class="right-name">Fair Trial</span>
+                        </div>
+                        <div class="right-card" data-amendment="7">
+                            <span class="amendment-number">7th</span>
+                            <span class="right-name">Jury Trial</span>
+                        </div>
+                        <div class="right-card" data-amendment="8">
+                            <span class="amendment-number">8th</span>
+                            <span class="right-name">No Cruel Punishment</span>
+                        </div>
+                        <div class="right-card" data-amendment="9">
+                            <span class="amendment-number">9th</span>
+                            <span class="right-name">Other Rights</span>
+                        </div>
+                        <div class="right-card" data-amendment="10">
+                            <span class="amendment-number">10th</span>
+                            <span class="right-name">State Powers</span>
+                        </div>
+                    </div>
+                    <div class="right-explanation" id="rightExplanation">
+                        <h5>Click on any amendment above to learn what it protects!</h5>
+                        <p>The Bill of Rights protects the most important freedoms of American citizens.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Citizenship Simulation -->
+            <div class="lesson-section">
+                <h3>🇺🇸 Citizenship Academy</h3>
+                <div class="citizenship-container">
+                    <div class="citizenship-tabs">
+                        <button class="citizen-tab active" onclick="switchCitizenTab('rights')">Rights</button>
+                        <button class="citizen-tab" onclick="switchCitizenTab('responsibilities')">Responsibilities</button>
+                        <button class="citizen-tab" onclick="switchCitizenTab('participation')">Participation</button>
+                        <button class="citizen-tab" onclick="switchCitizenTab('quiz')">Citizenship Test</button>
+                    </div>
+                    <div class="citizenship-content">
+                        <div id="rightsTab" class="citizen-panel active">
+                            <h4>Your Rights as a Citizen</h4>
+                            <div class="rights-checklist">
+                                <div class="right-item" onclick="toggleRight(this)">
+                                    <span class="right-checkbox">📋</span>
+                                    <div class="right-info">
+                                        <strong>Freedom of Speech</strong>
+                                        <p>You can express your opinions and ideas</p>
+                                    </div>
+                                </div>
+                                <div class="right-item" onclick="toggleRight(this)">
+                                    <span class="right-checkbox">📋</span>
+                                    <div class="right-info">
+                                        <strong>Freedom of Religion</strong>
+                                        <p>You can practice any religion or no religion</p>
+                                    </div>
+                                </div>
+                                <div class="right-item" onclick="toggleRight(this)">
+                                    <span class="right-checkbox">📋</span>
+                                    <div class="right-info">
+                                        <strong>Right to Vote</strong>
+                                        <p>You can choose your leaders when you turn 18</p>
+                                    </div>
+                                </div>
+                                <div class="right-item" onclick="toggleRight(this)">
+                                    <span class="right-checkbox">📋</span>
+                                    <div class="right-info">
+                                        <strong>Right to a Fair Trial</strong>
+                                        <p>You are innocent until proven guilty in court</p>
+                                    </div>
+                                </div>
+                                <div class="right-item" onclick="toggleRight(this)">
+                                    <span class="right-checkbox">📋</span>
+                                    <div class="right-info">
+                                        <strong>Right to Education</strong>
+                                        <p>You can go to school and learn</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="responsibilitiesTab" class="citizen-panel">
+                            <h4>Your Responsibilities as a Citizen</h4>
+                            <div class="responsibility-game">
+                                <p>Good citizens have responsibilities! Check off each one as you learn about it:</p>
+                                <div class="responsibility-list">
+                                    <div class="resp-item" onclick="toggleResponsibility(this)" data-resp="obey-laws">
+                                        <span class="resp-status">⬜</span>
+                                        <div class="resp-content">
+                                            <strong>Obey Laws</strong>
+                                            <p>Follow rules and laws to keep everyone safe</p>
+                                        </div>
+                                    </div>
+                                    <div class="resp-item" onclick="toggleResponsibility(this)" data-resp="pay-taxes">
+                                        <span class="resp-status">⬜</span>
+                                        <div class="resp-content">
+                                            <strong>Pay Taxes</strong>
+                                            <p>Help pay for schools, roads, and public services</p>
+                                        </div>
+                                    </div>
+                                    <div class="resp-item" onclick="toggleResponsibility(this)" data-resp="jury-duty">
+                                        <span class="resp-status">⬜</span>
+                                        <div class="resp-content">
+                                            <strong>Serve on Juries</strong>
+                                            <p>Help decide court cases fairly</p>
+                                        </div>
+                                    </div>
+                                    <div class="resp-item" onclick="toggleResponsibility(this)" data-resp="vote">
+                                        <span class="resp-status">⬜</span>
+                                        <div class="resp-content">
+                                            <strong>Vote in Elections</strong>
+                                            <p>Choose good leaders for your community</p>
+                                        </div>
+                                    </div>
+                                    <div class="resp-item" onclick="toggleResponsibility(this)" data-resp="community">
+                                        <span class="resp-status">⬜</span>
+                                        <div class="resp-content">
+                                            <strong>Help Your Community</strong>
+                                            <p>Volunteer and help others when you can</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="responsibility-score">
+                                    <p>Citizenship Score: <span id="respScore">0</span>/5</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="participationTab" class="citizen-panel">
+                            <h4>How to Participate in Democracy</h4>
+                            <div class="participation-simulator">
+                                <div class="scenario-title">📊 School Election Simulator</div>
+                                <div class="election-scenario">
+                                    <p><strong>Scenario:</strong> Your school is electing a new Student Council President. There are three candidates:</p>
+                                    <div class="candidates">
+                                        <div class="candidate" data-candidate="alex">
+                                            <div class="candidate-name">Alex Rodriguez</div>
+                                            <div class="candidate-platform">Promises: More recess time, healthier lunch options</div>
+                                        </div>
+                                        <div class="candidate" data-candidate="jordan">
+                                            <div class="candidate-name">Jordan Smith</div>
+                                            <div class="candidate-platform">Promises: New playground equipment, after-school clubs</div>
+                                        </div>
+                                        <div class="candidate" data-candidate="casey">
+                                            <div class="candidate-name">Casey Johnson</div>
+                                            <div class="candidate-platform">Promises: Better library books, school recycling program</div>
+                                        </div>
+                                    </div>
+                                    <div class="voting-booth">
+                                        <h5>🗳️ Cast Your Vote!</h5>
+                                        <p>Click on your choice:</p>
+                                        <div class="ballot">
+                                            <div class="ballot-option" onclick="castVote('alex')">
+                                                <span class="ballot-checkbox">⬜</span>
+                                                <span>Alex Rodriguez</span>
+                                            </div>
+                                            <div class="ballot-option" onclick="castVote('jordan')">
+                                                <span class="ballot-checkbox">⬜</span>
+                                                <span>Jordan Smith</span>
+                                            </div>
+                                            <div class="ballot-option" onclick="castVote('casey')">
+                                                <span class="ballot-checkbox">⬜</span>
+                                                <span>Casey Johnson</span>
+                                            </div>
+                                        </div>
+                                        <div id="voteResult" class="vote-result"></div>
+                                    </div>
+                                </div>
+                                <div class="democracy-actions">
+                                    <h5>Other Ways to Participate:</h5>
+                                    <div class="action-cards">
+                                        <div class="action-card" onclick="selectAction(this)">
+                                            <span class="action-icon">📢</span>
+                                            <span class="action-name">Speak at Town Hall</span>
+                                        </div>
+                                        <div class="action-card" onclick="selectAction(this)">
+                                            <span class="action-icon">✍️</span>
+                                            <span class="action-name">Write to Representatives</span>
+                                        </div>
+                                        <div class="action-card" onclick="selectAction(this)">
+                                            <span class="action-icon">🤝</span>
+                                            <span class="action-name">Volunteer for Campaigns</span>
+                                        </div>
+                                        <div class="action-card" onclick="selectAction(this)">
+                                            <span class="action-icon">📰</span>
+                                            <span class="action-name">Stay Informed</span>
+                                        </div>
+                                    </div>
+                                    <div id="actionResult" class="action-result"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="quizTab" class="citizen-panel">
+                            <h4>🧠 Citizenship Knowledge Test</h4>
+                            <div class="citizenship-test">
+                                <div id="citizenshipQuestion" class="test-question">
+                                    <p>Test your knowledge of American government and citizenship!</p>
+                                    <button onclick="startCitizenshipTest()" class="start-test-btn">Start Citizenship Test</button>
+                                </div>
+                                <div id="citizenshipOptions" class="test-options"></div>
+                                <div id="citizenshipFeedback" class="test-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Democratic Process Simulator -->
+            <div class="lesson-section">
+                <h3>🗳️ How a Bill Becomes a Law</h3>
+                <div class="law-process">
+                    <div class="process-steps">
+                        <div class="process-step" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Bill Introduced</div>
+                            <div class="step-description">A member of Congress writes a bill</div>
+                        </div>
+                        <div class="process-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Committee Review</div>
+                            <div class="step-description">Experts study and improve the bill</div>
+                        </div>
+                        <div class="process-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-title">House & Senate Vote</div>
+                            <div class="step-description">Both houses must pass the bill</div>
+                        </div>
+                        <div class="process-step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-title">President's Decision</div>
+                            <div class="step-description">President signs or vetoes the bill</div>
+                        </div>
+                        <div class="process-step" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-title">Becomes Law</div>
+                            <div class="step-description">Bill becomes law (or Congress overrides veto)</div>
+                        </div>
+                    </div>
+                    <div class="law-simulation">
+                        <h4>🏫 Simulate: "More Recess Time Act"</h4>
+                        <p>Follow this pretend bill through the lawmaking process!</p>
+                        <div class="simulation-controls">
+                            <button onclick="startLawSimulation()" id="startSimButton">Start Simulation</button>
+                            <button onclick="nextLawStep()" id="nextStepButton" style="display: none;">Next Step</button>
+                        </div>
+                        <div id="simulationStatus" class="simulation-status"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tracking -->
+            <div class="lesson-section">
+                <h3>📊 Your Government & Citizenship Progress</h3>
+                <div class="progress-dashboard">
+                    <div class="skill-progress">
+                        <div class="skill-item">
+                            <span>Three Branches</span>
+                            <div class="progress-bar"><div class="progress-fill" id="branchesProgress"></div></div>
+                            <span id="branchesScore">0/3</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Constitution</span>
+                            <div class="progress-bar"><div class="progress-fill" id="constitutionProgress"></div></div>
+                            <span id="constitutionScore">0/13</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Citizenship</span>
+                            <div class="progress-bar"><div class="progress-fill" id="citizenshipProgressBar"></div></div>
+                            <span id="citizenshipScore">0/10</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Knowledge Test</span>
+                            <div class="progress-bar"><div class="progress-fill" id="testProgress"></div></div>
+                            <span id="testScore">0/10</span>
+                        </div>
+                    </div>
+                    <div class="achievement-badges">
+                        <div class="badge locked" id="governmentExpertBadge">
+                            <span class="badge-icon">🏛️</span>
+                            <span class="badge-name">Government Expert</span>
+                        </div>
+                        <div class="badge locked" id="constitutionScholarBadge">
+                            <span class="badge-icon">📜</span>
+                            <span class="badge-name">Constitution Scholar</span>
+                        </div>
+                        <div class="badge locked" id="activeCitizenBadge">
+                            <span class="badge-icon">🇺🇸</span>
+                            <span class="badge-name">Active Citizen</span>
+                        </div>
+                        <div class="badge locked" id="civicsChampionBadge">
+                            <span class="badge-icon">🏆</span>
+                            <span class="badge-name">Civics Champion</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chapter-navigation">
             <a href="chapter-2.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
             </div>
             <a href="chapter-4.html" class="nav-button">Next →</a>
         </div>
@@ -35,6 +1493,695 @@
             fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+
+        // Government and Citizenship state management
+        let governmentProgress = {
+            branches: 0,
+            constitution: 0,
+            citizenship: 0,
+            testScore: 0
+        };
+
+        let currentCitizenshipQuestion = 0;
+        let citizenshipAnswers = [];
+        let currentLawStep = 0;
+        let responsibilityCount = 0;
+
+        // Constitution data
+        const constitutionData = {
+            preamble: {
+                title: 'The Preamble',
+                text: 'We the People of the United States, in Order to form a more perfect Union...',
+                explanation: 'The Preamble explains why the Constitution was written. It says the government should serve the people, keep peace, provide security, promote welfare, and protect liberty.',
+                keyPoints: [
+                    'Starts with \"We the People\" - government serves citizens',
+                    'Goals: Unity, justice, peace, defense, welfare, liberty',
+                    'Shows the Constitution comes from the people, not kings'
+                ]
+            },
+            articles: {
+                title: 'Seven Articles',
+                text: 'The main body of the Constitution with seven sections',
+                explanation: 'The Articles set up the structure of government. They create the three branches, explain federalism, and describe how to change the Constitution.',
+                keyPoints: [
+                    'Article I: Legislative Branch (Congress)',
+                    'Article II: Executive Branch (President)',
+                    'Article III: Judicial Branch (Courts)',
+                    'Article IV: Relations between states',
+                    'Article V: How to amend Constitution',
+                    'Article VI: Federal law supreme',
+                    'Article VII: How to ratify Constitution'
+                ]
+            },
+            amendments: {
+                title: '27 Amendments',
+                text: 'Changes and additions to the Constitution',
+                explanation: 'Amendments are changes to the Constitution. The first 10 are called the Bill of Rights and protect individual freedoms.',
+                keyPoints: [
+                    'First 10: Bill of Rights (individual freedoms)',
+                    'Amendment process requires broad support',
+                    'Later amendments: slavery ended, voting rights expanded',
+                    'Most recent: Congressional pay (1992)'
+                ]
+            }
+        };
+
+        // Bill of Rights data
+        const billOfRightsData = {
+            1: {
+                name: 'Freedom of Speech & Religion',
+                description: 'You can say what you think, practice any religion, and gather peacefully. The government cannot stop newspapers from printing stories.',
+                examples: ['Speak your opinion', 'Go to any church', 'Peaceful protests', 'Free press']
+            },
+            2: {
+                name: 'Right to Bear Arms',
+                description: 'Citizens can own weapons for protection and sport, following safety laws.',
+                examples: ['Own firearms legally', 'Hunt and sport shooting', 'Protect your home', 'Follow gun safety laws']
+            },
+            3: {
+                name: 'No Quartering Soldiers',
+                description: 'The government cannot force you to let soldiers live in your home during peacetime.',
+                examples: ['Your home is private', 'No forced military housing', 'Privacy protection', 'Historical: British soldiers']
+            },
+            4: {
+                name: 'No Unreasonable Searches',
+                description: 'Police need a warrant (court permission) to search your home, unless there is an emergency.',
+                examples: ['Need search warrant', 'Privacy at home', 'Court approval required', 'Reasonable suspicion needed']
+            },
+            5: {
+                name: 'Due Process Rights',
+                description: 'You have the right to remain silent, cannot be tried twice for the same crime, and deserve fair treatment.',
+                examples: ['Right to remain silent', 'No double jeopardy', 'Fair legal process', 'Grand jury for serious crimes']
+            },
+            6: {
+                name: 'Right to Fair Trial',
+                description: 'You have the right to a quick, public trial with a jury and a lawyer if accused of a crime.',
+                examples: ['Speedy trial', 'Public hearing', 'Jury of peers', 'Right to lawyer']
+            },
+            7: {
+                name: 'Right to Jury Trial',
+                description: 'In civil court cases involving money over $20, you can have a jury decide the case.',
+                examples: ['Civil jury trials', 'Disputes over money', 'Citizen juries', 'Court fairness']
+            },
+            8: {
+                name: 'No Cruel Punishment',
+                description: 'Punishments must be fair and reasonable. No torture or excessive fines.',
+                examples: ['Fair punishments', 'No torture', 'Reasonable bail', 'Humane treatment']
+            },
+            9: {
+                name: 'Other Rights Reserved',
+                description: 'Just because a right is not listed in the Constitution does not mean people don\\'t have it.',
+                examples: ['Unlisted rights exist', 'Privacy rights', 'Personal freedoms', 'Rights not limited to Constitution']
+            },
+            10: {
+                name: 'Powers to States',
+                description: 'Powers not given to federal government belong to states or the people.',
+                examples: ['State government powers', 'Education decisions', 'Local law enforcement', 'People retain power']
+            }
+        };
+
+        // Citizenship test questions
+        const citizenshipQuestions = [
+            {
+                question: 'What are the three branches of government?',
+                options: ['Executive, Legislative, Judicial', 'President, Congress, Army', 'Federal, State, Local', 'House, Senate, Court'],
+                correct: 0,
+                explanation: 'The three branches are Executive (President), Legislative (Congress), and Judicial (Courts).'
+            },
+            {
+                question: 'How long is the President\\'s term?',
+                options: ['2 years', '4 years', '6 years', '8 years'],
+                correct: 1,
+                explanation: 'The President serves a 4-year term and can be re-elected once.'
+            },
+            {
+                question: 'Which branch makes laws?',
+                options: ['Executive', 'Legislative', 'Judicial', 'Military'],
+                correct: 1,
+                explanation: 'The Legislative branch (Congress) has the power to make laws.'
+            },
+            {
+                question: 'What is the first part of the Constitution called?',
+                options: ['Bill of Rights', 'Articles', 'Preamble', 'Amendments'],
+                correct: 2,
+                explanation: 'The Preamble begins \"We the People\" and explains the purpose of the Constitution.'
+            },
+            {
+                question: 'How many amendments are in the Bill of Rights?',
+                options: ['5', '10', '15', '27'],
+                correct: 1,
+                explanation: 'The Bill of Rights consists of the first 10 amendments to the Constitution.'
+            },
+            {
+                question: 'What does the 1st Amendment protect?',
+                options: ['Right to bear arms', 'Freedom of speech and religion', 'Right to trial', 'No cruel punishment'],
+                correct: 1,
+                explanation: 'The 1st Amendment protects freedom of speech, religion, press, and assembly.'
+            },
+            {
+                question: 'Who can veto bills passed by Congress?',
+                options: ['Supreme Court', 'Vice President', 'President', 'Senate'],
+                correct: 2,
+                explanation: 'The President has the power to veto (reject) bills passed by Congress.'
+            },
+            {
+                question: 'What is a responsibility of citizenship?',
+                options: ['Owning property', 'Obeying laws', 'Having a job', 'Playing sports'],
+                correct: 1,
+                explanation: 'All citizens have the responsibility to obey laws and contribute to society.'
+            },
+            {
+                question: 'At what age can you vote?',
+                options: ['16', '17', '18', '21'],
+                correct: 2,
+                explanation: 'The 26th Amendment set the voting age at 18 for all elections.'
+            },
+            {
+                question: 'What does \"checks and balances\" mean?',
+                options: ['Counting money', 'Each branch limits the others', 'Balancing budgets', 'Voting fairly'],
+                correct: 1,
+                explanation: 'Checks and balances means each branch of government can limit the power of the others.'
+            }
+        ];
+
+        // Initialize interactive components
+        function initializeGovernmentBranches() {
+            const branches = document.querySelectorAll('.government-branch');
+            branches.forEach(branch => {
+                branch.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                    
+                    if (!this.classList.contains('visited')) {
+                        this.classList.add('visited');
+                        governmentProgress.branches++;
+                        updateProgress();
+                    }
+                });
+            });
+        }
+
+        // Power matching drag and drop
+        function initializePowerMatching() {
+            const powerCards = document.querySelectorAll('.power-card');
+            const dropZones = document.querySelectorAll('.branch-dropzones .drop-zone');
+            
+            powerCards.forEach(card => {
+                card.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', this.dataset.branch);
+                    e.dataTransfer.setData('text/html', this.outerHTML);
+                    this.style.opacity = '0.5';
+                });
+                
+                card.addEventListener('dragend', function() {
+                    this.style.opacity = '1';
+                });
+            });
+            
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                
+                zone.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    
+                    const cardBranch = e.dataTransfer.getData('text/plain');
+                    const cardHTML = e.dataTransfer.getData('text/html');
+                    
+                    this.querySelector('.drop-area').innerHTML += cardHTML;
+                });
+            });
+        }
+
+        function checkPowerMatching() {
+            const dropZones = document.querySelectorAll('.branch-dropzones .drop-zone');
+            const resultElement = document.getElementById('powerMatchingResult');
+            let correct = 0;
+            let total = 0;
+            
+            dropZones.forEach(zone => {
+                const target = zone.dataset.target;
+                const cards = zone.querySelectorAll('.power-card');
+                
+                cards.forEach(card => {
+                    total++;
+                    if (card.dataset.branch === target) {
+                        correct++;
+                        card.style.border = '3px solid green';
+                    } else {
+                        card.style.border = '3px solid red';
+                    }
+                });
+            });
+            
+            const percentage = Math.round((correct / total) * 100);
+            
+            resultElement.innerHTML = `
+                <div class=\"matching-result\">
+                    <p>You got \${correct} out of \${total} correct (\${percentage}%)</p>
+                    <p>\${percentage >= 80 ? 'Excellent! You understand checks and balances!' : 'Keep learning about how the branches check each other\\'s power.'}</p>
+                </div>
+            `;
+            
+            if (percentage >= 80) {
+                unlockBadge('governmentExpertBadge', 'Mastered the three branches of government!');
+            }
+        }
+
+        // Constitution explorer
+        function initializeConstitution() {
+            const sections = document.querySelectorAll('.const-section');
+            sections.forEach(section => {
+                section.addEventListener('click', function() {
+                    const sectionName = this.dataset.section;
+                    showConstitutionDetails(sectionName);
+                    
+                    if (!this.classList.contains('visited')) {
+                        this.classList.add('visited');
+                        governmentProgress.constitution++;
+                        updateProgress();
+                    }
+                });
+            });
+        }
+
+        function showConstitutionDetails(sectionName) {
+            const data = constitutionData[sectionName];
+            const detailsElement = document.getElementById('constitutionDetails');
+            
+            detailsElement.innerHTML = `
+                <h4>\${data.title}</h4>
+                <p class=\"const-text\">\${data.text}</p>
+                <div class=\"const-explanation\">
+                    <h5>What it means:</h5>
+                    <p>\${data.explanation}</p>
+                    <ul>
+                        \${data.keyPoints.map(point => `<li>\${point}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Bill of Rights interactive
+        function initializeBillOfRights() {
+            const rightCards = document.querySelectorAll('.right-card');
+            rightCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const amendment = parseInt(this.dataset.amendment);
+                    showRightExplanation(amendment);
+                    
+                    if (!this.classList.contains('visited')) {
+                        this.classList.add('visited');
+                        governmentProgress.constitution++;
+                        updateProgress();
+                    }
+                });
+            });
+        }
+
+        function showRightExplanation(amendmentNumber) {
+            const right = billOfRightsData[amendmentNumber];
+            const explanationElement = document.getElementById('rightExplanation');
+            
+            explanationElement.innerHTML = `
+                <h5>\${amendmentNumber}\${getOrdinalSuffix(amendmentNumber)} Amendment: \${right.name}</h5>
+                <p>\${right.description}</p>
+                <div class=\"right-examples\">
+                    <h6>Examples:</h6>
+                    <ul>
+                        \${right.examples.map(example => `<li>\${example}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function getOrdinalSuffix(num) {
+            const suffixes = ['th', 'st', 'nd', 'rd'];
+            const v = num % 100;
+            return suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0];
+        }
+
+        // Citizenship tabs
+        function switchCitizenTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.citizen-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show appropriate panel
+            document.querySelectorAll('.citizen-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Rights checklist
+        function toggleRight(rightElement) {
+            const checkbox = rightElement.querySelector('.right-checkbox');
+            if (checkbox.textContent === '📋') {
+                checkbox.textContent = '✅';
+                rightElement.classList.add('checked');
+            } else {
+                checkbox.textContent = '📋';
+                rightElement.classList.remove('checked');
+            }
+            
+            updateCitizenshipProgress();
+        }
+
+        // Responsibility tracker
+        function toggleResponsibility(respElement) {
+            const status = respElement.querySelector('.resp-status');
+            if (status.textContent === '⬜') {
+                status.textContent = '✅';
+                respElement.classList.add('completed');
+                responsibilityCount++;
+            } else {
+                status.textContent = '⬜';
+                respElement.classList.remove('completed');
+                responsibilityCount--;
+            }
+            
+            document.getElementById('respScore').textContent = responsibilityCount;
+            updateCitizenshipProgress();
+        }
+
+        function updateCitizenshipProgress() {
+            const checkedRights = document.querySelectorAll('.right-item.checked').length;
+            const completedResponsibilities = document.querySelectorAll('.resp-item.completed').length;
+            
+            governmentProgress.citizenship = checkedRights + completedResponsibilities;
+            updateProgress();
+        }
+
+        // Voting simulation
+        function castVote(candidate) {
+            // Clear previous selections
+            document.querySelectorAll('.ballot-option').forEach(option => {
+                option.classList.remove('selected');
+                option.querySelector('.ballot-checkbox').textContent = '⬜';
+            });
+            
+            // Mark selected option
+            event.target.classList.add('selected');
+            event.target.querySelector('.ballot-checkbox').textContent = '✅';
+            
+            const resultElement = document.getElementById('voteResult');
+            const candidateNames = {
+                alex: 'Alex Rodriguez',
+                jordan: 'Jordan Smith',
+                casey: 'Casey Johnson'
+            };
+            
+            resultElement.innerHTML = `
+                <div class=\"vote-cast\">
+                    <h5>🎉 Vote Cast!</h5>
+                    <p>You voted for \${candidateNames[candidate]}!</p>
+                    <p>In a real election, your vote would be secret and counted with all others.</p>
+                </div>
+            `;
+            
+            if (!document.body.classList.contains('voted')) {
+                document.body.classList.add('voted');
+                governmentProgress.citizenship++;
+                updateProgress();
+            }
+        }
+
+        // Democracy participation actions
+        function selectAction(actionCard) {
+            const actionName = actionCard.querySelector('.action-name').textContent;
+            const resultElement = document.getElementById('actionResult');
+            
+            const actionResponses = {
+                'Speak at Town Hall': 'Great! Speaking at town halls lets you share your ideas with local leaders and other citizens.',
+                'Write to Representatives': 'Excellent! Writing letters or emails to your representatives tells them what you think is important.',
+                'Volunteer for Campaigns': 'Wonderful! Volunteering helps candidates you support and teaches you about the political process.',
+                'Stay Informed': 'Smart choice! Reading news and learning about issues helps you make good voting decisions.'
+            };
+            
+            resultElement.innerHTML = `
+                <div class=\"action-feedback\">
+                    <h5>You chose: \${actionName}</h5>
+                    <p>\${actionResponses[actionName]}</p>
+                </div>
+            `;
+            
+            actionCard.classList.add('selected');
+            setTimeout(() => actionCard.classList.remove('selected'), 2000);
+        }
+
+        // Citizenship test
+        function startCitizenshipTest() {
+            currentCitizenshipQuestion = 0;
+            citizenshipAnswers = [];
+            showCitizenshipQuestion();
+        }
+
+        function showCitizenshipQuestion() {
+            if (currentCitizenshipQuestion >= citizenshipQuestions.length) {
+                showCitizenshipResults();
+                return;
+            }
+            
+            const question = citizenshipQuestions[currentCitizenshipQuestion];
+            const questionElement = document.getElementById('citizenshipQuestion');
+            const optionsElement = document.getElementById('citizenshipOptions');
+            
+            questionElement.innerHTML = `
+                <h5>Question \${currentCitizenshipQuestion + 1} of \${citizenshipQuestions.length}</h5>
+                <p>\${question.question}</p>
+            `;
+            
+            optionsElement.innerHTML = question.options.map((option, index) => 
+                `<button class=\"test-option\" onclick=\"selectCitizenshipAnswer(\${index})\">\${option}</button>`
+            ).join('');
+        }
+
+        function selectCitizenshipAnswer(selectedIndex) {
+            const question = citizenshipQuestions[currentCitizenshipQuestion];
+            const correct = selectedIndex === question.correct;
+            const feedbackElement = document.getElementById('citizenshipFeedback');
+            
+            citizenshipAnswers.push(correct);
+            
+            feedbackElement.innerHTML = `
+                <div class=\"answer-feedback \${correct ? 'correct' : 'incorrect'}\">
+                    <p><strong>\${correct ? 'Correct!' : 'Incorrect'}</strong></p>
+                    <p>\${question.explanation}</p>
+                    <button onclick=\"nextCitizenshipQuestion()\">Next Question</button>
+                </div>
+            `;
+            
+            // Disable option buttons
+            document.querySelectorAll('.test-option').forEach(btn => btn.disabled = true);
+        }
+
+        function nextCitizenshipQuestion() {
+            currentCitizenshipQuestion++;
+            showCitizenshipQuestion();
+        }
+
+        function showCitizenshipResults() {
+            const correctAnswers = citizenshipAnswers.filter(answer => answer).length;
+            const percentage = Math.round((correctAnswers / citizenshipQuestions.length) * 100);
+            
+            governmentProgress.testScore = correctAnswers;
+            updateProgress();
+            
+            const questionElement = document.getElementById('citizenshipQuestion');
+            const optionsElement = document.getElementById('citizenshipOptions');
+            const feedbackElement = document.getElementById('citizenshipFeedback');
+            
+            questionElement.innerHTML = `
+                <h4>Citizenship Test Complete!</h4>
+                <p>You got \${correctAnswers} out of \${citizenshipQuestions.length} questions correct!</p>
+            `;
+            
+            optionsElement.innerHTML = '';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = 'Outstanding! You\\'re ready to be an active, informed citizen!';
+            } else if (percentage >= 70) {
+                message = 'Great job! You have a solid understanding of American government!';
+            } else if (percentage >= 50) {
+                message = 'Good start! Keep learning about government and citizenship!';
+            } else {
+                message = 'Keep studying! Understanding government is important for all citizens.';
+            }
+            
+            feedbackElement.innerHTML = `
+                <div class=\"test-results\">
+                    <div class=\"score-display\">
+                        <span class=\"score-number\">\${percentage}%</span>
+                    </div>
+                    <p class=\"score-message\">\${message}</p>
+                    <button onclick=\"startCitizenshipTest()\" class=\"retry-btn\">Take Test Again</button>
+                </div>
+            `;
+        }
+
+        // Law simulation
+        function startLawSimulation() {
+            currentLawStep = 0;
+            document.getElementById('startSimButton').style.display = 'none';
+            document.getElementById('nextStepButton').style.display = 'inline-block';
+            nextLawStep();
+        }
+
+        function nextLawStep() {
+            const steps = [
+                'A student writes a proposal for \"More Recess Time Act\" - 30 minutes of recess instead of 15!',
+                'The Student Council Committee reviews the proposal and suggests improvements.',
+                'The proposal goes to a vote by all Student Council members. It passes!',
+                'The proposal goes to the Principal (like the President). The Principal signs it!',
+                'The \"More Recess Time Act\" becomes official school policy! Everyone gets more recess!'
+            ];
+            
+            if (currentLawStep < steps.length) {
+                const statusElement = document.getElementById('simulationStatus');
+                statusElement.innerHTML = `
+                    <div class=\"step-active\">
+                        <h5>Step \${currentLawStep + 1}: \${document.querySelectorAll('.process-step')[currentLawStep].querySelector('.step-title').textContent}</h5>
+                        <p>\${steps[currentLawStep]}</p>
+                    </div>
+                `;
+                
+                // Highlight current step
+                document.querySelectorAll('.process-step').forEach((step, index) => {
+                    step.classList.remove('active', 'completed');
+                    if (index === currentLawStep) {
+                        step.classList.add('active');
+                    } else if (index < currentLawStep) {
+                        step.classList.add('completed');
+                    }
+                });
+                
+                currentLawStep++;
+                
+                if (currentLawStep >= steps.length) {
+                    document.getElementById('nextStepButton').textContent = 'Restart Simulation';
+                    document.getElementById('nextStepButton').onclick = function() {
+                        document.getElementById('startSimButton').style.display = 'inline-block';
+                        document.getElementById('nextStepButton').style.display = 'none';
+                        document.getElementById('nextStepButton').textContent = 'Next Step';
+                        document.getElementById('nextStepButton').onclick = nextLawStep;
+                        document.getElementById('simulationStatus').innerHTML = '';
+                        document.querySelectorAll('.process-step').forEach(step => {
+                            step.classList.remove('active', 'completed');
+                        });
+                    };
+                }
+            }
+        }
+
+        // Progress tracking and badge system
+        function updateProgress() {
+            // Update branches progress
+            const branchesProgress = document.getElementById('branchesProgress');
+            const branchesScore = document.getElementById('branchesScore');
+            const branchesPercent = (governmentProgress.branches / 3) * 100;
+            branchesProgress.style.width = branchesPercent + '%';
+            branchesScore.textContent = `\${governmentProgress.branches}/3`;
+            
+            // Update constitution progress (3 sections + 10 amendments)
+            const constitutionProgress = document.getElementById('constitutionProgress');
+            const constitutionScore = document.getElementById('constitutionScore');
+            const constitutionPercent = (governmentProgress.constitution / 13) * 100;
+            constitutionProgress.style.width = constitutionPercent + '%';
+            constitutionScore.textContent = `\${governmentProgress.constitution}/13`;
+            
+            // Update citizenship progress (5 rights + 5 responsibilities)
+            const citizenshipProgress = document.getElementById('citizenshipProgressBar');
+            const citizenshipScore = document.getElementById('citizenshipScore');
+            const citizenshipPercent = (governmentProgress.citizenship / 10) * 100;
+            citizenshipProgress.style.width = citizenshipPercent + '%';
+            citizenshipScore.textContent = `\${governmentProgress.citizenship}/10`;
+            
+            // Update test progress
+            const testProgress = document.getElementById('testProgress');
+            const testScore = document.getElementById('testScore');
+            const testPercent = (governmentProgress.testScore / 10) * 100;
+            testProgress.style.width = testPercent + '%';
+            testScore.textContent = `\${governmentProgress.testScore}/10`;
+            
+            // Update main chapter progress
+            const mainProgress = document.querySelector('.chapter-navigation .progress-fill');
+            const totalProgress = (
+                (governmentProgress.branches / 3) +
+                (governmentProgress.constitution / 13) +
+                (governmentProgress.citizenship / 10) +
+                (governmentProgress.testScore / 10)
+            ) / 4;
+            mainProgress.style.width = (totalProgress * 100) + '%';
+            
+            // Check for badge unlocks
+            checkBadgeUnlocks();
+        }
+
+        function checkBadgeUnlocks() {
+            // Government Expert badge
+            if (governmentProgress.branches >= 3) {
+                unlockBadge('governmentExpertBadge', 'Mastered the three branches of government!');
+            }
+            
+            // Constitution Scholar badge
+            if (governmentProgress.constitution >= 10) {
+                unlockBadge('constitutionScholarBadge', 'Expert knowledge of the Constitution!');
+            }
+            
+            // Active Citizen badge
+            if (governmentProgress.citizenship >= 8) {
+                unlockBadge('activeCitizenBadge', 'Ready to be an active citizen!');
+            }
+            
+            // Civics Champion badge
+            if (governmentProgress.testScore >= 8) {
+                unlockBadge('civicsChampionBadge', 'Excellent civics knowledge!');
+            }
+        }
+
+        function unlockBadge(badgeId, message) {
+            const badge = document.getElementById(badgeId);
+            if (badge && badge.classList.contains('locked')) {
+                badge.classList.remove('locked');
+                badge.classList.add('unlocked');
+                
+                // Show celebration
+                showBadgeNotification(message);
+            }
+        }
+
+        function showBadgeNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'badge-notification';
+            notification.innerHTML = `
+                <div class=\"notification-content\">
+                    <span class=\"celebration\">🎉</span>
+                    <p>\${message}</p>
+                    <span class=\"celebration\">🎉</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Initialize all interactive components when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGovernmentBranches();
+            initializePowerMatching();
+            initializeConstitution();
+            initializeBillOfRights();
+            updateProgress();
+        });
     </script>
 </body>
 </html>
