@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data Analysis & Financial Literacy - Interactive 5th grade mathematics lesson with graphs, charts, and money management">
+    <meta name="keywords" content="5th grade, mathematics, data analysis, graphs, charts, financial literacy, money, STAAR, Texas TEKS">
+    <meta name="author" content="Yallappa H">
+    
+    <title>Data Analysis & Financial Literacy - 5th Grade Mathematics | Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+    <style>
+        .chart-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .chart-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .chart-visual {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .money-calculator {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Shared Header -->
+    <div id="header-container"></div>
+    
+    <main class="chapter-container">
+        <!-- Chapter Header -->
+        <div class="chapter-header">
+            <div class="chapter-number">Chapter 4</div>
+            <h1 class="chapter-title">Data Analysis & Financial Literacy</h1>
+            <p class="chapter-description">Create and interpret graphs, understand probability, and learn about money management. Real-world data activities and financial literacy games!</p>
+        </div>
+        
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <div class="lesson-section">
+                <h3><span class="section-icon">📊</span>Graphs & Charts</h3>
+                <p>Learn to create and read different types of graphs to display and analyze data.</p>
+                
+                <div class="chart-types">
+                    <div class="chart-card">
+                        <div class="chart-visual">📊</div>
+                        <h4>Bar Graph</h4>
+                        <p>Compare different categories</p>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-visual">📈</div>
+                        <h4>Line Graph</h4>
+                        <p>Show changes over time</p>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-visual">🥧</div>
+                        <h4>Pie Chart</h4>
+                        <p>Show parts of a whole</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h3><span class="section-icon">🎲</span>Probability</h3>
+                <p>Understand the likelihood of events happening using fractions and percentages.</p>
+                <div class="visual-element">
+                    <div class="placeholder-image">Interactive Probability Spinner</div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h3><span class="section-icon">💰</span>Money Management</h3>
+                <p>Learn about earning, spending, saving, and making smart financial decisions.</p>
+                
+                <div class="money-calculator">
+                    <h4>💵 Budget Calculator</h4>
+                    <p>Plan how to spend and save your allowance!</p>
+                    <button class="activity-button">Open Budget Tool</button>
+                </div>
+            </div>
+            
+            <div class="interactive-activity">
+                <h4>🏪 Virtual Store Challenge</h4>
+                <p>Practice making purchases and calculating change in our virtual store!</p>
+                <button class="activity-button">Start Shopping</button>
+            </div>
+        </div>
+        
+        <!-- Chapter Navigation -->
+        <div class="chapter-navigation">
+            <a href="chapter-3.html" class="nav-button">← Previous Chapter</a>
+            <div class="progress-indicator">
+                <div class="progress-text">Chapter Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <a href="assessment-1.html" class="nav-button">Take Assessment →</a>
+        </div>
+    </main>
+    
+    <!-- Include Shared Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="/js/app.js" defer></script>
+    <script>
+        // Load shared components
+        function loadSharedComponents() {
+            fetch('/subjects/shared/header.html')
+                .then(response => response.text())
+                .then(html => document.getElementById('header-container').innerHTML = html)
+                .catch(error => console.error('Error loading header:', error));
+            
+            fetch('/subjects/shared/footer.html')
+                .then(response => response.text())
+                .then(html => document.getElementById('footer-container').innerHTML = html)
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadSharedComponents);
+        } else {
+            loadSharedComponents();
+        }
+    </script>
+</body>
+</html>

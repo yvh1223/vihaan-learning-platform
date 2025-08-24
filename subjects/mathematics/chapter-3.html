@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Geometry & Measurement - Interactive 5th grade mathematics lesson with visual learning and practice activities">
+    <meta name="keywords" content="5th grade, mathematics, geometry, measurement, shapes, area, perimeter, STAAR, Texas TEKS">
+    <meta name="author" content="Yallappa H">
+    
+    <title>Geometry & Measurement - 5th Grade Mathematics | Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+    <style>
+        .shape-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .shape-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: transform var(--transition-fast);
+            cursor: pointer;
+        }
+        
+        .shape-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .shape-visual {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Shared Header -->
+    <div id="header-container"></div>
+    
+    <main class="chapter-container">
+        <!-- Chapter Header -->
+        <div class="chapter-header">
+            <div class="chapter-number">Chapter 3</div>
+            <h1 class="chapter-title">Geometry & Measurement</h1>
+            <p class="chapter-description">Explore 2D and 3D shapes, calculate area and perimeter, work with angles, and use coordinate planes. Hands-on measurement activities included!</p>
+        </div>
+        
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <div class="lesson-section">
+                <h3><span class="section-icon">🔷</span>2D Shapes & Properties</h3>
+                <p>Learn about triangles, rectangles, squares, and other polygons. Understand their properties and relationships.</p>
+                
+                <div class="shape-gallery">
+                    <div class="shape-card">
+                        <div class="shape-visual">🔺</div>
+                        <h4>Triangle</h4>
+                        <p>3 sides, 3 angles</p>
+                    </div>
+                    <div class="shape-card">
+                        <div class="shape-visual">⬛</div>
+                        <h4>Square</h4>
+                        <p>4 equal sides</p>
+                    </div>
+                    <div class="shape-card">
+                        <div class="shape-visual">🔶</div>
+                        <h4>Rectangle</h4>
+                        <p>4 sides, 4 right angles</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h3><span class="section-icon">📏</span>Area & Perimeter</h3>
+                <p>Calculate the area (inside space) and perimeter (distance around) of shapes.</p>
+                <div class="visual-element">
+                    <div class="placeholder-image">Interactive Area & Perimeter Calculator</div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h3><span class="section-icon">📐</span>Angles & Lines</h3>
+                <p>Understand different types of angles: acute, right, obtuse, and straight angles.</p>
+            </div>
+            
+            <div class="interactive-activity">
+                <h4>🎯 Try It Yourself!</h4>
+                <p>Measure shapes around your house and calculate their area and perimeter!</p>
+                <button class="activity-button">Start Measuring Activity</button>
+            </div>
+        </div>
+        
+        <!-- Chapter Navigation -->
+        <div class="chapter-navigation">
+            <a href="chapter-2.html" class="nav-button">← Previous Chapter</a>
+            <div class="progress-indicator">
+                <div class="progress-text">Chapter Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <a href="chapter-4.html" class="nav-button">Next Chapter →</a>
+        </div>
+    </main>
+    
+    <!-- Include Shared Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="/js/app.js" defer></script>
+    <script>
+        // Load shared components
+        function loadSharedComponents() {
+            fetch('/subjects/shared/header.html')
+                .then(response => response.text())
+                .then(html => document.getElementById('header-container').innerHTML = html)
+                .catch(error => console.error('Error loading header:', error));
+            
+            fetch('/subjects/shared/footer.html')
+                .then(response => response.text())
+                .then(html => document.getElementById('footer-container').innerHTML = html)
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadSharedComponents);
+        } else {
+            loadSharedComponents();
+        }
+    </script>
+</body>
+</html>

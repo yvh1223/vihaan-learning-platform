@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 - Social Studies</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="chapter-container">
+        <div class="chapter-header">
+            <div class="chapter-number">Chapter 1</div>
+            <h1 class="chapter-title">Social Studies Chapter 1</h1>
+        </div>
+        <div class="lesson-content">
+            <div class="lesson-section">
+                <h3>Chapter Content</h3>
+                <p>Content will be enhanced with interactive timelines, maps, and historical activities.</p>
+            </div>
+        </div>
+        <div class="chapter-navigation">
+            <a href="index.html" class="nav-button">← Previous</a>
+            <div class="progress-indicator">
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+            </div>
+            <a href="chapter-2.html" class="nav-button">Next →</a>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+    <script>
+        function loadSharedComponents() {
+            fetch('/subjects/shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
+            fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
+        }
+        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+    </script>
+</body>
+</html>

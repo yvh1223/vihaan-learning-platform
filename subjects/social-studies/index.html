@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Studies - 5th Grade Learning Platform</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <style>
+        .subject-hero {
+            background: linear-gradient(135deg, #DC2626, #F59E0B);
+            color: white;
+            padding: var(--spacing-xxl);
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xxl);
+        }
+        .social-visual { font-size: 4rem; margin: var(--spacing-lg) 0; }
+        .chapters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl); }
+        .chapter-card { background-color: var(--bg-card); border-radius: var(--radius-lg); padding: var(--spacing-xl); box-shadow: var(--shadow-md); transition: all var(--transition-normal); cursor: pointer; border-left: 4px solid #DC2626; }
+        .chapter-card:hover { transform: translateY(-4px); }
+        .chapter-icon { font-size: 2.5rem; margin-bottom: var(--spacing-md); }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="main-content">
+        <div class="subject-hero">
+            <div class="social-visual">🏛️🗺️⚖️💰🇺🇸</div>
+            <h1>Social Studies</h1>
+            <p class="subject-description">Explore American history, geography, government, and economics through interactive timelines and maps!</p>
+        </div>
+        <div class="chapters-grid">
+            <div class="chapter-card" onclick="location.href='chapter-1.html'">
+                <div class="chapter-icon">🏛️</div>
+                <h3>American History</h3>
+                <p>Chapter 1 - Colonial times through the Civil War</p>
+                <a href="chapter-1.html" class="start-button">Start →</a>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter-2.html'">
+                <div class="chapter-icon">🗺️</div>
+                <h3>Geography & Cultures</h3>
+                <p>Chapter 2 - Regions, landforms, and cultural diversity</p>
+                <a href="chapter-2.html" class="start-button">Start →</a>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter-3.html'">
+                <div class="chapter-icon">⚖️</div>
+                <h3>Government & Citizenship</h3>
+                <p>Chapter 3 - Constitution, rights, and civic responsibilities</p>
+                <a href="chapter-3.html" class="start-button">Start →</a>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter-4.html'">
+                <div class="chapter-icon">💰</div>
+                <h3>Economics & Society</h3>
+                <p>Chapter 4 - Supply and demand, trade, and economic systems</p>
+                <a href="chapter-4.html" class="start-button">Start →</a>
+            </div>
+        </div>
+        <div class="assessment-section">
+            <h2>🏛️ STAAR Social Studies Practice</h2>
+            <p>Test your knowledge of American history, geography, and civics!</p>
+            <button class="assessment-button" onclick="location.href='assessment-1.html'">Take Practice Test</button>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+    <script>
+        function loadSharedComponents() {
+            fetch('/subjects/shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
+            fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
+        }
+        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+    </script>
+</body>
+</html>

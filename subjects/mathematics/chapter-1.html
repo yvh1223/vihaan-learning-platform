@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Numbers & Operations - Interactive 5th grade mathematics lesson with place value, fractions, decimals, and visual learning">
+    <meta name="keywords" content="5th grade, mathematics, numbers, operations, place value, fractions, decimals, STAAR, MAP">
+    <meta name="author" content="Yallappa H">
+    
+    <title>Numbers & Operations - 5th Grade Mathematics | Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+    <style>
+        /* Chapter-specific styles */
+        .number-visual {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: center;
+            padding: var(--spacing-lg);
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .place-value-chart {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--spacing-sm);
+            max-width: 500px;
+            margin: var(--spacing-lg) auto;
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .place-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-sm);
+            text-align: center;
+            font-weight: bold;
+            font-size: var(--font-size-sm);
+            border-radius: var(--radius-sm);
+        }
+        
+        .place-digit {
+            background-color: var(--accent-color);
+            color: white;
+            padding: var(--spacing-md);
+            text-align: center;
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .place-digit:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+        }
+        
+        .fraction-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .fraction-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            position: relative;
+            background-color: var(--bg-secondary);
+            overflow: hidden;
+        }
+        
+        .fraction-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 120px 0 0 120px;
+        }
+        
+        .fraction-label {
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .decimal-ruler {
+            width: 100%;
+            max-width: 600px;
+            height: 60px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .decimal-markers {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .decimal-marker {
+            width: 2px;
+            background-color: white;
+            opacity: 0.8;
+        }
+        
+        .decimal-marker.major {
+            height: 80%;
+        }
+        
+        .decimal-marker.minor {
+            height: 50%;
+        }
+        
+        .decimal-label {
+            position: absolute;
+            bottom: -25px;
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+        
+        .operation-demo {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .math-problem {
+            font-size: var(--font-size-xxl);
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: center;
+            margin: var(--spacing-lg) 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .step-by-step {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .step-number {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: var(--font-size-sm);
+        }
+        
+        .try-it-button {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: block;
+            margin: var(--spacing-lg) auto;
+        }
+        
+        .try-it-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Shared Header -->
+    <div id="header-container"></div>
+    
+    <!-- Main Chapter Content -->
+    <main class="chapter-container">
+        <!-- Chapter Header -->
+        <div class="chapter-header">
+            <div class="chapter-number">Chapter 1</div>
+            <h1 class="chapter-title">Numbers & Operations</h1>
+            <p class="chapter-description">
+                Master place value, fractions, decimals, and operations with whole numbers using visual models and hands-on activities!
+            </p>
+        </div>
+        
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1: Place Value -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🎯</span>
+                    Understanding Place Value
+                </h3>
+                
+                <p>Place value helps us understand what each digit in a number means. Let's explore the number 23,456:</p>
+                
+                <div class="place-value-chart">
+                    <div class="place-header">Ten Thousands</div>
+                    <div class="place-header">Thousands</div>
+                    <div class="place-header">Hundreds</div>
+                    <div class="place-header">Tens</div>
+                    <div class="place-header">Ones</div>
+                    
+                    <div class="place-digit" onclick="showPlaceValue('ten-thousands', 2)">2</div>
+                    <div class="place-digit" onclick="showPlaceValue('thousands', 3)">3</div>
+                    <div class="place-digit" onclick="showPlaceValue('hundreds', 4)">4</div>
+                    <div class="place-digit" onclick="showPlaceValue('tens', 5)">5</div>
+                    <div class="place-digit" onclick="showPlaceValue('ones', 6)">6</div>
+                </div>
+                
+                <div class="visual-element">
+                    <div class="placeholder-image">
+                        📊 Interactive Place Value Manipulatives<br>
+                        <small>Click on each digit above to see its value!</small>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startPlaceValueActivity()">
+                    🎮 Try Interactive Place Value Game
+                </button>
+            </div>
+            
+            <!-- Section 2: Fractions -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🍕</span>
+                    Working with Fractions
+                </h3>
+                
+                <p>Fractions represent parts of a whole. Let's visualize 1/2 using circles:</p>
+                
+                <div class="fraction-visual">
+                    <div class="fraction-circle">
+                        <div class="fraction-fill"></div>
+                    </div>
+                    <div class="fraction-label">=</div>
+                    <div class="fraction-label">1/2</div>
+                </div>
+                
+                <div class="operation-demo">
+                    <h4>Adding Fractions with Same Denominators</h4>
+                    <div class="math-problem">1/4 + 2/4 = ?</div>
+                    
+                    <div class="step-by-step">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div>Since denominators are the same, add only the numerators: 1 + 2 = 3</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div>Keep the same denominator: 3/4</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div>Answer: 1/4 + 2/4 = 3/4</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="visual-element">
+                    <div class="placeholder-image">
+                        🧮 Fraction Circles and Bars<br>
+                        <small>Visual fraction manipulatives for hands-on learning</small>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startFractionActivity()">
+                    🎯 Practice Fraction Operations
+                </button>
+            </div>
+            
+            <!-- Section 3: Decimals -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">📏</span>
+                    Understanding Decimals
+                </h3>
+                
+                <p>Decimals are another way to write fractions. They use place value too!</p>
+                
+                <div class="number-visual">
+                    2.45 = 2 ones + 4 tenths + 5 hundredths
+                </div>
+                
+                <div class="decimal-ruler">
+                    <div class="decimal-markers">
+                        <div class="decimal-marker major">
+                            <div class="decimal-label">0</div>
+                        </div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker major">
+                            <div class="decimal-label">0.5</div>
+                        </div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker minor"></div>
+                        <div class="decimal-marker major">
+                            <div class="decimal-label">1.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="visual-element">
+                    <div class="placeholder-image">
+                        📐 Decimal Number Lines and Grids<br>
+                        <small>Visual tools for comparing and ordering decimals</small>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startDecimalActivity()">
+                    🔢 Explore Decimal Place Value
+                </button>
+            </div>
+            
+            <!-- Section 4: Operations -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">➕</span>
+                    Multi-digit Operations
+                </h3>
+                
+                <p>Let's practice multi-digit addition and subtraction with regrouping!</p>
+                
+                <div class="operation-demo">
+                    <h4>Addition with Regrouping</h4>
+                    <div class="math-problem">
+                        <div>  4 7 8</div>
+                        <div>+ 2 5 6</div>
+                        <div>_____</div>
+                        <div>  ? ? ?</div>
+                    </div>
+                    
+                    <div class="step-by-step">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div>Add ones: 8 + 6 = 14. Write 4, carry 1</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div>Add tens: 7 + 5 + 1 = 13. Write 3, carry 1</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div>Add hundreds: 4 + 2 + 1 = 7. Write 7</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div>Answer: 478 + 256 = 734</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="interactive-activity">
+                    <h4>🎲 Roll & Calculate Challenge</h4>
+                    <p>Practice your skills with randomly generated problems!</p>
+                    <button class="activity-button" onclick="generateProblem()">
+                        Generate New Problem
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chapter Navigation -->
+        <div class="chapter-navigation">
+            <a href="index.html" class="nav-button">
+                ← Back to Mathematics
+            </a>
+            
+            <div class="progress-indicator">
+                <div class="progress-text">Chapter Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+            </div>
+            
+            <a href="chapter-2.html" class="nav-button">
+                Next: Algebraic Reasoning →
+            </a>
+        </div>
+    </main>
+    
+    <!-- Include Shared Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="/js/app.js" defer></script>
+    <script>
+        // Chapter 1: Numbers & Operations JavaScript
+        (function() {
+            // Load shared components
+            function loadSharedComponents() {
+                // Load header
+                fetch('/subjects/shared/header.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('header-container').innerHTML = html;
+                    })
+                    .catch(error => console.error('Error loading header:', error));
+                
+                // Load footer
+                fetch('/subjects/shared/footer.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('footer-container').innerHTML = html;
+                    })
+                    .catch(error => console.error('Error loading footer:', error));
+            }
+            
+            // Show place value explanation
+            window.showPlaceValue = function(place, digit) {
+                const values = {
+                    'ten-thousands': 20000,
+                    'thousands': 3000,
+                    'hundreds': 400,
+                    'tens': 50,
+                    'ones': 6
+                };
+                
+                const placeNames = {
+                    'ten-thousands': 'Ten Thousands',
+                    'thousands': 'Thousands',
+                    'hundreds': 'Hundreds',
+                    'tens': 'Tens',
+                    'ones': 'Ones'
+                };
+                
+                showNotification(
+                    `${digit} in the ${placeNames[place]} place = ${values[place].toLocaleString()}`,
+                    'success'
+                );
+            };
+            
+            // Start place value activity
+            window.startPlaceValueActivity = function() {
+                showNotification('🎮 Place Value Game coming soon! Try clicking the digits above.', 'info');
+                // Future: Launch interactive place value game
+            };
+            
+            // Start fraction activity
+            window.startFractionActivity = function() {
+                showNotification('🎯 Fraction Practice starting soon! Visual manipulatives loading...', 'info');
+                // Future: Launch fraction manipulation activity
+            };
+            
+            // Start decimal activity
+            window.startDecimalActivity = function() {
+                showNotification('🔢 Decimal Explorer coming up! Interactive number lines loading...', 'info');
+                // Future: Launch decimal place value activity
+            };
+            
+            // Generate practice problem
+            window.generateProblem = function() {
+                const num1 = Math.floor(Math.random() * 500) + 100;
+                const num2 = Math.floor(Math.random() * 300) + 50;
+                const answer = num1 + num2;
+                
+                showNotification(
+                    `🎲 New Problem: ${num1} + ${num2} = ?  (Answer: ${answer})`,
+                    'success'
+                );
+            };
+            
+            // Simple notification system
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};
+                    color: white;
+                    padding: var(--spacing-md) var(--spacing-lg);
+                    border-radius: var(--radius-md);
+                    box-shadow: var(--shadow-lg);
+                    z-index: 1000;
+                    max-width: 300px;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after 4 seconds
+                setTimeout(() => {
+                    notification.remove();
+                }, 4000);
+            }
+            
+            // Initialize page interactions
+            function initializePage() {
+                // Add interactive hover effects to visual elements
+                const visualElements = document.querySelectorAll('.visual-element');
+                visualElements.forEach(element => {
+                    element.addEventListener('click', () => {
+                        element.style.transform = 'scale(1.05)';
+                        setTimeout(() => {
+                            element.style.transform = '';
+                        }, 200);
+                    });
+                });
+                
+                // Track chapter progress (simplified)
+                updateProgress();
+            }
+            
+            // Update progress tracking
+            function updateProgress() {
+                // Mark this chapter as 25% complete
+                const progress = { 'chapter-1': 25 };
+                localStorage.setItem('math-progress', JSON.stringify(progress));
+            }
+            
+            // Initialize on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    loadSharedComponents();
+                    initializePage();
+                });
+            } else {
+                loadSharedComponents();
+                initializePage();
+            }
+        })();
+    </script>
+    
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</body>
+</html>

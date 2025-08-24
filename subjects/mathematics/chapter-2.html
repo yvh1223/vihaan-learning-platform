@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Algebraic Reasoning - 5th grade mathematics lesson with patterns, expressions, equations, and variables">
+    <meta name="keywords" content="5th grade, mathematics, algebra, patterns, expressions, equations, variables, STAAR, MAP">
+    <meta name="author" content="Yallappa H">
+    
+    <title>Algebraic Reasoning - 5th Grade Mathematics | Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+    <style>
+        .pattern-sequence {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+        }
+        
+        .pattern-item {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .pattern-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .pattern-red { background-color: #e74c3c; }
+        .pattern-blue { background-color: #3498db; }
+        .pattern-green { background-color: #27ae60; }
+        .pattern-yellow { background-color: #f39c12; }
+        .pattern-mystery { background-color: #95a5a6; }
+        
+        .equation-builder {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .equation-display {
+            font-size: 2.5rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-align: center;
+            color: var(--primary-color);
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+            border: 3px dashed var(--primary-color);
+        }
+        
+        .variable-box {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-weight: bold;
+            margin: 0 var(--spacing-xs);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .variable-box:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        
+        .expression-parts {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+        }
+        
+        .expression-term {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .expression-term:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+        
+        .operation-symbol {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .order-operations {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .pemdas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .pemdas-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        
+        .pemdas-letter {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .pemdas-word {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+        
+        .balance-scale {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: var(--spacing-xl);
+            margin: var(--spacing-xxl) 0;
+        }
+        
+        .scale-side {
+            width: 150px;
+            height: 100px;
+            background-color: var(--accent-color);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .scale-side:hover {
+            transform: translateY(-5px);
+        }
+        
+        .scale-fulcrum {
+            width: 20px;
+            height: 60px;
+            background-color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+        }
+        
+        .input-output-table {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .table-header {
+            background-color: var(--primary-color);
+            color: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .table-cell {
+            padding: var(--spacing-md);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--bg-accent);
+        }
+        
+        .table-row:nth-child(even) {
+            background-color: var(--bg-secondary);
+        }
+        
+        .table-data {
+            padding: var(--spacing-md);
+            text-align: center;
+            font-size: var(--font-size-lg);
+            font-weight: 500;
+            border-right: 1px solid var(--bg-accent);
+        }
+        
+        .mystery-value {
+            background-color: var(--warning-color);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Shared Header -->
+    <div id="header-container"></div>
+    
+    <!-- Main Chapter Content -->
+    <main class="chapter-container">
+        <!-- Chapter Header -->
+        <div class="chapter-header">
+            <div class="chapter-number">Chapter 2</div>
+            <h1 class="chapter-title">Algebraic Reasoning</h1>
+            <p class="chapter-description">
+                Discover patterns, build expressions, and solve equations! Learn to think algebraically with visual models and interactive activities.
+            </p>
+        </div>
+        
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1: Pattern Recognition -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🎨</span>
+                    Identifying Patterns
+                </h3>
+                
+                <p>Patterns are everywhere! Look at this sequence and predict what comes next:</p>
+                
+                <div class="pattern-sequence">
+                    <div class="pattern-item pattern-red">1</div>
+                    <div class="pattern-item pattern-blue">3</div>
+                    <div class="pattern-item pattern-red">5</div>
+                    <div class="pattern-item pattern-blue">7</div>
+                    <div class="pattern-item pattern-red">9</div>
+                    <div class="pattern-item pattern-mystery" onclick="revealPattern()">?</div>
+                </div>
+                
+                <p><strong>Pattern Rule:</strong> Start with 1, add 2 each time. Colors alternate red, blue, red, blue...</p>
+                
+                <div class="visual-element">
+                    <div class="placeholder-image">
+                        🔍 Interactive Pattern Builder<br>
+                        <small>Create your own patterns with shapes, colors, and numbers</small>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startPatternActivity()">
+                    🎯 Create Your Own Pattern
+                </button>
+            </div>
+            
+            <!-- Section 2: Expressions and Variables -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🔤</span>
+                    Building Expressions
+                </h3>
+                
+                <p>Variables are letters that represent unknown numbers. Let's build expressions!</p>
+                
+                <div class="equation-builder">
+                    <h4>Expression Builder</h4>
+                    <div class="expression-parts">
+                        <div class="expression-term" onclick="addToExpression('3')">3</div>
+                        <div class="operation-symbol">+</div>
+                        <div class="expression-term" onclick="addToExpression('x')">x</div>
+                        <div class="operation-symbol">=</div>
+                        <div class="expression-term" onclick="addToExpression('11')">11</div>
+                    </div>
+                    
+                    <div class="equation-display" id="expression-display">
+                        3 + <span class="variable-box">x</span> = 11
+                    </div>
+                    
+                    <p>What value of <strong>x</strong> makes this equation true?</p>
+                    <p><em>Hint: If 3 + x = 11, then x = 11 - 3 = 8</em></p>
+                </div>
+                
+                <div class="input-output-table">
+                    <div class="table-header">
+                        <div class="table-cell">Input (x)</div>
+                        <div class="table-cell">Output (2x + 1)</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-data">1</div>
+                        <div class="table-data">3</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-data">2</div>
+                        <div class="table-data">5</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-data">3</div>
+                        <div class="table-data">7</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-data">4</div>
+                        <div class="table-data mystery-value" onclick="revealOutput()">?</div>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startExpressionBuilder()">
+                    🔢 Build Your Own Expression
+                </button>
+            </div>
+            
+            <!-- Section 3: Equations and Balance -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">⚖️</span>
+                    Solving Equations
+                </h3>
+                
+                <p>Equations are like balanced scales. Both sides must be equal!</p>
+                
+                <div class="balance-scale">
+                    <div class="scale-side" onclick="adjustScale('left')">
+                        x + 3
+                    </div>
+                    <div class="scale-fulcrum"></div>
+                    <div class="scale-side" onclick="adjustScale('right')">
+                        9
+                    </div>
+                </div>
+                
+                <p style="text-align: center;">
+                    <strong>To keep the scale balanced:</strong> If x + 3 = 9, then x = 6
+                </p>
+                
+                <div class="equation-builder">
+                    <h4>Step-by-Step Solution</h4>
+                    <div class="step-by-step">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div>Start with: x + 3 = 9</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div>Subtract 3 from both sides: x + 3 - 3 = 9 - 3</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div>Simplify: x = 6</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div>Check: 6 + 3 = 9 ✓</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startEquationSolver()">
+                    ⚖️ Practice Equation Solving
+                </button>
+            </div>
+            
+            <!-- Section 4: Order of Operations -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🎯</span>
+                    Order of Operations (PEMDAS)
+                </h3>
+                
+                <p>When solving complex expressions, follow the order: <strong>PEMDAS</strong></p>
+                
+                <div class="order-operations">
+                    <div class="pemdas">
+                        <div class="pemdas-item">
+                            <span class="pemdas-letter">P</span>
+                            <span class="pemdas-word">Parentheses</span>
+                        </div>
+                        <div class="pemdas-item">
+                            <span class="pemdas-letter">E</span>
+                            <span class="pemdas-word">Exponents</span>
+                        </div>
+                        <div class="pemdas-item">
+                            <span class="pemdas-letter">M</span>
+                            <span class="pemdas-word">Multiplication</span>
+                        </div>
+                        <div class="pemdas-item">
+                            <span class="pemdas-letter">D</span>
+                            <span class="pemdas-word">Division</span>
+                        </div>
+                        <div class="pemdas-item">
+                            <span class="pemdas-letter">A</span>
+                            <span class="pemdas-word">Addition</span>
+                        </div>
+                        <div class="pemdas-item">
+                            <span class="pemdas-letter">S</span>
+                            <span class="pemdas-word">Subtraction</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: var(--spacing-lg);">
+                        <h4 style="color: white;">Example: 2 + 3 × 4</h4>
+                        <p style="opacity: 0.9;">First multiply: 3 × 4 = 12</p>
+                        <p style="opacity: 0.9;">Then add: 2 + 12 = 14</p>
+                    </div>
+                </div>
+                
+                <div class="interactive-activity">
+                    <h4>🎮 PEMDAS Challenge</h4>
+                    <p>Solve expressions using the correct order of operations!</p>
+                    <button class="activity-button" onclick="generatePEMDASProblem()">
+                        Generate New Problem
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chapter Navigation -->
+        <div class="chapter-navigation">
+            <a href="chapter-1.html" class="nav-button">
+                ← Numbers & Operations
+            </a>
+            
+            <div class="progress-indicator">
+                <div class="progress-text">Chapter Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                </div>
+            </div>
+            
+            <a href="chapter-3.html" class="nav-button">
+                Next: Geometry & Measurement →
+            </a>
+        </div>
+    </main>
+    
+    <!-- Include Shared Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="/js/app.js" defer></script>
+    <script>
+        // Chapter 2: Algebraic Reasoning JavaScript
+        (function() {
+            // Load shared components
+            function loadSharedComponents() {
+                fetch('/subjects/shared/header.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('header-container').innerHTML = html)
+                    .catch(error => console.error('Error loading header:', error));
+                
+                fetch('/subjects/shared/footer.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('footer-container').innerHTML = html)
+                    .catch(error => console.error('Error loading footer:', error));
+            }
+            
+            // Reveal pattern answer
+            window.revealPattern = function() {
+                const mysteryItem = document.querySelector('.pattern-mystery');
+                mysteryItem.textContent = '11';
+                mysteryItem.classList.remove('pattern-mystery');
+                mysteryItem.classList.add('pattern-blue');
+                showNotification('🎉 Correct! The pattern continues: add 2, alternate colors', 'success');
+            };
+            
+            // Start pattern activity
+            window.startPatternActivity = function() {
+                showNotification('🎨 Pattern Builder loading! Create sequences with numbers, shapes, and colors.', 'info');
+            };
+            
+            // Add to expression
+            window.addToExpression = function(value) {
+                showNotification(`Added "${value}" to expression!`, 'info');
+            };
+            
+            // Reveal table output
+            window.revealOutput = function() {
+                const mysteryCell = document.querySelector('.mystery-value');
+                mysteryCell.textContent = '9';
+                mysteryCell.classList.remove('mystery-value');
+                showNotification('🎯 Correct! When x = 4: 2(4) + 1 = 9', 'success');
+            };
+            
+            // Start expression builder
+            window.startExpressionBuilder = function() {
+                showNotification('🔢 Expression Builder starting! Build and solve your own equations.', 'info');
+            };
+            
+            // Adjust balance scale
+            window.adjustScale = function(side) {
+                showNotification(`⚖️ Adjusted ${side} side of the scale! Keep it balanced!`, 'info');
+            };
+            
+            // Start equation solver
+            window.startEquationSolver = function() {
+                showNotification('⚖️ Equation Solver loading! Practice with balance scales and step-by-step solutions.', 'info');
+            };
+            
+            // Generate PEMDAS problem
+            window.generatePEMDASProblem = function() {
+                const problems = [
+                    { problem: '5 + 2 × 3', answer: '11', steps: 'First: 2 × 3 = 6, Then: 5 + 6 = 11' },
+                    { problem: '(4 + 2) × 3', answer: '18', steps: 'First: (4 + 2) = 6, Then: 6 × 3 = 18' },
+                    { problem: '12 ÷ 3 + 2', answer: '6', steps: 'First: 12 ÷ 3 = 4, Then: 4 + 2 = 6' }
+                ];
+                
+                const randomProblem = problems[Math.floor(Math.random() * problems.length)];
+                showNotification(
+                    `🎲 Solve: ${randomProblem.problem} = ?  (Answer: ${randomProblem.answer} - ${randomProblem.steps})`,
+                    'success'
+                );
+            };
+            
+            // Simple notification system
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};
+                    color: white;
+                    padding: var(--spacing-md) var(--spacing-lg);
+                    border-radius: var(--radius-md);
+                    box-shadow: var(--shadow-lg);
+                    z-index: 1000;
+                    max-width: 350px;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 5000);
+            }
+            
+            // Update progress tracking
+            function updateProgress() {
+                const currentProgress = JSON.parse(localStorage.getItem('math-progress') || '{}');
+                currentProgress['chapter-2'] = 50;
+                localStorage.setItem('math-progress', JSON.stringify(currentProgress));
+            }
+            
+            // Initialize on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    loadSharedComponents();
+                    updateProgress();
+                });
+            } else {
+                loadSharedComponents();
+                updateProgress();
+            }
+        })();
+    </script>
+    
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</body>
+</html>

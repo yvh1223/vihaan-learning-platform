@@ -1,0 +1,267 @@
+<!-- Shared Navigation Header Component -->
+<!-- Used across all subject and chapter pages for consistent navigation -->
+
+<header class="main-header">
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/index.html" class="brand-link">
+                <img src="/assets/icons/logo.png" alt="Learning Platform Logo" class="logo">
+                <h1>5th Grade Learning Hub</h1>
+            </a>
+        </div>
+        
+        <!-- Main Navigation Menu -->
+        <div class="nav-menu" id="nav-menu">
+            <ul class="nav-list">
+                <li><a href="/index.html" class="nav-link" data-nav="dashboard">
+                    <span class="nav-icon">🏠</span>Dashboard
+                </a></li>
+                <li><a href="/subjects/mathematics/index.html" class="nav-link" data-nav="mathematics">
+                    <span class="nav-icon">🔢</span>Mathematics
+                </a></li>
+                <li><a href="/subjects/science/index.html" class="nav-link" data-nav="science">
+                    <span class="nav-icon">🔬</span>Science
+                </a></li>
+                <li><a href="/subjects/english/index.html" class="nav-link" data-nav="english">
+                    <span class="nav-icon">📚</span>English Language Arts
+                </a></li>
+                <li><a href="/subjects/social-studies/index.html" class="nav-link" data-nav="social-studies">
+                    <span class="nav-icon">🌍</span>Social Studies
+                </a></li>
+            </ul>
+        </div>
+        
+        <!-- Navigation Controls -->
+        <div class="nav-controls">
+            <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+            <button id="menu-toggle" class="btn-icon mobile-only" aria-label="Toggle menu">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Breadcrumb Navigation (context-aware, populated by JavaScript) -->
+    <div class="breadcrumb-container" id="breadcrumb-container" style="display: none;">
+        <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+            <ol class="breadcrumb-list" id="breadcrumb-list">
+                <!-- Dynamically populated by navigation.js -->
+            </ol>
+        </nav>
+    </div>
+</header>
+
+<style>
+/* Shared Header Styles - Extends main.css */
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-link:hover h1 {
+    color: var(--primary-hover);
+}
+
+.nav-icon {
+    font-size: var(--font-size-lg);
+    margin-right: var(--spacing-xs);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+/* Breadcrumb Styles */
+.breadcrumb-container {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--bg-accent);
+    padding: var(--spacing-sm) var(--spacing-xl);
+}
+
+.breadcrumb-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+    content: "›";
+    margin-left: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+.breadcrumb-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.breadcrumb-current {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Mobile breadcrumb adjustments */
+@media (max-width: 767px) {
+    .breadcrumb-container {
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+    
+    .breadcrumb-list {
+        font-size: var(--font-size-xs);
+        gap: var(--spacing-xs);
+    }
+    
+    .breadcrumb-item:not(:last-child)::after {
+        margin-left: var(--spacing-xs);
+    }
+}
+</style>
+
+<script>
+// Shared Header JavaScript for Navigation Context
+(function() {
+    // Initialize header navigation context
+    function initializeHeaderNavigation() {
+        updateActiveNavigation();
+        updateBreadcrumbs();
+    }
+    
+    // Update active navigation based on current page
+    function updateActiveNavigation() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Remove all active classes
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // Determine current section and mark as active
+        if (currentPath.includes('/subjects/mathematics/')) {
+            document.querySelector('[data-nav="mathematics"]')?.classList.add('active');
+        } else if (currentPath.includes('/subjects/science/')) {
+            document.querySelector('[data-nav="science"]')?.classList.add('active');
+        } else if (currentPath.includes('/subjects/english/')) {
+            document.querySelector('[data-nav="english"]')?.classList.add('active');
+        } else if (currentPath.includes('/subjects/social-studies/')) {
+            document.querySelector('[data-nav="social-studies"]')?.classList.add('active');
+        } else if (currentPath === '/' || currentPath.endsWith('index.html')) {
+            document.querySelector('[data-nav="dashboard"]')?.classList.add('active');
+        }
+    }
+    
+    // Update breadcrumb navigation based on current page context
+    function updateBreadcrumbs() {
+        const currentPath = window.location.pathname;
+        const breadcrumbContainer = document.getElementById('breadcrumb-container');
+        const breadcrumbList = document.getElementById('breadcrumb-list');
+        
+        // Clear existing breadcrumbs
+        breadcrumbList.innerHTML = '';
+        
+        // Always start with Dashboard
+        const dashboardCrumb = createBreadcrumbItem('🏠 Dashboard', '/index.html');
+        breadcrumbList.appendChild(dashboardCrumb);
+        
+        // Add subject-specific breadcrumbs
+        if (currentPath.includes('/subjects/')) {
+            const pathParts = currentPath.split('/');
+            const subject = pathParts.find(part => part.includes('mathematics') || part.includes('science') || part.includes('english') || part.includes('social-studies'));
+            const fileName = pathParts[pathParts.length - 1];
+            
+            if (subject) {
+                const subjectNames = {
+                    'mathematics': 'Mathematics',
+                    'science': 'Science', 
+                    'english': 'English Language Arts',
+                    'social-studies': 'Social Studies'
+                };
+                
+                const subjectCrumb = createBreadcrumbItem(
+                    subjectNames[subject], 
+                    `/subjects/${subject}/index.html`
+                );
+                breadcrumbList.appendChild(subjectCrumb);
+                
+                // Add chapter/assessment breadcrumb if not on subject index
+                if (fileName !== 'index.html') {
+                    const pageName = getPageDisplayName(fileName);
+                    const currentCrumb = createBreadcrumbItem(pageName, null, true);
+                    breadcrumbList.appendChild(currentCrumb);
+                }
+                
+                // Show breadcrumb container
+                breadcrumbContainer.style.display = 'block';
+            }
+        } else {
+            // Hide breadcrumbs on dashboard
+            breadcrumbContainer.style.display = 'none';
+        }
+    }
+    
+    // Create breadcrumb item element
+    function createBreadcrumbItem(text, href, isCurrent = false) {
+        const li = document.createElement('li');
+        li.className = 'breadcrumb-item';
+        
+        if (isCurrent || !href) {
+            li.innerHTML = `<span class="breadcrumb-current">${text}</span>`;
+        } else {
+            li.innerHTML = `<a href="${href}" class="breadcrumb-link">${text}</a>`;
+        }
+        
+        return li;
+    }
+    
+    // Get display name for page based on filename
+    function getPageDisplayName(fileName) {
+        const pageNames = {
+            'chapter-1.html': 'Chapter 1',
+            'chapter-2.html': 'Chapter 2', 
+            'chapter-3.html': 'Chapter 3',
+            'chapter-4.html': 'Chapter 4',
+            'chapter-5.html': 'Chapter 5',
+            'assessment-1.html': 'Practice Assessment'
+        };
+        
+        return pageNames[fileName] || fileName.replace('.html', '').replace('-', ' ');
+    }
+    
+    // Mobile menu toggle functionality
+    function initializeMobileMenu() {
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+    }
+    
+    // Initialize when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeHeaderNavigation();
+            initializeMobileMenu();
+        });
+    } else {
+        initializeHeaderNavigation();
+        initializeMobileMenu();
+    }
+})();
+</script>

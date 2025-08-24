@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="5th Grade Mathematics - Numbers, Operations, Algebra, Geometry, and Data Analysis with interactive visual learning">
+    <meta name="keywords" content="5th grade, mathematics, numbers, algebra, geometry, data analysis, STAAR, MAP, Texas TEKS">
+    <meta name="author" content="Yallappa H">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mathematics - 5th Grade Learning Platform">
+    <meta property="og:description" content="Interactive mathematics learning for 5th graders with visual manipulatives and real-world applications">
+    <meta property="og:type" content="website">
+    
+    <title>Mathematics - 5th Grade Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+    <style>
+        .subject-hero {
+            background: linear-gradient(135deg, #4A90E2, #50C878);
+            color: white;
+            padding: var(--spacing-xxl);
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .subject-hero h1 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+        
+        .subject-description {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .math-visual {
+            font-size: 4rem;
+            margin: var(--spacing-lg) 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .chapter-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-color);
+        }
+        
+        .chapter-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .chapter-icon {
+            font-size: 2.5rem;
+            padding: var(--spacing-md);
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chapter-info h3 {
+            margin: 0 0 var(--spacing-xs) 0;
+            color: var(--primary-color);
+        }
+        
+        .chapter-number {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .chapter-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        
+        .chapter-topics {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .topics-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        
+        .topic-tag {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+        
+        .chapter-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: var(--spacing-lg);
+        }
+        
+        .progress-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .progress-bar {
+            width: 100px;
+            height: 6px;
+            background-color: var(--bg-accent);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--radius-full);
+            transition: width var(--transition-slow);
+        }
+        
+        .start-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .start-button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        
+        .assessment-section {
+            background: linear-gradient(135deg, var(--accent-color), var(--warning-color));
+            padding: var(--spacing-xxl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            color: white;
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .assessment-section h2 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .assessment-description {
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.95;
+        }
+        
+        .assessment-button {
+            background-color: white;
+            color: var(--primary-color);
+            padding: var(--spacing-md) var(--spacing-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: var(--font-size-lg);
+        }
+        
+        .assessment-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Shared Header -->
+    <div id="header-container"></div>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Subject Hero Section -->
+        <div class="subject-hero">
+            <div class="math-visual">🔢➕➖✖️➗</div>
+            <h1>Mathematics</h1>
+            <p class="subject-description">
+                Explore numbers, patterns, shapes, and data through interactive visual learning! 
+                Master essential math concepts with hands-on activities and real-world applications.
+            </p>
+        </div>
+        
+        <!-- Mathematics Chapters -->
+        <div class="chapters-grid">
+            <!-- Chapter 1: Numbers & Operations -->
+            <div class="chapter-card" onclick="location.href='chapter-1.html'">
+                <div class="chapter-header">
+                    <div class="chapter-icon">🔢</div>
+                    <div class="chapter-info">
+                        <h3>Numbers & Operations</h3>
+                        <div class="chapter-number">Chapter 1</div>
+                    </div>
+                </div>
+                
+                <p class="chapter-description">
+                    Understand place value, fractions, decimals, and perform operations with whole numbers. 
+                    Use visual models and manipulatives to build number sense.
+                </p>
+                
+                <div class="chapter-topics">
+                    <ul class="topics-list">
+                        <li class="topic-tag">Place Value</li>
+                        <li class="topic-tag">Fractions</li>
+                        <li class="topic-tag">Decimals</li>
+                        <li class="topic-tag">Operations</li>
+                        <li class="topic-tag">Number Lines</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-progress">
+                    <div class="progress-info">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <a href="chapter-1.html" class="start-button">Start →</a>
+                </div>
+            </div>
+            
+            <!-- Chapter 2: Algebraic Reasoning -->
+            <div class="chapter-card" onclick="location.href='chapter-2.html'">
+                <div class="chapter-header">
+                    <div class="chapter-icon">📐</div>
+                    <div class="chapter-info">
+                        <h3>Algebraic Reasoning</h3>
+                        <div class="chapter-number">Chapter 2</div>
+                    </div>
+                </div>
+                
+                <p class="chapter-description">
+                    Identify patterns, write expressions, and solve equations. Build foundation 
+                    for algebraic thinking through visual patterns and real-world problems.
+                </p>
+                
+                <div class="chapter-topics">
+                    <ul class="topics-list">
+                        <li class="topic-tag">Patterns</li>
+                        <li class="topic-tag">Expressions</li>
+                        <li class="topic-tag">Equations</li>
+                        <li class="topic-tag">Variables</li>
+                        <li class="topic-tag">Order of Operations</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-progress">
+                    <div class="progress-info">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <a href="chapter-2.html" class="start-button">Start →</a>
+                </div>
+            </div>
+            
+            <!-- Chapter 3: Geometry & Measurement -->
+            <div class="chapter-card" onclick="location.href='chapter-3.html'">
+                <div class="chapter-header">
+                    <div class="chapter-icon">📏</div>
+                    <div class="chapter-info">
+                        <h3>Geometry & Measurement</h3>
+                        <div class="chapter-number">Chapter 3</div>
+                    </div>
+                </div>
+                
+                <p class="chapter-description">
+                    Explore 2D and 3D shapes, calculate area and perimeter, work with angles, 
+                    and use coordinate planes. Hands-on measurement activities included!
+                </p>
+                
+                <div class="chapter-topics">
+                    <ul class="topics-list">
+                        <li class="topic-tag">2D Shapes</li>
+                        <li class="topic-tag">3D Shapes</li>
+                        <li class="topic-tag">Area & Perimeter</li>
+                        <li class="topic-tag">Angles</li>
+                        <li class="topic-tag">Coordinates</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-progress">
+                    <div class="progress-info">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <a href="chapter-3.html" class="start-button">Start →</a>
+                </div>
+            </div>
+            
+            <!-- Chapter 4: Data Analysis & Financial Literacy -->
+            <div class="chapter-card" onclick="location.href='chapter-4.html'">
+                <div class="chapter-header">
+                    <div class="chapter-icon">📊</div>
+                    <div class="chapter-info">
+                        <h3>Data Analysis & Financial Literacy</h3>
+                        <div class="chapter-number">Chapter 4</div>
+                    </div>
+                </div>
+                
+                <p class="chapter-description">
+                    Create and interpret graphs, understand probability, and learn about money management. 
+                    Real-world data activities and financial literacy games!
+                </p>
+                
+                <div class="chapter-topics">
+                    <ul class="topics-list">
+                        <li class="topic-tag">Graphs & Charts</li>
+                        <li class="topic-tag">Probability</li>
+                        <li class="topic-tag">Money Management</li>
+                        <li class="topic-tag">Data Collection</li>
+                        <li class="topic-tag">Statistics</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-progress">
+                    <div class="progress-info">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <a href="chapter-4.html" class="start-button">Start →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- STAAR Practice Assessment -->
+        <div class="assessment-section">
+            <h2>🎯 STAAR Practice Assessment</h2>
+            <p class="assessment-description">
+                Test your mathematics skills with authentic STAAR-style questions! 
+                Get instant feedback and personalized recommendations for improvement.
+            </p>
+            <button class="assessment-button" onclick="location.href='assessment-1.html'">
+                Take Practice Test
+            </button>
+        </div>
+    </main>
+    
+    <!-- Include Shared Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="/js/app.js" defer></script>
+    <script>
+        // Mathematics Subject Page JavaScript
+        (function() {
+            // Load shared components
+            function loadSharedComponents() {
+                // Load header
+                fetch('/subjects/shared/header.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('header-container').innerHTML = html;
+                    })
+                    .catch(error => console.error('Error loading header:', error));
+                
+                // Load footer
+                fetch('/subjects/shared/footer.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('footer-container').innerHTML = html;
+                    })
+                    .catch(error => console.error('Error loading footer:', error));
+            }
+            
+            // Initialize page interactions
+            function initializePage() {
+                // Add hover effects to chapter cards
+                const chapterCards = document.querySelectorAll('.chapter-card');
+                chapterCards.forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-6px) scale(1.02)';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = '';
+                    });
+                });
+                
+                // Load progress data (placeholder - will connect to Supabase)
+                loadChapterProgress();
+            }
+            
+            // Load chapter progress from local storage (placeholder)
+            function loadChapterProgress() {
+                const progressData = {
+                    'chapter-1': 0,
+                    'chapter-2': 0,
+                    'chapter-3': 0,
+                    'chapter-4': 0
+                };
+                
+                // Try to load from localStorage
+                const savedProgress = localStorage.getItem('math-progress');
+                if (savedProgress) {
+                    try {
+                        Object.assign(progressData, JSON.parse(savedProgress));
+                    } catch (error) {
+                        console.warn('Error loading progress data:', error);
+                    }
+                }
+                
+                // Update progress bars
+                Object.keys(progressData).forEach(chapter => {
+                    const card = document.querySelector(`[onclick="location.href='${chapter}.html'"]`);
+                    if (card) {
+                        const progressFill = card.querySelector('.progress-fill');
+                        const progressText = card.querySelector('.progress-text');
+                        
+                        if (progressFill && progressText) {
+                            const progress = progressData[chapter];
+                            progressFill.style.width = `${progress}%`;
+                            progressText.textContent = `${progress}% Complete`;
+                        }
+                    }
+                });
+            }
+            
+            // Initialize on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    loadSharedComponents();
+                    initializePage();
+                });
+            } else {
+                loadSharedComponents();
+                initializePage();
+            }
+        })();
+    </script>
+</body>
+</html>

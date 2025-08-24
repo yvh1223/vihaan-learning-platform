@@ -1,0 +1,347 @@
+<!-- Shared Footer Component -->
+<!-- Used across all subject and chapter pages for consistent footer content -->
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <p>&copy; 2025 5th Grade Learning Platform. Built for educational excellence.</p>
+            <p class="footer-tagline">Making learning fun, visual, and personalized for every 5th grader! 🎓</p>
+        </div>
+        
+        <div class="footer-links">
+            <a href="/index.html" class="footer-link">🏠 Home</a>
+            <a href="#progress" class="footer-link">📊 Progress</a>
+            <a href="#achievements" class="footer-link">🏆 Achievements</a>
+            <a href="#help" class="footer-link">❓ Help</a>
+        </div>
+        
+        <div class="footer-subjects">
+            <h4 class="footer-title">Quick Subject Access</h4>
+            <div class="footer-subject-links">
+                <a href="/subjects/mathematics/index.html" class="footer-subject-link">
+                    <span class="subject-icon">🔢</span>Math
+                </a>
+                <a href="/subjects/science/index.html" class="footer-subject-link">
+                    <span class="subject-icon">🔬</span>Science
+                </a>
+                <a href="/subjects/english/index.html" class="footer-subject-link">
+                    <span class="subject-icon">📚</span>English
+                </a>
+                <a href="/subjects/social-studies/index.html" class="footer-subject-link">
+                    <span class="subject-icon">🌍</span>Social Studies
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Progress indicator (appears on chapter pages) -->
+    <div class="footer-progress" id="footer-progress" style="display: none;">
+        <div class="progress-container">
+            <div class="progress-info">
+                <span class="progress-label">Chapter Progress:</span>
+                <span class="progress-percentage" id="footer-progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="footer-progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Shared Footer Styles - Extends main.css */
+.main-footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--bg-accent);
+    margin-top: auto;
+    padding: var(--spacing-xl) 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.footer-tagline {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.footer-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.footer-subjects {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.footer-title {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-subject-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.footer-subject-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+}
+
+.footer-subject-link:hover {
+    color: var(--primary-color);
+    background-color: var(--bg-accent);
+    transform: translateX(4px);
+}
+
+.subject-icon {
+    font-size: var(--font-size-sm);
+}
+
+/* Footer Progress Indicator */
+.footer-progress {
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--bg-accent);
+    padding: var(--spacing-md) 0;
+    margin-top: var(--spacing-lg);
+}
+
+.progress-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    min-width: 150px;
+}
+
+.progress-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.progress-percentage {
+    font-size: var(--font-size-sm);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.footer-progress .progress-bar {
+    flex: 1;
+    height: 6px;
+    background-color: var(--bg-accent);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.footer-progress .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .footer-subjects {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        text-align: center;
+    }
+    
+    .footer-links {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+    }
+    
+    .footer-subject-links {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+    
+    .progress-container {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .progress-info {
+        justify-content: center;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-footer {
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .footer-content {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .footer-subject-links {
+        gap: var(--spacing-xs);
+    }
+    
+    .footer-subject-link {
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+}
+</style>
+
+<script>
+// Shared Footer JavaScript for Progress Tracking
+(function() {
+    // Initialize footer functionality
+    function initializeFooter() {
+        updateFooterProgress();
+        setupFooterInteractions();
+    }
+    
+    // Update footer progress indicator based on current page
+    function updateFooterProgress() {
+        const currentPath = window.location.pathname;
+        const footerProgress = document.getElementById('footer-progress');
+        
+        // Show progress indicator only on chapter pages
+        if (currentPath.includes('chapter-') || currentPath.includes('assessment-')) {
+            footerProgress.style.display = 'block';
+            
+            // Calculate and display progress (placeholder logic)
+            const progress = calculateChapterProgress();
+            updateProgressDisplay(progress);
+        } else {
+            footerProgress.style.display = 'none';
+        }
+    }
+    
+    // Calculate chapter progress (placeholder - will be enhanced with Supabase integration)
+    function calculateChapterProgress() {
+        // For now, return a placeholder value
+        // In full implementation, this would check completed activities, quizzes, etc.
+        const currentPath = window.location.pathname;
+        
+        // Simple simulation based on which chapter we're viewing
+        if (currentPath.includes('chapter-1')) return 25;
+        if (currentPath.includes('chapter-2')) return 50;
+        if (currentPath.includes('chapter-3')) return 75;
+        if (currentPath.includes('chapter-4') || currentPath.includes('chapter-5')) return 90;
+        if (currentPath.includes('assessment-')) return 100;
+        
+        return 0;
+    }
+    
+    // Update progress display elements
+    function updateProgressDisplay(progressPercentage) {
+        const progressFill = document.getElementById('footer-progress-fill');
+        const progressText = document.getElementById('footer-progress-percentage');
+        
+        if (progressFill && progressText) {
+            progressFill.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+    }
+    
+    // Setup footer interaction behaviors
+    function setupFooterInteractions() {
+        // Smooth scroll to top when footer navigation links are clicked
+        const footerLinks = document.querySelectorAll('.footer-link');
+        footerLinks.forEach(link => {
+            if (link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+        
+        // Analytics tracking for subject quick access (placeholder)
+        const subjectLinks = document.querySelectorAll('.footer-subject-link');
+        subjectLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Track subject access from footer
+                console.log('Footer subject navigation:', link.textContent.trim());
+            });
+        });
+    }
+    
+    // Initialize when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeFooter);
+    } else {
+        initializeFooter();
+    }
+    
+    // Re-initialize when page content changes (for SPA-like behavior)
+    window.addEventListener('popstate', initializeFooter);
+})();
+</script>

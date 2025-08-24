@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mathematics STAAR Practice Assessment - 5th grade math test preparation with authentic questions">
+    <meta name="keywords" content="5th grade, mathematics, STAAR, assessment, practice test, Texas, math test">
+    <meta name="author" content="Yallappa H">
+    
+    <title>Mathematics Practice Assessment - 5th Grade STAAR Prep | Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+    <style>
+        .assessment-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+        }
+        
+        .assessment-header {
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+            color: white;
+            padding: var(--spacing-xxl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .assessment-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .assessment-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .info-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        
+        .info-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .info-label {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+        
+        .question-container {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--bg-accent);
+            padding-bottom: var(--spacing-md);
+        }
+        
+        .question-number {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-weight: bold;
+        }
+        
+        .question-category {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+        
+        .question-text {
+            font-size: var(--font-size-lg);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+        }
+        
+        .question-visual {
+            background-color: var(--bg-secondary);
+            border: 2px dashed var(--bg-accent);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .visual-placeholder {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: var(--font-size-lg);
+        }
+        
+        .answer-choices {
+            display: grid;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .choice-option {
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--bg-accent);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .choice-option:hover {
+            border-color: var(--primary-color);
+            background-color: var(--bg-card);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .choice-option.selected {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .choice-option.correct {
+            border-color: var(--success-color);
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .choice-option.incorrect {
+            border-color: var(--danger-color);
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .choice-letter {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: var(--font-size-sm);
+        }
+        
+        .choice-option.selected .choice-letter,
+        .choice-option.correct .choice-letter,
+        .choice-option.incorrect .choice-letter {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .explanation {
+            background-color: var(--bg-secondary);
+            border-left: 4px solid var(--success-color);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            display: none;
+        }
+        
+        .explanation.show {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .explanation-title {
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .progress-bar {
+            background-color: var(--bg-accent);
+            height: 8px;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+            border-radius: var(--radius-full);
+            transition: width var(--transition-slow);
+        }
+        
+        .assessment-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: var(--spacing-xxl) 0;
+            padding: var(--spacing-lg);
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+        }
+        
+        .control-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .control-button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        
+        .control-button:disabled {
+            background-color: var(--text-light);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .score-display {
+            text-align: center;
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .results-summary {
+            background: linear-gradient(135deg, var(--success-color), var(--secondary-color));
+            color: white;
+            padding: var(--spacing-xxl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-top: var(--spacing-xxl);
+            display: none;
+        }
+        
+        .results-summary.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        .final-score {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .recommendations {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-lg);
+            text-align: left;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .assessment-container {
+                padding: var(--spacing-md);
+            }
+            
+            .assessment-title {
+                font-size: 2rem;
+            }
+            
+            .question-container {
+                padding: var(--spacing-lg);
+            }
+            
+            .assessment-controls {
+                flex-direction: column;
+                gap: var(--spacing-lg);
+            }
+            
+            .final-score {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Shared Header -->
+    <div id="header-container"></div>
+    
+    <!-- Assessment Content -->
+    <main class="assessment-container">
+        <!-- Assessment Header -->
+        <div class="assessment-header">
+            <h1 class="assessment-title">🎯 Mathematics Practice Assessment</h1>
+            <p>STAAR-Style Practice Test for 5th Grade Mathematics</p>
+            
+            <div class="assessment-info">
+                <div class="info-item">
+                    <span class="info-number">10</span>
+                    <span class="info-label">Questions</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number">25</span>
+                    <span class="info-label">Minutes</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number">70%</span>
+                    <span class="info-label">To Pass</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number">∞</span>
+                    <span class="info-label">Attempts</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+        
+        <!-- Question 1: Place Value -->
+        <div class="question-container" data-question="1">
+            <div class="question-header">
+                <div class="question-number">Question 1</div>
+                <div class="question-category">Numbers & Operations</div>
+            </div>
+            
+            <div class="question-text">
+                What is the value of the digit 7 in the number 47,293?
+            </div>
+            
+            <div class="question-visual">
+                <div class="visual-placeholder">
+                    📊 Place Value Chart: 4 | 7 | 2 | 9 | 3<br>
+                    Ten Thousands | Thousands | Hundreds | Tens | Ones
+                </div>
+            </div>
+            
+            <div class="answer-choices">
+                <div class="choice-option" data-choice="A" onclick="selectAnswer(1, 'A', false)">
+                    <div class="choice-letter">A</div>
+                    <div>7</div>
+                </div>
+                <div class="choice-option" data-choice="B" onclick="selectAnswer(1, 'B', false)">
+                    <div class="choice-letter">B</div>
+                    <div>70</div>
+                </div>
+                <div class="choice-option" data-choice="C" onclick="selectAnswer(1, 'C', false)">
+                    <div class="choice-letter">C</div>
+                    <div>700</div>
+                </div>
+                <div class="choice-option" data-choice="D" onclick="selectAnswer(1, 'D', true)">
+                    <div class="choice-letter">D</div>
+                    <div>7,000</div>
+                </div>
+            </div>
+            
+            <div class="explanation">
+                <div class="explanation-title">✅ Correct Answer: D</div>
+                <p>The digit 7 is in the thousands place, so its value is 7,000. In place value, each position represents a power of 10.</p>
+            </div>
+        </div>
+        
+        <!-- Question 2: Fractions -->
+        <div class="question-container" data-question="2">
+            <div class="question-header">
+                <div class="question-number">Question 2</div>
+                <div class="question-category">Numbers & Operations</div>
+            </div>
+            
+            <div class="question-text">
+                Maria ate 2/8 of a pizza and her brother ate 3/8 of the same pizza. How much pizza did they eat altogether?
+            </div>
+            
+            <div class="question-visual">
+                <div class="visual-placeholder">
+                    🍕 Pizza Visual: Circle divided into 8 equal slices<br>
+                    Maria's portion: 2 slices highlighted<br>
+                    Brother's portion: 3 slices highlighted
+                </div>
+            </div>
+            
+            <div class="answer-choices">
+                <div class="choice-option" data-choice="A" onclick="selectAnswer(2, 'A', false)">
+                    <div class="choice-letter">A</div>
+                    <div>2/8</div>
+                </div>
+                <div class="choice-option" data-choice="B" onclick="selectAnswer(2, 'B', true)">
+                    <div class="choice-letter">B</div>
+                    <div>5/8</div>
+                </div>
+                <div class="choice-option" data-choice="C" onclick="selectAnswer(2, 'C', false)">
+                    <div class="choice-letter">C</div>
+                    <div>6/8</div>
+                </div>
+                <div class="choice-option" data-choice="D" onclick="selectAnswer(2, 'D', false)">
+                    <div class="choice-letter">D</div>
+                    <div>5/16</div>
+                </div>
+            </div>
+            
+            <div class="explanation">
+                <div class="explanation-title">✅ Correct Answer: B</div>
+                <p>To add fractions with the same denominator, add the numerators: 2/8 + 3/8 = (2+3)/8 = 5/8</p>
+            </div>
+        </div>
+        
+        <!-- Question 3: Algebraic Pattern -->
+        <div class="question-container" data-question="3">
+            <div class="question-header">
+                <div class="question-number">Question 3</div>
+                <div class="question-category">Algebraic Reasoning</div>
+            </div>
+            
+            <div class="question-text">
+                Look at this pattern: 5, 8, 11, 14, ___. What number comes next?
+            </div>
+            
+            <div class="question-visual">
+                <div class="visual-placeholder">
+                    🔢 Pattern Sequence: 5 → 8 → 11 → 14 → ?<br>
+                    Rule: Add 3 each time
+                </div>
+            </div>
+            
+            <div class="answer-choices">
+                <div class="choice-option" data-choice="A" onclick="selectAnswer(3, 'A', false)">
+                    <div class="choice-letter">A</div>
+                    <div>16</div>
+                </div>
+                <div class="choice-option" data-choice="B" onclick="selectAnswer(3, 'B', true)">
+                    <div class="choice-letter">B</div>
+                    <div>17</div>
+                </div>
+                <div class="choice-option" data-choice="C" onclick="selectAnswer(3, 'C', false)">
+                    <div class="choice-letter">C</div>
+                    <div>18</div>
+                </div>
+                <div class="choice-option" data-choice="D" onclick="selectAnswer(3, 'D', false)">
+                    <div class="choice-letter">D</div>
+                    <div>19</div>
+                </div>
+            </div>
+            
+            <div class="explanation">
+                <div class="explanation-title">✅ Correct Answer: B</div>
+                <p>The pattern adds 3 each time: 5+3=8, 8+3=11, 11+3=14, so 14+3=17</p>
+            </div>
+        </div>
+        
+        <!-- Assessment Controls -->
+        <div class="assessment-controls">
+            <button class="control-button" onclick="previousQuestion()" id="prev-btn" disabled>Previous</button>
+            
+            <div class="score-display">
+                <span id="current-question">1</span> of <span id="total-questions">10</span>
+                <br>Score: <span id="current-score">0</span>/<span id="max-score">10</span>
+            </div>
+            
+            <button class="control-button" onclick="nextQuestion()" id="next-btn">Next</button>
+        </div>
+        
+        <!-- Results Summary (Hidden initially) -->
+        <div class="results-summary" id="results-summary">
+            <h2>🎉 Assessment Complete!</h2>
+            <div class="final-score" id="final-score-display">8/10</div>
+            <p><strong>Excellent work!</strong> You scored 80% on this mathematics assessment.</p>
+            
+            <div class="recommendations">
+                <h4>📚 Recommended Study Areas:</h4>
+                <ul>
+                    <li>Continue practicing place value with larger numbers</li>
+                    <li>Review fraction operations and visual models</li>
+                    <li>Strengthen pattern recognition skills</li>
+                </ul>
+                <br>
+                <p><strong>🎯 Next Steps:</strong> Try the interactive chapter activities for additional practice!</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Include Shared Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="/js/app.js" defer></script>
+    <script>
+        // Mathematics Assessment JavaScript
+        (function() {
+            let currentQuestion = 1;
+            let totalQuestions = 10;  // Will be expanded to full 10 questions
+            let score = 0;
+            let answers = {};
+            
+            // Load shared components
+            function loadSharedComponents() {
+                fetch('/subjects/shared/header.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('header-container').innerHTML = html)
+                    .catch(error => console.error('Error loading header:', error));
+                
+                fetch('/subjects/shared/footer.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('footer-container').innerHTML = html)
+                    .catch(error => console.error('Error loading footer:', error));
+            }
+            
+            // Select answer for a question
+            window.selectAnswer = function(questionNum, choice, isCorrect) {
+                // Remove previous selections
+                const questionContainer = document.querySelector(`[data-question="${questionNum}"]`);
+                const choices = questionContainer.querySelectorAll('.choice-option');
+                choices.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark selected choice
+                const selectedChoice = questionContainer.querySelector(`[data-choice="${choice}"]`);
+                selectedChoice.classList.add('selected');
+                
+                // Store answer
+                answers[questionNum] = { choice, isCorrect };
+                
+                // Show explanation after a delay
+                setTimeout(() => {
+                    // Show correct/incorrect styling
+                    if (isCorrect) {
+                        selectedChoice.classList.add('correct');
+                        if (!answers[questionNum].hasScored) {
+                            score++;
+                            answers[questionNum].hasScored = true;
+                        }
+                    } else {
+                        selectedChoice.classList.add('incorrect');
+                        // Show correct answer
+                        const correctChoice = questionContainer.querySelector('[onclick*="true"]');
+                        if (correctChoice) {
+                            correctChoice.classList.add('correct');
+                        }
+                    }
+                    
+                    // Show explanation
+                    const explanation = questionContainer.querySelector('.explanation');
+                    explanation.classList.add('show');
+                    
+                    updateScore();
+                }, 500);
+            };
+            
+            // Navigate to next question
+            window.nextQuestion = function() {
+                if (currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                    updateDisplay();
+                } else {
+                    showResults();
+                }
+            };
+            
+            // Navigate to previous question
+            window.previousQuestion = function() {
+                if (currentQuestion > 1) {
+                    currentQuestion--;
+                    updateDisplay();
+                }
+            };
+            
+            // Update display and controls
+            function updateDisplay() {
+                // Update question counter
+                document.getElementById('current-question').textContent = currentQuestion;
+                
+                // Update progress bar
+                const progress = (currentQuestion / totalQuestions) * 100;
+                document.getElementById('progress-fill').style.width = `${progress}%`;
+                
+                // Update button states
+                document.getElementById('prev-btn').disabled = currentQuestion === 1;
+                document.getElementById('next-btn').textContent = 
+                    currentQuestion === totalQuestions ? 'Finish' : 'Next';
+                
+                // Show only current question (simplified for demo - only shows first 3)
+                const allQuestions = document.querySelectorAll('.question-container');
+                allQuestions.forEach((question, index) => {
+                    question.style.display = (index + 1 === currentQuestion && index < 3) ? 'block' : 'none';
+                });
+                
+                // If beyond implemented questions, show placeholder
+                if (currentQuestion > 3) {
+                    showQuestionPlaceholder();
+                }
+            }
+            
+            // Show placeholder for unimplemented questions
+            function showQuestionPlaceholder() {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'question-container';
+                placeholder.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">Question ${currentQuestion}</div>
+                        <div class="question-category">Coming Soon</div>
+                    </div>
+                    <div class="question-text">
+                        Additional questions will be available in the full implementation. 
+                        This demo shows the assessment structure and functionality.
+                    </div>
+                    <div class="visual-element">
+                        <div class="placeholder-image">
+                            🚧 Question ${currentQuestion} placeholder<br>
+                            <small>Auto-scoring for demo purposes</small>
+                        </div>
+                    </div>
+                `;
+                
+                // Insert before controls
+                const controls = document.querySelector('.assessment-controls');
+                controls.parentNode.insertBefore(placeholder, controls);
+                
+                // Auto-score placeholder questions
+                setTimeout(() => {
+                    answers[currentQuestion] = { choice: 'auto', isCorrect: Math.random() > 0.3 };
+                    if (answers[currentQuestion].isCorrect) score++;
+                    updateScore();
+                }, 1000);
+            }
+            
+            // Update score display
+            function updateScore() {
+                document.getElementById('current-score').textContent = score;
+                document.getElementById('max-score').textContent = totalQuestions;
+            }
+            
+            // Show final results
+            function showResults() {
+                const percentage = Math.round((score / totalQuestions) * 100);
+                document.getElementById('final-score-display').textContent = `${score}/${totalQuestions}`;
+                
+                // Update results text based on performance
+                const resultsText = getResultsText(percentage);
+                document.querySelector('.results-summary p').innerHTML = resultsText;
+                
+                // Show results
+                document.getElementById('results-summary').classList.add('show');
+                
+                // Hide controls
+                document.querySelector('.assessment-controls').style.display = 'none';
+                
+                // Save assessment results
+                saveAssessmentResults(score, totalQuestions, percentage);
+                
+                // Trigger AI remediation for wrong answers (if implemented)
+                if (score < totalQuestions * 0.8) {
+                    suggestRemediation();
+                }
+            }
+            
+            // Get results text based on performance
+            function getResultsText(percentage) {
+                if (percentage >= 90) {
+                    return '<strong>Outstanding!</strong> You have mastered 5th grade mathematics concepts. 🌟';
+                } else if (percentage >= 80) {
+                    return '<strong>Excellent work!</strong> You have a strong understanding of mathematics. 🎯';
+                } else if (percentage >= 70) {
+                    return '<strong>Good job!</strong> You\'re on the right track with some areas to review. 📚';
+                } else if (percentage >= 60) {
+                    return '<strong>Keep practicing!</strong> Review the recommended topics and try again. 💪';
+                } else {
+                    return '<strong>More practice needed.</strong> Don\'t give up - let\'s work on the fundamentals! 🎓';
+                }
+            }
+            
+            // Save assessment results (placeholder for Supabase integration)
+            function saveAssessmentResults(score, total, percentage) {
+                const results = {
+                    subject: 'mathematics',
+                    assessment: 'assessment-1',
+                    score: score,
+                    total: total,
+                    percentage: percentage,
+                    timestamp: new Date().toISOString(),
+                    answers: answers
+                };
+                
+                // Save to localStorage for now (will be Supabase in full implementation)
+                const savedResults = JSON.parse(localStorage.getItem('assessment-results') || '[]');
+                savedResults.push(results);
+                localStorage.setItem('assessment-results', JSON.stringify(savedResults));
+                
+                console.log('Assessment results saved:', results);
+            }
+            
+            // Suggest AI remediation for areas needing improvement
+            function suggestRemediation() {
+                showNotification(
+                    '🤖 AI Remediation recommended! Additional practice questions will be generated for topics you found challenging.',
+                    'info'
+                );
+            }
+            
+            // Simple notification system
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};
+                    color: white;
+                    padding: var(--spacing-md) var(--spacing-lg);
+                    border-radius: var(--radius-md);
+                    box-shadow: var(--shadow-lg);
+                    z-index: 1000;
+                    max-width: 300px;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 6000);
+            }
+            
+            // Initialize assessment
+            function initializeAssessment() {
+                // Set initial state
+                document.getElementById('total-questions').textContent = totalQuestions;
+                updateDisplay();
+                
+                // Start timer (placeholder)
+                console.log('Assessment timer started: 25 minutes');
+                
+                showNotification('📝 Assessment started! Take your time and read each question carefully.', 'info');
+            }
+            
+            // Initialize on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    loadSharedComponents();
+                    initializeAssessment();
+                });
+            } else {
+                loadSharedComponents();
+                initializeAssessment();
+            }
+        })();
+    </script>
+    
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</body>
+</html>
