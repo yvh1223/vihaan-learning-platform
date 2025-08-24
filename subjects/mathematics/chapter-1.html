@@ -431,6 +431,10 @@
     
     <!-- JavaScript -->
     <script src="/js/app.js" defer></script>
+    <script src="/js/drag-drop-utils.js" defer></script>
+    <script src="/js/assessment-system.js" defer></script>
+    <script src="/js/multimedia-system.js" defer></script>
+    <script src="/js/gamification-system.js" defer></script>
     <script>
         // Chapter 1: Numbers & Operations JavaScript
         (function() {
@@ -477,10 +481,109 @@
                 );
             };
             
-            // Start place value activity
+            // Start place value activity with drag-drop
             window.startPlaceValueActivity = function() {
-                showNotification('🎮 Place Value Game coming soon! Try clicking the digits above.', 'info');
-                // Future: Launch interactive place value game
+                // Create drag-drop place value game
+                const gameContainer = document.createElement('div');
+                gameContainer.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center;">
+                        <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 800px; width: 90%;">
+                            <h3>🎮 Place Value Drag & Drop Game</h3>
+                            <p>Drag each digit to its correct place value position!</p>
+                            
+                            <div style="margin: 2rem 0;">
+                                <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+                                    <div class="draggable" data-digit="7" style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 0.5rem; cursor: move; font-weight: bold; font-size: 1.5rem;">7</div>
+                                    <div class="draggable" data-digit="3" style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 0.5rem; cursor: move; font-weight: bold; font-size: 1.5rem;">3</div>
+                                    <div class="draggable" data-digit="9" style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 0.5rem; cursor: move; font-weight: bold; font-size: 1.5rem;">9</div>
+                                    <div class="draggable" data-digit="2" style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 0.5rem; cursor: move; font-weight: bold; font-size: 1.5rem;">2</div>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 600px; margin: 0 auto;">
+                                    <div class="drop-zone" data-place="thousands" style="background: var(--bg-secondary); border: 2px dashed var(--primary-color); padding: 2rem; text-align: center; border-radius: 0.5rem; min-height: 80px; display: flex; flex-direction: column; justify-content: center;">
+                                        <strong>Thousands</strong>
+                                        <small>1000s</small>
+                                    </div>
+                                    <div class="drop-zone" data-place="hundreds" style="background: var(--bg-secondary); border: 2px dashed var(--primary-color); padding: 2rem; text-align: center; border-radius: 0.5rem; min-height: 80px; display: flex; flex-direction: column; justify-content: center;">
+                                        <strong>Hundreds</strong>
+                                        <small>100s</small>
+                                    </div>
+                                    <div class="drop-zone" data-place="tens" style="background: var(--bg-secondary); border: 2px dashed var(--primary-color); padding: 2rem; text-align: center; border-radius: 0.5rem; min-height: 80px; display: flex; flex-direction: column; justify-content: center;">
+                                        <strong>Tens</strong>
+                                        <small>10s</small>
+                                    </div>
+                                    <div class="drop-zone" data-place="ones" style="background: var(--bg-secondary); border: 2px dashed var(--primary-color); padding: 2rem; text-align: center; border-radius: 0.5rem; min-height: 80px; display: flex; flex-direction: column; justify-content: center;">
+                                        <strong>Ones</strong>
+                                        <small>1s</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem; justify-content: center;">
+                                <button onclick="checkPlaceValueAnswer()" style="background: var(--success-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">Check Answer</button>
+                                <button onclick="closePlaceValueGame()" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(gameContainer);
+                
+                // Initialize drag-drop for this game
+                if (window.UniversalDragDrop) {
+                    const dragDrop = new UniversalDragDrop({
+                        dragSelector: '.draggable',
+                        dropSelector: '.drop-zone',
+                        onDrop: function(dragElement, dropElement) {
+                            const digit = dragElement.getAttribute('data-digit');
+                            const place = dropElement.getAttribute('data-place');
+                            
+                            // Visual feedback
+                            dropElement.style.background = 'var(--success-color)';
+                            dropElement.innerHTML = `<strong>${place}</strong><div style="font-size: 2rem; font-weight: bold; color: white;">${digit}</div>`;
+                            dragElement.style.opacity = '0.3';
+                            
+                            // Award points for correct placement
+                            if (window.GamificationSystem) {
+                                window.gamificationSystem.awardPoints('drag_drop_correct');
+                            }
+                        }
+                    });
+                } else {
+                    showNotification('⚠️ Drag-drop system loading...', 'info');
+                }
+                
+                // Game functions
+                window.checkPlaceValueAnswer = function() {
+                    const correctAnswer = { thousands: '7', hundreds: '3', tens: '9', ones: '2' };
+                    let correct = 0;
+                    let total = 4;
+                    
+                    document.querySelectorAll('.drop-zone').forEach(zone => {
+                        const place = zone.getAttribute('data-place');
+                        const digit = zone.textContent.match(/\d/) ? zone.textContent.match(/\d/)[0] : null;
+                        if (digit === correctAnswer[place]) {
+                            correct++;
+                            zone.style.borderColor = 'var(--success-color)';
+                        } else {
+                            zone.style.borderColor = 'var(--error-color)';
+                        }
+                    });
+                    
+                    const score = Math.round((correct / total) * 100);
+                    showNotification(`🎯 Score: ${score}% (${correct}/${total} correct)`, score === 100 ? 'success' : 'info');
+                    
+                    if (window.GamificationSystem && score === 100) {
+                        window.gamificationSystem.awardPoints('perfect_score', 2);
+                        window.gamificationSystem.awardBadge('math_master');
+                    }
+                };
+                
+                window.closePlaceValueGame = function() {
+                    gameContainer.remove();
+                    delete window.checkPlaceValueAnswer;
+                    delete window.closePlaceValueGame;
+                };
             };
             
             // Start fraction activity

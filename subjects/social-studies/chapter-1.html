@@ -669,9 +669,88 @@
             <h1 class="chapter-title">Social Studies Chapter 1</h1>
         </div>
         <div class="lesson-content">
+            <!-- Gamification Dashboard -->
+            <div id="gamification-dashboard" class="lesson-section" style="background: linear-gradient(135deg, #e8f5e8 0%, #d4f4dd 100%); border: 2px solid #a5d6a7; border-radius: 15px; padding: 2rem; margin: 2rem 0;">
+                <h3>🏆 Your Social Studies Adventure Progress</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                    <div class="stat-card" style="background: white; border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid #e9ecef;">
+                        <h4>📊 Total Points</h4>
+                        <span id="total-points" style="font-weight: bold; font-size: 1.5rem; color: #4caf50;">0</span>
+                    </div>
+                    <div class="stat-card" style="background: white; border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid #e9ecef;">
+                        <h4>🥇 Current Level</h4>
+                        <span id="current-level" style="font-weight: bold; font-size: 1.5rem; color: #4caf50;">1</span>
+                    </div>
+                    <div class="stat-card" style="background: white; border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid #e9ecef;">
+                        <h4>🏅 Badges Earned</h4>
+                        <span id="badges-count" style="font-weight: bold; font-size: 1.5rem; color: #4caf50;">0</span>
+                    </div>
+                    <div class="stat-card" style="background: white; border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid #e9ecef;">
+                        <h4>🔥 Daily Streak</h4>
+                        <span id="daily-streak" style="font-weight: bold; font-size: 1.5rem; color: #4caf50;">0</span>
+                    </div>
+                </div>
+                <div id="recent-achievements" style="margin-top: 1rem; text-align: center;">
+                    <h4>🎉 Recent Achievements</h4>
+                    <div id="achievement-list" style="min-height: 50px; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">
+                        <p style="color: #666; font-style: italic;">Start exploring to earn your first achievements!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interactive Learning Activities -->
             <div class="lesson-section">
-                <h3>Chapter Content</h3>
-                <p>Content will be enhanced with interactive timelines, maps, and historical activities.</p>
+                <h3>🗺️ American History Adventure Hub</h3>
+                <p>Explore different periods in American history through interactive activities and earn points and badges!</p>
+                
+                <div class="history-hub">
+                    <div class="history-card" onclick="exploreNativeAmericans()">
+                        <h4>🏹 Native American Cultures</h4>
+                        <p>Discover the rich traditions and diverse lifestyles of America's first peoples</p>
+                        <span style="color: #4caf50; font-weight: bold;">+50 Points</span>
+                    </div>
+                    
+                    <div class="history-card" onclick="exploreColonialAmerica()">
+                        <h4>🚢 Colonial America</h4>
+                        <p>Experience life in the 13 colonies and make survival decisions</p>
+                        <span style="color: #4caf50; font-weight: bold;">+75 Points</span>
+                    </div>
+                    
+                    <div class="history-card" onclick="exploreRevolution()">
+                        <h4>⚔️ American Revolution</h4>
+                        <p>Join the fight for independence and make crucial historical choices</p>
+                        <span style="color: #4caf50; font-weight: bold;">+100 Points</span>
+                    </div>
+                    
+                    <div class="history-card" onclick="exploreFoundingFathers()">
+                        <h4>🎩 Founding Fathers</h4>
+                        <p>Meet the leaders who created the United States of America</p>
+                        <span style="color: #4caf50; font-weight: bold;">+60 Points</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Daily Challenge Section -->
+            <div class="lesson-section" id="daily-challenge">
+                <h3>⚡ Daily Social Studies Challenge</h3>
+                <p>Complete today's challenge to earn bonus points and maintain your streak!</p>
+                
+                <div id="challenge-content" style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 1.5rem 0;">
+                    <h4 id="challenge-title">🧠 History Quiz Challenge</h4>
+                    <p id="challenge-description">Test your knowledge with today's historical question!</p>
+                    
+                    <div id="challenge-question" style="margin: 1.5rem 0;">
+                        <p><strong>Which Native American confederacy influenced the U.S. Constitution?</strong></p>
+                        <div style="display: grid; gap: 0.5rem; margin: 1rem 0;">
+                            <button class="challenge-option" onclick="answerChallenge('iroquois')" style="background: white; border: 2px solid #e9ecef; border-radius: 8px; padding: 1rem; cursor: pointer; text-align: left;">A) Iroquois Confederacy</button>
+                            <button class="challenge-option" onclick="answerChallenge('apache')" style="background: white; border: 2px solid #e9ecef; border-radius: 8px; padding: 1rem; cursor: pointer; text-align: left;">B) Apache Tribe</button>
+                            <button class="challenge-option" onclick="answerChallenge('sioux')" style="background: white; border: 2px solid #e9ecef; border-radius: 8px; padding: 1rem; cursor: pointer; text-align: left;">C) Sioux Nation</button>
+                            <button class="challenge-option" onclick="answerChallenge('cherokee')" style="background: white; border: 2px solid #e9ecef; border-radius: 8px; padding: 1rem; cursor: pointer; text-align: left;">D) Cherokee Nation</button>
+                        </div>
+                    </div>
+                    
+                    <div id="challenge-result" style="margin-top: 1rem;"></div>
+                </div>
             </div>
         </div>
         <div class="chapter-navigation">
@@ -683,12 +762,154 @@
         </div>
     </main>
     <div id="footer-container"></div>
+    
+    <!-- Epic 7 JavaScript Systems -->
+    <script src="/js/app.js" defer></script>
+    <script src="/js/drag-drop-utils.js" defer></script>
+    <script src="/js/assessment-system.js" defer></script>
+    <script src="/js/multimedia-system.js" defer></script>
+    <script src="/js/gamification-system.js" defer></script>
+    
     <script>
         function loadSharedComponents() {
             fetch('/subjects/shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
             fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+        
+        // Initialize gamification system on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSocialStudiesGamification();
+        });
+        
+        function initializeSocialStudiesGamification() {
+            // Initialize gamification system
+            if (window.GamificationSystem) {
+                window.gamificationSystem = new GamificationSystem({
+                    userId: 'social-studies-student',
+                    subject: 'social-studies'
+                });
+                
+                // Update dashboard with current stats
+                updateGamificationDashboard();
+                
+                // Award points for visiting the page
+                window.gamificationSystem.awardPoints('page_visit');
+            } else {
+                console.log('Gamification system loading...');
+                setTimeout(initializeSocialStudiesGamification, 1000);
+            }
+        }
+        
+        function updateGamificationDashboard() {
+            if (!window.gamificationSystem) return;
+            
+            const userData = window.gamificationSystem.getUserData();
+            document.getElementById('total-points').textContent = userData.totalPoints;
+            document.getElementById('current-level').textContent = userData.level;
+            document.getElementById('badges-count').textContent = userData.badges.length;
+            document.getElementById('daily-streak').textContent = userData.dailyStreak;
+            
+            // Update recent achievements
+            const achievementList = document.getElementById('achievement-list');
+            if (userData.recentAchievements && userData.recentAchievements.length > 0) {
+                achievementList.innerHTML = userData.recentAchievements
+                    .slice(-3)
+                    .map(achievement => `<span style="background: #4caf50; color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.8rem;">${achievement}</span>`)
+                    .join('');
+            }
+        }
+        
+        // Exploration Activities
+        function exploreNativeAmericans() {
+            if (window.gamificationSystem) {
+                window.gamificationSystem.awardPoints('exploration', 1.5);
+                window.gamificationSystem.awardBadge('history_explorer');
+                window.gamificationSystem.celebrate('🏹 Native American Explorer!');
+                updateGamificationDashboard();
+            }
+            
+            alert('🏹 Native American Cultures\\n\\nYou discovered the rich heritage of America\\'s indigenous peoples!\\n\\n• The Iroquois Confederacy had a democratic government\\n• Pueblo peoples built amazing cliff dwellings\\n• Plains tribes followed buffalo herds\\n• Northwest tribes were master fishermen\\n\\n+50 Points Earned! 🎉');
+        }
+        
+        function exploreColonialAmerica() {
+            if (window.gamificationSystem) {
+                window.gamificationSystem.awardPoints('exploration', 2);
+                window.gamificationSystem.awardBadge('colonial_survivor');
+                window.gamificationSystem.celebrate('🚢 Colonial Expert!');
+                updateGamificationDashboard();
+            }
+            
+            alert('🚢 Colonial America Experience\\n\\nYou survived the challenges of colonial life!\\n\\n• Built shelter and found food\\n• Learned colonial trades and crafts\\n• Experienced community cooperation\\n• Made tough survival decisions\\n\\n+75 Points Earned! 🎉');
+        }
+        
+        function exploreRevolution() {
+            if (window.gamificationSystem) {
+                window.gamificationSystem.awardPoints('exploration', 3);
+                window.gamificationSystem.awardBadge('freedom_fighter');
+                window.gamificationSystem.celebrate('⚔️ Revolutionary Hero!');
+                updateGamificationDashboard();
+            }
+            
+            alert('⚔️ American Revolution Adventure\\n\\nYou joined the fight for independence!\\n\\n• Made crucial patriot vs loyalist decisions\\n• Learned about key battles and heroes\\n• Understood the Declaration of Independence\\n• Experienced the birth of a nation\\n\\n+100 Points Earned! 🎉');
+        }
+        
+        function exploreFoundingFathers() {
+            if (window.gamificationSystem) {
+                window.gamificationSystem.awardPoints('exploration', 2);
+                window.gamificationSystem.awardBadge('constitution_scholar');
+                window.gamificationSystem.celebrate('🎩 Founding Father Expert!');
+                updateGamificationDashboard();
+            }
+            
+            alert('🎩 Founding Fathers Gallery\\n\\nYou met the architects of America!\\n\\n• Washington - \"Father of His Country\"\\n• Franklin - The Renaissance Man\\n• Jefferson - Author of Independence\\n• Adams - Atlas of Independence\\n\\n+60 Points Earned! 🎉');
+        }
+        
+        // Daily Challenge Function
+        function answerChallenge(answer) {
+            const resultDiv = document.getElementById('challenge-result');
+            const buttons = document.querySelectorAll('.challenge-option');
+            
+            // Disable all buttons
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (answer === 'iroquois') {
+                resultDiv.innerHTML = `
+                    <div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: 8px; border: 1px solid #c3e6cb;">
+                        <h5>🎉 Correct! Outstanding work!</h5>
+                        <p>The Iroquois Confederacy (also called the Haudenosaunee) had a sophisticated democratic government that influenced the U.S. Constitution. Benjamin Franklin even studied their system of government!</p>
+                        <p><strong>Daily Challenge Complete! +50 Bonus Points! 🏆</strong></p>
+                    </div>
+                `;
+                
+                if (window.gamificationSystem) {
+                    window.gamificationSystem.awardPoints('daily_challenge_correct', 2);
+                    window.gamificationSystem.completeDailyChallenge();
+                    window.gamificationSystem.celebrate('📚 Daily Challenge Champion!');
+                    updateGamificationDashboard();
+                }
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 8px; border: 1px solid #f5c6cb;">
+                        <h5>🤔 Not quite right, but great effort!</h5>
+                        <p>The correct answer is the Iroquois Confederacy. They had a democratic system where chiefs were chosen by women, and decisions were made by council. This system influenced the founding fathers when creating the Constitution!</p>
+                        <p><strong>Keep learning! +10 Participation Points! 💪</strong></p>
+                    </div>
+                `;
+                
+                if (window.gamificationSystem) {
+                    window.gamificationSystem.awardPoints('daily_challenge_attempt');
+                    window.gamificationSystem.celebrate('📖 Keep Learning!');
+                    updateGamificationDashboard();
+                }
+            }
+            
+            // Reset challenge tomorrow
+            setTimeout(() => {
+                resultDiv.innerHTML = '';
+                buttons.forEach(btn => btn.disabled = false);
+            }, 10000);
+        }
     </script>
 </body>
 </html>

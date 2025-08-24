@@ -26,12 +26,127 @@
         </div>
     </main>
     <div id="footer-container"></div>
+    <!-- Epic 7 JavaScript Systems -->
+    <script src="/js/app.js" defer></script>
+    <script src="/js/drag-drop-utils.js" defer></script>
+    <script src="/js/assessment-system.js" defer></script>
+    <script src="/js/multimedia-system.js" defer></script>
+    <script src="/js/gamification-system.js" defer></script>
+    
     <script>
         function loadSharedComponents() {
             fetch('/subjects/shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
             fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+        
+        // Initialize Science Assessment when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeScienceAssessment();
+        });
+        
+        function initializeScienceAssessment() {
+            // Define comprehensive science assessment
+            const scienceAssessment = {
+                title: "🔬 5th Grade Science Assessment",
+                description: "STAAR-style science practice with interactive questions",
+                timeLimit: 30, // minutes
+                questions: [
+                    {
+                        id: 1,
+                        type: 'multiple-choice',
+                        question: 'Which of the following is an example of a physical change?',
+                        options: [
+                            'Burning wood',
+                            'Melting ice',
+                            'Rusting iron',
+                            'Digesting food'
+                        ],
+                        correct: 1,
+                        explanation: 'Melting ice is a physical change because the water molecules remain the same, only changing from solid to liquid state.',
+                        subject: 'science',
+                        topic: 'physical-chemical-changes'
+                    },
+                    {
+                        id: 2,
+                        type: 'drag-drop',
+                        question: 'Classify these items as living or non-living by dragging them to the correct category:',
+                        items: ['Tree', 'Rock', 'Bird', 'Water', 'Bacteria', 'Plastic'],
+                        categories: {
+                            'Living': ['Tree', 'Bird', 'Bacteria'],
+                            'Non-living': ['Rock', 'Water', 'Plastic']
+                        },
+                        explanation: 'Living things grow, reproduce, respond to environment, and need energy. Non-living things do not have these characteristics.',
+                        subject: 'science',
+                        topic: 'living-nonliving'
+                    },
+                    {
+                        id: 3,
+                        type: 'multiple-choice',
+                        question: 'What happens to the particles in water as it heats up?',
+                        options: [
+                            'They slow down and get closer together',
+                            'They speed up and spread farther apart',
+                            'They stay exactly the same',
+                            'They disappear completely'
+                        ],
+                        correct: 1,
+                        explanation: 'As water heats up, the particles gain kinetic energy, move faster, and spread farther apart, which is why hot water is less dense than cold water.',
+                        subject: 'science',
+                        topic: 'particle-theory'
+                    },
+                    {
+                        id: 4,
+                        type: 'true-false',
+                        question: 'The Sun is a star that produces its own light and heat.',
+                        correct: true,
+                        explanation: 'The Sun is indeed a star - a massive ball of hot, glowing gas that produces light and heat through nuclear fusion reactions.',
+                        subject: 'science',
+                        topic: 'earth-space'
+                    },
+                    {
+                        id: 5,
+                        type: 'short-answer',
+                        question: 'Name two ways that plants and animals depend on each other in an ecosystem.',
+                        sampleAnswer: 'Plants provide oxygen and food for animals, while animals provide carbon dioxide and help spread plant seeds.',
+                        explanation: 'This demonstrates the interdependence in ecosystems - plants and animals have evolved together and rely on each other for survival.',
+                        subject: 'science',
+                        topic: 'ecosystems'
+                    }
+                ]
+            };
+            
+            // Initialize the assessment system
+            if (window.AssessmentSystem) {
+                const assessmentContainer = document.querySelector('.lesson-content');
+                assessmentContainer.innerHTML = '<div id="assessment-container"></div>';
+                
+                window.scienceAssessment = new AssessmentSystem({
+                    container: '#assessment-container',
+                    showProgress: true,
+                    allowReview: true,
+                    autoSave: true,
+                    showExplanations: true,
+                    gamification: true
+                });
+                
+                window.scienceAssessment.loadAssessment(scienceAssessment);
+                
+                // Start assessment automatically
+                setTimeout(() => {
+                    window.scienceAssessment.startAssessment();
+                }, 1000);
+            } else {
+                console.error('Assessment system not loaded');
+                document.querySelector('.lesson-content').innerHTML = `
+                    <div class="lesson-section">
+                        <h3>⚠️ Assessment System Loading</h3>
+                        <p>Please refresh the page if the assessment doesn't load automatically.</p>
+                        <button onclick="window.location.reload()" class="nav-button">🔄 Refresh Page</button>
+                    </div>
+                `;
+            }
+        }
     </script>
 </body>
 </html>

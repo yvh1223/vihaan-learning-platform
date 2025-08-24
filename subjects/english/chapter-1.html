@@ -31,9 +31,17 @@
                     <div class="reading-passage" id="reading-passage">
                         <div class="passage-header">
                             <h3 id="passage-title">The Great Adventure</h3>
-                            <div class="reading-timer">
-                                <span class="timer-icon">⏱️</span>
-                                <span id="reading-timer">0:00</span>
+                            <div class="reading-controls">
+                                <div class="reading-timer">
+                                    <span class="timer-icon">⏱️</span>
+                                    <span id="reading-timer">0:00</span>
+                                </div>
+                                <button id="narration-btn" class="narration-button" onclick="toggleNarration()" title="Listen to passage">
+                                    🔊 Listen
+                                </button>
+                                <button id="highlight-btn" class="highlight-button" onclick="toggleHighlighting()" title="Highlight as you read">
+                                    ✨ Highlight
+                                </button>
                             </div>
                         </div>
                         <div class="passage-text" id="passage-text">
@@ -185,6 +193,14 @@
         </div>
     </main>
     <div id="footer-container"></div>
+    
+    <!-- Epic 7 JavaScript Systems -->
+    <script src="/js/app.js" defer></script>
+    <script src="/js/drag-drop-utils.js" defer></script>
+    <script src="/js/assessment-system.js" defer></script>
+    <script src="/js/multimedia-system.js" defer></script>
+    <script src="/js/gamification-system.js" defer></script>
+    
     <script>
         function loadSharedComponents() {
             fetch('/subjects/shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
@@ -425,14 +441,136 @@
             document.getElementById('writing-feedback').innerHTML = '<div class="success-message">📝 Your story has been saved successfully!</div>';
         }
 
-        // Initialize word count tracking
+        // Epic 7 Multimedia Integration
+        let multimediaSystem = null;
+        let isNarrating = false;
+        let isHighlighting = false;
+        
+        // Initialize multimedia system and word count tracking
         document.addEventListener('DOMContentLoaded', () => {
             const editor = document.getElementById('story-editor');
             if (editor) {
                 editor.addEventListener('input', updateWordCount);
                 loadReadingPassage(); // Load initial passage
             }
+            
+            // Initialize multimedia system
+            if (window.MultimediaSystem) {
+                multimediaSystem = new MultimediaSystem({
+                    autoPlay: false,
+                    narrationRate: 0.9,
+                    highlightColor: '#ffeb3b',
+                    accessibility: true
+                });
+                
+                // Award points for using multimedia features
+                if (window.GamificationSystem) {
+                    window.gamificationSystem.awardPoints('engagement_feature');
+                }
+            }
         });
+        
+        // Toggle narration functionality
+        function toggleNarration() {
+            if (!multimediaSystem) {
+                alert('Multimedia system loading... Please try again in a moment.');
+                return;
+            }
+            
+            const btn = document.getElementById('narration-btn');
+            const passageText = document.getElementById('passage-text').textContent;
+            
+            if (!isNarrating) {
+                isNarrating = true;
+                btn.innerHTML = '⏸️ Pause';
+                btn.title = 'Pause narration';
+                
+                multimediaSystem.startNarration(passageText, {
+                    rate: 0.9,
+                    pitch: 1.0,
+                    onEnd: () => {
+                        isNarrating = false;
+                        btn.innerHTML = '🔊 Listen';
+                        btn.title = 'Listen to passage';
+                        
+                        // Award points for completing narration
+                        if (window.GamificationSystem) {
+                            window.gamificationSystem.awardPoints('narration_complete');
+                        }
+                    }
+                });
+                
+                // Award points for using narration
+                if (window.GamificationSystem) {
+                    window.gamificationSystem.awardPoints('narration_start');
+                }
+            } else {
+                isNarrating = false;
+                btn.innerHTML = '🔊 Listen';
+                btn.title = 'Listen to passage';
+                multimediaSystem.stopNarration();
+            }
+        }
+        
+        // Toggle highlighting functionality
+        function toggleHighlighting() {
+            const btn = document.getElementById('highlight-btn');
+            const passageText = document.getElementById('passage-text');
+            
+            if (!isHighlighting) {
+                isHighlighting = true;
+                btn.innerHTML = '🎯 Stop Highlight';
+                btn.title = 'Stop highlighting';
+                
+                // Add highlighting functionality
+                passageText.style.cursor = 'pointer';
+                passageText.addEventListener('click', highlightText);
+                
+                // Add instructional message
+                passageText.insertAdjacentHTML('afterbegin', 
+                    '<div id="highlight-instruction" style="background: #e3f2fd; padding: 0.5rem; margin-bottom: 1rem; border-radius: 0.25rem; font-size: 0.9rem;">👆 Click on any sentence to highlight it!</div>'
+                );
+                
+                // Award points for using highlighting
+                if (window.GamificationSystem) {
+                    window.gamificationSystem.awardPoints('highlighting_start');
+                }
+            } else {
+                isHighlighting = false;
+                btn.innerHTML = '✨ Highlight';
+                btn.title = 'Highlight as you read';
+                
+                passageText.style.cursor = 'default';
+                passageText.removeEventListener('click', highlightText);
+                
+                // Remove highlights and instruction
+                const instruction = document.getElementById('highlight-instruction');
+                if (instruction) instruction.remove();
+                
+                passageText.querySelectorAll('.highlighted-text').forEach(element => {
+                    element.style.backgroundColor = '';
+                    element.classList.remove('highlighted-text');
+                });
+            }
+        }
+        
+        // Highlight clicked text
+        function highlightText(event) {
+            if (event.target.tagName === 'P') {
+                if (event.target.classList.contains('highlighted-text')) {
+                    event.target.style.backgroundColor = '';
+                    event.target.classList.remove('highlighted-text');
+                } else {
+                    event.target.style.backgroundColor = '#ffeb3b';
+                    event.target.classList.add('highlighted-text');
+                    
+                    // Award points for highlighting
+                    if (window.GamificationSystem) {
+                        window.gamificationSystem.awardPoints('text_highlight');
+                    }
+                }
+            }
+        }
 
         // Grammar Games System
         let currentGrammarGame = null;
