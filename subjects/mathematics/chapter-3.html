@@ -38,6 +38,208 @@
             font-size: 3rem;
             margin-bottom: var(--spacing-sm);
         }
+        
+        .shape-card.interactive {
+            cursor: pointer;
+            transform: scale(1);
+        }
+        
+        .shape-card.interactive:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .shape-properties {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .measurement-demo {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .rectangle-demo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xl);
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+        }
+        
+        .rectangle-visual {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .rectangle-shape {
+            width: 200px;
+            height: 120px;
+            background-color: rgba(74, 144, 226, 0.3);
+            border: 3px solid var(--primary-color);
+            position: relative;
+            margin: var(--spacing-lg);
+        }
+        
+        .dimension-label {
+            position: absolute;
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            font-weight: bold;
+        }
+        
+        .dimension-label.top {
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .dimension-label.side {
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .calculation-box {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .calculation-row {
+            padding: var(--spacing-md);
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-sm) 0;
+        }
+        
+        .answer {
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: var(--font-size-lg);
+        }
+        
+        .formula-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .formula-card {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .angles-demo {
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .angle-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .angle-card {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 2px solid transparent;
+        }
+        
+        .angle-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .angle-visual {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .angle-display {
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .protractor {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: conic-gradient(from 0deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .angle-measure {
+            background-color: white;
+            color: var(--primary-color);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-weight: bold;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .shape-3d-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .shape-3d-card {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 2px solid transparent;
+        }
+        
+        .shape-3d-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+        
+        .shape-3d-visual {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .volume-demo {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .cube-example {
+            text-align: center;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .cube-visual {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+        }
     </style>
 </head>
 <body>
@@ -54,46 +256,196 @@
         
         <!-- Lesson Content -->
         <div class="lesson-content">
+            <!-- Section 1: 2D Shapes -->
             <div class="lesson-section">
                 <h3><span class="section-icon">🔷</span>2D Shapes & Properties</h3>
-                <p>Learn about triangles, rectangles, squares, and other polygons. Understand their properties and relationships.</p>
+                <p>Learn about triangles, rectangles, squares, and other polygons. Click each shape to explore its properties!</p>
                 
                 <div class="shape-gallery">
-                    <div class="shape-card">
+                    <div class="shape-card interactive" onclick="exploreShape('triangle')">
                         <div class="shape-visual">🔺</div>
                         <h4>Triangle</h4>
-                        <p>3 sides, 3 angles</p>
+                        <p>3 sides, 3 angles<br><small>Sum of angles = 180°</small></p>
                     </div>
-                    <div class="shape-card">
+                    <div class="shape-card interactive" onclick="exploreShape('square')">
                         <div class="shape-visual">⬛</div>
                         <h4>Square</h4>
-                        <p>4 equal sides</p>
+                        <p>4 equal sides<br><small>All angles = 90°</small></p>
                     </div>
-                    <div class="shape-card">
+                    <div class="shape-card interactive" onclick="exploreShape('rectangle')">
                         <div class="shape-visual">🔶</div>
                         <h4>Rectangle</h4>
-                        <p>4 sides, 4 right angles</p>
+                        <p>4 sides, 4 right angles<br><small>Opposite sides equal</small></p>
+                    </div>
+                    <div class="shape-card interactive" onclick="exploreShape('pentagon')">
+                        <div class="shape-visual">⬟</div>
+                        <h4>Pentagon</h4>
+                        <p>5 sides, 5 angles<br><small>Can be regular or irregular</small></p>
+                    </div>
+                    <div class="shape-card interactive" onclick="exploreShape('hexagon')">
+                        <div class="shape-visual">⬡</div>
+                        <h4>Hexagon</h4>
+                        <p>6 sides, 6 angles<br><small>Like a honeycomb!</small></p>
+                    </div>
+                    <div class="shape-card interactive" onclick="exploreShape('circle')">
+                        <div class="shape-visual">⭕</div>
+                        <h4>Circle</h4>
+                        <p>No sides, curved line<br><small>All points equal distance from center</small></p>
                     </div>
                 </div>
+                
+                <div class="shape-properties" id="shape-details" style="display: none;">
+                    <h4 id="shape-name">Shape Properties</h4>
+                    <div id="shape-info"></div>
+                </div>
+                
+                <button class="try-it-button" onclick="startShapeBuilder()">
+                    🎨 Build Your Own Shapes
+                </button>
             </div>
             
+            <!-- Section 2: Area & Perimeter -->
             <div class="lesson-section">
                 <h3><span class="section-icon">📏</span>Area & Perimeter</h3>
-                <p>Calculate the area (inside space) and perimeter (distance around) of shapes.</p>
-                <div class="visual-element">
-                    <div class="placeholder-image">Interactive Area & Perimeter Calculator</div>
+                <p>Area measures the space inside a shape. Perimeter measures the distance around a shape.</p>
+                
+                <div class="measurement-demo">
+                    <h4>Rectangle Example</h4>
+                    <div class="rectangle-demo">
+                        <div class="rectangle-visual">
+                            <div class="rectangle-shape">
+                                <div class="dimension-label top">Length = 6 units</div>
+                                <div class="dimension-label side">Width = 4 units</div>
+                                <div class="grid-overlay"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="calculation-box">
+                            <div class="calculation-row">
+                                <strong>Perimeter:</strong> 6 + 4 + 6 + 4 = <span class="answer">20 units</span>
+                            </div>
+                            <div class="calculation-row">
+                                <strong>Area:</strong> 6 × 4 = <span class="answer">24 square units</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="formula-cards">
+                        <div class="formula-card">
+                            <h5>📐 Rectangle Formulas</h5>
+                            <p><strong>Perimeter:</strong> 2 × (length + width)</p>
+                            <p><strong>Area:</strong> length × width</p>
+                        </div>
+                        <div class="formula-card">
+                            <h5>⭐ Square Formulas</h5>
+                            <p><strong>Perimeter:</strong> 4 × side</p>
+                            <p><strong>Area:</strong> side × side</p>
+                        </div>
+                        <div class="formula-card">
+                            <h5>🔺 Triangle Formulas</h5>
+                            <p><strong>Perimeter:</strong> side 1 + side 2 + side 3</p>
+                            <p><strong>Area:</strong> ½ × base × height</p>
+                        </div>
+                    </div>
                 </div>
+                
+                <button class="try-it-button" onclick="startAreaCalculator()">
+                    🧮 Interactive Area Calculator
+                </button>
             </div>
             
+            <!-- Section 3: Angles -->
             <div class="lesson-section">
-                <h3><span class="section-icon">📐</span>Angles & Lines</h3>
-                <p>Understand different types of angles: acute, right, obtuse, and straight angles.</p>
+                <h3><span class="section-icon">📐</span>Angles & Their Measures</h3>
+                <p>Angles are formed when two lines meet. Let's explore different types of angles!</p>
+                
+                <div class="angles-demo">
+                    <div class="angle-types">
+                        <div class="angle-card" onclick="showAngle('acute')">
+                            <div class="angle-visual">📐</div>
+                            <h5>Acute Angle</h5>
+                            <p>Less than 90°</p>
+                        </div>
+                        <div class="angle-card" onclick="showAngle('right')">
+                            <div class="angle-visual">⟳</div>
+                            <h5>Right Angle</h5>
+                            <p>Exactly 90°</p>
+                        </div>
+                        <div class="angle-card" onclick="showAngle('obtuse')">
+                            <div class="angle-visual">↗️</div>
+                            <h5>Obtuse Angle</h5>
+                            <p>Greater than 90°</p>
+                        </div>
+                        <div class="angle-card" onclick="showAngle('straight')">
+                            <div class="angle-visual">↔️</div>
+                            <h5>Straight Angle</h5>
+                            <p>Exactly 180°</p>
+                        </div>
+                    </div>
+                    
+                    <div class="angle-display" id="angle-demo">
+                        <div class="protractor">
+                            <div class="angle-arc" id="angle-arc"></div>
+                            <div class="angle-measure" id="angle-measure">Click an angle type above!</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startAngleMeasurer()">
+                    📐 Practice Measuring Angles
+                </button>
+            </div>
+            
+            <!-- Section 4: 3D Shapes -->
+            <div class="lesson-section">
+                <h3><span class="section-icon">🎲</span>3D Shapes & Volume</h3>
+                <p>Three-dimensional shapes have length, width, and height. Let's explore cubes, spheres, and more!</p>
+                
+                <div class="shape-3d-gallery">
+                    <div class="shape-3d-card" onclick="explore3D('cube')">
+                        <div class="shape-3d-visual">🎲</div>
+                        <h5>Cube</h5>
+                        <p>6 square faces<br>8 vertices, 12 edges</p>
+                    </div>
+                    <div class="shape-3d-card" onclick="explore3D('sphere')">
+                        <div class="shape-3d-visual">⚽</div>
+                        <h5>Sphere</h5>
+                        <p>Perfectly round<br>Like a ball</p>
+                    </div>
+                    <div class="shape-3d-card" onclick="explore3D('cylinder')">
+                        <div class="shape-3d-visual">🥫</div>
+                        <h5>Cylinder</h5>
+                        <p>2 circular bases<br>Like a can</p>
+                    </div>
+                    <div class="shape-3d-card" onclick="explore3D('pyramid')">
+                        <div class="shape-3d-visual">🔺</div>
+                        <h5>Pyramid</h5>
+                        <p>Triangular faces<br>Comes to a point</p>
+                    </div>
+                </div>
+                
+                <div class="volume-demo">
+                    <h4>Volume = Space Inside a 3D Shape</h4>
+                    <div class="volume-example">
+                        <div class="cube-example">
+                            <div class="cube-visual">🎲</div>
+                            <p>Cube: side = 3 units</p>
+                            <p><strong>Volume = 3 × 3 × 3 = 27 cubic units</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="start3DExplorer()">
+                    🎲 3D Shape Explorer
+                </button>
             </div>
             
             <div class="interactive-activity">
-                <h4>🎯 Try It Yourself!</h4>
-                <p>Measure shapes around your house and calculate their area and perimeter!</p>
-                <button class="activity-button">Start Measuring Activity</button>
+                <h4>🎯 Geometry Detective Challenge</h4>
+                <p>Find shapes around your house, measure them, and calculate area and perimeter!</p>
+                <button class="activity-button" onclick="startGeometryChallenge()">
+                    🕵️ Start Geometry Hunt
+                </button>
             </div>
         </div>
         
@@ -129,10 +481,123 @@
                 .catch(error => console.error('Error loading footer:', error));
         }
         
+        // Shape exploration functions
+        window.exploreShape = function(shapeName) {
+            const shapeInfo = {
+                triangle: 'Triangles have 3 sides and 3 angles. The sum of all angles in any triangle is always 180°!',
+                square: 'Squares have 4 equal sides and 4 right angles (90° each). All sides are exactly the same length!',
+                rectangle: 'Rectangles have 4 sides with opposite sides equal. All angles are 90°, but length ≠ width.',
+                pentagon: 'Pentagons have 5 sides and 5 angles. Regular pentagons have all sides and angles equal.',
+                hexagon: 'Hexagons have 6 sides and 6 angles. You see them in honeycomb patterns!',
+                circle: 'Circles have no sides or corners. Every point on the circle is the same distance from the center.'
+            };
+            
+            const details = document.getElementById('shape-details');
+            const shapeName2 = document.getElementById('shape-name');
+            const shapeInfo2 = document.getElementById('shape-info');
+            
+            shapeName2.textContent = shapeName.charAt(0).toUpperCase() + shapeName.slice(1) + ' Properties';
+            shapeInfo2.textContent = shapeInfo[shapeName];
+            details.style.display = 'block';
+            
+            showNotification(`🔷 Learning about ${shapeName}s! ${shapeInfo[shapeName]}`, 'success');
+        };
+        
+        window.startShapeBuilder = function() {
+            showNotification('🎨 Shape Builder loading! Create and modify shapes with different properties.', 'info');
+        };
+        
+        window.startAreaCalculator = function() {
+            showNotification('🧮 Area Calculator starting! Input dimensions and get instant calculations.', 'info');
+        };
+        
+        window.showAngle = function(angleType) {
+            const angleInfo = {
+                acute: { degrees: '45°', description: 'Acute angles are less than 90° - sharp and pointed!' },
+                right: { degrees: '90°', description: 'Right angles are exactly 90° - like the corner of a square!' },
+                obtuse: { degrees: '120°', description: 'Obtuse angles are greater than 90° - wide and open!' },
+                straight: { degrees: '180°', description: 'Straight angles are exactly 180° - a perfect line!' }
+            };
+            
+            const info = angleInfo[angleType];
+            const measureElement = document.getElementById('angle-measure');
+            measureElement.textContent = `${info.degrees} - ${angleType.charAt(0).toUpperCase() + angleType.slice(1)} Angle`;
+            
+            showNotification(`📐 ${info.description}`, 'success');
+        };
+        
+        window.startAngleMeasurer = function() {
+            showNotification('📐 Angle Measurer loading! Practice identifying and measuring different angle types.', 'info');
+        };
+        
+        window.explore3D = function(shapeName) {
+            const shape3DInfo = {
+                cube: '🎲 Cubes have 6 square faces, 8 vertices (corners), and 12 edges. Like dice!',
+                sphere: '⚽ Spheres are perfectly round in all directions. Like balls, planets, and bubbles!',
+                cylinder: '🥫 Cylinders have 2 circular ends and 1 curved surface. Like cans and tubes!',
+                pyramid: '🔺 Pyramids have a base and triangular faces that meet at a point. Like Egyptian pyramids!'
+            };
+            
+            showNotification(shape3DInfo[shapeName], 'success');
+        };
+        
+        window.start3DExplorer = function() {
+            showNotification('🎲 3D Shape Explorer loading! Rotate, examine, and learn about 3D shapes!', 'info');
+        };
+        
+        window.startGeometryChallenge = function() {
+            const challenges = [
+                'Find a rectangular object and measure its length and width!',
+                'Look for triangular shapes around your house!',
+                'Count how many circular objects you can find!',
+                'Measure the perimeter of a book or picture frame!',
+                'Find examples of right angles (90°) in your home!'
+            ];
+            
+            const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+            showNotification(`🕵️ Geometry Challenge: ${randomChallenge}`, 'success');
+        };
+        
+        // Simple notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};
+                color: white;
+                padding: var(--spacing-md) var(--spacing-lg);
+                border-radius: var(--radius-md);
+                box-shadow: var(--shadow-lg);
+                z-index: 1000;
+                max-width: 350px;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Update progress tracking
+        function updateProgress() {
+            const currentProgress = JSON.parse(localStorage.getItem('math-progress') || '{}');
+            currentProgress['chapter-3'] = 75;
+            localStorage.setItem('math-progress', JSON.stringify(currentProgress));
+        }
+        
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadSharedComponents);
+            document.addEventListener('DOMContentLoaded', () => {
+                loadSharedComponents();
+                updateProgress();
+            });
         } else {
             loadSharedComponents();
+            updateProgress();
         }
     </script>
 </body>
