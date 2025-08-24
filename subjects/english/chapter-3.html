@@ -12,18 +12,141 @@
     <main class="chapter-container">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 3</div>
-            <h1 class="chapter-title">English Chapter 3</h1>
+            <h1 class="chapter-title">Advanced Reading & Literary Analysis</h1>
         </div>
         <div class="lesson-content">
             <div class="lesson-section">
-                <h3>Chapter Content</h3>
-                <p>Content will be enhanced with reading passages, writing activities, and interactive elements.</p>
+                <h2><span class="section-icon">📖</span>Literary Elements Detective</h2>
+                <div class="literary-analysis">
+                    <div class="story-selection">
+                        <h3>Choose a Story to Analyze</h3>
+                        <div class="story-buttons">
+                            <button class="story-btn" onclick="loadStoryAnalysis('brave-little-mouse')">🐭 The Brave Little Mouse</button>
+                            <button class="story-btn" onclick="loadStoryAnalysis('magic-garden')">🌿 The Magic Garden</button>
+                            <button class="story-btn" onclick="loadStoryAnalysis('friendship-bridge')">🌉 The Friendship Bridge</button>
+                            <button class="story-btn" onclick="loadStoryAnalysis('time-traveler')">⏰ The Time Traveler's Journal</button>
+                        </div>
+                    </div>
+                    
+                    <div class="story-display" id="story-display">
+                        <div class="story-instructions">
+                            <h4>🕵️‍♂️ Literary Detective Academy</h4>
+                            <p>Select a story above to begin your literary analysis adventure!</p>
+                            <div class="detective-tools">
+                                <h5>Detective Tools You'll Use:</h5>
+                                <ul>
+                                    <li>🎢 Character Analysis Magnifier</li>
+                                    <li>📍 Plot Structure Map</li>
+                                    <li>🌍 Setting Time Machine</li>
+                                    <li>🎨 Theme Treasure Hunter</li>
+                                    <li>🗣️ Point of View Periscope</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-results" id="analysis-results"></div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">🎨</span>Poetry Explorer & Creator</h2>
+                <div class="poetry-activities">
+                    <div class="poetry-analysis">
+                        <h3>Analyze Famous Poems</h3>
+                        <div class="poem-selector">
+                            <button class="poem-btn" onclick="loadPoemAnalysis('haiku')">Haiku Garden 🌸</button>
+                            <button class="poem-btn" onclick="loadPoemAnalysis('limerick')">Silly Limericks 😂</button>
+                            <button class="poem-btn" onclick="loadPoemAnalysis('acrostic')">Acrostic Adventures 🅰️</button>
+                            <button class="poem-btn" onclick="loadPoemAnalysis('free-verse')">Free Verse Freedom 🔆</button>
+                        </div>
+                        
+                        <div class="poem-content" id="poem-content">
+                            <div class="poem-instructions">
+                                <h4>🎭 Poetry Performance Stage</h4>
+                                <p>Choose a poetry type to explore rhythm, rhyme, and meaning!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="poem-creator" id="poem-creator">
+                            <h3>✍️ Create Your Own Poem</h3>
+                            <div class="creator-tools">
+                                <button class="creator-btn" onclick="startPoemCreation('haiku')">Write a Haiku</button>
+                                <button class="creator-btn" onclick="startPoemCreation('limerick')">Create a Limerick</button>
+                                <button class="creator-btn" onclick="startPoemCreation('acrostic')">Build an Acrostic</button>
+                                <button class="creator-btn" onclick="startPoemCreation('free-verse')">Free Verse Expression</button>
+                            </div>
+                            <div class="creation-space" id="creation-space"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">📊</span>Reading Comprehension Challenges</h2>
+                <div class="comprehension-challenges">
+                    <div class="challenge-levels">
+                        <h3>Choose Your Challenge Level</h3>
+                        <div class="level-buttons">
+                            <button class="level-btn" onclick="loadComprehensionChallenge('inference')">🔍 Inference Detective</button>
+                            <button class="level-btn" onclick="loadComprehensionChallenge('main-idea')">🎯 Main Idea Hunter</button>
+                            <button class="level-btn" onclick="loadComprehensionChallenge('compare-contrast')">⚖️ Compare & Contrast</button>
+                            <button class="level-btn" onclick="loadComprehensionChallenge('cause-effect')">🔗 Cause & Effect Chain</button>
+                        </div>
+                    </div>
+                    
+                    <div class="challenge-content" id="challenge-content">
+                        <div class="challenge-instructions">
+                            <h4>🏆 Reading Challenge Arena</h4>
+                            <p>Test your advanced reading skills with these challenging activities!</p>
+                            <div class="skill-badges">
+                                <div class="badge">🔍 Inference Master</div>
+                                <div class="badge">🎯 Main Idea Expert</div>
+                                <div class="badge">⚖️ Comparison Specialist</div>
+                                <div class="badge">🔗 Logic Chain Builder</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="challenge-progress" id="challenge-progress"></div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">📝</span>Advanced Writing Workshop</h2>
+                <div class="advanced-writing">
+                    <div class="writing-techniques">
+                        <h3>Master Writing Techniques</h3>
+                        <div class="technique-selector">
+                            <button class="technique-btn" onclick="loadWritingTechnique('descriptive')">🎨 Descriptive Writing</button>
+                            <button class="technique-btn" onclick="loadWritingTechnique('narrative')">📚 Narrative Storytelling</button>
+                            <button class="technique-btn" onclick="loadWritingTechnique('persuasive')">🎤 Persuasive Arguments</button>
+                            <button class="technique-btn" onclick="loadWritingTechnique('expository')">📊 Expository Explanation</button>
+                        </div>
+                        
+                        <div class="technique-content" id="technique-content">
+                            <div class="technique-instructions">
+                                <h4>✍️ Advanced Writing Laboratory</h4>
+                                <p>Learn professional writing techniques used by real authors!</p>
+                                <div class="writing-tools">
+                                    <div class="tool">🔍 Show Don't Tell Analyzer</div>
+                                    <div class="tool">🎨 Sensory Detail Builder</div>
+                                    <div class="tool">🗺️ Story Structure Planner</div>
+                                    <div class="tool">🎤 Persuasion Power Meter</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="writing-workspace" id="writing-workspace"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chapter-navigation">
             <a href="chapter-2.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 20%"></div></div>
+                <span class="progress-text">Chapter 3 Progress: 20%</span>
             </div>
             <a href="chapter-4.html" class="nav-button">Next →</a>
         </div>
@@ -35,6 +158,1097 @@
             fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+
+        // Literary Analysis System
+        let currentStory = null;
+        let literaryScore = 0;
+        let literaryQuestionsAnswered = 0;
+
+        const storyDatabase = {
+            'brave-little-mouse': {
+                title: 'The Brave Little Mouse',
+                text: `Once upon a time, in a cozy farmhouse kitchen, lived a timid little mouse named Pip. Unlike the other mice who boldly scavenged for crumbs, Pip was afraid of everything - the cat's shadow, creaking floorboards, even his own reflection.
+
+One dark stormy night, Pip heard desperate squeaking from the basement. His little sister Squeaky had fallen into a deep bucket and couldn't climb out! The other mice were too scared of the storm to help, but Pip knew he had to act.
+
+Despite his trembling paws and racing heart, Pip crept down to the scary basement. Using his small size to his advantage, he found a long piece of string and carefully lowered it into the bucket. "Hold tight, Squeaky!" he whispered bravely.
+
+With patience and determination, Pip pulled his sister to safety. From that night forward, Pip realized that being brave doesn't mean you're not scared - it means you do what's right even when you are afraid. The other mice now looked up to Pip as their hero, and he never felt quite so small again.`,
+                elements: {
+                    character: { main: 'Pip', traits: ['timid', 'caring', 'grows brave'], development: 'transforms from fearful to courageous' },
+                    setting: { time: 'one dark stormy night', place: 'farmhouse kitchen and basement', mood: 'initially scary, becomes hopeful' },
+                    plot: { problem: 'sister trapped in bucket', climax: 'Pip overcomes fear to save her', resolution: 'becomes confident and respected' },
+                    theme: 'True bravery means doing what\'s right despite being afraid',
+                    pov: 'third person omniscient'
+                }
+            },
+            'magic-garden': {
+                title: 'The Magic Garden',
+                text: `Sarah discovered the hidden garden behind the old stone wall on her grandmother's property. At first glance, it seemed ordinary - just overgrown weeds and forgotten flowers. But as she began to clear away the brambles, something magical happened.
+
+Each plant she touched with kindness began to bloom more beautifully than ever before. The roses grew rainbow petals, the sunflowers turned to follow her like friendly faces, and the herbs sang softly in the breeze. Sarah realized that the garden responded to love and care.
+
+Day after day, Sarah tended the garden with patience and wonder. She talked to the plants, sang to them, and even read them stories. The garden became a sanctuary of beauty and peace, attracting butterflies that shimmered like jewels and birds that sang in perfect harmony.
+
+When Sarah's friends came to visit, they too learned the garden's secret - that magic exists wherever there is genuine care and kindness. Together, they transformed not just the garden, but themselves, discovering that the most powerful magic of all is love.`,
+                elements: {
+                    character: { main: 'Sarah', traits: ['caring', 'patient', 'nurturing'], development: 'learns the power of kindness' },
+                    setting: { time: 'summer days', place: 'hidden garden behind stone wall', mood: 'magical and peaceful' },
+                    plot: { problem: 'garden is overgrown and forgotten', climax: 'discovers plants respond to kindness', resolution: 'creates beautiful magical sanctuary' },
+                    theme: 'Love and kindness create magic in the world',
+                    pov: 'third person limited'
+                }
+            },
+            'friendship-bridge': {
+                title: 'The Friendship Bridge',
+                text: `The old wooden bridge across Miller's Creek had been broken for months, separating the children of Maple Street from their friends on Oak Avenue. Emma lived on Maple Street, and her best friend Jake lived on Oak Avenue. The long walk around the creek made it hard for them to play together.
+
+Both children tried to convince their parents to fix the bridge, but the grown-ups were too busy arguing about who should pay for the repairs. Emma and Jake decided they couldn't wait any longer - they would fix the bridge themselves.
+
+Working together every weekend, the two friends gathered materials, watched online tutorials, and slowly began to repair the bridge. Their determination inspired other children from both streets to help. Soon, a whole team of young builders was working on the project.
+
+When the parents saw what their children had accomplished through cooperation and determination, they were amazed. The bridge was stronger than ever, and more importantly, it became a symbol of how working together can overcome any obstacle. The children had built more than a bridge - they had built a community.`,
+                elements: {
+                    character: { main: 'Emma and Jake', traits: ['determined', 'cooperative', 'resourceful'], development: 'become community leaders' },
+                    setting: { time: 'over several weekends', place: 'broken bridge over Miller\'s Creek', mood: 'hopeful and collaborative' },
+                    plot: { problem: 'broken bridge separates friends', climax: 'children work together to fix it', resolution: 'community comes together' },
+                    theme: 'Cooperation and determination can solve problems',
+                    pov: 'third person omniscient'
+                }
+            },
+            'time-traveler': {
+                title: 'The Time Traveler\'s Journal',
+                text: `Maya found the mysterious leather journal in her grandfather's attic, filled with entries dated centuries into the future. According to the journal, it belonged to Dr. Elena Martinez, a time traveler from 2157 who had accidentally dropped it during a research mission to the past.
+
+The journal described incredible technologies: flying cars that ran on sunlight, cities built underwater to protect ocean life, and schools where students learned by experiencing history firsthand. But it also warned of challenges: climate changes that required new ways of living, and the importance of preserving knowledge and kindness across generations.
+
+Maya realized the journal had appeared in her time for a reason. She began documenting her own life and times, creating a bridge between past, present, and future. She interviewed elderly neighbors about their memories, recorded family stories, and started a school project about preserving local history.
+
+When Maya graduated high school, she buried a time capsule containing her own journal and the future traveler's notebook. She included a note: "To whoever finds this - remember that every generation has the power to create a better future through the choices they make today." The journal had taught her that time travel isn't about machines - it's about connecting across generations through stories and wisdom.`,
+                elements: {
+                    character: { main: 'Maya', traits: ['curious', 'thoughtful', 'responsible'], development: 'becomes a bridge between generations' },
+                    setting: { time: 'present day with glimpses of future', place: 'grandfather\'s attic and Maya\'s community', mood: 'mysterious and inspiring' },
+                    plot: { problem: 'finding mysterious journal from future', climax: 'realizes her role in connecting generations', resolution: 'creates time capsule for future' },
+                    theme: 'Every generation has the power to shape the future',
+                    pov: 'third person limited'
+                }
+            }
+        };
+
+        function loadStoryAnalysis(storyId) {
+            currentStory = storyId;
+            literaryScore = 0;
+            literaryQuestionsAnswered = 0;
+            
+            const story = storyDatabase[storyId];
+            const storyHTML = `
+                <div class="story-analysis-container">
+                    <div class="story-text">
+                        <h3>${story.title}</h3>
+                        <div class="story-content">
+                            ${story.text.split('\\n\\n').map(paragraph => `<p>${paragraph}</p>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-tools">
+                        <h4>🔍 Literary Detective Tools</h4>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" onclick="analyzeElement('character')">🎭 Character Analysis</button>
+                            <button class="tool-btn" onclick="analyzeElement('setting')">🌍 Setting Explorer</button>
+                            <button class="tool-btn" onclick="analyzeElement('plot')">📈 Plot Structure</button>
+                            <button class="tool-btn" onclick="analyzeElement('theme')">💎 Theme Hunter</button>
+                            <button class="tool-btn" onclick="analyzeElement('pov')">👁️ Point of View</button>
+                        </div>
+                        <button class="complete-analysis-btn" onclick="startLiteraryQuiz()">📝 Complete Analysis Quiz</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('story-display').innerHTML = storyHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.story-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function analyzeElement(element) {
+            const story = storyDatabase[currentStory];
+            const elementData = story.elements[element];
+            
+            let analysisHTML = '';
+            
+            switch(element) {
+                case 'character':
+                    analysisHTML = `
+                        <div class="element-analysis">
+                            <h4>🎭 Character Analysis: ${elementData.main}</h4>
+                            <div class="character-details">
+                                <p><strong>Character Traits:</strong> ${elementData.traits.join(', ')}</p>
+                                <p><strong>Character Development:</strong> ${elementData.development}</p>
+                                <div class="character-questions">
+                                    <h5>Think About It:</h5>
+                                    <ul>
+                                        <li>How does the main character change throughout the story?</li>
+                                        <li>What motivates the character to act?</li>
+                                        <li>How do other characters react to the main character?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'setting':
+                    analysisHTML = `
+                        <div class="element-analysis">
+                            <h4>🌍 Setting Analysis</h4>
+                            <div class="setting-details">
+                                <p><strong>Time:</strong> ${elementData.time}</p>
+                                <p><strong>Place:</strong> ${elementData.place}</p>
+                                <p><strong>Mood:</strong> ${elementData.mood}</p>
+                                <div class="setting-questions">
+                                    <h5>Think About It:</h5>
+                                    <ul>
+                                        <li>How does the setting affect the story's mood?</li>
+                                        <li>Would the story be different in another time or place?</li>
+                                        <li>How does the setting influence the characters' actions?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'plot':
+                    analysisHTML = `
+                        <div class="element-analysis">
+                            <h4>📈 Plot Structure Analysis</h4>
+                            <div class="plot-details">
+                                <p><strong>Problem/Conflict:</strong> ${elementData.problem}</p>
+                                <p><strong>Climax:</strong> ${elementData.climax}</p>
+                                <p><strong>Resolution:</strong> ${elementData.resolution}</p>
+                                <div class="plot-diagram">
+                                    <h5>Story Mountain:</h5>
+                                    <div class="plot-mountain">
+                                        <div class="plot-point">📍 Problem</div>
+                                        <div class="plot-point">⬆️ Rising Action</div>
+                                        <div class="plot-point">🏔️ Climax</div>
+                                        <div class="plot-point">⬇️ Falling Action</div>
+                                        <div class="plot-point">✅ Resolution</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'theme':
+                    analysisHTML = `
+                        <div class="element-analysis">
+                            <h4>💎 Theme Analysis</h4>
+                            <div class="theme-details">
+                                <p><strong>Main Theme:</strong> ${elementData}</p>
+                                <div class="theme-questions">
+                                    <h5>Theme Detective Questions:</h5>
+                                    <ul>
+                                        <li>What lesson does the story teach?</li>
+                                        <li>How do the character's actions support this theme?</li>
+                                        <li>Can you think of real-life situations where this theme applies?</li>
+                                        <li>What evidence from the story supports this theme?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'pov':
+                    analysisHTML = `
+                        <div class="element-analysis">
+                            <h4>👁️ Point of View Analysis</h4>
+                            <div class="pov-details">
+                                <p><strong>Narrative Perspective:</strong> ${elementData}</p>
+                                <div class="pov-explanation">
+                                    <h5>Point of View Types:</h5>
+                                    <ul>
+                                        <li><strong>First Person:</strong> "I" - narrator is in the story</li>
+                                        <li><strong>Third Person Limited:</strong> "He/She" - knows one character's thoughts</li>
+                                        <li><strong>Third Person Omniscient:</strong> "He/She" - knows all characters' thoughts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            document.getElementById('analysis-results').innerHTML = analysisHTML;
+        }
+
+        function startLiteraryQuiz() {
+            const story = storyDatabase[currentStory];
+            const quizQuestions = [
+                {
+                    question: `Who is the main character in "${story.title}"?`,
+                    options: [story.elements.character.main, 'The narrator', 'A mysterious stranger', 'The antagonist'],
+                    correct: 0,
+                    explanation: `${story.elements.character.main} is the protagonist who drives the story forward.`
+                },
+                {
+                    question: 'What is the main theme of this story?',
+                    options: [story.elements.theme, 'Friendship is important', 'Never give up', 'Be kind to others'],
+                    correct: 0,
+                    explanation: `The theme "${story.elements.theme}" is supported by the character's actions and the story's events.`
+                },
+                {
+                    question: 'What point of view is used in this story?',
+                    options: [story.elements.pov, 'First person', 'Second person', 'Mixed perspective'],
+                    correct: 0,
+                    explanation: `This story uses ${story.elements.pov} narration.`
+                }
+            ];
+            
+            loadLiteraryQuizQuestion(0, quizQuestions);
+        }
+
+        function loadLiteraryQuizQuestion(questionIndex, questions) {
+            if (questionIndex >= questions.length) {
+                showLiteraryResults();
+                return;
+            }
+            
+            const question = questions[questionIndex];
+            const quizHTML = `
+                <div class="literary-quiz">
+                    <h4>Literary Analysis Quiz - Question ${questionIndex + 1} of ${questions.length}</h4>
+                    <p class="quiz-question">${question.question}</p>
+                    <div class="quiz-options">
+                        ${question.options.map((option, i) => 
+                            `<button class="quiz-option-btn" onclick="selectLiteraryAnswer(${questionIndex}, ${i}, ${question.correct}, '${question.explanation}', ${JSON.stringify(questions).replace(/"/g, '&quot;')})">${option}</button>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('analysis-results').innerHTML = quizHTML;
+        }
+
+        function selectLiteraryAnswer(questionIndex, selectedAnswer, correctAnswer, explanation, questionsJson) {
+            const questions = JSON.parse(questionsJson.replace(/&quot;/g, '"'));
+            
+            literaryQuestionsAnswered++;
+            let feedback = '';
+            
+            if (selectedAnswer === correctAnswer) {
+                literaryScore++;
+                feedback = `<div class="quiz-correct">✅ Correct! ${explanation}</div>`;
+            } else {
+                feedback = `<div class="quiz-incorrect">❌ Not quite right. ${explanation}</div>`;
+            }
+            
+            document.getElementById('analysis-results').innerHTML += feedback;
+            
+            setTimeout(() => {
+                loadLiteraryQuizQuestion(questionIndex + 1, questions);
+            }, 2500);
+        }
+
+        function showLiteraryResults() {
+            const percentage = Math.round((literaryScore / literaryQuestionsAnswered) * 100);
+            let badge = '';
+            let message = '';
+            
+            if (percentage >= 90) {
+                badge = '🥇 Literary Analysis Master';
+                message = 'Outstanding analytical skills!';
+            } else if (percentage >= 70) {
+                badge = '🥈 Story Detective';
+                message = 'Great literary understanding!';
+            } else if (percentage >= 50) {
+                badge = '🥉 Emerging Analyst';
+                message = 'Keep developing your skills!';
+            } else {
+                badge = '📚 Reading Explorer';
+                message = 'Practice makes perfect!';
+            }
+            
+            document.getElementById('analysis-results').innerHTML = `
+                <div class="literary-results">
+                    <h4>Analysis Complete!</h4>
+                    <div class="badge-earned">${badge}</div>
+                    <p><strong>Score: ${literaryScore}/${literaryQuestionsAnswered} (${percentage}%)</strong></p>
+                    <p>${message}</p>
+                    <button class="retry-btn" onclick="startLiteraryQuiz()">Retake Quiz</button>
+                    <button class="new-story-btn" onclick="document.getElementById('analysis-results').innerHTML = ''">Analyze New Story</button>
+                </div>
+            `;
+        }
+
+        // Poetry System
+        let currentPoemType = null;
+
+        const poetryDatabase = {
+            haiku: {
+                name: 'Haiku - Nature\'s Whispers',
+                description: 'Haiku are 3-line poems with 5-7-5 syllables that capture moments in nature.',
+                examples: [
+                    { poem: 'Cherry blossoms fall\\nGentle petals dance on breeze\\nSpring\'s sweet symphony', analysis: '5-7-5 syllable pattern, focuses on nature imagery' },
+                    { poem: 'Morning dewdrops shine\\nSilver gems on grass blades gleam\\nSun awakens earth', analysis: 'Creates vivid picture with few words, present tense' }
+                ],
+                structure: { lines: 3, pattern: '5-7-5 syllables', topic: 'nature, seasons, emotions' }
+            },
+            limerick: {
+                name: 'Limerick - Silly Stories',
+                description: 'Limericks are funny 5-line poems with AABBA rhyme scheme.',
+                examples: [
+                    { poem: 'There once was a cat from Peru\\nWho learned how to dance and bamboo\\nHe wiggled his tail\\nWithout ever fail\\nAnd soon he was teaching it too!', analysis: 'AABBA rhyme scheme, bouncy rhythm, humorous story' },
+                    { poem: 'A student who lived in Vermont\\nHad homework she really didn\'t want\\nShe hid it away\\nFor another day\\nBut her teacher said "That\'s what I thought!"', analysis: 'Tells complete funny story, unexpected ending' }
+                ],
+                structure: { lines: 5, pattern: 'AABBA rhyme', topic: 'funny stories, silly characters' }
+            },
+            acrostic: {
+                name: 'Acrostic - Name Poems',
+                description: 'Acrostic poems use the letters of a word to begin each line.',
+                examples: [
+                    { poem: 'F riendship means caring every day\\nR eady to help in every way\\nI nviting others to join and play\\nE ncouraging words we always say\\nN ever leaving a friend behind\\nD edicated, loyal, and kind', analysis: 'Each line starts with F-R-I-E-N-D, theme relates to friendship' },
+                    { poem: 'S oaring high above the trees\\nU nder bright blue summer skies\\nN ever landing, flying free\\nM ajestic bird that never dies', analysis: 'S-U-N creates theme about sun and freedom' }
+                ],
+                structure: { lines: 'variable', pattern: 'first letters spell word', topic: 'any theme that matches the word' }
+            },
+            'free-verse': {
+                name: 'Free Verse - Expression Freedom',
+                description: 'Free verse poems don\'t follow strict rules - they focus on emotion and imagery.',
+                examples: [
+                    { poem: 'The old oak tree\\nstands guard\\nover childhood memories\\nswing still swaying\\nin the wind\\nwhispering stories\\nof summers past', analysis: 'No rhyme scheme, varied line lengths, creates mood through imagery' },
+                    { poem: 'Lightning splits the darkness\\nThunder rolls\\nacross the prairie\\nRain begins\\nits ancient dance\\nwashing the world clean', analysis: 'Uses line breaks for emphasis, natural rhythm, strong sensory images' }
+                ],
+                structure: { lines: 'any number', pattern: 'no set pattern', topic: 'emotions, experiences, observations' }
+            }
+        };
+
+        function loadPoemAnalysis(poemType) {
+            currentPoemType = poemType;
+            const poetry = poetryDatabase[poemType];
+            
+            const poemHTML = `
+                <div class="poem-analysis-container">
+                    <h4>${poetry.name}</h4>
+                    <p class="poem-description">${poetry.description}</p>
+                    
+                    <div class="poem-examples">
+                        <h5>📖 Example Poems:</h5>
+                        ${poetry.examples.map((example, index) => `
+                            <div class="poem-example">
+                                <div class="poem-text">${example.poem.replace(/\\n/g, '<br>')}</div>
+                                <div class="poem-analysis">${example.analysis}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="poem-structure">
+                        <h5>📐 Structure Guide:</h5>
+                        <ul>
+                            <li><strong>Lines:</strong> ${poetry.structure.lines}</li>
+                            <li><strong>Pattern:</strong> ${poetry.structure.pattern}</li>
+                            <li><strong>Common Topics:</strong> ${poetry.structure.topic}</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('poem-content').innerHTML = poemHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.poem-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function startPoemCreation(type) {
+            const poetry = poetryDatabase[type];
+            let creatorHTML = '';
+            
+            switch(type) {
+                case 'haiku':
+                    creatorHTML = `
+                        <div class="haiku-creator">
+                            <h4>🌸 Create Your Haiku</h4>
+                            <p>Remember: Line 1 (5 syllables), Line 2 (7 syllables), Line 3 (5 syllables)</p>
+                            <div class="haiku-lines">
+                                <div class="haiku-line">
+                                    <label>Line 1 (5 syllables):</label>
+                                    <input type="text" id="haiku-line1" placeholder="Cherry blossoms fall" oninput="countSyllables(this, 1, 5)">
+                                    <span class="syllable-count" id="count1">0/5</span>
+                                </div>
+                                <div class="haiku-line">
+                                    <label>Line 2 (7 syllables):</label>
+                                    <input type="text" id="haiku-line2" placeholder="Gentle petals dance on breeze" oninput="countSyllables(this, 2, 7)">
+                                    <span class="syllable-count" id="count2">0/7</span>
+                                </div>
+                                <div class="haiku-line">
+                                    <label>Line 3 (5 syllables):</label>
+                                    <input type="text" id="haiku-line3" placeholder="Spring's sweet symphony" oninput="countSyllables(this, 3, 5)">
+                                    <span class="syllable-count" id="count3">0/5</span>
+                                </div>
+                            </div>
+                            <button class="create-poem-btn" onclick="displayCreatedPoem('haiku')">Create Haiku</button>
+                        </div>
+                    `;
+                    break;
+                case 'acrostic':
+                    creatorHTML = `
+                        <div class="acrostic-creator">
+                            <h4>📝 Create Your Acrostic</h4>
+                            <div class="acrostic-word">
+                                <label>Choose your word:</label>
+                                <input type="text" id="acrostic-word" placeholder="FRIEND" oninput="generateAcrosticLines()" maxlength="8">
+                            </div>
+                            <div class="acrostic-lines" id="acrostic-lines">
+                                <p>Type a word above to create your acrostic poem!</p>
+                            </div>
+                            <button class="create-poem-btn" onclick="displayCreatedPoem('acrostic')" id="create-acrostic" style="display:none;">Create Acrostic</button>
+                        </div>
+                    `;
+                    break;
+                case 'free-verse':
+                    creatorHTML = `
+                        <div class="free-verse-creator">
+                            <h4>🎨 Create Your Free Verse Poem</h4>
+                            <p>Express yourself freely - no rules, just emotion and imagery!</p>
+                            <div class="verse-prompts">
+                                <p>Need inspiration? Try writing about:</p>
+                                <div class="prompt-chips">
+                                    <span class="prompt-chip" onclick="addPrompt('A memory that makes me smile...')">Happy Memory</span>
+                                    <span class="prompt-chip" onclick="addPrompt('The storm outside my window...')">Weather</span>
+                                    <span class="prompt-chip" onclick="addPrompt('If I could fly, I would...')">Dreams</span>
+                                    <span class="prompt-chip" onclick="addPrompt('The sound of...')">Sounds</span>
+                                </div>
+                            </div>
+                            <textarea id="free-verse-text" placeholder="Let your creativity flow..." rows="8"></textarea>
+                            <button class="create-poem-btn" onclick="displayCreatedPoem('free-verse')">Share Your Poem</button>
+                        </div>
+                    `;
+                    break;
+                case 'limerick':
+                    creatorHTML = `
+                        <div class="limerick-creator">
+                            <h4>😄 Create Your Limerick</h4>
+                            <p>Make it funny! Lines 1, 2, 5 rhyme. Lines 3, 4 rhyme.</p>
+                            <div class="limerick-template">
+                                <div class="limerick-line">
+                                    <label>Line 1:</label>
+                                    <input type="text" id="limerick-line1" placeholder="There once was a [person] from [place]">
+                                </div>
+                                <div class="limerick-line">
+                                    <label>Line 2 (rhymes with 1):</label>
+                                    <input type="text" id="limerick-line2" placeholder="Who [did something funny]">
+                                </div>
+                                <div class="limerick-line">
+                                    <label>Line 3:</label>
+                                    <input type="text" id="limerick-line3" placeholder="[Something short]">
+                                </div>
+                                <div class="limerick-line">
+                                    <label>Line 4 (rhymes with 3):</label>
+                                    <input type="text" id="limerick-line4" placeholder="[Something that rhymes]">
+                                </div>
+                                <div class="limerick-line">
+                                    <label>Line 5 (rhymes with 1 & 2):</label>
+                                    <input type="text" id="limerick-line5" placeholder="And [funny conclusion]">
+                                </div>
+                            </div>
+                            <button class="create-poem-btn" onclick="displayCreatedPoem('limerick')">Create Limerick</button>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            document.getElementById('creation-space').innerHTML = creatorHTML;
+        }
+
+        function countSyllables(input, lineNum, target) {
+            // Simple syllable counter (approximation)
+            const text = input.value.toLowerCase();
+            const syllables = text.split(/[aeiou]+/).length - 1 || (text.length > 0 ? 1 : 0);
+            const counter = document.getElementById(`count${lineNum}`);
+            counter.textContent = `${syllables}/${target}`;
+            counter.className = syllables === target ? 'syllable-count correct' : 'syllable-count';
+        }
+
+        function generateAcrosticLines() {
+            const word = document.getElementById('acrostic-word').value.toUpperCase();
+            if (word.length === 0) {
+                document.getElementById('acrostic-lines').innerHTML = '<p>Type a word above to create your acrostic poem!</p>';
+                document.getElementById('create-acrostic').style.display = 'none';
+                return;
+            }
+            
+            let linesHTML = '';
+            for (let i = 0; i < word.length; i++) {
+                linesHTML += `
+                    <div class="acrostic-line">
+                        <span class="acrostic-letter">${word[i]}</span>
+                        <input type="text" id="acrostic-input-${i}" placeholder="Write a line starting with '${word[i]}'">
+                    </div>
+                `;
+            }
+            
+            document.getElementById('acrostic-lines').innerHTML = linesHTML;
+            document.getElementById('create-acrostic').style.display = 'block';
+        }
+
+        function addPrompt(promptText) {
+            document.getElementById('free-verse-text').value = promptText + '\\n';
+        }
+
+        function displayCreatedPoem(type) {
+            let poemContent = '';
+            
+            switch(type) {
+                case 'haiku':
+                    const line1 = document.getElementById('haiku-line1').value;
+                    const line2 = document.getElementById('haiku-line2').value;
+                    const line3 = document.getElementById('haiku-line3').value;
+                    poemContent = `${line1}\\n${line2}\\n${line3}`;
+                    break;
+                case 'acrostic':
+                    const word = document.getElementById('acrostic-word').value;
+                    let acrosticLines = [];
+                    for (let i = 0; i < word.length; i++) {
+                        const input = document.getElementById(`acrostic-input-${i}`);
+                        if (input) acrosticLines.push(input.value);
+                    }
+                    poemContent = acrosticLines.join('\\n');
+                    break;
+                case 'limerick':
+                    let limerickLines = [];
+                    for (let i = 1; i <= 5; i++) {
+                        const input = document.getElementById(`limerick-line${i}`);
+                        if (input) limerickLines.push(input.value);
+                    }
+                    poemContent = limerickLines.join('\\n');
+                    break;
+                case 'free-verse':
+                    poemContent = document.getElementById('free-verse-text').value;
+                    break;
+            }
+            
+            if (poemContent.trim() === '') {
+                alert('Please write your poem first!');
+                return;
+            }
+            
+            const displayHTML = `
+                <div class="created-poem">
+                    <h4>🎉 Your Beautiful ${poetryDatabase[type].name.split(' - ')[0]}!</h4>
+                    <div class="poem-display">
+                        ${poemContent.replace(/\\n/g, '<br>')}
+                    </div>
+                    <div class="poem-actions">
+                        <button class="save-poem-btn" onclick="savePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>💾 Save Poem</button>
+                        <button class="share-poem-btn" onclick="sharePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>📤 Share Poem</button>
+                        <button class="new-poem-btn" onclick="startPoemCreation('${type}')")>✨ Create Another</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('creation-space').innerHTML = displayHTML;
+        }
+
+        function savePoem(type, content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `my-${type}-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('🎉 Your poem has been saved!');
+        }
+
+        function sharePoem(type, content) {
+            if (navigator.share) {
+                navigator.share({
+                    title: `My ${type} poem`,
+                    text: content
+                });
+            } else {
+                navigator.clipboard.writeText(content);
+                alert('📋 Poem copied to clipboard!');
+            }
+        }
+
+        // Reading Comprehension Challenges
+        let currentChallenge = null;
+        let challengeScore = 0;
+        let challengeQuestionsAnswered = 0;
+
+        const comprehensionChallenges = {
+            inference: {
+                name: 'Inference Detective',
+                description: 'Read between the lines to discover hidden meanings.',
+                passages: [
+                    {
+                        text: "Emma packed her umbrella, raincoat, and waterproof boots before leaving the house. She grabbed her lunch and hurried to the bus stop, pulling her hood up as she walked.",
+                        question: "What can you infer about the weather?",
+                        options: ["It's sunny and warm", "It's raining or about to rain", "It's snowing heavily", "It's very windy"],
+                        correct: 1,
+                        explanation: "Emma's preparations (umbrella, raincoat, boots, hood up) all suggest rainy weather."
+                    },
+                    {
+                        text: "Jake's stomach rumbled loudly during math class. He kept glancing at the clock and fidgeting with his pencil. When the lunch bell finally rang, he was the first one out the door.",
+                        question: "What can you infer about Jake?",
+                        options: ["He doesn't like math", "He's very hungry", "He's in trouble", "He forgot his homework"],
+                        correct: 1,
+                        explanation: "The rumbling stomach, clock-watching, and rushing to lunch all suggest Jake is hungry."
+                    }
+                ]
+            },
+            'main-idea': {
+                name: 'Main Idea Hunter',
+                description: 'Find the central message or most important point.',
+                passages: [
+                    {
+                        text: "Recycling is one of the most important things we can do to help our planet. When we recycle paper, plastic, and glass, we reduce the amount of waste in landfills. Recycling also saves energy because it takes less energy to make new products from recycled materials than from raw materials. Additionally, recycling helps conserve natural resources like trees and oil.",
+                        question: "What is the main idea of this passage?",
+                        options: ["Landfills are full of waste", "Recycling helps protect the environment", "Making new products uses energy", "Trees are natural resources"],
+                        correct: 1,
+                        explanation: "The passage discusses multiple benefits of recycling, all supporting the main idea that recycling helps the environment."
+                    }
+                ]
+            },
+            'compare-contrast': {
+                name: 'Compare & Contrast',
+                description: 'Identify similarities and differences between ideas.',
+                passages: [
+                    {
+                        text: "Both cats and dogs make wonderful pets, but they have different needs and behaviors. Cats are independent animals that groom themselves and use litter boxes. They often sleep during the day and are most active at night. Dogs, on the other hand, are social creatures that need regular walks and enjoy playing with their owners. They are usually active during the day and sleep at night, just like humans.",
+                        question: "What is one main difference between cats and dogs mentioned in the passage?",
+                        options: ["Dogs are pets but cats aren't", "Cats are independent while dogs are social", "Cats don't sleep but dogs do", "Dogs don't need care but cats do"],
+                        correct: 1,
+                        explanation: "The passage clearly contrasts cats' independence with dogs' social nature."
+                    }
+                ]
+            },
+            'cause-effect': {
+                name: 'Cause & Effect Chain',
+                description: 'Identify what happens and why it happens.',
+                passages: [
+                    {
+                        text: "Because it hadn't rained for three weeks, the soil in Sarah's garden became very dry and hard. As a result, her plants began to wilt and turn brown. Sarah realized she needed to water her garden every day, so she set up a sprinkler system. After a few days of regular watering, her plants became green and healthy again.",
+                        question: "What caused Sarah's plants to wilt and turn brown?",
+                        options: ["Too much water", "No rain for three weeks", "The sprinkler system", "Insects ate them"],
+                        correct: 1,
+                        explanation: "The passage states that lack of rain for three weeks caused the dry soil, which led to wilting plants."
+                    }
+                ]
+            }
+        };
+
+        function loadComprehensionChallenge(challengeType) {
+            currentChallenge = challengeType;
+            challengeScore = 0;
+            challengeQuestionsAnswered = 0;
+            
+            const challenge = comprehensionChallenges[challengeType];
+            const challengeHTML = `
+                <div class="comprehension-challenge-container">
+                    <h4>${challenge.name}</h4>
+                    <p class="challenge-description">${challenge.description}</p>
+                    <button class="start-challenge-btn" onclick="startComprehensionQuestions(0)">Start Challenge</button>
+                </div>
+            `;
+            
+            document.getElementById('challenge-content').innerHTML = challengeHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function startComprehensionQuestions(questionIndex) {
+            const challenge = comprehensionChallenges[currentChallenge];
+            if (questionIndex >= challenge.passages.length) {
+                showComprehensionResults();
+                return;
+            }
+            
+            const passage = challenge.passages[questionIndex];
+            const questionHTML = `
+                <div class="comprehension-question">
+                    <h4>${challenge.name} - Question ${questionIndex + 1} of ${challenge.passages.length}</h4>
+                    <div class="passage-text">
+                        <p>${passage.text}</p>
+                    </div>
+                    <div class="comprehension-question-area">
+                        <p class="question">${passage.question}</p>
+                        <div class="comprehension-options">
+                            ${passage.options.map((option, i) => 
+                                `<button class="comprehension-option-btn" onclick="selectComprehensionAnswer(${questionIndex}, ${i}, ${passage.correct}, '${passage.explanation}')">${option}</button>`
+                            ).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('challenge-content').innerHTML = questionHTML;
+        }
+
+        function selectComprehensionAnswer(questionIndex, selectedAnswer, correctAnswer, explanation) {
+            challengeQuestionsAnswered++;
+            let feedback = '';
+            
+            if (selectedAnswer === correctAnswer) {
+                challengeScore++;
+                feedback = `<div class="comprehension-correct">✅ Excellent reasoning! ${explanation}</div>`;
+            } else {
+                feedback = `<div class="comprehension-incorrect">❌ Think again. ${explanation}</div>`;
+            }
+            
+            document.getElementById('challenge-content').innerHTML += feedback;
+            
+            setTimeout(() => {
+                startComprehensionQuestions(questionIndex + 1);
+            }, 3000);
+        }
+
+        function showComprehensionResults() {
+            const challenge = comprehensionChallenges[currentChallenge];
+            const percentage = Math.round((challengeScore / challengeQuestionsAnswered) * 100);
+            let badge = '';
+            let message = '';
+            
+            if (percentage >= 90) {
+                badge = '🥇 Reading Master';
+                message = 'Outstanding comprehension skills!';
+            } else if (percentage >= 70) {
+                badge = '🥈 Skilled Reader';
+                message = 'Great analytical thinking!';
+            } else {
+                badge = '🥉 Growing Reader';
+                message = 'Keep practicing these skills!';
+            }
+            
+            document.getElementById('challenge-progress').innerHTML = `
+                <div class="challenge-results">
+                    <h4>Challenge Complete!</h4>
+                    <div class="badge-earned">${badge}</div>
+                    <p><strong>Score: ${challengeScore}/${challengeQuestionsAnswered} (${percentage}%)</strong></p>
+                    <p>${message}</p>
+                    <button class="retry-btn" onclick="startComprehensionQuestions(0)">Try Again</button>
+                    <button class="new-challenge-btn" onclick="document.getElementById('challenge-progress').innerHTML = ''">New Challenge</button>
+                </div>
+            `;
+        }
+
+        // Advanced Writing Techniques
+        let currentTechnique = null;
+
+        const writingTechniques = {
+            descriptive: {
+                name: 'Descriptive Writing - Paint Pictures with Words',
+                description: 'Use sensory details and vivid language to help readers visualize your ideas.',
+                lesson: {
+                    concept: 'Descriptive writing appeals to the five senses: sight, sound, smell, taste, and touch.',
+                    examples: [
+                        { weak: 'The dog was big.', strong: 'The enormous Great Dane towered over the children, his deep bark echoing through the yard.' },
+                        { weak: 'The cake tasted good.', strong: 'The moist chocolate cake melted on my tongue, its rich sweetness perfectly balanced by tangy raspberry frosting.' }
+                    ],
+                    tips: [
+                        'Use specific adjectives instead of generic ones',
+                        'Include sensory details (what you see, hear, feel, smell, taste)',
+                        'Show, don\'t tell - paint a picture with words',
+                        'Use figurative language like similes and metaphors'
+                    ]
+                }
+            },
+            narrative: {
+                name: 'Narrative Storytelling - Craft Compelling Stories',
+                description: 'Structure stories with strong beginnings, middles, and endings that engage readers.',
+                lesson: {
+                    concept: 'Good narratives have clear story structure: exposition, rising action, climax, falling action, resolution.',
+                    examples: [
+                        { element: 'Strong Opening', example: '"The day I discovered I could talk to animals was the day my ordinary life became extraordinary."' },
+                        { element: 'Character Development', example: 'Show how characters change through their actions and decisions.' }
+                    ],
+                    tips: [
+                        'Start with action or dialogue to grab attention',
+                        'Develop characters through their actions, not just description',
+                        'Create conflict to drive your story forward',
+                        'Use dialogue to reveal character and advance plot'
+                    ]
+                }
+            },
+            persuasive: {
+                name: 'Persuasive Arguments - Convince Your Readers',
+                description: 'Use evidence, logic, and emotional appeals to convince readers of your viewpoint.',
+                lesson: {
+                    concept: 'Persuasive writing uses facts, examples, and logical reasoning to convince readers.',
+                    examples: [
+                        { technique: 'Evidence', example: 'Studies show that students who read 20 minutes daily score 23% higher on tests.' },
+                        { technique: 'Emotional Appeal', example: 'Every child deserves the joy of discovering magical worlds through books.' }
+                    ],
+                    tips: [
+                        'State your position clearly in your opening',
+                        'Support arguments with facts, statistics, and examples',
+                        'Address counterarguments to strengthen your position',
+                        'Use emotional appeals appropriately'
+                    ]
+                }
+            },
+            expository: {
+                name: 'Expository Explanation - Teach Through Writing',
+                description: 'Explain topics clearly and logically to help readers understand new information.',
+                lesson: {
+                    concept: 'Expository writing explains, informs, or describes topics in a clear, organized way.',
+                    examples: [
+                        { structure: 'Definition', example: 'Photosynthesis is the process by which plants convert sunlight into energy.' },
+                        { structure: 'Steps', example: 'First, gather your materials. Next, measure carefully. Then, mix thoroughly.' }
+                    ],
+                    tips: [
+                        'Use clear topic sentences for each paragraph',
+                        'Organize information logically (chronological, importance, etc.)',
+                        'Define technical terms your readers might not know',
+                        'Use transitions to connect ideas smoothly'
+                    ]
+                }
+            }
+        };
+
+        function loadWritingTechnique(technique) {
+            currentTechnique = technique;
+            const tech = writingTechniques[technique];
+            
+            let techniqueHTML = `
+                <div class="writing-technique-container">
+                    <h4>${tech.name}</h4>
+                    <p class="technique-description">${tech.description}</p>
+                    
+                    <div class="technique-lesson">
+                        <h5>💡 Key Concept</h5>
+                        <p>${tech.lesson.concept}</p>
+                        
+                        <div class="technique-examples">
+                            <h5>📖 Examples</h5>
+            `;
+            
+            if (tech.lesson.examples[0].weak) {
+                // Before/After examples
+                techniqueHTML += tech.lesson.examples.map(ex => `
+                    <div class="example-comparison">
+                        <div class="weak-example">
+                            <strong>Weak:</strong> ${ex.weak}
+                        </div>
+                        <div class="strong-example">
+                            <strong>Strong:</strong> ${ex.strong}
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                // Element examples
+                techniqueHTML += tech.lesson.examples.map(ex => `
+                    <div class="technique-example">
+                        <strong>${ex.element || ex.technique || ex.structure}:</strong> ${ex.example}
+                    </div>
+                `).join('');
+            }
+            
+            techniqueHTML += `
+                        </div>
+                        
+                        <div class="technique-tips">
+                            <h5>✨ Pro Tips</h5>
+                            <ul>
+                                ${tech.lesson.tips.map(tip => `<li>${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button class="start-writing-btn" onclick="startWritingPractice('${technique}')">Practice This Technique</button>
+                </div>
+            `;
+            
+            document.getElementById('technique-content').innerHTML = techniqueHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.technique-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function startWritingPractice(technique) {
+            const tech = writingTechniques[technique];
+            let practiceHTML = '';
+            
+            switch(technique) {
+                case 'descriptive':
+                    practiceHTML = `
+                        <div class="writing-practice">
+                            <h4>🎨 Descriptive Writing Practice</h4>
+                            <div class="writing-prompt">
+                                <p><strong>Your Challenge:</strong> Describe your favorite place using all five senses.</p>
+                                <div class="sensory-checklist">
+                                    <label><input type="checkbox" id="sight"> 👁️ What you see</label>
+                                    <label><input type="checkbox" id="sound"> 👂 What you hear</label>
+                                    <label><input type="checkbox" id="smell"> 👃 What you smell</label>
+                                    <label><input type="checkbox" id="taste"> 👅 What you taste</label>
+                                    <label><input type="checkbox" id="touch"> ✋ What you feel</label>
+                                </div>
+                            </div>
+                            <textarea id="descriptive-writing" placeholder="Describe your favorite place..." rows="8"></textarea>
+                            <button class="analyze-writing-btn" onclick="analyzeDescriptiveWriting()">Analyze My Writing</button>
+                        </div>
+                    `;
+                    break;
+                case 'persuasive':
+                    practiceHTML = `
+                        <div class="writing-practice">
+                            <h4>🎤 Persuasive Writing Practice</h4>
+                            <div class="writing-prompt">
+                                <p><strong>Your Challenge:</strong> Convince your principal to extend recess by 10 minutes.</p>
+                                <div class="persuasive-structure">
+                                    <div class="structure-step">1. State your position clearly</div>
+                                    <div class="structure-step">2. Provide 2-3 strong reasons</div>
+                                    <div class="structure-step">3. Support with evidence or examples</div>
+                                    <div class="structure-step">4. Address possible concerns</div>
+                                    <div class="structure-step">5. End with a strong conclusion</div>
+                                </div>
+                            </div>
+                            <textarea id="persuasive-writing" placeholder="Dear Principal..." rows="10"></textarea>
+                            <button class="analyze-writing-btn" onclick="analyzePersuasiveWriting()">Analyze My Argument</button>
+                        </div>
+                    `;
+                    break;
+                default:
+                    practiceHTML = `
+                        <div class="writing-practice">
+                            <h4>✍️ ${tech.name} Practice</h4>
+                            <div class="writing-prompt">
+                                <p><strong>Practice Prompt:</strong> Use the techniques you learned to write about any topic that interests you.</p>
+                            </div>
+                            <textarea id="general-writing" placeholder="Start writing here..." rows="8"></textarea>
+                            <button class="analyze-writing-btn" onclick="analyzeGeneralWriting('${technique}')">Review My Writing</button>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            document.getElementById('writing-workspace').innerHTML = practiceHTML;
+        }
+
+        function analyzeDescriptiveWriting() {
+            const writing = document.getElementById('descriptive-writing').value;
+            if (writing.trim() === '') {
+                alert('Please write something first!');
+                return;
+            }
+            
+            // Simple analysis for sensory details
+            const senses = {
+                sight: /\\b(see|saw|look|bright|colorful|dark|beautiful|ugly|big|small|tall|short)\\b/gi,
+                sound: /\\b(hear|heard|sound|loud|quiet|music|noise|whisper|shout|bang|ring)\\b/gi,
+                smell: /\\b(smell|scent|fragrance|aroma|stink|perfume|fresh|musty)\\b/gi,
+                taste: /\\b(taste|flavor|sweet|sour|bitter|salty|delicious|yummy)\\b/gi,
+                touch: /\\b(feel|felt|touch|soft|hard|smooth|rough|hot|cold|warm|cool)\\b/gi
+            };
+            
+            let feedback = '<div class="writing-analysis"><h5>🔍 Analysis Results</h5>';
+            let sensesUsed = 0;
+            
+            Object.keys(senses).forEach(sense => {
+                const matches = writing.match(senses[sense]);
+                if (matches && matches.length > 0) {
+                    sensesUsed++;
+                    feedback += `<div class="sense-found">✅ ${sense.charAt(0).toUpperCase() + sense.slice(1)} details found!</div>`;
+                } else {
+                    feedback += `<div class="sense-missing">⚪ Try adding ${sense} details</div>`;
+                }
+            });
+            
+            feedback += `<p><strong>Sensory Score: ${sensesUsed}/5</strong></p>`;
+            
+            if (sensesUsed >= 4) feedback += '<p>🌟 Excellent sensory writing!</p>';
+            else if (sensesUsed >= 2) feedback += '<p>👍 Good start! Try adding more senses.</p>';
+            else feedback += '<p>💪 Challenge yourself to use more sensory details.</p>';
+            
+            feedback += '</div>';
+            
+            document.getElementById('writing-workspace').innerHTML += feedback;
+        }
+
+        function analyzePersuasiveWriting() {
+            const writing = document.getElementById('persuasive-writing').value;
+            if (writing.trim() === '') {
+                alert('Please write your argument first!');
+                return;
+            }
+            
+            // Simple analysis for persuasive elements
+            const persuasiveElements = {
+                position: /\\b(should|must|believe|think|propose|suggest)\\b/gi,
+                evidence: /\\b(study|research|fact|data|statistics|example|proof)\\b/gi,
+                benefits: /\\b(benefit|advantage|improve|better|help|good|positive)\\b/gi,
+                appeals: /\\b(important|necessary|fair|right|deserve|need)\\b/gi
+            };
+            
+            let feedback = '<div class="writing-analysis"><h5>🔍 Persuasive Analysis</h5>';
+            let elementsFound = 0;
+            
+            Object.keys(persuasiveElements).forEach(element => {
+                const matches = writing.match(persuasiveElements[element]);
+                if (matches && matches.length > 0) {
+                    elementsFound++;
+                    feedback += `<div class="element-found">✅ ${element.charAt(0).toUpperCase() + element.slice(1)} language detected!</div>`;
+                } else {
+                    feedback += `<div class="element-missing">⚪ Consider adding ${element} language</div>`;
+                }
+            });
+            
+            feedback += `<p><strong>Persuasive Elements: ${elementsFound}/4</strong></p>`;
+            
+            if (elementsFound >= 3) feedback += '<p>🌟 Strong persuasive argument!</p>';
+            else if (elementsFound >= 2) feedback += '<p>👍 Good foundation! Add more supporting details.</p>';
+            else feedback += '<p>💪 Strengthen your argument with evidence and appeals.</p>';
+            
+            feedback += '</div>';
+            
+            document.getElementById('writing-workspace').innerHTML += feedback;
+        }
+
+        function analyzeGeneralWriting(technique) {
+            const writing = document.getElementById('general-writing').value;
+            if (writing.trim() === '') {
+                alert('Please write something first!');
+                return;
+            }
+            
+            const wordCount = writing.trim().split(/\\s+/).length;
+            const sentences = writing.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+            const avgWordsPerSentence = Math.round(wordCount / sentences);
+            
+            let feedback = `
+                <div class="writing-analysis">
+                    <h5>📊 Writing Analysis</h5>
+                    <p><strong>Word Count:</strong> ${wordCount}</p>
+                    <p><strong>Sentences:</strong> ${sentences}</p>
+                    <p><strong>Average Words per Sentence:</strong> ${avgWordsPerSentence}</p>
+                    <p>🎉 Great work practicing ${writingTechniques[technique].name.split(' - ')[0]}!</p>
+                    <button class="save-writing-btn" onclick="saveWriting('${technique}', '${writing.replace(/'/g, '\\\\\'')}')")>💾 Save My Writing</button>
+                </div>
+            `;
+            
+            document.getElementById('writing-workspace').innerHTML += feedback;
+        }
+
+        function saveWriting(technique, content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `my-${technique}-writing-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('💾 Your writing has been saved!');
+        }
     </script>
 </body>
 </html>
