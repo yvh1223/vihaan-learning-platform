@@ -10,8 +10,8 @@
     <title>Numbers & Operations - 5th Grade Mathematics | Learning Platform</title>
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
     
     <style>
         /* Chapter-specific styles */
@@ -430,18 +430,18 @@
     <div id="footer-container"></div>
     
     <!-- JavaScript -->
-    <script src="/js/app.js" defer></script>
-    <script src="/js/drag-drop-utils.js" defer></script>
-    <script src="/js/assessment-system.js" defer></script>
-    <script src="/js/multimedia-system.js" defer></script>
-    <script src="/js/gamification-system.js" defer></script>
+    <script src="../../js/app.js" defer></script>
+    <script src="../../js/drag-drop-utils.js" defer></script>
+    <script src="../../js/assessment-system.js" defer></script>
+    <script src="../../js/multimedia-system.js" defer></script>
+    <script src="../../js/gamification-system.js" defer></script>
     <script>
         // Chapter 1: Numbers & Operations JavaScript
         (function() {
             // Load shared components
             function loadSharedComponents() {
                 // Load header
-                fetch('/subjects/shared/header.html')
+                fetch('../shared/header.html')
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('header-container').innerHTML = html;
@@ -449,7 +449,7 @@
                     .catch(error => console.error('Error loading header:', error));
                 
                 // Load footer
-                fetch('/subjects/shared/footer.html')
+                fetch('../shared/footer.html')
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('footer-container').innerHTML = html;

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STAAR Reading Practice - 5th Grade</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
 </head>
 <body>
     <div id="header-container"></div>
@@ -28,8 +28,8 @@
     <div id="footer-container"></div>
     <script>
         function loadSharedComponents() {
-            fetch('/subjects/shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
-            fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
+            fetch('../shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
+            fetch('../shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
     </script>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 1 - Social Studies</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
     <style>
         /* Social Studies Chapter 1 Styles */
         .history-hub {
@@ -764,16 +764,16 @@
     <div id="footer-container"></div>
     
     <!-- Epic 7 JavaScript Systems -->
-    <script src="/js/app.js" defer></script>
-    <script src="/js/drag-drop-utils.js" defer></script>
-    <script src="/js/assessment-system.js" defer></script>
-    <script src="/js/multimedia-system.js" defer></script>
-    <script src="/js/gamification-system.js" defer></script>
+    <script src="../../js/app.js" defer></script>
+    <script src="../../js/drag-drop-utils.js" defer></script>
+    <script src="../../js/assessment-system.js" defer></script>
+    <script src="../../js/multimedia-system.js" defer></script>
+    <script src="../../js/gamification-system.js" defer></script>
     
     <script>
         function loadSharedComponents() {
-            fetch('/subjects/shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
-            fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
+            fetch('../shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
+            fetch('../shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
         

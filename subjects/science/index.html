@@ -10,8 +10,8 @@
     <title>Science - 5th Grade Learning Platform</title>
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
     
     <style>
         .subject-hero {
@@ -177,16 +177,16 @@
     <div id="footer-container"></div>
     
     <!-- JavaScript -->
-    <script src="/js/app.js" defer></script>
+    <script src="../../js/app.js" defer></script>
     <script>
         // Load shared components
         function loadSharedComponents() {
-            fetch('/subjects/shared/header.html')
+            fetch('../shared/header.html')
                 .then(response => response.text())
                 .then(html => document.getElementById('header-container').innerHTML = html)
                 .catch(error => console.error('Error loading header:', error));
             
-            fetch('/subjects/shared/footer.html')
+            fetch('../shared/footer.html')
                 .then(response => response.text())
                 .then(html => document.getElementById('footer-container').innerHTML = html)
                 .catch(error => console.error('Error loading footer:', error));

@@ -4,8 +4,8 @@
 <header class="main-header">
     <nav class="navbar">
         <div class="nav-brand">
-            <a href="/index.html" class="brand-link">
-                <img src="/assets/icons/logo.png" alt="Learning Platform Logo" class="logo">
+            <a href="../../index.html" class="brand-link">
+                <img src="../../assets/icons/logo.svg" alt="Learning Platform Logo" class="logo">
                 <h1>5th Grade Learning Hub</h1>
             </a>
         </div>
@@ -13,19 +13,19 @@
         <!-- Main Navigation Menu -->
         <div class="nav-menu" id="nav-menu">
             <ul class="nav-list">
-                <li><a href="/index.html" class="nav-link" data-nav="dashboard">
+                <li><a href="../../index.html" class="nav-link" data-nav="dashboard">
                     <span class="nav-icon">🏠</span>Dashboard
                 </a></li>
-                <li><a href="/subjects/mathematics/index.html" class="nav-link" data-nav="mathematics">
+                <li><a href="../mathematics/index.html" class="nav-link" data-nav="mathematics">
                     <span class="nav-icon">🔢</span>Mathematics
                 </a></li>
-                <li><a href="/subjects/science/index.html" class="nav-link" data-nav="science">
+                <li><a href="../science/index.html" class="nav-link" data-nav="science">
                     <span class="nav-icon">🔬</span>Science
                 </a></li>
-                <li><a href="/subjects/english/index.html" class="nav-link" data-nav="english">
+                <li><a href="../english/index.html" class="nav-link" data-nav="english">
                     <span class="nav-icon">📚</span>English Language Arts
                 </a></li>
-                <li><a href="/subjects/social-studies/index.html" class="nav-link" data-nav="social-studies">
+                <li><a href="../social-studies/index.html" class="nav-link" data-nav="social-studies">
                     <span class="nav-icon">🌍</span>Social Studies
                 </a></li>
             </ul>
@@ -174,7 +174,7 @@
         breadcrumbList.innerHTML = '';
         
         // Always start with Dashboard
-        const dashboardCrumb = createBreadcrumbItem('🏠 Dashboard', '/index.html');
+        const dashboardCrumb = createBreadcrumbItem('🏠 Dashboard', '../../index.html');
         breadcrumbList.appendChild(dashboardCrumb);
         
         // Add subject-specific breadcrumbs
@@ -193,7 +193,7 @@
                 
                 const subjectCrumb = createBreadcrumbItem(
                     subjectNames[subject], 
-                    `/subjects/${subject}/index.html`
+                    `../${subject}/index.html`
                 );
                 breadcrumbList.appendChild(subjectCrumb);
                 

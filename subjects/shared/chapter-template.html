@@ -25,8 +25,8 @@ Variables to replace: {{SUBJECT}}, {{CHAPTER_NUMBER}}, {{CHAPTER_TITLE}}, {{CONT
     <title>{{CHAPTER_TITLE}} - 5th Grade {{SUBJECT}} | Learning Platform</title>
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
     
     <!-- Chapter-specific styles -->
     <style>
@@ -276,14 +276,14 @@ Variables to replace: {{SUBJECT}}, {{CHAPTER_NUMBER}}, {{CHAPTER_TITLE}}, {{CONT
     <div id="footer-container"></div>
     
     <!-- JavaScript -->
-    <script src="/js/app.js" defer></script>
+    <script src="../../js/app.js" defer></script>
     <script>
         // Chapter Template JavaScript
         (function() {
             // Load shared components
             function loadSharedComponents() {
                 // Load header
-                fetch('/subjects/shared/header.html')
+                fetch('../shared/header.html')
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('header-container').innerHTML = html;
@@ -291,7 +291,7 @@ Variables to replace: {{SUBJECT}}, {{CHAPTER_NUMBER}}, {{CHAPTER_TITLE}}, {{CONT
                     .catch(error => console.error('Error loading header:', error));
                 
                 // Load footer
-                fetch('/subjects/shared/footer.html')
+                fetch('../shared/footer.html')
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('footer-container').innerHTML = html;

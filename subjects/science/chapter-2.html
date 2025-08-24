@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Force, Motion & Energy - 5th Grade Science</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
 </head>
 <body>
     <div id="header-container"></div>
@@ -199,12 +199,12 @@
         </div>
     </main>
     <div id="footer-container"></div>
-    <script src="/js/app.js" defer></script>
+    <script src="../../js/app.js" defer></script>
     <script>
         // Load shared components
         function loadSharedComponents() {
-            fetch('/subjects/shared/header.html').then(response => response.text()).then(html => document.getElementById('header-container').innerHTML = html);
-            fetch('/subjects/shared/footer.html').then(response => response.text()).then(html => document.getElementById('footer-container').innerHTML = html);
+            fetch('../shared/header.html').then(response => response.text()).then(html => document.getElementById('header-container').innerHTML = html);
+            fetch('../shared/footer.html').then(response => response.text()).then(html => document.getElementById('footer-container').innerHTML = html);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
 
