@@ -12,18 +12,174 @@
     <main class="chapter-container">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 1</div>
-            <h1 class="chapter-title">English Chapter 1</h1>
+            <h1 class="chapter-title">Reading & Writing Fundamentals</h1>
         </div>
         <div class="lesson-content">
             <div class="lesson-section">
-                <h3>Chapter Content</h3>
-                <p>Content will be enhanced with reading passages, writing activities, and interactive elements.</p>
+                <h2><span class="section-icon">📚</span>Reading Comprehension & Analysis</h2>
+                <div class="reading-passage-container">
+                    <div class="passage-selector">
+                        <label for="passage-select">Choose a Reading Passage:</label>
+                        <select id="passage-select" onchange="loadReadingPassage()">
+                            <option value="adventure">The Great Adventure</option>
+                            <option value="friendship">True Friendship</option>
+                            <option value="mystery">The Missing Key</option>
+                            <option value="nature">Exploring Nature</option>
+                        </select>
+                    </div>
+                    
+                    <div class="reading-passage" id="reading-passage">
+                        <div class="passage-header">
+                            <h3 id="passage-title">The Great Adventure</h3>
+                            <div class="reading-timer">
+                                <span class="timer-icon">⏱️</span>
+                                <span id="reading-timer">0:00</span>
+                            </div>
+                        </div>
+                        <div class="passage-text" id="passage-text">
+                            <p>Sarah had always dreamed of exploring the mysterious forest behind her grandmother's house. The towering trees seemed to whisper secrets, and the winding paths promised exciting discoveries. One sunny morning, she finally gathered the courage to venture into the unknown wilderness.</p>
+                            
+                            <p>As she walked deeper into the forest, Sarah noticed how the sunlight filtered through the leaves, creating dancing shadows on the forest floor. She heard the cheerful chirping of birds and the gentle rustling of leaves in the breeze. The air smelled fresh and earthy, filled with the scent of pine needles and wildflowers.</p>
+                            
+                            <p>Suddenly, Sarah spotted something unusual. A small, wooden door was carved into the trunk of an enormous oak tree. Her heart raced with excitement as she approached the mysterious entrance. What adventures awaited her on the other side?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="comprehension-questions" id="comprehension-questions">
+                        <h4>📝 Reading Comprehension Questions</h4>
+                        <div class="question-container">
+                            <div class="question" data-question="1">
+                                <p><strong>1. What had Sarah always dreamed of doing?</strong></p>
+                                <div class="answer-options">
+                                    <label><input type="radio" name="q1" value="a"> Climbing mountains</label>
+                                    <label><input type="radio" name="q1" value="b"> Exploring the forest</label>
+                                    <label><input type="radio" name="q1" value="c"> Swimming in the lake</label>
+                                    <label><input type="radio" name="q1" value="d"> Building a treehouse</label>
+                                </div>
+                            </div>
+                            
+                            <div class="question" data-question="2">
+                                <p><strong>2. How did Sarah feel when she found the wooden door?</strong></p>
+                                <div class="answer-options">
+                                    <label><input type="radio" name="q2" value="a"> Scared and worried</label>
+                                    <label><input type="radio" name="q2" value="b"> Bored and tired</label>
+                                    <label><input type="radio" name="q2" value="c"> Excited and curious</label>
+                                    <label><input type="radio" name="q2" value="d"> Angry and frustrated</label>
+                                </div>
+                            </div>
+                            
+                            <div class="question" data-question="3">
+                                <p><strong>3. What sensory details does the author use to describe the forest?</strong></p>
+                                <div class="answer-options">
+                                    <label><input type="radio" name="q3" value="a"> Only what Sarah could see</label>
+                                    <label><input type="radio" name="q3" value="b"> Only what Sarah could hear</label>
+                                    <label><input type="radio" name="q3" value="c"> Sight, sound, and smell</label>
+                                    <label><input type="radio" name="q3" value="d"> Only what Sarah could touch</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="check-answers-btn" onclick="checkReadingAnswers()">Check My Answers</button>
+                        <div class="results-display" id="reading-results"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">✍️</span>Creative Writing Workshop</h2>
+                <div class="writing-activities">
+                    <div class="writing-prompt-container">
+                        <h3>Story Starters</h3>
+                        <div class="prompt-selector">
+                            <button class="prompt-btn" onclick="selectWritingPrompt('adventure')">Adventure</button>
+                            <button class="prompt-btn" onclick="selectWritingPrompt('mystery')">Mystery</button>
+                            <button class="prompt-btn" onclick="selectWritingPrompt('friendship')">Friendship</button>
+                            <button class="prompt-btn" onclick="selectWritingPrompt('fantasy')">Fantasy</button>
+                        </div>
+                        
+                        <div class="current-prompt" id="writing-prompt">
+                            <h4>🌟 Your Writing Prompt</h4>
+                            <p id="prompt-text">Click a category above to get your story starter!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="writing-editor">
+                        <h3>📝 Your Story</h3>
+                        <div class="writing-tools">
+                            <button class="tool-btn" onclick="addDialogue()">💬 Add Dialogue</button>
+                            <button class="tool-btn" onclick="addDescription()">🎨 Add Description</button>
+                            <button class="tool-btn" onclick="showWritingTips()">💡 Writing Tips</button>
+                            <button class="tool-btn" onclick="saveStory()">💾 Save Story</button>
+                        </div>
+                        
+                        <textarea id="story-editor" placeholder="Start writing your story here..." rows="12"></textarea>
+                        
+                        <div class="word-counter">
+                            <span id="word-count">0</span> words | <span id="char-count">0</span> characters
+                        </div>
+                        
+                        <div class="writing-feedback" id="writing-feedback"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">🎯</span>Grammar & Language Skills</h2>
+                <div class="grammar-activities">
+                    <div class="grammar-game-container">
+                        <h3>Grammar Detective Game</h3>
+                        <div class="game-selector">
+                            <button class="game-btn" onclick="startGrammarGame('punctuation')">Punctuation Police</button>
+                            <button class="game-btn" onclick="startGrammarGame('parts-of-speech')">Parts of Speech</button>
+                            <button class="game-btn" onclick="startGrammarGame('sentence-structure')">Sentence Builder</button>
+                        </div>
+                        
+                        <div class="grammar-game" id="grammar-game">
+                            <div class="game-instructions" id="game-instructions">
+                                <p>Choose a grammar game above to start practicing!</p>
+                            </div>
+                            
+                            <div class="game-content" id="game-content">
+                                <!-- Game content will be loaded here -->
+                            </div>
+                            
+                            <div class="game-score" id="game-score"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">📖</span>Vocabulary Builder</h2>
+                <div class="vocabulary-activities">
+                    <div class="vocab-explorer">
+                        <h3>Word Explorer</h3>
+                        <div class="vocab-categories">
+                            <button class="vocab-btn" onclick="loadVocabCategory('emotions')">😊 Emotions</button>
+                            <button class="vocab-btn" onclick="loadVocabCategory('nature')">🌳 Nature</button>
+                            <button class="vocab-btn" onclick="loadVocabCategory('adventure')">🗺️ Adventure</button>
+                            <button class="vocab-btn" onclick="loadVocabCategory('descriptive')">🎨 Descriptive</button>
+                        </div>
+                        
+                        <div class="vocab-display" id="vocab-display">
+                            <div class="vocab-card-container" id="vocab-cards">
+                                <p>Select a category to explore new words!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="vocab-practice" id="vocab-practice">
+                            <button class="practice-btn" onclick="startVocabQuiz()">🧠 Test Your Knowledge</button>
+                            <button class="practice-btn" onclick="createWordStory()">📚 Use Words in Story</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chapter-navigation">
             <a href="index.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 10%"></div></div>
+                <span class="progress-text">Chapter 1 Progress: 10%</span>
             </div>
             <a href="chapter-2.html" class="nav-button">Next →</a>
         </div>
