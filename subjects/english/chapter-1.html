@@ -191,6 +191,541 @@
             fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+
+        // Reading Comprehension System
+        let readingTimer = 0;
+        let timerInterval = null;
+        let currentPassage = 'adventure';
+
+        const readingPassages = {
+            adventure: {
+                title: 'The Great Adventure',
+                text: `<p>Sarah had always dreamed of exploring the mysterious forest behind her grandmother's house. The towering trees seemed to whisper secrets, and the winding paths promised exciting discoveries. One sunny morning, she finally gathered the courage to venture into the unknown wilderness.</p>
+                      <p>As she walked deeper into the forest, Sarah noticed how the sunlight filtered through the leaves, creating dancing shadows on the forest floor. She heard the cheerful chirping of birds and the gentle rustling of leaves in the breeze. The air smelled fresh and earthy, filled with the scent of pine needles and wildflowers.</p>
+                      <p>Suddenly, Sarah spotted something unusual. A small, wooden door was carved into the trunk of an enormous oak tree. Her heart raced with excitement as she approached the mysterious entrance. What adventures awaited her on the other side?</p>`,
+                questions: [
+                    { q: 'What had Sarah always dreamed of doing?', options: ['Climbing mountains', 'Exploring the forest', 'Swimming in the lake', 'Building a treehouse'], correct: 1 },
+                    { q: 'How did Sarah feel when she found the wooden door?', options: ['Scared and worried', 'Bored and tired', 'Excited and curious', 'Angry and frustrated'], correct: 2 },
+                    { q: 'What sensory details does the author use to describe the forest?', options: ['Only what Sarah could see', 'Only what Sarah could hear', 'Sight, sound, and smell', 'Only what Sarah could touch'], correct: 2 }
+                ]
+            },
+            friendship: {
+                title: 'True Friendship',
+                text: `<p>Maya and Alex had been best friends since kindergarten. They shared everything - their favorite snacks, their deepest secrets, and their wildest dreams. When Maya's family announced they were moving to another state, both friends felt their world turning upside down.</p>
+                      <p>"Promise we'll stay friends forever," Maya whispered as they sat under their favorite oak tree. Alex nodded, fighting back tears. They spent their last day together creating a time capsule filled with photos, letters, and small treasures from their adventures.</p>
+                      <p>Years passed, and despite the distance, Maya and Alex kept their promise. They wrote letters, made video calls, and visited each other during summers. Their friendship proved that true bonds can survive any challenge, growing stronger with time and trust.</p>`,
+                questions: [
+                    { q: 'How long had Maya and Alex been friends?', options: ['One year', 'Since kindergarten', 'Two years', 'Since first grade'], correct: 1 },
+                    { q: 'What did they create on their last day together?', options: ['A photo album', 'A time capsule', 'A scrapbook', 'A video'], correct: 1 },
+                    { q: 'What does this story teach us about friendship?', options: ['Friends must live nearby', 'Distance can end friendships', 'True friendship survives challenges', 'Making new friends is easy'], correct: 2 }
+                ]
+            },
+            mystery: {
+                title: 'The Missing Key',
+                text: `<p>Detective Emma examined the locked treasure chest in the old library attic. The brass keyhole gleamed mysteriously in the dusty sunlight. According to the librarian, the chest had been there for over fifty years, and no one knew what secrets it held inside.</p>
+                      <p>Emma searched carefully through old books and papers, looking for clues. In a forgotten diary, she discovered a riddle: "Where knowledge sleeps and stories wake, the key rests where readers partake." Her eyes lit up with understanding as she decoded the mysterious message.</p>
+                      <p>Racing downstairs to the reading room, Emma found a loose brick near the fireplace where people often gathered to read. Inside the hidden space was an ornate brass key. With trembling hands, she returned to unlock the chest, revealing a collection of rare books and handwritten stories from children who had visited the library decades ago.</p>`,
+                questions: [
+                    { q: 'Where did Emma find the treasure chest?', options: ['In the basement', 'In the library attic', 'In the reading room', 'Outside the library'], correct: 1 },
+                    { q: 'What helped Emma solve the mystery?', options: ['A map', 'A riddle in a diary', 'The librarian', 'A witness'], correct: 1 },
+                    { q: 'What was inside the treasure chest?', options: ['Gold coins', 'Old photographs', 'Rare books and stories', 'Ancient artifacts'], correct: 2 }
+                ]
+            },
+            nature: {
+                title: 'Exploring Nature',
+                text: `<p>The nature trail wound through a magnificent forest ecosystem. Tall evergreen trees stretched toward the sky, while colorful wildflowers carpeted the forest floor. A crystal-clear stream bubbled nearby, providing fresh water for the diverse wildlife that called this place home.</p>
+                      <p>Quietly observing from the trail, visitors could spot red squirrels gathering acorns, graceful deer stepping carefully through the underbrush, and various bird species building their nests in the protective canopy above. Each creature played an important role in maintaining the forest's delicate balance.</p>
+                      <p>The interconnected web of life fascinated young explorers who learned that every plant and animal depended on the others for survival. From the smallest insects pollinating flowers to the largest trees providing shelter, nature demonstrated the beauty and importance of working together in harmony.</p>`,
+                questions: [
+                    { q: 'What provides water for the forest wildlife?', options: ['Rain puddles', 'A crystal-clear stream', 'Underground springs', 'Morning dew'], correct: 1 },
+                    { q: 'According to the passage, what do red squirrels gather?', options: ['Berries', 'Leaves', 'Acorns', 'Twigs'], correct: 2 },
+                    { q: 'What is the main message about nature in this passage?', options: ['Animals are dangerous', 'Plants grow everywhere', 'All living things work together', 'Forests are quiet places'], correct: 2 }
+                ]
+            }
+        };
+
+        function loadReadingPassage() {
+            const select = document.getElementById('passage-select');
+            currentPassage = select.value;
+            const passage = readingPassages[currentPassage];
+            
+            document.getElementById('passage-title').textContent = passage.title;
+            document.getElementById('passage-text').innerHTML = passage.text;
+            
+            // Load questions
+            const questionsContainer = document.getElementById('comprehension-questions');
+            let questionsHTML = '<h4>📝 Reading Comprehension Questions</h4><div class="question-container">';
+            
+            passage.questions.forEach((question, index) => {
+                questionsHTML += `
+                    <div class="question" data-question="${index + 1}">
+                        <p><strong>${index + 1}. ${question.q}</strong></p>
+                        <div class="answer-options">
+                            ${question.options.map((option, i) => 
+                                `<label><input type="radio" name="q${index + 1}" value="${i}"> ${option}</label>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            questionsHTML += '</div><button class="check-answers-btn" onclick="checkReadingAnswers()">Check My Answers</button><div class="results-display" id="reading-results"></div>';
+            questionsContainer.innerHTML = questionsHTML;
+            
+            // Reset timer
+            readingTimer = 0;
+            updateTimer();
+            startReadingTimer();
+        }
+
+        function startReadingTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                readingTimer++;
+                updateTimer();
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(readingTimer / 60);
+            const seconds = readingTimer % 60;
+            document.getElementById('reading-timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function checkReadingAnswers() {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            const passage = readingPassages[currentPassage];
+            let score = 0;
+            const results = [];
+            
+            passage.questions.forEach((question, index) => {
+                const selected = document.querySelector(`input[name="q${index + 1}"]:checked`);
+                if (selected) {
+                    if (parseInt(selected.value) === question.correct) {
+                        score++;
+                        results.push(`✅ Question ${index + 1}: Correct!`);
+                    } else {
+                        results.push(`❌ Question ${index + 1}: Incorrect. The correct answer is "${question.options[question.correct]}"`);
+                    }
+                } else {
+                    results.push(`⚠️ Question ${index + 1}: No answer selected`);
+                }
+            });
+            
+            const percentage = Math.round((score / passage.questions.length) * 100);
+            let feedback = '';
+            if (percentage >= 90) feedback = 'Excellent work! 🌟';
+            else if (percentage >= 70) feedback = 'Good job! 👍';
+            else if (percentage >= 50) feedback = 'Keep practicing! 📚';
+            else feedback = 'Need more practice. Try again! 💪';
+            
+            document.getElementById('reading-results').innerHTML = `
+                <h4>Your Results</h4>
+                <p><strong>Score: ${score}/${passage.questions.length} (${percentage}%)</strong></p>
+                <p><strong>${feedback}</strong></p>
+                <p><strong>Reading Time: ${Math.floor(readingTimer / 60)}:${(readingTimer % 60).toString().padStart(2, '0')}</strong></p>
+                <div class="answer-details">${results.join('<br>')}</div>
+            `;
+        }
+
+        // Creative Writing System
+        const writingPrompts = {
+            adventure: [
+                "You discover a hidden cave behind a waterfall. What treasures await inside?",
+                "Your pet suddenly starts talking and asks you to go on a quest. Where do you go?",
+                "You find a mysterious map in your attic. Where does it lead?",
+                "A friendly dragon offers to take you on a flight around the world. Describe your journey."
+            ],
+            mystery: [
+                "All the clocks in your town have stopped at exactly 3:33. What's happening?",
+                "You receive a letter addressed to someone from 100 years ago. What do you do?",
+                "Your shadow starts acting independently. What is it trying to tell you?",
+                "A new student at school seems to know things they shouldn't. What's their secret?"
+            ],
+            friendship: [
+                "Your best friend moves away, but you discover a magical way to visit them. How?",
+                "Two very different animals become unlikely friends. Tell their story.",
+                "You have the power to bring two people together. Who do you choose and why?",
+                "A shy new student sits alone at lunch. How do you help them make friends?"
+            ],
+            fantasy: [
+                "You wake up with magical powers, but they only work when you're helping others.",
+                "A talking tree in your backyard offers to grant you one wish. What do you choose?",
+                "You're invited to attend a school for young wizards. Describe your first day.",
+                "A constellation falls from the sky and becomes your companion. What adventures follow?"
+            ]
+        };
+
+        function selectWritingPrompt(category) {
+            const prompts = writingPrompts[category];
+            const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+            document.getElementById('prompt-text').textContent = randomPrompt;
+            
+            // Update button styles
+            document.querySelectorAll('.prompt-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function addDialogue() {
+            const editor = document.getElementById('story-editor');
+            const sampleDialogue = '\n\n"Hello there!" said [Character Name]. "How are you feeling today?"\n\n"I\'m excited about our adventure," replied [Other Character].\n\n';
+            editor.value += sampleDialogue;
+            updateWordCount();
+        }
+
+        function addDescription() {
+            const editor = document.getElementById('story-editor');
+            const sampleDescription = '\n\nThe [setting] was [adjective] and [adjective]. [Character] could [action] while [sensory detail]. It felt like [comparison or metaphor].\n\n';
+            editor.value += sampleDescription;
+            updateWordCount();
+        }
+
+        function showWritingTips() {
+            const tips = [
+                "Use descriptive words to paint a picture in the reader's mind.",
+                "Start your story with action or dialogue to grab attention.",
+                "Show don't tell - instead of 'he was scared', write 'his hands trembled'.",
+                "Use the five senses: sight, sound, smell, taste, and touch.",
+                "Give your characters unique personalities and speaking styles.",
+                "Create a clear beginning, middle, and end for your story."
+            ];
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            document.getElementById('writing-feedback').innerHTML = `<div class="writing-tip">💡 <strong>Writing Tip:</strong> ${randomTip}</div>`;
+        }
+
+        function updateWordCount() {
+            const editor = document.getElementById('story-editor');
+            const text = editor.value;
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            const characters = text.length;
+            
+            document.getElementById('word-count').textContent = words;
+            document.getElementById('char-count').textContent = characters;
+        }
+
+        function saveStory() {
+            const story = document.getElementById('story-editor').value;
+            if (story.trim() === '') {
+                alert('Please write something before saving!');
+                return;
+            }
+            
+            const blob = new Blob([story], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `my-story-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            document.getElementById('writing-feedback').innerHTML = '<div class="success-message">📝 Your story has been saved successfully!</div>';
+        }
+
+        // Initialize word count tracking
+        document.addEventListener('DOMContentLoaded', () => {
+            const editor = document.getElementById('story-editor');
+            if (editor) {
+                editor.addEventListener('input', updateWordCount);
+                loadReadingPassage(); // Load initial passage
+            }
+        });
+
+        // Grammar Games System
+        let currentGrammarGame = null;
+        let gameScore = 0;
+        let questionsAnswered = 0;
+
+        const grammarGames = {
+            punctuation: {
+                name: 'Punctuation Police',
+                instructions: 'Help fix these sentences by choosing the correct punctuation!',
+                questions: [
+                    { sentence: 'What time is it', options: ['?', '!', '.', ','], correct: 0, explanation: 'Questions end with question marks.' },
+                    { sentence: 'Watch out', options: ['?', '!', '.', ','], correct: 1, explanation: 'Exclamations showing strong emotion end with exclamation points.' },
+                    { sentence: 'I like pizza, hamburgers and ice cream', options: [' and ice cream.', ', and ice cream.', ' and, ice cream.', ', and, ice cream.'], correct: 1, explanation: 'Use commas to separate items in a series.' },
+                    { sentence: 'My favorite colors are blue green and yellow', options: [' blue green and', ' blue, green, and', ' blue green, and', ' blue, green and'], correct: 1, explanation: 'Use commas between all items in a series.' }
+                ]
+            },
+            'parts-of-speech': {
+                name: 'Parts of Speech Detective',
+                instructions: 'Identify the part of speech for the highlighted word!',
+                questions: [
+                    { sentence: 'The *happy* dog ran quickly.', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 2, explanation: 'Happy describes the dog, so it\'s an adjective.' },
+                    { sentence: 'She *ran* to the store.', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 1, explanation: 'Ran is an action word, so it\'s a verb.' },
+                    { sentence: 'The cat sat on the *table*.', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 0, explanation: 'Table is a person, place, or thing, so it\'s a noun.' },
+                    { sentence: 'He spoke very *softly*.', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 3, explanation: 'Softly describes how he spoke, so it\'s an adverb.' }
+                ]
+            },
+            'sentence-structure': {
+                name: 'Sentence Builder',
+                instructions: 'Choose the words that make a complete sentence!',
+                questions: [
+                    { prompt: 'Which is a complete sentence?', options: ['Running in the park.', 'The dog barked loudly.', 'After the rain stopped.', 'Because I was tired.'], correct: 1, explanation: 'A complete sentence needs a subject and a predicate.' },
+                    { prompt: 'What type of sentence is: "Close the door."', options: ['Statement', 'Question', 'Command', 'Exclamation'], correct: 2, explanation: 'This gives a command or instruction.' },
+                    { prompt: 'Which sentence is a question?', options: ['I love reading books.', 'What is your favorite book.', 'What is your favorite book?', 'Read this book!'], correct: 2, explanation: 'Questions end with question marks.' },
+                    { prompt: 'What makes this sentence exciting: "Wow, what a great game!"', options: ['Question mark', 'Exclamation point', 'Period', 'Comma'], correct: 1, explanation: 'Exclamation points show strong emotion or excitement.' }
+                ]
+            }
+        };
+
+        function startGrammarGame(gameType) {
+            currentGrammarGame = gameType;
+            gameScore = 0;
+            questionsAnswered = 0;
+            
+            const game = grammarGames[gameType];
+            document.getElementById('game-instructions').innerHTML = `
+                <h4>${game.name}</h4>
+                <p>${game.instructions}</p>
+            `;
+            
+            loadGrammarQuestion(0);
+            
+            // Update button styles
+            document.querySelectorAll('.game-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function loadGrammarQuestion(questionIndex) {
+            const game = grammarGames[currentGrammarGame];
+            if (questionIndex >= game.questions.length) {
+                showGrammarResults();
+                return;
+            }
+            
+            const question = game.questions[questionIndex];
+            let questionHTML = '';
+            
+            if (question.sentence) {
+                questionHTML = `
+                    <div class="grammar-question">
+                        <h4>Question ${questionIndex + 1} of ${game.questions.length}</h4>
+                        <p class="sentence">${question.sentence.replace(/\*/g, '<strong>')}</p>
+                        <div class="grammar-options">
+                            ${question.options.map((option, i) => 
+                                `<button class="option-btn" onclick="selectGrammarAnswer(${questionIndex}, ${i})">${option}</button>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                questionHTML = `
+                    <div class="grammar-question">
+                        <h4>Question ${questionIndex + 1} of ${game.questions.length}</h4>
+                        <p class="prompt">${question.prompt}</p>
+                        <div class="grammar-options">
+                            ${question.options.map((option, i) => 
+                                `<button class="option-btn" onclick="selectGrammarAnswer(${questionIndex}, ${i})">${option}</button>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('game-content').innerHTML = questionHTML;
+        }
+
+        function selectGrammarAnswer(questionIndex, selectedAnswer) {
+            const game = grammarGames[currentGrammarGame];
+            const question = game.questions[questionIndex];
+            
+            questionsAnswered++;
+            let feedback = '';
+            
+            if (selectedAnswer === question.correct) {
+                gameScore++;
+                feedback = `<div class="correct-answer">✅ Correct! ${question.explanation}</div>`;
+            } else {
+                feedback = `<div class="incorrect-answer">❌ Incorrect. ${question.explanation}</div>`;
+            }
+            
+            document.getElementById('game-content').innerHTML += feedback;
+            
+            setTimeout(() => {
+                loadGrammarQuestion(questionIndex + 1);
+            }, 2000);
+        }
+
+        function showGrammarResults() {
+            const percentage = Math.round((gameScore / questionsAnswered) * 100);
+            let message = '';
+            
+            if (percentage >= 90) message = 'Outstanding grammar skills! 🌟';
+            else if (percentage >= 70) message = 'Great job! Keep it up! 👍';
+            else if (percentage >= 50) message = 'Good effort! Practice more! 📚';
+            else message = 'Keep studying! You\'ll improve! 💪';
+            
+            document.getElementById('game-score').innerHTML = `
+                <h4>Game Complete!</h4>
+                <p><strong>Final Score: ${gameScore}/${questionsAnswered} (${percentage}%)</strong></p>
+                <p>${message}</p>
+                <button class="play-again-btn" onclick="startGrammarGame('${currentGrammarGame}')">Play Again</button>
+            `;
+        }
+
+        // Vocabulary System
+        const vocabularyCategories = {
+            emotions: {
+                name: 'Emotions & Feelings',
+                words: [
+                    { word: 'Elated', definition: 'Extremely happy and excited', example: 'She felt elated when she won the contest.' },
+                    { word: 'Melancholy', definition: 'A gentle sadness', example: 'The rainy day made him feel melancholy.' },
+                    { word: 'Serene', definition: 'Calm and peaceful', example: 'The lake looked serene in the morning.' },
+                    { word: 'Bewildered', definition: 'Very confused', example: 'He was bewildered by the difficult math problem.' },
+                    { word: 'Triumphant', definition: 'Feeling successful and proud', example: 'The team felt triumphant after their victory.' }
+                ]
+            },
+            nature: {
+                name: 'Nature & Environment',
+                words: [
+                    { word: 'Majestic', definition: 'Grand and impressive', example: 'The majestic mountains towered above the valley.' },
+                    { word: 'Lush', definition: 'Rich and abundant in growth', example: 'The lush garden was full of colorful flowers.' },
+                    { word: 'Pristine', definition: 'In perfect, untouched condition', example: 'The pristine lake reflected the sky perfectly.' },
+                    { word: 'Vibrant', definition: 'Full of life and bright color', example: 'The vibrant sunset painted the sky orange and pink.' },
+                    { word: 'Tranquil', definition: 'Quiet and peaceful', example: 'The forest was tranquil in the early morning.' }
+                ]
+            },
+            adventure: {
+                name: 'Adventure & Exploration',
+                words: [
+                    { word: 'Intrepid', definition: 'Brave and fearless', example: 'The intrepid explorer ventured into the unknown cave.' },
+                    { word: 'Perilous', definition: 'Full of danger', example: 'The mountain climb was perilous but exciting.' },
+                    { word: 'Treacherous', definition: 'Dangerous and unpredictable', example: 'The treacherous path led through the dark forest.' },
+                    { word: 'Valiant', definition: 'Courageous and determined', example: 'The valiant knight rescued the villagers.' },
+                    { word: 'Audacious', definition: 'Bold and daring', example: 'Her audacious plan surprised everyone.' }
+                ]
+            },
+            descriptive: {
+                name: 'Descriptive Words',
+                words: [
+                    { word: 'Luminous', definition: 'Giving off bright light', example: 'The luminous stars lit up the night sky.' },
+                    { word: 'Colossal', definition: 'Extremely large', example: 'The colossal statue dominated the town square.' },
+                    { word: 'Minuscule', definition: 'Extremely small', example: 'The minuscule ant carried a crumb twice its size.' },
+                    { word: 'Gleaming', definition: 'Shining brightly', example: 'The knight\'s gleaming armor caught the sunlight.' },
+                    { word: 'Ornate', definition: 'Decorated with fancy details', example: 'The ornate doorway was covered in carved flowers.' }
+                ]
+            }
+        };
+
+        let currentVocabCategory = null;
+        let vocabQuizMode = false;
+
+        function loadVocabCategory(category) {
+            currentVocabCategory = category;
+            const vocab = vocabularyCategories[category];
+            
+            let cardsHTML = `<h4>${vocab.name}</h4><div class="vocab-cards">`;
+            vocab.words.forEach((wordObj, index) => {
+                cardsHTML += `
+                    <div class="vocab-card" onclick="flipVocabCard(${index})">
+                        <div class="card-front">
+                            <h3>${wordObj.word}</h3>
+                            <p class="tap-hint">Tap to see definition</p>
+                        </div>
+                        <div class="card-back" id="card-back-${index}" style="display: none;">
+                            <h3>${wordObj.word}</h3>
+                            <p class="definition"><strong>Definition:</strong> ${wordObj.definition}</p>
+                            <p class="example"><strong>Example:</strong> ${wordObj.example}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            cardsHTML += '</div>';
+            
+            document.getElementById('vocab-cards').innerHTML = cardsHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.vocab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function flipVocabCard(index) {
+            const front = document.querySelector(`#vocab-cards .vocab-card:nth-child(${index + 2}) .card-front`);
+            const back = document.querySelector(`#vocab-cards .vocab-card:nth-child(${index + 2}) .card-back`);
+            
+            if (front.style.display !== 'none') {
+                front.style.display = 'none';
+                back.style.display = 'block';
+            } else {
+                front.style.display = 'block';
+                back.style.display = 'none';
+            }
+        }
+
+        function startVocabQuiz() {
+            if (!currentVocabCategory) {
+                alert('Please select a vocabulary category first!');
+                return;
+            }
+            
+            const vocab = vocabularyCategories[currentVocabCategory];
+            const randomWord = vocab.words[Math.floor(Math.random() * vocab.words.length)];
+            const allWords = Object.values(vocabularyCategories).flatMap(cat => cat.words);
+            
+            // Create wrong options
+            const wrongOptions = allWords
+                .filter(w => w.word !== randomWord.word)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3)
+                .map(w => w.definition);
+            
+            const options = [randomWord.definition, ...wrongOptions].sort(() => 0.5 - Math.random());
+            const correctIndex = options.indexOf(randomWord.definition);
+            
+            let quizHTML = `
+                <h4>Vocabulary Quiz</h4>
+                <div class="vocab-quiz">
+                    <p class="quiz-word"><strong>What does "${randomWord.word}" mean?</strong></p>
+                    <div class="quiz-options">
+                        ${options.map((option, i) => 
+                            `<button class="quiz-option-btn" onclick="checkVocabAnswer(${i}, ${correctIndex}, '${randomWord.word}', '${randomWord.example}')">${option}</button>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('vocab-cards').innerHTML = quizHTML;
+        }
+
+        function checkVocabAnswer(selected, correct, word, example) {
+            let result = '';
+            if (selected === correct) {
+                result = `<div class="vocab-correct">✅ Correct! "${word}" is used like this: ${example}</div>`;
+            } else {
+                result = `<div class="vocab-incorrect">❌ Incorrect. Try again!</div>`;
+            }
+            
+            document.querySelector('.vocab-quiz').innerHTML += result;
+            
+            setTimeout(() => {
+                if (selected === correct) {
+                    loadVocabCategory(currentVocabCategory);
+                }
+            }, 3000);
+        }
+
+        function createWordStory() {
+            if (!currentVocabCategory) {
+                alert('Please select a vocabulary category first!');
+                return;
+            }
+            
+            const vocab = vocabularyCategories[currentVocabCategory];
+            const wordList = vocab.words.map(w => w.word).join(', ');
+            
+            document.getElementById('story-editor').value = 
+                `Write a short story using these vocabulary words: ${wordList}\n\n` +
+                'Remember to use each word correctly based on its definition. Make your story creative and fun!\n\n' +
+                'Your story:\n\n';
+            
+            // Scroll to writing section
+            document.querySelector('.writing-editor').scrollIntoView({ behavior: 'smooth' });
+            updateWordCount();
+        }
     </script>
 </body>
 </html>

@@ -12,18 +12,155 @@
     <main class="chapter-container">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 2</div>
-            <h1 class="chapter-title">English Chapter 2</h1>
+            <h1 class="chapter-title">Grammar & Language Mechanics</h1>
         </div>
         <div class="lesson-content">
             <div class="lesson-section">
-                <h3>Chapter Content</h3>
-                <p>Content will be enhanced with reading passages, writing activities, and interactive elements.</p>
+                <h2><span class="section-icon">🔤</span>Parts of Speech Mastery</h2>
+                <div class="parts-of-speech-activities">
+                    <div class="pos-selection">
+                        <h3>Choose Your Focus</h3>
+                        <div class="pos-buttons">
+                            <button class="pos-btn" onclick="loadPOSActivity('nouns')">📦 Nouns</button>
+                            <button class="pos-btn" onclick="loadPOSActivity('verbs')">⚡ Verbs</button>
+                            <button class="pos-btn" onclick="loadPOSActivity('adjectives')">🎨 Adjectives</button>
+                            <button class="pos-btn" onclick="loadPOSActivity('adverbs')">🏃 Adverbs</button>
+                            <button class="pos-btn" onclick="loadPOSActivity('mixed')">🎲 Mixed Practice</button>
+                        </div>
+                    </div>
+                    
+                    <div class="pos-content" id="pos-content">
+                        <div class="pos-instructions">
+                            <h4>🎯 Parts of Speech Explorer</h4>
+                            <p>Select a part of speech above to start learning and practicing!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pos-progress" id="pos-progress"></div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">✏️</span>Sentence Structure Workshop</h2>
+                <div class="sentence-activities">
+                    <div class="sentence-builder">
+                        <h3>Interactive Sentence Builder</h3>
+                        <div class="sentence-components">
+                            <div class="component-category">
+                                <h4>Subjects</h4>
+                                <div class="word-bank" id="subjects-bank">
+                                    <span class="word-chip" draggable="true" data-type="subject">The cat</span>
+                                    <span class="word-chip" draggable="true" data-type="subject">My friend</span>
+                                    <span class="word-chip" draggable="true" data-type="subject">The students</span>
+                                    <span class="word-chip" draggable="true" data-type="subject">Our teacher</span>
+                                    <span class="word-chip" draggable="true" data-type="subject">The dog</span>
+                                </div>
+                            </div>
+                            
+                            <div class="component-category">
+                                <h4>Verbs</h4>
+                                <div class="word-bank" id="verbs-bank">
+                                    <span class="word-chip" draggable="true" data-type="verb">runs</span>
+                                    <span class="word-chip" draggable="true" data-type="verb">reads</span>
+                                    <span class="word-chip" draggable="true" data-type="verb">plays</span>
+                                    <span class="word-chip" draggable="true" data-type="verb">writes</span>
+                                    <span class="word-chip" draggable="true" data-type="verb">sings</span>
+                                </div>
+                            </div>
+                            
+                            <div class="component-category">
+                                <h4>Objects & Details</h4>
+                                <div class="word-bank" id="objects-bank">
+                                    <span class="word-chip" draggable="true" data-type="object">a beautiful song</span>
+                                    <span class="word-chip" draggable="true" data-type="object">in the park</span>
+                                    <span class="word-chip" draggable="true" data-type="object">every morning</span>
+                                    <span class="word-chip" draggable="true" data-type="object">with enthusiasm</span>
+                                    <span class="word-chip" draggable="true" data-type="object">a fascinating book</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sentence-construction">
+                            <h4>Build Your Sentence</h4>
+                            <div class="sentence-dropzone" id="sentence-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <p class="drop-instruction">Drag words here to build your sentence</p>
+                            </div>
+                            <div class="construction-controls">
+                                <button class="control-btn" onclick="clearSentence()">🗑️ Clear</button>
+                                <button class="control-btn" onclick="checkSentence()">✅ Check Grammar</button>
+                                <button class="control-btn" onclick="generateRandomSentence()">🎲 Random Sentence</button>
+                            </div>
+                        </div>
+                        
+                        <div class="sentence-feedback" id="sentence-feedback"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">📝</span>Punctuation & Capitalization Lab</h2>
+                <div class="punctuation-activities">
+                    <div class="punctuation-practice">
+                        <h3>Fix the Sentences</h3>
+                        <div class="practice-selector">
+                            <button class="practice-btn" onclick="loadPunctuationPractice('capitals')">🔤 Capitalization</button>
+                            <button class="practice-btn" onclick="loadPunctuationPractice('periods')">⚪ Periods</button>
+                            <button class="practice-btn" onclick="loadPunctuationPractice('questions')">❓ Question Marks</button>
+                            <button class="practice-btn" onclick="loadPunctuationPractice('exclamations')">❗ Exclamation Points</button>
+                            <button class="practice-btn" onclick="loadPunctuationPractice('commas')">📍 Commas</button>
+                        </div>
+                        
+                        <div class="practice-content" id="punctuation-content">
+                            <div class="practice-instructions">
+                                <h4>🔧 Punctuation Repair Shop</h4>
+                                <p>Choose a punctuation type above to start fixing sentences!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="practice-score" id="punctuation-score"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">📚</span>Advanced Vocabulary Challenge</h2>
+                <div class="vocab-challenge">
+                    <div class="synonym-antonym-game">
+                        <h3>Synonym & Antonym Detective</h3>
+                        <div class="game-mode-selector">
+                            <button class="mode-btn" onclick="startWordRelationGame('synonyms')">🤝 Synonyms</button>
+                            <button class="mode-btn" onclick="startWordRelationGame('antonyms')">⚡ Antonyms</button>
+                            <button class="mode-btn" onclick="startWordRelationGame('mixed')">🎭 Mixed Challenge</button>
+                        </div>
+                        
+                        <div class="word-game-content" id="word-game-content">
+                            <div class="game-instructions">
+                                <h4>🕵️ Word Detective Game</h4>
+                                <p>Select a game mode above to start discovering word relationships!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="game-stats" id="word-game-stats"></div>
+                    </div>
+                    
+                    <div class="context-clues-activity">
+                        <h3>Context Clues Mystery</h3>
+                        <div class="mystery-passage" id="mystery-passage">
+                            <h4>🔍 Use Context Clues to Solve the Mystery</h4>
+                            <p>Click the button below to get a passage with mystery words!</p>
+                            <button class="mystery-btn" onclick="loadContextCluesChallenge()">🎯 New Mystery</button>
+                        </div>
+                        
+                        <div class="clues-content" id="clues-content"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chapter-navigation">
             <a href="chapter-1.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 15%"></div></div>
+                <span class="progress-text">Chapter 2 Progress: 15%</span>
             </div>
             <a href="chapter-3.html" class="nav-button">Next →</a>
         </div>
@@ -35,6 +172,678 @@
             fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+
+        // Parts of Speech System
+        let currentPOSActivity = null;
+        let posScore = 0;
+        let posQuestionsAnswered = 0;
+
+        const partsOfSpeechData = {
+            nouns: {
+                name: 'Nouns - People, Places, Things',
+                description: 'A noun is a word that names a person, place, thing, or idea.',
+                examples: ['teacher', 'school', 'book', 'happiness', 'dog', 'mountain'],
+                practice: [
+                    { sentence: 'The *teacher* helped the students learn.', word: 'teacher', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 0, explanation: 'Teacher is a person, so it\'s a noun.' },
+                    { sentence: 'My *house* is painted blue.', word: 'house', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 0, explanation: 'House is a place, so it\'s a noun.' },
+                    { sentence: 'The *happiness* in her eyes was obvious.', word: 'happiness', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 0, explanation: 'Happiness is an idea or feeling, so it\'s a noun.' },
+                    { sentence: 'Three *books* sat on the shelf.', word: 'books', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 0, explanation: 'Books are things, so it\'s a noun.' }
+                ]
+            },
+            verbs: {
+                name: 'Verbs - Action & Being Words',
+                description: 'A verb is a word that shows action or a state of being.',
+                examples: ['run', 'jump', 'think', 'is', 'seems', 'become'],
+                practice: [
+                    { sentence: 'She *runs* to school every morning.', word: 'runs', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 1, explanation: 'Runs shows action, so it\'s a verb.' },
+                    { sentence: 'The cake *is* delicious.', word: 'is', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 1, explanation: 'Is shows a state of being, so it\'s a verb.' },
+                    { sentence: 'They *played* games all afternoon.', word: 'played', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 1, explanation: 'Played shows past action, so it\'s a verb.' },
+                    { sentence: 'The flowers *seem* beautiful today.', word: 'seem', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 1, explanation: 'Seem shows a state of being, so it\'s a verb.' }
+                ]
+            },
+            adjectives: {
+                name: 'Adjectives - Describing Words',
+                description: 'An adjective is a word that describes or modifies a noun.',
+                examples: ['happy', 'tall', 'red', 'beautiful', 'three', 'small'],
+                practice: [
+                    { sentence: 'The *happy* child smiled brightly.', word: 'happy', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 2, explanation: 'Happy describes the child, so it\'s an adjective.' },
+                    { sentence: 'I saw a *beautiful* butterfly.', word: 'beautiful', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 2, explanation: 'Beautiful describes the butterfly, so it\'s an adjective.' },
+                    { sentence: 'The *tall* building touched the sky.', word: 'tall', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 2, explanation: 'Tall describes the building, so it\'s an adjective.' },
+                    { sentence: 'She wore a *red* dress to the party.', word: 'red', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 2, explanation: 'Red describes the dress, so it\'s an adjective.' }
+                ]
+            },
+            adverbs: {
+                name: 'Adverbs - Describing Actions',
+                description: 'An adverb is a word that describes how, when, or where an action happens.',
+                examples: ['quickly', 'yesterday', 'here', 'carefully', 'very', 'often'],
+                practice: [
+                    { sentence: 'He spoke *quietly* in the library.', word: 'quietly', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 3, explanation: 'Quietly describes how he spoke, so it\'s an adverb.' },
+                    { sentence: 'She *always* arrives on time.', word: 'always', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 3, explanation: 'Always describes when she arrives, so it\'s an adverb.' },
+                    { sentence: 'The dog ran *outside* to play.', word: 'outside', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 3, explanation: 'Outside describes where the dog ran, so it\'s an adverb.' },
+                    { sentence: 'They worked *very* hard on the project.', word: 'very', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 3, explanation: 'Very modifies the adverb hard, so it\'s an adverb.' }
+                ]
+            },
+            mixed: {
+                name: 'Mixed Practice - All Parts of Speech',
+                description: 'Practice identifying all parts of speech together!',
+                examples: [],
+                practice: [
+                    { sentence: 'The *brave* firefighter rescued the cat.', word: 'brave', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 2, explanation: 'Brave describes the firefighter, so it\'s an adjective.' },
+                    { sentence: 'She *carefully* painted the fence.', word: 'carefully', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 3, explanation: 'Carefully describes how she painted, so it\'s an adverb.' },
+                    { sentence: 'The *students* studied for their test.', word: 'students', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 0, explanation: 'Students are people, so it\'s a noun.' },
+                    { sentence: 'They *played* soccer after school.', word: 'played', options: ['Noun', 'Verb', 'Adjective', 'Adverb'], correct: 1, explanation: 'Played shows action, so it\'s a verb.' }
+                ]
+            }
+        };
+
+        function loadPOSActivity(type) {
+            currentPOSActivity = type;
+            posScore = 0;
+            posQuestionsAnswered = 0;
+            
+            const data = partsOfSpeechData[type];
+            let contentHTML = `
+                <div class="pos-lesson">
+                    <h4>${data.name}</h4>
+                    <p class="pos-description">${data.description}</p>
+            `;
+            
+            if (data.examples.length > 0) {
+                contentHTML += `
+                    <div class="pos-examples">
+                        <h5>Examples:</h5>
+                        <div class="example-words">
+                            ${data.examples.map(word => `<span class="example-word">${word}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            contentHTML += `
+                    <button class="start-practice-btn" onclick="startPOSPractice()">Start Practice</button>
+                </div>
+            `;
+            
+            document.getElementById('pos-content').innerHTML = contentHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.pos-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function startPOSPractice() {
+            loadPOSQuestion(0);
+        }
+
+        function loadPOSQuestion(questionIndex) {
+            const data = partsOfSpeechData[currentPOSActivity];
+            if (questionIndex >= data.practice.length) {
+                showPOSResults();
+                return;
+            }
+            
+            const question = data.practice[questionIndex];
+            const questionHTML = `
+                <div class="pos-question">
+                    <h4>Question ${questionIndex + 1} of ${data.practice.length}</h4>
+                    <p class="pos-sentence">${question.sentence.replace(/\*/g, '<strong>')}</p>
+                    <p class="pos-prompt">What part of speech is the highlighted word "<strong>${question.word}</strong>"?</p>
+                    <div class="pos-options">
+                        ${question.options.map((option, i) => 
+                            `<button class="pos-option-btn" onclick="selectPOSAnswer(${questionIndex}, ${i})">${option}</button>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('pos-content').innerHTML = questionHTML;
+        }
+
+        function selectPOSAnswer(questionIndex, selectedAnswer) {
+            const data = partsOfSpeechData[currentPOSActivity];
+            const question = data.practice[questionIndex];
+            
+            posQuestionsAnswered++;
+            let feedback = '';
+            
+            if (selectedAnswer === question.correct) {
+                posScore++;
+                feedback = `<div class="pos-correct">✅ Correct! ${question.explanation}</div>`;
+            } else {
+                feedback = `<div class="pos-incorrect">❌ Incorrect. ${question.explanation}</div>`;
+            }
+            
+            document.getElementById('pos-content').innerHTML += feedback;
+            
+            setTimeout(() => {
+                loadPOSQuestion(questionIndex + 1);
+            }, 2500);
+        }
+
+        function showPOSResults() {
+            const data = partsOfSpeechData[currentPOSActivity];
+            const percentage = Math.round((posScore / posQuestionsAnswered) * 100);
+            let message = '';
+            
+            if (percentage >= 90) message = 'Excellent grammar knowledge! 🌟';
+            else if (percentage >= 70) message = 'Great work! Keep practicing! 👍';
+            else if (percentage >= 50) message = 'Good effort! Review and try again! 📚';
+            else message = 'Keep studying! You\'ll improve! 💪';
+            
+            document.getElementById('pos-progress').innerHTML = `
+                <h4>Practice Complete!</h4>
+                <p><strong>Score: ${posScore}/${posQuestionsAnswered} (${percentage}%)</strong></p>
+                <p>${message}</p>
+                <button class="retry-btn" onclick="startPOSPractice()">Try Again</button>
+                <button class="new-topic-btn" onclick="document.getElementById('pos-progress').innerHTML = ''">Choose New Topic</button>
+            `;
+        }
+
+        // Sentence Builder System
+        let currentSentenceParts = [];
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.outerHTML);
+            ev.dataTransfer.setData("id", ev.target.id || ev.target.textContent);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            const wordText = ev.dataTransfer.getData("id");
+            
+            if (data && wordText) {
+                const dropzone = document.getElementById('sentence-dropzone');
+                
+                // Clear instruction text if present
+                if (dropzone.querySelector('.drop-instruction')) {
+                    dropzone.innerHTML = '';
+                }
+                
+                // Create new word element
+                const wordElement = document.createElement('span');
+                wordElement.className = 'dropped-word';
+                wordElement.textContent = wordText;
+                wordElement.onclick = () => removeWord(wordElement);
+                
+                dropzone.appendChild(wordElement);
+                currentSentenceParts.push(wordText);
+            }
+        }
+
+        function removeWord(element) {
+            const word = element.textContent;
+            const index = currentSentenceParts.indexOf(word);
+            if (index > -1) {
+                currentSentenceParts.splice(index, 1);
+            }
+            element.remove();
+            
+            // Show instruction if empty
+            const dropzone = document.getElementById('sentence-dropzone');
+            if (dropzone.children.length === 0) {
+                dropzone.innerHTML = '<p class="drop-instruction">Drag words here to build your sentence</p>';
+            }
+        }
+
+        function clearSentence() {
+            document.getElementById('sentence-dropzone').innerHTML = '<p class="drop-instruction">Drag words here to build your sentence</p>';
+            document.getElementById('sentence-feedback').innerHTML = '';
+            currentSentenceParts = [];
+        }
+
+        function checkSentence() {
+            const sentence = currentSentenceParts.join(' ');
+            if (sentence.trim() === '') {
+                document.getElementById('sentence-feedback').innerHTML = '<div class="feedback-error">Please build a sentence first!</div>';
+                return;
+            }
+            
+            // Simple grammar checking
+            let feedback = '';
+            let hasSubject = false;
+            let hasVerb = false;
+            
+            // Check for basic sentence structure
+            const subjects = ['The cat', 'My friend', 'The students', 'Our teacher', 'The dog'];
+            const verbs = ['runs', 'reads', 'plays', 'writes', 'sings'];
+            
+            subjects.forEach(subject => {
+                if (sentence.includes(subject)) hasSubject = true;
+            });
+            
+            verbs.forEach(verb => {
+                if (sentence.includes(verb)) hasVerb = true;
+            });
+            
+            if (hasSubject && hasVerb) {
+                feedback = `<div class="feedback-success">✅ Great sentence! "${sentence}" has both a subject and a verb.</div>`;
+            } else if (!hasSubject && hasVerb) {
+                feedback = `<div class="feedback-warning">⚠️ Your sentence needs a subject (who or what is doing the action).</div>`;
+            } else if (hasSubject && !hasVerb) {
+                feedback = `<div class="feedback-warning">⚠️ Your sentence needs a verb (action word).</div>`;
+            } else {
+                feedback = `<div class="feedback-error">❌ A complete sentence needs both a subject and a verb.</div>`;
+            }
+            
+            document.getElementById('sentence-feedback').innerHTML = feedback;
+        }
+
+        function generateRandomSentence() {
+            clearSentence();
+            
+            const subjects = ['The cat', 'My friend', 'The students', 'Our teacher', 'The dog'];
+            const verbs = ['runs', 'reads', 'plays', 'writes', 'sings'];
+            const objects = ['a beautiful song', 'in the park', 'every morning', 'with enthusiasm', 'a fascinating book'];
+            
+            const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
+            const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
+            const randomObject = objects[Math.floor(Math.random() * objects.length)];
+            
+            const dropzone = document.getElementById('sentence-dropzone');
+            dropzone.innerHTML = '';
+            
+            [randomSubject, randomVerb, randomObject].forEach(word => {
+                const wordElement = document.createElement('span');
+                wordElement.className = 'dropped-word';
+                wordElement.textContent = word;
+                wordElement.onclick = () => removeWord(wordElement);
+                dropzone.appendChild(wordElement);
+                currentSentenceParts.push(word);
+            });
+            
+            checkSentence();
+        }
+
+        // Initialize drag and drop
+        document.addEventListener('DOMContentLoaded', () => {
+            const wordChips = document.querySelectorAll('.word-chip');
+            wordChips.forEach(chip => {
+                chip.addEventListener('dragstart', drag);
+            });
+        });
+
+        // Punctuation Practice System
+        let currentPunctuationPractice = null;
+        let punctuationScore = 0;
+        let punctuationQuestionsAnswered = 0;
+
+        const punctuationData = {
+            capitals: {
+                name: 'Capitalization Rules',
+                description: 'Capital letters start sentences and proper nouns.',
+                practice: [
+                    { sentence: 'my dog rover loves to play fetch', correct: 'My dog Rover loves to play fetch.', explanation: 'Capitalize the first word and proper nouns like names.' },
+                    { sentence: 'we visited new york city last summer', correct: 'We visited New York City last summer.', explanation: 'Capitalize the first word and place names.' },
+                    { sentence: 'on monday, sarah will start school', correct: 'On Monday, Sarah will start school.', explanation: 'Capitalize the first word, days of the week, and names.' },
+                    { sentence: 'dr. smith works at mercy hospital', correct: 'Dr. Smith works at Mercy Hospital.', explanation: 'Capitalize titles, names, and specific places.' }
+                ]
+            },
+            periods: {
+                name: 'Period Placement',
+                description: 'Periods end statements and abbreviations.',
+                practice: [
+                    { sentence: 'The cat sat on the mat', correct: 'The cat sat on the mat.', explanation: 'Statements end with periods.' },
+                    { sentence: 'Dr Johnson lives on Oak St', correct: 'Dr. Johnson lives on Oak St.', explanation: 'Abbreviations need periods.' },
+                    { sentence: 'She went to the store yesterday', correct: 'She went to the store yesterday.', explanation: 'Complete thoughts end with periods.' },
+                    { sentence: 'Mr and Mrs Davis have three children', correct: 'Mr. and Mrs. Davis have three children.', explanation: 'Titles and statements need periods.' }
+                ]
+            },
+            questions: {
+                name: 'Question Marks',
+                description: 'Question marks end questions.',
+                practice: [
+                    { sentence: 'What time is it', correct: 'What time is it?', explanation: 'Questions end with question marks.' },
+                    { sentence: 'Where are you going', correct: 'Where are you going?', explanation: 'Questions asking for information need question marks.' },
+                    { sentence: 'Can you help me with this problem', correct: 'Can you help me with this problem?', explanation: 'Requests in question form need question marks.' },
+                    { sentence: 'How many cookies did you eat', correct: 'How many cookies did you eat?', explanation: 'Questions asking "how many" need question marks.' }
+                ]
+            },
+            exclamations: {
+                name: 'Exclamation Points',
+                description: 'Exclamation points show strong emotion.',
+                practice: [
+                    { sentence: 'Watch out', correct: 'Watch out!', explanation: 'Warnings and commands with emotion need exclamation points.' },
+                    { sentence: 'What a beautiful day', correct: 'What a beautiful day!', explanation: 'Strong positive emotions need exclamation points.' },
+                    { sentence: 'I won the contest', correct: 'I won the contest!', explanation: 'Exciting news needs exclamation points.' },
+                    { sentence: 'That was amazing', correct: 'That was amazing!', explanation: 'Strong feelings need exclamation points.' }
+                ]
+            },
+            commas: {
+                name: 'Comma Usage',
+                description: 'Commas separate items and clauses.',
+                practice: [
+                    { sentence: 'I need apples bananas and oranges', correct: 'I need apples, bananas, and oranges.', explanation: 'Use commas to separate items in a series.' },
+                    { sentence: 'After the game we went home', correct: 'After the game, we went home.', explanation: 'Use commas after introductory phrases.' },
+                    { sentence: 'My friend Sarah who lives nearby visited me', correct: 'My friend Sarah, who lives nearby, visited me.', explanation: 'Use commas around additional information.' },
+                    { sentence: 'Yes I would like some cake', correct: 'Yes, I would like some cake.', explanation: 'Use commas after introductory words.' }
+                ]
+            }
+        };
+
+        function loadPunctuationPractice(type) {
+            currentPunctuationPractice = type;
+            punctuationScore = 0;
+            punctuationQuestionsAnswered = 0;
+            
+            const data = punctuationData[type];
+            let contentHTML = `
+                <div class="punctuation-lesson">
+                    <h4>${data.name}</h4>
+                    <p class="punctuation-description">${data.description}</p>
+                    <button class="start-punctuation-btn" onclick="startPunctuationPractice()">Start Fixing Sentences</button>
+                </div>
+            `;
+            
+            document.getElementById('punctuation-content').innerHTML = contentHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.practice-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function startPunctuationPractice() {
+            loadPunctuationQuestion(0);
+        }
+
+        function loadPunctuationQuestion(questionIndex) {
+            const data = punctuationData[currentPunctuationPractice];
+            if (questionIndex >= data.practice.length) {
+                showPunctuationResults();
+                return;
+            }
+            
+            const question = data.practice[questionIndex];
+            const questionHTML = `
+                <div class="punctuation-question">
+                    <h4>Fix This Sentence (${questionIndex + 1} of ${data.practice.length})</h4>
+                    <div class="broken-sentence">
+                        <p><strong>Broken:</strong> ${question.sentence}</p>
+                    </div>
+                    <div class="fix-input">
+                        <label>Your Fixed Version:</label>
+                        <input type="text" id="fix-input" placeholder="Type the corrected sentence here..." />
+                        <button class="check-fix-btn" onclick="checkPunctuationFix(${questionIndex})">Check My Fix</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('punctuation-content').innerHTML = questionHTML;
+            document.getElementById('fix-input').focus();
+        }
+
+        function checkPunctuationFix(questionIndex) {
+            const data = punctuationData[currentPunctuationPractice];
+            const question = data.practice[questionIndex];
+            const userAnswer = document.getElementById('fix-input').value.trim();
+            
+            punctuationQuestionsAnswered++;
+            let feedback = '';
+            
+            if (userAnswer.toLowerCase() === question.correct.toLowerCase()) {
+                punctuationScore++;
+                feedback = `<div class="punctuation-correct">✅ Perfect! ${question.explanation}</div>`;
+            } else {
+                feedback = `<div class="punctuation-incorrect">❌ Not quite right.<br><strong>Correct answer:</strong> ${question.correct}<br><strong>Why:</strong> ${question.explanation}</div>`;
+            }
+            
+            document.getElementById('punctuation-content').innerHTML += feedback;
+            
+            setTimeout(() => {
+                loadPunctuationQuestion(questionIndex + 1);
+            }, 4000);
+        }
+
+        function showPunctuationResults() {
+            const data = punctuationData[currentPunctuationPractice];
+            const percentage = Math.round((punctuationScore / punctuationQuestionsAnswered) * 100);
+            let message = '';
+            
+            if (percentage >= 90) message = 'Outstanding punctuation skills! 🌟';
+            else if (percentage >= 70) message = 'Great improvement! Keep practicing! 👍';
+            else if (percentage >= 50) message = 'Good try! Review the rules and try again! 📚';
+            else message = 'Keep studying punctuation rules! 💪';
+            
+            document.getElementById('punctuation-score').innerHTML = `
+                <h4>Practice Complete!</h4>
+                <p><strong>Score: ${punctuationScore}/${punctuationQuestionsAnswered} (${percentage}%)</strong></p>
+                <p>${message}</p>
+                <button class="retry-btn" onclick="startPunctuationPractice()">Try Again</button>
+                <button class="new-punctuation-btn" onclick="document.getElementById('punctuation-score').innerHTML = ''">Choose New Topic</button>
+            `;
+        }
+
+        // Word Relationships Game System
+        let currentWordGame = null;
+        let wordGameScore = 0;
+        let wordGameQuestionsAnswered = 0;
+
+        const wordRelationData = {
+            synonyms: {
+                name: 'Synonyms - Similar Meanings',
+                description: 'Synonyms are words that mean the same or nearly the same thing.',
+                pairs: [
+                    { word: 'Happy', synonym: 'Joyful', distractors: ['Sad', 'Angry', 'Tired'] },
+                    { word: 'Big', synonym: 'Large', distractors: ['Small', 'Tiny', 'Short'] },
+                    { word: 'Smart', synonym: 'Intelligent', distractors: ['Silly', 'Confused', 'Lazy'] },
+                    { word: 'Fast', synonym: 'Quick', distractors: ['Slow', 'Steady', 'Careful'] },
+                    { word: 'Brave', synonym: 'Courageous', distractors: ['Scared', 'Weak', 'Shy'] }
+                ]
+            },
+            antonyms: {
+                name: 'Antonyms - Opposite Meanings',
+                description: 'Antonyms are words that have opposite meanings.',
+                pairs: [
+                    { word: 'Hot', synonym: 'Cold', distractors: ['Warm', 'Cool', 'Mild'] },
+                    { word: 'Tall', synonym: 'Short', distractors: ['High', 'Big', 'Long'] },
+                    { word: 'Easy', synonym: 'Difficult', distractors: ['Simple', 'Clear', 'Quick'] },
+                    { word: 'Light', synonym: 'Dark', distractors: ['Bright', 'Shiny', 'Clear'] },
+                    { word: 'Loud', synonym: 'Quiet', distractors: ['Noisy', 'Clear', 'Strong'] }
+                ]
+            },
+            mixed: {
+                name: 'Mixed Challenge - Synonyms & Antonyms',
+                description: 'Practice both synonyms and antonyms together!',
+                pairs: [
+                    { word: 'Happy', synonym: 'Joyful', distractors: ['Sad', 'Angry', 'Tired'], type: 'synonym' },
+                    { word: 'Big', synonym: 'Small', distractors: ['Large', 'Huge', 'Giant'], type: 'antonym' },
+                    { word: 'Fast', synonym: 'Quick', distractors: ['Slow', 'Steady', 'Careful'], type: 'synonym' },
+                    { word: 'Easy', synonym: 'Hard', distractors: ['Simple', 'Clear', 'Quick'], type: 'antonym' }
+                ]
+            }
+        };
+
+        function startWordRelationGame(type) {
+            currentWordGame = type;
+            wordGameScore = 0;
+            wordGameQuestionsAnswered = 0;
+            
+            const data = wordRelationData[type];
+            let contentHTML = `
+                <div class="word-relation-lesson">
+                    <h4>${data.name}</h4>
+                    <p class="word-relation-description">${data.description}</p>
+                    <button class="start-word-game-btn" onclick="loadWordRelationQuestion(0)">Start Game</button>
+                </div>
+            `;
+            
+            document.getElementById('word-game-content').innerHTML = contentHTML;
+            
+            // Update button styles
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function loadWordRelationQuestion(questionIndex) {
+            const data = wordRelationData[currentWordGame];
+            if (questionIndex >= data.pairs.length) {
+                showWordGameResults();
+                return;
+            }
+            
+            const pair = data.pairs[questionIndex];
+            const allOptions = [pair.synonym, ...pair.distractors].sort(() => Math.random() - 0.5);
+            const correctIndex = allOptions.indexOf(pair.synonym);
+            
+            let questionText = '';
+            if (currentWordGame === 'mixed') {
+                questionText = pair.type === 'synonym' ? 
+                    `Which word means the SAME as "${pair.word}"?` :
+                    `Which word means the OPPOSITE of "${pair.word}"?`;
+            } else if (currentWordGame === 'synonyms') {
+                questionText = `Which word means the SAME as "${pair.word}"?`;
+            } else {
+                questionText = `Which word means the OPPOSITE of "${pair.word}"?`;
+            }
+            
+            const questionHTML = `
+                <div class="word-relation-question">
+                    <h4>Question ${questionIndex + 1} of ${data.pairs.length}</h4>
+                    <div class="target-word">
+                        <h3>${pair.word}</h3>
+                    </div>
+                    <p class="word-question">${questionText}</p>
+                    <div class="word-options">
+                        ${allOptions.map((option, i) => 
+                            `<button class="word-option-btn" onclick="selectWordRelation(${questionIndex}, ${i}, ${correctIndex})">${option}</button>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('word-game-content').innerHTML = questionHTML;
+        }
+
+        function selectWordRelation(questionIndex, selectedIndex, correctIndex) {
+            const data = wordRelationData[currentWordGame];
+            const pair = data.pairs[questionIndex];
+            
+            wordGameQuestionsAnswered++;
+            let feedback = '';
+            
+            if (selectedIndex === correctIndex) {
+                wordGameScore++;
+                const relationshipType = currentWordGame === 'mixed' ? 
+                    (pair.type === 'synonym' ? 'synonym' : 'antonym') :
+                    (currentWordGame === 'synonyms' ? 'synonym' : 'antonym');
+                feedback = `<div class="word-correct">✅ Correct! "${pair.synonym}" is a ${relationshipType} of "${pair.word}".</div>`;
+            } else {
+                const relationshipType = currentWordGame === 'mixed' ? 
+                    (pair.type === 'synonym' ? 'synonym' : 'antonym') :
+                    (currentWordGame === 'synonyms' ? 'synonym' : 'antonym');
+                feedback = `<div class="word-incorrect">❌ Not quite! The correct ${relationshipType} is "${pair.synonym}".</div>`;
+            }
+            
+            document.getElementById('word-game-content').innerHTML += feedback;
+            
+            setTimeout(() => {
+                loadWordRelationQuestion(questionIndex + 1);
+            }, 2500);
+        }
+
+        function showWordGameResults() {
+            const data = wordRelationData[currentWordGame];
+            const percentage = Math.round((wordGameScore / wordGameQuestionsAnswered) * 100);
+            let message = '';
+            
+            if (percentage >= 90) message = 'Amazing vocabulary skills! 🌟';
+            else if (percentage >= 70) message = 'Great work with word relationships! 👍';
+            else if (percentage >= 50) message = 'Good progress! Keep building vocabulary! 📚';
+            else message = 'Keep learning new words! 💪';
+            
+            document.getElementById('word-game-stats').innerHTML = `
+                <h4>Game Complete!</h4>
+                <p><strong>Score: ${wordGameScore}/${wordGameQuestionsAnswered} (${percentage}%)</strong></p>
+                <p>${message}</p>
+                <button class="retry-btn" onclick="loadWordRelationQuestion(0)">Play Again</button>
+                <button class="new-game-btn" onclick="document.getElementById('word-game-stats').innerHTML = ''">Choose New Game</button>
+            `;
+        }
+
+        // Context Clues System
+        const contextCluesPassages = [
+            {
+                passage: "The ancient artifact was extremely *fragile*, so the archaeologist handled it with the utmost care, wrapping it in soft cloth and placing it gently in a protective case.",
+                word: "fragile",
+                meaning: "easily broken or damaged",
+                clues: "handled with care, wrapped in soft cloth, placed gently, protective case"
+            },
+            {
+                passage: "Maria felt *elated* when she received her test results - she had scored 100%! She jumped up and down with joy and couldn't stop smiling.",
+                word: "elated",
+                meaning: "extremely happy and excited",
+                clues: "scored 100%, jumped up and down with joy, couldn't stop smiling"
+            },
+            {
+                passage: "The *meticulous* student double-checked every answer, reviewed each calculation three times, and made sure her handwriting was perfectly neat before turning in her assignment.",
+                word: "meticulous",
+                meaning: "very careful and precise",
+                clues: "double-checked every answer, reviewed three times, perfectly neat"
+            },
+            {
+                passage: "The abandoned house looked *decrepit* - its roof was caving in, the windows were broken, paint was peeling off the walls, and weeds had grown up around the foundation.",
+                word: "decrepit",
+                meaning: "worn out or ruined because of age or neglect",
+                clues: "abandoned, roof caving in, windows broken, paint peeling, weeds grown up"
+            }
+        ];
+
+        function loadContextCluesChallenge() {
+            const passage = contextCluesPassages[Math.floor(Math.random() * contextCluesPassages.length)];
+            
+            const challengeHTML = `
+                <div class="context-challenge">
+                    <h4>🔍 Mystery Word Detective</h4>
+                    <div class="mystery-passage-text">
+                        <p>${passage.passage.replace(/\*/g, '<strong class="mystery-word">')}</p>
+                    </div>
+                    <div class="clue-questions">
+                        <h5>Detective Questions:</h5>
+                        <p>1. What do you think the word "<strong>${passage.word}</strong>" means?</p>
+                        <textarea id="meaning-guess" placeholder="Write your guess here..." rows="2"></textarea>
+                        
+                        <p>2. What clues in the passage helped you figure it out?</p>
+                        <textarea id="clues-found" placeholder="List the clues you found..." rows="3"></textarea>
+                        
+                        <button class="reveal-btn" onclick="revealContextAnswer('${passage.word}', '${passage.meaning}', '${passage.clues}')">Reveal Answer</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('clues-content').innerHTML = challengeHTML;
+        }
+
+        function revealContextAnswer(word, meaning, clues) {
+            const userMeaning = document.getElementById('meaning-guess').value.trim();
+            const userClues = document.getElementById('clues-found').value.trim();
+            
+            let feedback = `
+                <div class="context-answer">
+                    <h5>🎯 Answer Revealed!</h5>
+                    <p><strong>"${word}"</strong> means: <em>${meaning}</em></p>
+                    <p><strong>Context clues:</strong> ${clues}</p>
+            `;
+            
+            if (userMeaning) {
+                feedback += `<p><strong>Your guess:</strong> ${userMeaning}</p>`;
+            }
+            
+            if (userClues) {
+                feedback += `<p><strong>Clues you found:</strong> ${userClues}</p>`;
+            }
+            
+            feedback += `
+                    <p class="context-tip">💡 <strong>Tip:</strong> Context clues help us understand new words by looking at the words and sentences around them!</p>
+                    <button class="new-mystery-btn" onclick="loadContextCluesChallenge()">New Mystery Word</button>
+                </div>
+            `;
+            
+            document.getElementById('clues-content').innerHTML = feedback;
+        }
     </script>
 </body>
 </html>
