@@ -39,6 +39,255 @@
             border-radius: var(--radius-md);
             margin: var(--spacing-lg) 0;
         }
+        
+        .chart-builder {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .data-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .data-point {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        
+        .data-value {
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .data-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-top: var(--spacing-xs);
+        }
+        
+        .interactive-chart {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: var(--spacing-lg);
+            position: relative;
+        }
+        
+        .chart-bar {
+            width: 60px;
+            background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .chart-bar:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-xs);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+        
+        .chart-bar:hover::after {
+            opacity: 1;
+        }
+        
+        .chart-labels {
+            position: absolute;
+            bottom: -35px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+        
+        .probability-spinner {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #ff6b6b 0deg 90deg,
+                #4ecdc4 90deg 180deg,
+                #45b7d1 180deg 270deg,
+                #96ceb4 270deg 360deg
+            );
+            margin: var(--spacing-lg) auto;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.5s ease-out;
+        }
+        
+        .spinner-arrow {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 30px solid var(--text-primary);
+        }
+        
+        .spinner-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-primary);
+            border-radius: 50%;
+        }
+        
+        .probability-legend {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin: var(--spacing-lg) 0;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: var(--radius-sm);
+        }
+        
+        .budget-tool {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .budget-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .budget-category {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        
+        .budget-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .budget-amount {
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            color: var(--success-color);
+            margin: var(--spacing-sm) 0;
+        }
+        
+        .budget-slider {
+            width: 100%;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .virtual-store {
+            background: linear-gradient(135deg, var(--accent-color), var(--warning-color));
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            color: white;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .store-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .store-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .store-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .item-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .item-price {
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .shopping-cart {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .cart-total {
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            text-align: center;
+            margin: var(--spacing-md) 0;
+        }
     </style>
 </head>
 <body>
@@ -55,52 +304,244 @@
         
         <!-- Lesson Content -->
         <div class="lesson-content">
+            <!-- Section 1: Data & Graphs -->
             <div class="lesson-section">
-                <h3><span class="section-icon">📊</span>Graphs & Charts</h3>
-                <p>Learn to create and read different types of graphs to display and analyze data.</p>
+                <h3><span class="section-icon">📊</span>Creating & Reading Graphs</h3>
+                <p>Learn to create and interpret different types of graphs using real data!</p>
+                
+                <div class="chart-builder">
+                    <h4>Interactive Bar Chart Builder</h4>
+                    <p>Favorite Ice Cream Flavors Survey Results:</p>
+                    
+                    <div class="data-input">
+                        <div class="data-point">
+                            <div class="data-value">8</div>
+                            <div class="data-label">Vanilla</div>
+                        </div>
+                        <div class="data-point">
+                            <div class="data-value">12</div>
+                            <div class="data-label">Chocolate</div>
+                        </div>
+                        <div class="data-point">
+                            <div class="data-value">6</div>
+                            <div class="data-label">Strawberry</div>
+                        </div>
+                        <div class="data-point">
+                            <div class="data-value">10</div>
+                            <div class="data-label">Cookies & Cream</div>
+                        </div>
+                    </div>
+                    
+                    <div class="interactive-chart" id="bar-chart">
+                        <div class="chart-bar" style="height: 160px" data-value="8" onclick="highlightBar(this, 'Vanilla')"></div>
+                        <div class="chart-bar" style="height: 240px" data-value="12" onclick="highlightBar(this, 'Chocolate')"></div>
+                        <div class="chart-bar" style="height: 120px" data-value="6" onclick="highlightBar(this, 'Strawberry')"></div>
+                        <div class="chart-bar" style="height: 200px" data-value="10" onclick="highlightBar(this, 'Cookies & Cream')"></div>
+                        
+                        <div class="chart-labels">
+                            <span>Vanilla</span>
+                            <span>Chocolate</span>
+                            <span>Strawberry</span>
+                            <span>Cookies & Cream</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-questions">
+                        <p><strong>Questions:</strong></p>
+                        <ul>
+                            <li>Which flavor is most popular? <em>(Click the bars to explore!)</em></li>
+                            <li>How many more people like chocolate than strawberry?</li>
+                            <li>What's the total number of people surveyed?</li>
+                        </ul>
+                    </div>
+                </div>
                 
                 <div class="chart-types">
-                    <div class="chart-card">
+                    <div class="chart-card" onclick="showChartType('bar')">
                         <div class="chart-visual">📊</div>
                         <h4>Bar Graph</h4>
                         <p>Compare different categories</p>
                     </div>
-                    <div class="chart-card">
+                    <div class="chart-card" onclick="showChartType('line')">
                         <div class="chart-visual">📈</div>
                         <h4>Line Graph</h4>
                         <p>Show changes over time</p>
                     </div>
-                    <div class="chart-card">
+                    <div class="chart-card" onclick="showChartType('pie')">
                         <div class="chart-visual">🥧</div>
                         <h4>Pie Chart</h4>
                         <p>Show parts of a whole</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="lesson-section">
-                <h3><span class="section-icon">🎲</span>Probability</h3>
-                <p>Understand the likelihood of events happening using fractions and percentages.</p>
-                <div class="visual-element">
-                    <div class="placeholder-image">Interactive Probability Spinner</div>
-                </div>
-            </div>
-            
-            <div class="lesson-section">
-                <h3><span class="section-icon">💰</span>Money Management</h3>
-                <p>Learn about earning, spending, saving, and making smart financial decisions.</p>
                 
-                <div class="money-calculator">
-                    <h4>💵 Budget Calculator</h4>
-                    <p>Plan how to spend and save your allowance!</p>
-                    <button class="activity-button">Open Budget Tool</button>
-                </div>
+                <button class="try-it-button" onclick="startChartBuilder()">
+                    📊 Build Your Own Charts
+                </button>
             </div>
             
-            <div class="interactive-activity">
-                <h4>🏪 Virtual Store Challenge</h4>
-                <p>Practice making purchases and calculating change in our virtual store!</p>
-                <button class="activity-button">Start Shopping</button>
+            <!-- Section 2: Probability -->
+            <div class="lesson-section">
+                <h3><span class="section-icon">🎲</span>Understanding Probability</h3>
+                <p>Probability tells us how likely something is to happen. Let's explore with a spinner!</p>
+                
+                <div class="probability-demo">
+                    <div class="probability-spinner" onclick="spinWheel()">
+                        <div class="spinner-arrow"></div>
+                        <div class="spinner-center"></div>
+                    </div>
+                    
+                    <div class="probability-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                            <span>Red (1/4)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #4ecdc4;"></div>
+                            <span>Teal (1/4)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #45b7d1;"></div>
+                            <span>Blue (1/4)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #96ceb4;"></div>
+                            <span>Green (1/4)</span>
+                        </div>
+                    </div>
+                    
+                    <div id="spin-results" style="text-align: center; margin-top: var(--spacing-lg);">
+                        <p><strong>Click the spinner to try your luck!</strong></p>
+                        <p>Each color has a <strong>25%</strong> (1 out of 4) chance of winning.</p>
+                    </div>
+                </div>
+                
+                <div class="probability-examples">
+                    <h4>Probability in Daily Life</h4>
+                    <div class="example-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin: var(--spacing-lg) 0;">
+                        <div class="example-card" style="background-color: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md); text-align: center;">
+                            <div style="font-size: 2rem;">🎲</div>
+                            <h5>Rolling a 6</h5>
+                            <p>1 out of 6 = 1/6</p>
+                        </div>
+                        <div class="example-card" style="background-color: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md); text-align: center;">
+                            <div style="font-size: 2rem;">🪙</div>
+                            <h5>Coin Heads</h5>
+                            <p>1 out of 2 = 1/2</p>
+                        </div>
+                        <div class="example-card" style="background-color: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md); text-align: center;">
+                            <div style="font-size: 2rem;">☀️</div>
+                            <h5>Sunny Day</h5>
+                            <p>Based on weather forecast</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startProbabilityGame()">
+                    🎯 Play Probability Games
+                </button>
+            </div>
+            
+            <!-- Section 3: Financial Literacy -->
+            <div class="lesson-section">
+                <h3><span class="section-icon">💰</span>Smart Money Management</h3>
+                <p>Learn to make smart decisions with money: earning, spending, and saving!</p>
+                
+                <div class="budget-tool">
+                    <h4>💵 Weekly Allowance Budget Planner</h4>
+                    <p>You have $20 allowance. How will you spend and save it?</p>
+                    
+                    <div class="budget-categories">
+                        <div class="budget-category">
+                            <div class="budget-icon">🎮</div>
+                            <h5>Fun & Games</h5>
+                            <div class="budget-amount" id="fun-amount">$5</div>
+                            <input type="range" class="budget-slider" min="0" max="20" value="5" 
+                                   oninput="updateBudget('fun', this.value)">
+                        </div>
+                        <div class="budget-category">
+                            <div class="budget-icon">🍕</div>
+                            <h5>Snacks & Treats</h5>
+                            <div class="budget-amount" id="snacks-amount">$7</div>
+                            <input type="range" class="budget-slider" min="0" max="20" value="7" 
+                                   oninput="updateBudget('snacks', this.value)">
+                        </div>
+                        <div class="budget-category">
+                            <div class="budget-icon">🏦</div>
+                            <h5>Savings</h5>
+                            <div class="budget-amount" id="savings-amount">$5</div>
+                            <input type="range" class="budget-slider" min="0" max="20" value="5" 
+                                   oninput="updateBudget('savings', this.value)">
+                        </div>
+                        <div class="budget-category">
+                            <div class="budget-icon">🎁</div>
+                            <h5>Gifts & Charity</h5>
+                            <div class="budget-amount" id="charity-amount">$3</div>
+                            <input type="range" class="budget-slider" min="0" max="20" value="3" 
+                                   oninput="updateBudget('charity', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div id="budget-total" style="text-align: center; font-size: var(--font-size-xl); font-weight: bold; margin: var(--spacing-lg) 0; color: var(--success-color);">
+                        Total Spent: $20 / $20 ✓
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="saveBudgetPlan()">
+                    💾 Save My Budget Plan
+                </button>
+            </div>
+            
+            <!-- Section 4: Virtual Store -->
+            <div class="lesson-section">
+                <h3><span class="section-icon">🏪</span>Virtual Shopping Experience</h3>
+                
+                <div class="virtual-store">
+                    <h4>🛒 Vihaan's Virtual Store</h4>
+                    <p>You have $15 to spend. Choose items and calculate your change!</p>
+                    
+                    <div class="store-items">
+                        <div class="store-item" onclick="addToCart('pencils', 3)">
+                            <div class="item-icon">✏️</div>
+                            <h5>Pencil Set</h5>
+                            <div class="item-price">$3.00</div>
+                        </div>
+                        <div class="store-item" onclick="addToCart('notebook', 5)">
+                            <div class="item-icon">📓</div>
+                            <h5>Notebook</h5>
+                            <div class="item-price">$5.00</div>
+                        </div>
+                        <div class="store-item" onclick="addToCart('stickers', 2)">
+                            <div class="item-icon">⭐</div>
+                            <h5>Stickers</h5>
+                            <div class="item-price">$2.00</div>
+                        </div>
+                        <div class="store-item" onclick="addToCart('eraser', 1)">
+                            <div class="item-icon">🔄</div>
+                            <h5>Eraser</h5>
+                            <div class="item-price">$1.00</div>
+                        </div>
+                        <div class="store-item" onclick="addToCart('markers', 4)">
+                            <div class="item-icon">🖍️</div>
+                            <h5>Markers</h5>
+                            <div class="item-price">$4.00</div>
+                        </div>
+                        <div class="store-item" onclick="addToCart('calculator', 8)">
+                            <div class="item-icon">🧮</div>
+                            <h5>Calculator</h5>
+                            <div class="item-price">$8.00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="shopping-cart">
+                        <h5>🛒 Your Shopping Cart</h5>
+                        <div id="cart-items">Cart is empty</div>
+                        <div class="cart-total" id="cart-total">Total: $0.00</div>
+                        <div id="change-display" style="font-size: var(--font-size-lg); margin: var(--spacing-sm) 0;">Money remaining: $15.00</div>
+                        <button class="activity-button" onclick="checkout()" style="background-color: white; color: var(--primary-color); margin-top: var(--spacing-md);">
+                            💳 Checkout & Calculate Change
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -123,24 +564,196 @@
     <!-- JavaScript -->
     <script src="/js/app.js" defer></script>
     <script>
-        // Load shared components
-        function loadSharedComponents() {
-            fetch('/subjects/shared/header.html')
-                .then(response => response.text())
-                .then(html => document.getElementById('header-container').innerHTML = html)
-                .catch(error => console.error('Error loading header:', error));
+        // Chapter 4: Data Analysis & Financial Literacy JavaScript
+        (function() {
+            // Load shared components
+            function loadSharedComponents() {
+                fetch('/subjects/shared/header.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('header-container').innerHTML = html)
+                    .catch(error => console.error('Error loading header:', error));
+                
+                fetch('/subjects/shared/footer.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('footer-container').innerHTML = html)
+                    .catch(error => console.error('Error loading footer:', error));
+            }
             
-            fetch('/subjects/shared/footer.html')
-                .then(response => response.text())
-                .then(html => document.getElementById('footer-container').innerHTML = html)
-                .catch(error => console.error('Error loading footer:', error));
-        }
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadSharedComponents);
-        } else {
-            loadSharedComponents();
-        }
+            // Cart system for virtual store
+            let shoppingCart = [];
+            let totalBudget = 15.00;
+            
+            // Budget tracking
+            let budget = { fun: 5, snacks: 7, savings: 5, charity: 3 };
+            
+            // Chart interaction functions
+            window.highlightBar = function(barElement, flavor) {
+                // Reset all bars
+                document.querySelectorAll('.chart-bar').forEach(bar => {
+                    bar.style.filter = '';
+                });
+                
+                // Highlight selected bar
+                barElement.style.filter = 'brightness(1.3) drop-shadow(0 4px 8px rgba(0,0,0,0.3))';
+                
+                const value = barElement.getAttribute('data-value');
+                showNotification(`📊 ${flavor}: ${value} people chose this flavor! This is ${value > 10 ? 'very popular' : value > 7 ? 'popular' : 'less popular'}.`, 'success');
+            };
+            
+            window.showChartType = function(type) {
+                const descriptions = {
+                    bar: '📊 Bar graphs are perfect for comparing different categories side by side!',
+                    line: '📈 Line graphs show how data changes over time - great for trends!',
+                    pie: '🥧 Pie charts show how parts make up a whole - like slices of a pie!'
+                };
+                showNotification(descriptions[type], 'info');
+            };
+            
+            window.startChartBuilder = function() {
+                showNotification('📊 Chart Builder loading! Create bar graphs, line graphs, and pie charts with your own data.', 'info');
+            };
+            
+            // Probability spinner
+            window.spinWheel = function() {
+                const spinner = document.querySelector('.probability-spinner');
+                const colors = ['Red', 'Teal', 'Blue', 'Green'];
+                const randomResult = Math.floor(Math.random() * 4);
+                const degrees = randomResult * 90 + (Math.random() * 70) + 10; // Add some randomness within each section
+                
+                spinner.style.transform = `rotate(${720 + degrees}deg)`; // 2 full rotations plus final position
+                
+                setTimeout(() => {
+                    const resultDiv = document.getElementById('spin-results');
+                    resultDiv.innerHTML = `
+                        <p><strong>🎉 You landed on ${colors[randomResult]}!</strong></p>
+                        <p>Probability was 25% (1/4) and you got it!</p>
+                        <p><em>Click again to spin more!</em></p>
+                    `;
+                    showNotification(`🎲 Spinner result: ${colors[randomResult]}! That was a 25% chance!`, 'success');
+                }, 1000);
+            };
+            
+            window.startProbabilityGame = function() {
+                showNotification('🎯 Probability Games loading! Try dice, coins, spinners, and more!', 'info');
+            };
+            
+            // Budget management
+            window.updateBudget = function(category, value) {
+                budget[category] = parseInt(value);
+                document.getElementById(`${category}-amount`).textContent = `$${value}`;
+                
+                const total = Object.values(budget).reduce((sum, val) => sum + val, 0);
+                const totalDiv = document.getElementById('budget-total');
+                
+                if (total === 20) {
+                    totalDiv.innerHTML = `Total Spent: $${total} / $20 ✓`;
+                    totalDiv.style.color = 'var(--success-color)';
+                } else if (total > 20) {
+                    totalDiv.innerHTML = `Total Spent: $${total} / $20 ⚠️ Over budget!`;
+                    totalDiv.style.color = 'var(--error-color)';
+                } else {
+                    totalDiv.innerHTML = `Total Spent: $${total} / $20 📊 $${20-total} left`;
+                    totalDiv.style.color = 'var(--warning-color)';
+                }
+            };
+            
+            window.saveBudgetPlan = function() {
+                const total = Object.values(budget).reduce((sum, val) => sum + val, 0);
+                if (total === 20) {
+                    showNotification('💾 Perfect budget plan saved! You allocated all $20 wisely.', 'success');
+                } else {
+                    showNotification(`💡 Budget plan saved! You used $${total} of $20. ${total < 20 ? 'You have money left over!' : 'You went over budget!'}`, 'info');
+                }
+            };
+            
+            // Virtual store functions
+            window.addToCart = function(itemName, price) {
+                const currentTotal = shoppingCart.reduce((sum, item) => sum + item.price, 0);
+                
+                if (currentTotal + price > totalBudget) {
+                    showNotification(`💳 Not enough money! You need $${(currentTotal + price - totalBudget).toFixed(2)} more.`, 'error');
+                    return;
+                }
+                
+                shoppingCart.push({ name: itemName, price: price });
+                updateCartDisplay();
+                showNotification(`✏️ ${itemName.charAt(0).toUpperCase() + itemName.slice(1)} added to cart!`, 'success');
+            };
+            
+            function updateCartDisplay() {
+                const cartItemsDiv = document.getElementById('cart-items');
+                const cartTotalDiv = document.getElementById('cart-total');
+                const changeDisplay = document.getElementById('change-display');
+                
+                if (shoppingCart.length === 0) {
+                    cartItemsDiv.textContent = 'Cart is empty';
+                } else {
+                    cartItemsDiv.innerHTML = shoppingCart.map(item => 
+                        `<div>${item.name.charAt(0).toUpperCase() + item.name.slice(1)}: $${item.price.toFixed(2)}</div>`
+                    ).join('');
+                }
+                
+                const total = shoppingCart.reduce((sum, item) => sum + item.price, 0);
+                cartTotalDiv.textContent = `Total: $${total.toFixed(2)}`;
+                changeDisplay.textContent = `Money remaining: $${(totalBudget - total).toFixed(2)}`;
+            }
+            
+            window.checkout = function() {
+                const total = shoppingCart.reduce((sum, item) => sum + item.price, 0);
+                const change = totalBudget - total;
+                
+                if (shoppingCart.length === 0) {
+                    showNotification('🛒 Your cart is empty! Add some items first.', 'info');
+                    return;
+                }
+                
+                showNotification(`💳 Checkout complete! You spent $${total.toFixed(2)} and have $${change.toFixed(2)} change. Great shopping!`, 'success');
+            };
+            
+            // Simple notification system
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? 'var(--success-color)' : 
+                                   type === 'error' ? 'var(--error-color)' : 'var(--primary-color)'};
+                    color: white;
+                    padding: var(--spacing-md) var(--spacing-lg);
+                    border-radius: var(--radius-md);
+                    box-shadow: var(--shadow-lg);
+                    z-index: 1000;
+                    max-width: 350px;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 5000);
+            }
+            
+            // Update progress tracking
+            function updateProgress() {
+                const currentProgress = JSON.parse(localStorage.getItem('math-progress') || '{}');
+                currentProgress['chapter-4'] = 100; // Chapter 4 complete
+                localStorage.setItem('math-progress', JSON.stringify(currentProgress));
+            }
+            
+            // Initialize on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    loadSharedComponents();
+                    updateProgress();
+                });
+            } else {
+                loadSharedComponents();
+                updateProgress();
+            }
+        })();
     </script>
 </body>
 </html>
