@@ -3,27 +3,1220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 2 - Social Studies</title>
+    <title>Chapter 2: Geography & Interactive Maps - Social Studies</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <style>
+        /* Geography Chapter 2 Specific Styles */
+        .chapter-description {
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Texas Geography Explorer Styles */
+        .texas-map-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .texas-regions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .region-card {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #5ba0f2, #4680cd);
+        }
+
+        .region-card.visited {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            border: 3px solid #f39c12;
+        }
+
+        .region-card h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+
+        .region-info {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .region-details {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .region-details h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .region-description {
+            line-height: 1.6;
+        }
+
+        .region-features ul, .region-cities, .region-climate {
+            margin-top: 1rem;
+        }
+
+        .region-features h5, .region-cities h5, .region-climate h5 {
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        /* U.S. Regional Map Styles */
+        .us-map-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .us-regions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .us-region {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .us-region:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, #f75c4c, #d0493b);
+        }
+
+        .us-region.visited {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            border: 3px solid #f1c40f;
+        }
+
+        .us-region h4 {
+            margin: 0 0 0.8rem 0;
+            font-size: 1.2rem;
+        }
+
+        .region-states {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .region-info-panel {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .region-info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-section h6 {
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Geography Quiz Styles */
+        .geography-quiz {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            margin: 1rem 0;
+        }
+
+        .quiz-question h4 {
+            margin-bottom: 1rem;
+        }
+
+        .start-quiz-btn {
+            background: #fff;
+            color: #f39c12;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .quiz-option:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .answer-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .answer-feedback.correct {
+            background: rgba(46,204,113,0.2);
+            border: 2px solid #27ae60;
+        }
+
+        .answer-feedback.incorrect {
+            background: rgba(231,76,60,0.2);
+            border: 2px solid #c0392b;
+        }
+
+        .quiz-results {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .score-display {
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .retry-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .retry-btn:hover {
+            background: #2ecc71;
+            transform: scale(1.05);
+        }
+
+        /* Map Skills Laboratory Styles */
+        .map-skills-container {
+            background: #ecf0f1;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .skills-tabs {
+            display: flex;
+            background: #34495e;
+        }
+
+        .skill-tab {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            color: #bdc3c7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .skill-tab:hover {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .skill-tab.active {
+            background: #3498db;
+            color: white;
+            border-bottom-color: #2980b9;
+        }
+
+        .skill-content {
+            padding: 2rem;
+        }
+
+        .skill-panel {
+            display: none;
+        }
+
+        .skill-panel.active {
+            display: block;
+        }
+
+        /* Compass Rose Styles */
+        .compass-activity {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .interactive-compass {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .compass-rose {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #3498db, #2980b9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .direction {
+            position: absolute;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .direction:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.2);
+        }
+
+        .direction.north { top: 10px; left: 50%; transform: translateX(-50%); }
+        .direction.northeast { top: 25px; right: 25px; }
+        .direction.east { right: 10px; top: 50%; transform: translateY(-50%); }
+        .direction.southeast { bottom: 25px; right: 25px; }
+        .direction.south { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .direction.southwest { bottom: 25px; left: 25px; }
+        .direction.west { left: 10px; top: 50%; transform: translateY(-50%); }
+        .direction.northwest { top: 25px; left: 25px; }
+
+        .direction-challenge {
+            text-align: center;
+        }
+
+        .direction-challenge p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .direction-challenge p.correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .direction-challenge p.incorrect {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Scale Activity Styles */
+        .scale-activity {
+            text-align: center;
+        }
+
+        .scale-example {
+            margin: 2rem 0;
+        }
+
+        .map-scale {
+            display: inline-block;
+            border: 2px solid #34495e;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .scale-bar {
+            width: 200px;
+            height: 10px;
+            background: linear-gradient(to right, #34495e 0%, #34495e 50%, white 50%, white 100%);
+            border: 1px solid #34495e;
+            margin-bottom: 0.5rem;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .scale-problems {
+            margin-top: 2rem;
+        }
+
+        .scale-answers {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .scale-answers button {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scale-answers button:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        /* Coordinate Activity Styles */
+        .coordinate-activity {
+            text-align: center;
+        }
+
+        .coordinate-grid {
+            display: inline-block;
+            position: relative;
+            background: #ecf0f1;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+        }
+
+        .coordinate-map {
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(to right, rgba(52,73,94,0.1) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(52,73,94,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            border: 2px solid #34495e;
+            position: relative;
+        }
+
+        .coordinate-point {
+            position: absolute;
+            background: #e74c3c;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            top: 60%;
+            left: 30%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .coordinate-point:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .coordinate-answers {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .coordinate-answers button {
+            padding: 0.8rem 1rem;
+            border: 2px solid #9b59b6;
+            background: white;
+            color: #9b59b6;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .coordinate-answers button:hover {
+            background: #9b59b6;
+            color: white;
+        }
+
+        /* Symbol Activity Styles */
+        .symbols-activity {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .map-legend {
+            background: white;
+            border: 2px solid #34495e;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .map-legend h5 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .symbol-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .symbol-item:hover {
+            background: #ecf0f1;
+        }
+
+        .symbol-map {
+            background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .feature {
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.8);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature:hover {
+            transform: scale(1.1);
+            background: white;
+            border-color: #3498db;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .symbol-challenge {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Physical vs Political Maps Styles */
+        .map-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .map-type {
+            text-align: center;
+        }
+
+        .physical-map, .political-map {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            min-height: 200px;
+        }
+
+        .physical-map {
+            background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+        }
+
+        .political-map {
+            background: linear-gradient(135deg, #ffb3ba, #ffdfba);
+        }
+
+        .terrain-features, .political-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .terrain-features div, .political-features div {
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .map-activity {
+            margin-top: 2rem;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .map-sorting {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sortable-feature {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: move;
+            text-align: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .sortable-feature:hover {
+            background: #2980b9;
+            transform: translateX(5px);
+        }
+
+        .sorting-containers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .drop-zone {
+            text-align: center;
+        }
+
+        .drop-zone h5 {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .drop-zone[data-category="physical"] h5 {
+            background: #a8e6cf;
+            color: #2c3e50;
+        }
+
+        .drop-zone[data-category="political"] h5 {
+            background: #ffb3ba;
+            color: #2c3e50;
+        }
+
+        .drop-area {
+            min-height: 200px;
+            border: 3px dashed #bdc3c7;
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone.drag-over .drop-area {
+            border-color: #3498db;
+            background: rgba(52,152,219,0.1);
+        }
+
+        /* Progress Dashboard Styles */
+        .progress-dashboard {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .skill-progress {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 80px;
+            gap: 1rem;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .skill-item span:first-child {
+            font-weight: bold;
+        }
+
+        .skill-item span:last-child {
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease;
+            min-width: 2px;
+        }
+
+        .achievement-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.5s ease;
+            border: 2px solid transparent;
+        }
+
+        .badge.locked {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .badge.unlocked {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            transform: scale(1.05);
+            border-color: #fff;
+            box-shadow: 0 10px 20px rgba(241,196,15,0.3);
+            animation: badgeUnlock 0.6s ease;
+        }
+
+        @keyframes badgeUnlock {
+            0% { transform: scale(0.8) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.15) rotate(5deg); }
+            100% { transform: scale(1.05) rotate(0deg); opacity: 1; }
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .badge-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideIn 0.5s ease, fadeOut 0.5s ease 2.5s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .celebration {
+            font-size: 1.5rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Feedback Styles */
+        .correct {
+            color: #27ae60 !important;
+        }
+
+        .incorrect {
+            color: #e74c3c !important;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .texas-map-container, .us-map-container {
+                grid-template-columns: 1fr;
+            }
+
+            .texas-regions, .us-regions {
+                grid-template-columns: 1fr;
+            }
+
+            .map-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .compass-activity {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .symbols-activity {
+                grid-template-columns: 1fr;
+            }
+
+            .map-sorting {
+                grid-template-columns: 1fr;
+            }
+
+            .sorting-containers {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-tabs {
+                flex-direction: column;
+            }
+
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-badges {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skill-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .achievement-badges {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="header-container"></div>
     <main class="chapter-container">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 2</div>
-            <h1 class="chapter-title">Social Studies Chapter 2</h1>
+            <h1 class="chapter-title">Geography & Interactive Maps</h1>
+            <p class="chapter-description">Explore Texas geography, U.S. regions, and world maps through interactive activities and virtual exploration!</p>
         </div>
         <div class="lesson-content">
+            <!-- Texas Geography Explorer -->
             <div class="lesson-section">
-                <h3>Chapter Content</h3>
-                <p>Content will be enhanced with interactive timelines, maps, and historical activities.</p>
+                <h3>🏞️ Texas Geography Explorer</h3>
+                <div class="texas-map-container">
+                    <div class="texas-regions">
+                        <div class="region-card" data-region="east-texas">
+                            <h4>East Texas</h4>
+                            <div class="region-info">Piney Woods, lakes, forests</div>
+                        </div>
+                        <div class="region-card" data-region="gulf-coast">
+                            <h4>Gulf Coast</h4>
+                            <div class="region-info">Beaches, wetlands, oil industry</div>
+                        </div>
+                        <div class="region-card" data-region="south-texas">
+                            <h4>South Texas</h4>
+                            <div class="region-info">Rio Grande Valley, farming</div>
+                        </div>
+                        <div class="region-card" data-region="west-texas">
+                            <h4>West Texas</h4>
+                            <div class="region-info">Desert, mountains, oil fields</div>
+                        </div>
+                        <div class="region-card" data-region="central-texas">
+                            <h4>Central Texas</h4>
+                            <div class="region-info">Hill Country, rivers, cities</div>
+                        </div>
+                        <div class="region-card" data-region="panhandle">
+                            <h4>Panhandle Plains</h4>
+                            <div class="region-info">Flat plains, wheat, cattle</div>
+                        </div>
+                    </div>
+                    <div class="region-details" id="regionDetails">
+                        <h4 id="selectedRegionName">Select a Texas region to explore</h4>
+                        <div id="regionDescription" class="region-description"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive U.S. Map -->
+            <div class="lesson-section">
+                <h3>🗺️ Interactive U.S. Regional Map</h3>
+                <div class="us-map-container">
+                    <div class="us-regions">
+                        <div class="us-region" data-region="northeast">
+                            <h4>Northeast</h4>
+                            <div class="region-states">ME, NH, VT, MA, RI, CT, NY, NJ, PA</div>
+                        </div>
+                        <div class="us-region" data-region="southeast">
+                            <h4>Southeast</h4>
+                            <div class="region-states">DE, MD, VA, WV, KY, TN, NC, SC, GA, FL, AL, MS, AR, LA</div>
+                        </div>
+                        <div class="us-region" data-region="midwest">
+                            <h4>Midwest</h4>
+                            <div class="region-states">OH, MI, IN, IL, WI, MN, IA, MO, ND, SD, NE, KS</div>
+                        </div>
+                        <div class="us-region" data-region="southwest">
+                            <h4>Southwest</h4>
+                            <div class="region-states">TX, OK, NM, AZ</div>
+                        </div>
+                        <div class="us-region" data-region="west">
+                            <h4>West</h4>
+                            <div class="region-states">MT, WY, CO, UT, ID, WA, OR, NV, CA, AK, HI</div>
+                        </div>
+                    </div>
+                    <div class="region-info-panel" id="usRegionInfo">
+                        <h4>U.S. Regional Information</h4>
+                        <div id="usRegionDetails">Click on a region to learn about its geography, climate, and features!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Geography Quiz Game -->
+            <div class="lesson-section">
+                <h3>🎯 Geography Challenge</h3>
+                <div class="geography-quiz">
+                    <div class="quiz-question" id="quizQuestion">
+                        <h4>Geography Quiz</h4>
+                        <p>Test your knowledge of geography!</p>
+                        <button onclick="startGeographyQuiz()" class="start-quiz-btn">Start Challenge</button>
+                    </div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    <div class="quiz-feedback" id="quizFeedback"></div>
+                </div>
+            </div>
+
+            <!-- Map Skills Laboratory -->
+            <div class="lesson-section">
+                <h3>🧭 Map Skills Laboratory</h3>
+                <div class="map-skills-container">
+                    <div class="skills-tabs">
+                        <button class="skill-tab active" onclick="switchSkill('compass')">Compass Rose</button>
+                        <button class="skill-tab" onclick="switchSkill('scale')">Map Scale</button>
+                        <button class="skill-tab" onclick="switchSkill('coordinates')">Coordinates</button>
+                        <button class="skill-tab" onclick="switchSkill('symbols')">Map Symbols</button>
+                    </div>
+                    <div class="skill-content">
+                        <div id="compassSkill" class="skill-panel active">
+                            <h4>Compass Rose & Directions</h4>
+                            <div class="compass-activity">
+                                <div class="interactive-compass">
+                                    <div class="compass-rose">
+                                        <div class="direction north" data-direction="N">N</div>
+                                        <div class="direction northeast" data-direction="NE">NE</div>
+                                        <div class="direction east" data-direction="E">E</div>
+                                        <div class="direction southeast" data-direction="SE">SE</div>
+                                        <div class="direction south" data-direction="S">S</div>
+                                        <div class="direction southwest" data-direction="SW">SW</div>
+                                        <div class="direction west" data-direction="W">W</div>
+                                        <div class="direction northwest" data-direction="NW">NW</div>
+                                    </div>
+                                </div>
+                                <div class="direction-challenge">
+                                    <p id="directionQuestion">Click on the compass to practice directions!</p>
+                                    <button onclick="startDirectionChallenge()">Start Direction Challenge</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="scaleSkill" class="skill-panel">
+                            <h4>Understanding Map Scale</h4>
+                            <div class="scale-activity">
+                                <div class="scale-example">
+                                    <div class="map-scale">
+                                        <div class="scale-bar"></div>
+                                        <div class="scale-labels">
+                                            <span>0</span><span>50</span><span>100 miles</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="scale-problems">
+                                    <div class="scale-question">
+                                        <p>If the scale shows 1 inch = 50 miles, and two cities are 2 inches apart on the map, how far apart are they in real life?</p>
+                                        <div class="scale-answers">
+                                            <button onclick="checkScaleAnswer(50)">50 miles</button>
+                                            <button onclick="checkScaleAnswer(100)">100 miles</button>
+                                            <button onclick="checkScaleAnswer(150)">150 miles</button>
+                                        </div>
+                                    </div>
+                                    <div id="scaleResult"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="coordinatesSkill" class="skill-panel">
+                            <h4>Latitude & Longitude</h4>
+                            <div class="coordinate-activity">
+                                <div class="coordinate-grid">
+                                    <div class="grid-labels">
+                                        <div class="lat-labels">
+                                            <span>40°N</span>
+                                            <span>30°N</span>
+                                            <span>20°N</span>
+                                            <span>10°N</span>
+                                        </div>
+                                        <div class="lng-labels">
+                                            <span>100°W</span>
+                                            <span>90°W</span>
+                                            <span>80°W</span>
+                                            <span>70°W</span>
+                                        </div>
+                                    </div>
+                                    <div class="coordinate-map">
+                                        <div class="grid-lines"></div>
+                                        <div class="coordinate-point" data-lat="32" data-lng="97" id="dallasPoint">Dallas, TX</div>
+                                    </div>
+                                </div>
+                                <div class="coordinate-practice">
+                                    <p>Find locations using coordinates!</p>
+                                    <button onclick="startCoordinateChallenge()">Practice Coordinates</button>
+                                    <div id="coordinateQuestion"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="symbolsSkill" class="skill-panel">
+                            <h4>Map Symbols & Legend</h4>
+                            <div class="symbols-activity">
+                                <div class="map-legend">
+                                    <h5>Map Legend</h5>
+                                    <div class="symbol-item" data-symbol="mountain">🏔️ Mountains</div>
+                                    <div class="symbol-item" data-symbol="river">🌊 Rivers</div>
+                                    <div class="symbol-item" data-symbol="forest">🌲 Forests</div>
+                                    <div class="symbol-item" data-symbol="desert">🏜️ Desert</div>
+                                    <div class="symbol-item" data-symbol="city">🏙️ Major City</div>
+                                    <div class="symbol-item" data-symbol="capital">⭐ State Capital</div>
+                                </div>
+                                <div class="symbol-map">
+                                    <div class="map-features">
+                                        <div class="feature mountain-feature" data-type="mountain">🏔️</div>
+                                        <div class="feature river-feature" data-type="river">🌊</div>
+                                        <div class="feature city-feature" data-type="city">🏙️</div>
+                                        <div class="feature capital-feature" data-type="capital">⭐</div>
+                                    </div>
+                                </div>
+                                <div class="symbol-challenge">
+                                    <p id="symbolQuestion">Click on map features to identify them!</p>
+                                    <div id="symbolScore">Score: 0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physical vs Political Maps -->
+            <div class="lesson-section">
+                <h3>🌍 Physical vs Political Maps</h3>
+                <div class="map-comparison">
+                    <div class="map-type">
+                        <h4>Physical Map</h4>
+                        <div class="physical-map">
+                            <div class="terrain-features">
+                                <div class="mountain-range">🏔️ Rocky Mountains</div>
+                                <div class="river">🌊 Mississippi River</div>
+                                <div class="desert">🏜️ Mojave Desert</div>
+                                <div class="plains">🌾 Great Plains</div>
+                            </div>
+                            <p>Shows natural features like mountains, rivers, and deserts</p>
+                        </div>
+                    </div>
+                    <div class="map-type">
+                        <h4>Political Map</h4>
+                        <div class="political-map">
+                            <div class="political-features">
+                                <div class="state-border">--- State Borders</div>
+                                <div class="country-border">=== Country Borders</div>
+                                <div class="capital">⭐ State Capitals</div>
+                                <div class="city">🏙️ Major Cities</div>
+                            </div>
+                            <p>Shows human-made boundaries, cities, and political divisions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-activity">
+                    <h4>Map Type Challenge</h4>
+                    <p>Can you identify whether these features belong on a physical or political map?</p>
+                    <div class="map-sorting">
+                        <div class="feature-items">
+                            <div class="sortable-feature" draggable="true" data-type="physical">Lake Superior</div>
+                            <div class="sortable-feature" draggable="true" data-type="political">Austin (Capital)</div>
+                            <div class="sortable-feature" draggable="true" data-type="physical">Appalachian Mountains</div>
+                            <div class="sortable-feature" draggable="true" data-type="political">Texas-Oklahoma Border</div>
+                        </div>
+                        <div class="sorting-containers">
+                            <div class="drop-zone" data-category="physical">
+                                <h5>Physical Features</h5>
+                                <div class="drop-area">Drop physical features here</div>
+                            </div>
+                            <div class="drop-zone" data-category="political">
+                                <h5>Political Features</h5>
+                                <div class="drop-area">Drop political features here</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="checkSortingAnswers()">Check Answers</button>
+                    <div id="sortingResult"></div>
+                </div>
+            </div>
+
+            <!-- Progress Tracking -->
+            <div class="lesson-section">
+                <h3>📊 Your Geography Progress</h3>
+                <div class="progress-dashboard">
+                    <div class="skill-progress">
+                        <div class="skill-item">
+                            <span>Texas Regions</span>
+                            <div class="progress-bar"><div class="progress-fill" id="texasProgress"></div></div>
+                            <span id="texasScore">0/6</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>U.S. Regions</span>
+                            <div class="progress-bar"><div class="progress-fill" id="usProgress"></div></div>
+                            <span id="usScore">0/5</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Map Skills</span>
+                            <div class="progress-bar"><div class="progress-fill" id="skillsProgress"></div></div>
+                            <span id="skillsScore">0/4</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Geography Quiz</span>
+                            <div class="progress-bar"><div class="progress-fill" id="quizProgress"></div></div>
+                            <span id="quizScore">0/10</span>
+                        </div>
+                    </div>
+                    <div class="achievement-badges">
+                        <div class="badge locked" id="texasExplorerBadge">
+                            <span class="badge-icon">🏞️</span>
+                            <span class="badge-name">Texas Explorer</span>
+                        </div>
+                        <div class="badge locked" id="mapMasterBadge">
+                            <span class="badge-icon">🗺️</span>
+                            <span class="badge-name">Map Master</span>
+                        </div>
+                        <div class="badge locked" id="compassChampionBadge">
+                            <span class="badge-icon">🧭</span>
+                            <span class="badge-name">Compass Champion</span>
+                        </div>
+                        <div class="badge locked" id="geographyGenius">
+                            <span class="badge-icon">🌍</span>
+                            <span class="badge-name">Geography Genius</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chapter-navigation">
             <a href="chapter-1.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div>
             </div>
             <a href="chapter-3.html" class="nav-button">Next →</a>
         </div>
@@ -35,6 +1228,700 @@
             fetch('/subjects/shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+
+        // Geography data and state management
+        let geographyProgress = {
+            texasRegions: 0,
+            usRegions: 0,
+            mapSkills: 0,
+            quizScore: 0
+        };
+
+        let currentQuizQuestion = 0;
+        let quizAnswers = [];
+
+        // Texas regions data
+        const texasRegionsData = {
+            'east-texas': {
+                name: 'East Texas',
+                description: 'Known as the Piney Woods, East Texas is covered with forests of pine, oak, and hickory trees. This region has many lakes and is great for outdoor activities like fishing and hiking.',
+                features: ['Dense forests', 'Many lakes', 'Timber industry', 'Tourism and recreation'],
+                cities: ['Tyler', 'Longview', 'Marshall', 'Nacogdoches'],
+                climate: 'Humid subtropical with hot summers and mild winters'
+            },
+            'gulf-coast': {
+                name: 'Gulf Coast Plains',
+                description: 'The Gulf Coast region stretches along the Gulf of Mexico and includes beaches, wetlands, and major ports. This area is important for shipping, fishing, and oil production.',
+                features: ['Coastal beaches', 'Salt marshes', 'Oil refineries', 'Major ports'],
+                cities: ['Houston', 'Galveston', 'Corpus Christi', 'Beaumont'],
+                climate: 'Hot and humid with frequent storms in summer'
+            },
+            'south-texas': {
+                name: 'South Texas Plains',
+                description: 'South Texas includes the Rio Grande Valley and is known for farming, ranching, and its proximity to Mexico. The region grows citrus fruits, cotton, and vegetables.',
+                features: ['Rio Grande River', 'Fertile farmland', 'Border with Mexico', 'Cattle ranching'],
+                cities: ['San Antonio', 'Brownsville', 'McAllen', 'Laredo'],
+                climate: 'Hot and dry with mild winters'
+            },
+            'west-texas': {
+                name: 'Mountains and Basins',
+                description: 'West Texas features desert landscapes, mountains, and oil fields. This region has the highest peak in Texas (Guadalupe Peak) and includes Big Bend National Park.',
+                features: ['Desert terrain', 'Mountain ranges', 'Oil production', 'Sparse population'],
+                cities: ['El Paso', 'Midland', 'Odessa', 'Alpine'],
+                climate: 'Very dry with hot days and cool nights'
+            },
+            'central-texas': {
+                name: 'Central Texas Hill Country',
+                description: 'Central Texas features rolling hills, rivers, and the state capital. This region is known for its wildflowers, especially bluebonnets, and has many springs and caves.',
+                features: ['Rolling hills', 'Rivers and springs', 'State capital', 'Wildflower displays'],
+                cities: ['Austin', 'San Marcos', 'Fredericksburg', 'New Braunfels'],
+                climate: 'Hot summers with mild winters, moderate rainfall'
+            },
+            'panhandle': {
+                name: 'Panhandle Plains',
+                description: 'The Texas Panhandle is flat prairie land used mainly for wheat farming and cattle ranching. This region experiences strong winds and is ideal for wind energy production.',
+                features: ['Flat plains', 'Wheat farming', 'Cattle ranching', 'Wind energy'],
+                cities: ['Amarillo', 'Lubbock', 'Abilene', 'Wichita Falls'],
+                climate: 'Semi-arid with hot summers and cold winters'
+            }
+        };
+
+        // U.S. regions data
+        const usRegionsData = {
+            northeast: {
+                name: 'Northeast Region',
+                description: 'The Northeast includes New England and the Mid-Atlantic states. Known for historical sites, major cities, and fall foliage.',
+                features: ['Historical sites', 'Dense population', 'Four seasons', 'Major cities'],
+                climate: 'Four distinct seasons with cold winters and warm summers',
+                economy: 'Manufacturing, finance, tourism, fishing'
+            },
+            southeast: {
+                name: 'Southeast Region',
+                description: 'The Southeast is known for its warm climate, agriculture, and rich cultural heritage including music and food.',
+                features: ['Warm climate', 'Agriculture', 'Beaches', 'Cultural diversity'],
+                climate: 'Humid subtropical with hot summers and mild winters',
+                economy: 'Agriculture, tourism, aerospace, textiles'
+            },
+            midwest: {
+                name: 'Midwest Region',
+                description: 'The Midwest is America\\'s heartland, known for farming, especially corn and soybeans, and manufacturing.',
+                features: ['Great Lakes', 'Fertile farmland', 'Manufacturing', 'Flat terrain'],
+                climate: 'Continental climate with cold winters and warm summers',
+                economy: 'Agriculture, manufacturing, transportation'
+            },
+            southwest: {
+                name: 'Southwest Region',
+                description: 'The Southwest features desert landscapes, Native American culture, and rapid population growth.',
+                features: ['Desert climate', 'Native American heritage', 'Oil and gas', 'Growing cities'],
+                climate: 'Hot and dry with little rainfall',
+                economy: 'Oil, natural gas, technology, tourism'
+            },
+            west: {
+                name: 'West Region',
+                description: 'The West includes mountains, deserts, forests, and coastline. Known for technology, entertainment, and natural beauty.',
+                features: ['Diverse geography', 'Technology industry', 'National parks', 'Pacific coastline'],
+                climate: 'Varies from desert to alpine to mediterranean',
+                economy: 'Technology, entertainment, agriculture, tourism'
+            }
+        };
+
+        // Geography quiz questions
+        const geographyQuestions = [
+            {
+                question: 'Which Texas region is known as the Piney Woods?',
+                options: ['East Texas', 'West Texas', 'South Texas', 'Panhandle'],
+                correct: 0,
+                explanation: 'East Texas is covered with pine forests and is called the Piney Woods.'
+            },
+            {
+                question: 'What is the highest peak in Texas?',
+                options: ['Mount Bonnell', 'Guadalupe Peak', 'Enchanted Rock', 'Caddo Peak'],
+                correct: 1,
+                explanation: 'Guadalupe Peak in West Texas is the highest point in the state at 8,751 feet.'
+            },
+            {
+                question: 'Which region produces the most oil in Texas?',
+                options: ['East Texas', 'West Texas', 'Central Texas', 'Gulf Coast'],
+                correct: 1,
+                explanation: 'West Texas, particularly the Permian Basin, is the largest oil-producing region.'
+            },
+            {
+                question: 'What river forms the border between Texas and Mexico?',
+                options: ['Colorado River', 'Brazos River', 'Rio Grande', 'Red River'],
+                correct: 2,
+                explanation: 'The Rio Grande forms the natural border between Texas and Mexico.'
+            },
+            {
+                question: 'Which U.S. region is known as America\\'s heartland?',
+                options: ['Northeast', 'Southeast', 'Midwest', 'West'],
+                correct: 2,
+                explanation: 'The Midwest is called America\\'s heartland due to its central location and farming.'
+            },
+            {
+                question: 'What do the lines of latitude measure?',
+                options: ['Distance east and west', 'Distance north and south', 'Mountain height', 'Ocean depth'],
+                correct: 1,
+                explanation: 'Latitude lines run east-west but measure distance north and south of the equator.'
+            },
+            {
+                question: 'What is the difference between a physical and political map?',
+                options: ['Physical shows borders, political shows landforms', 'No difference', 'Physical shows landforms, political shows borders', 'Political maps are smaller'],
+                correct: 2,
+                explanation: 'Physical maps show natural features, while political maps show human-made boundaries.'
+            },
+            {
+                question: 'Which direction would you travel to go from Dallas to Houston?',
+                options: ['North', 'South', 'East', 'West'],
+                correct: 1,
+                explanation: 'Houston is southeast of Dallas, so you would travel generally south.'
+            },
+            {
+                question: 'What does a map scale help you determine?',
+                options: ['Direction', 'Real distances', 'Population', 'Weather'],
+                correct: 1,
+                explanation: 'Map scale shows the relationship between map distance and real distance.'
+            },
+            {
+                question: 'Which Texas region has the most major ports?',
+                options: ['Panhandle', 'Central Texas', 'Gulf Coast', 'East Texas'],
+                correct: 2,
+                explanation: 'The Gulf Coast region has major ports like Houston, Corpus Christi, and Galveston.'
+            }
+        ];
+
+        // Map skills challenges
+        let currentDirectionChallenge = null;
+        let directionScore = 0;
+        let currentSkill = 'compass';
+        let skillProgress = {
+            compass: 0,
+            scale: 0,
+            coordinates: 0,
+            symbols: 0
+        };
+
+        // Texas regions interaction
+        function initializeTexasExplorer() {
+            const regionCards = document.querySelectorAll('.region-card');
+            regionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const region = this.dataset.region;
+                    showRegionDetails(region);
+                    
+                    // Update progress
+                    if (!this.classList.contains('visited')) {
+                        this.classList.add('visited');
+                        geographyProgress.texasRegions++;
+                        updateProgress();
+                    }
+                });
+            });
+        }
+
+        function showRegionDetails(regionKey) {
+            const region = texasRegionsData[regionKey];
+            const nameElement = document.getElementById('selectedRegionName');
+            const descriptionElement = document.getElementById('regionDescription');
+            
+            nameElement.textContent = region.name;
+            descriptionElement.innerHTML = `
+                <p><strong>Description:</strong> \${region.description}</p>
+                <div class=\"region-features\">
+                    <h5>Key Features:</h5>
+                    <ul>
+                        \${region.features.map(feature => `<li>\${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class=\"region-cities\">
+                    <h5>Major Cities:</h5>
+                    <p>\${region.cities.join(', ')}</p>
+                </div>
+                <div class=\"region-climate\">
+                    <h5>Climate:</h5>
+                    <p>\${region.climate}</p>
+                </div>
+            `;
+        }
+
+        // U.S. regions interaction
+        function initializeUSRegions() {
+            const usRegions = document.querySelectorAll('.us-region');
+            usRegions.forEach(region => {
+                region.addEventListener('click', function() {
+                    const regionKey = this.dataset.region;
+                    showUSRegionDetails(regionKey);
+                    
+                    // Update progress
+                    if (!this.classList.contains('visited')) {
+                        this.classList.add('visited');
+                        geographyProgress.usRegions++;
+                        updateProgress();
+                    }
+                });
+            });
+        }
+
+        function showUSRegionDetails(regionKey) {
+            const region = usRegionsData[regionKey];
+            const infoElement = document.getElementById('usRegionDetails');
+            
+            infoElement.innerHTML = `
+                <h5>\${region.name}</h5>
+                <p><strong>Description:</strong> \${region.description}</p>
+                <div class=\"region-info-grid\">
+                    <div class=\"info-section\">
+                        <h6>Key Features:</h6>
+                        <ul>
+                            \${region.features.map(feature => `<li>\${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class=\"info-section\">
+                        <h6>Climate:</h6>
+                        <p>\${region.climate}</p>
+                    </div>
+                    <div class=\"info-section\">
+                        <h6>Economy:</h6>
+                        <p>\${region.economy}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Geography quiz functionality
+        function startGeographyQuiz() {
+            currentQuizQuestion = 0;
+            quizAnswers = [];
+            showQuizQuestion();
+        }
+
+        function showQuizQuestion() {
+            if (currentQuizQuestion >= geographyQuestions.length) {
+                showQuizResults();
+                return;
+            }
+            
+            const question = geographyQuestions[currentQuizQuestion];
+            const questionElement = document.getElementById('quizQuestion');
+            const optionsElement = document.getElementById('quizOptions');
+            const feedbackElement = document.getElementById('quizFeedback');
+            
+            questionElement.innerHTML = `
+                <h4>Question \${currentQuizQuestion + 1} of \${geographyQuestions.length}</h4>
+                <p>\${question.question}</p>
+            `;
+            
+            optionsElement.innerHTML = question.options.map((option, index) => 
+                `<button class=\"quiz-option\" onclick=\"selectQuizAnswer(\${index})\">\${option}</button>`
+            ).join('');
+            
+            feedbackElement.innerHTML = '';
+        }
+
+        function selectQuizAnswer(selectedIndex) {
+            const question = geographyQuestions[currentQuizQuestion];
+            const correct = selectedIndex === question.correct;
+            const feedbackElement = document.getElementById('quizFeedback');
+            
+            quizAnswers.push(correct);
+            
+            feedbackElement.innerHTML = `
+                <div class=\"answer-feedback \${correct ? 'correct' : 'incorrect'}\">
+                    <p><strong>\${correct ? 'Correct!' : 'Incorrect'}</strong></p>
+                    <p>\${question.explanation}</p>
+                    <button onclick=\"nextQuizQuestion()\">Next Question</button>
+                </div>
+            `;
+            
+            // Disable option buttons
+            document.querySelectorAll('.quiz-option').forEach(btn => btn.disabled = true);
+        }
+
+        function nextQuizQuestion() {
+            currentQuizQuestion++;
+            showQuizQuestion();
+        }
+
+        function showQuizResults() {
+            const correctAnswers = quizAnswers.filter(answer => answer).length;
+            const percentage = Math.round((correctAnswers / geographyQuestions.length) * 100);
+            
+            geographyProgress.quizScore = correctAnswers;
+            updateProgress();
+            
+            const questionElement = document.getElementById('quizQuestion');
+            const optionsElement = document.getElementById('quizOptions');
+            const feedbackElement = document.getElementById('quizFeedback');
+            
+            questionElement.innerHTML = `
+                <h4>Quiz Complete!</h4>
+                <p>You got \${correctAnswers} out of \${geographyQuestions.length} questions correct!</p>
+            `;
+            
+            optionsElement.innerHTML = '';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = 'Excellent work! You\\'re a geography expert!';
+            } else if (percentage >= 70) {
+                message = 'Great job! You have a good understanding of geography!';
+            } else if (percentage >= 50) {
+                message = 'Good effort! Review the material and try again to improve!';
+            } else {
+                message = 'Keep practicing! Geography takes time to master.';
+            }
+            
+            feedbackElement.innerHTML = `
+                <div class=\"quiz-results\">
+                    <p class=\"score-message\">\${message}</p>
+                    <div class=\"score-display\">
+                        <span class=\"score-number\">\${percentage}%</span>
+                    </div>
+                    <button onclick=\"startGeographyQuiz()\" class=\"retry-btn\">Try Again</button>
+                </div>
+            `;
+        }
+
+        // Map skills functionality
+        function switchSkill(skillName) {
+            currentSkill = skillName;
+            
+            // Update tab appearance
+            document.querySelectorAll('.skill-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show appropriate skill panel
+            document.querySelectorAll('.skill-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById(skillName + 'Skill').classList.add('active');
+        }
+
+        function startDirectionChallenge() {
+            const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+            const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+            currentDirectionChallenge = randomDirection;
+            
+            document.getElementById('directionQuestion').textContent = 
+                `Click on the direction: \${getDirectionName(randomDirection)}`;
+                
+            // Add click listeners to compass directions
+            document.querySelectorAll('.direction').forEach(dir => {
+                dir.addEventListener('click', function() {
+                    checkDirectionAnswer(this.dataset.direction);
+                });
+            });
+        }
+
+        function getDirectionName(abbrev) {
+            const names = {
+                'N': 'North', 'NE': 'Northeast', 'E': 'East', 'SE': 'Southeast',
+                'S': 'South', 'SW': 'Southwest', 'W': 'West', 'NW': 'Northwest'
+            };
+            return names[abbrev] || abbrev;
+        }
+
+        function checkDirectionAnswer(selectedDirection) {
+            const questionElement = document.getElementById('directionQuestion');
+            
+            if (selectedDirection === currentDirectionChallenge) {
+                questionElement.textContent = 'Correct! Well done!';
+                questionElement.className = 'correct';
+                directionScore++;
+                
+                if (skillProgress.compass < 5) {
+                    skillProgress.compass++;
+                    geographyProgress.mapSkills++;
+                    updateProgress();
+                }
+            } else {
+                questionElement.textContent = `Incorrect. \${getDirectionName(selectedDirection)} was selected, but the answer was \${getDirectionName(currentDirectionChallenge)}.`;
+                questionElement.className = 'incorrect';
+            }
+            
+            setTimeout(() => {
+                questionElement.className = '';
+                startDirectionChallenge();
+            }, 2000);
+        }
+
+        function checkScaleAnswer(answer) {
+            const resultElement = document.getElementById('scaleResult');
+            
+            if (answer === 100) {
+                resultElement.innerHTML = `
+                    <div class=\"correct\">
+                        <p><strong>Correct!</strong> If 1 inch = 50 miles, then 2 inches = 100 miles.</p>
+                    </div>
+                `;
+                
+                if (skillProgress.scale === 0) {
+                    skillProgress.scale = 1;
+                    geographyProgress.mapSkills++;
+                    updateProgress();
+                }
+            } else {
+                resultElement.innerHTML = `
+                    <div class=\"incorrect\">
+                        <p><strong>Incorrect.</strong> Remember: 2 inches \u00d7 50 miles per inch = 100 miles total distance.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function startCoordinateChallenge() {
+            const locations = [
+                { name: 'Dallas, TX', lat: '32\u00b0N', lng: '97\u00b0W' },
+                { name: 'Miami, FL', lat: '25\u00b0N', lng: '80\u00b0W' },
+                { name: 'Denver, CO', lat: '39\u00b0N', lng: '105\u00b0W' },
+                { name: 'Seattle, WA', lat: '47\u00b0N', lng: '122\u00b0W' }
+            ];
+            
+            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+            
+            document.getElementById('coordinateQuestion').innerHTML = `
+                <p>What are the approximate coordinates for \${randomLocation.name}?</p>
+                <div class=\"coordinate-answers\">
+                    <button onclick=\"checkCoordinateAnswer(true)\">\${randomLocation.lat}, \${randomLocation.lng}</button>
+                    <button onclick=\"checkCoordinateAnswer(false)\">35\u00b0N, 85\u00b0W</button>
+                    <button onclick=\"checkCoordinateAnswer(false)\">40\u00b0N, 75\u00b0W</button>
+                </div>
+                <div id=\"coordinateResult\"></div>
+            `;
+        }
+
+        function checkCoordinateAnswer(correct) {
+            const resultElement = document.getElementById('coordinateResult');
+            
+            if (correct) {
+                resultElement.innerHTML = '<p class=\"correct\">Correct! Great job with coordinates!</p>';
+                
+                if (skillProgress.coordinates === 0) {
+                    skillProgress.coordinates = 1;
+                    geographyProgress.mapSkills++;
+                    updateProgress();
+                }
+            } else {
+                resultElement.innerHTML = '<p class=\"incorrect\">Try again! Look at the coordinate grid for help.</p>';
+            }
+        }
+
+        // Symbol identification game
+        function initializeSymbolGame() {
+            const features = document.querySelectorAll('.feature');
+            let symbolScore = 0;
+            
+            features.forEach(feature => {
+                feature.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    const questionElement = document.getElementById('symbolQuestion');
+                    const scoreElement = document.getElementById('symbolScore');
+                    
+                    let correctName = '';
+                    switch(type) {
+                        case 'mountain': correctName = 'Mountains'; break;
+                        case 'river': correctName = 'Rivers'; break;
+                        case 'city': correctName = 'Major City'; break;
+                        case 'capital': correctName = 'State Capital'; break;
+                    }
+                    
+                    questionElement.textContent = `You identified: \${correctName}! Click another feature.`;
+                    symbolScore++;
+                    scoreElement.textContent = `Score: \${symbolScore}`;
+                    
+                    this.style.opacity = '0.5';
+                    this.style.pointerEvents = 'none';
+                    
+                    if (symbolScore >= 4 && skillProgress.symbols === 0) {
+                        skillProgress.symbols = 1;
+                        geographyProgress.mapSkills++;
+                        updateProgress();
+                        questionElement.textContent = 'Great job! You identified all the map symbols!';
+                    }
+                });
+            });
+        }
+
+        // Drag and drop functionality for map sorting
+        function initializeDragAndDrop() {
+            const features = document.querySelectorAll('.sortable-feature');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            features.forEach(feature => {
+                feature.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', this.dataset.type);
+                    e.dataTransfer.setData('text/html', this.outerHTML);
+                    this.style.opacity = '0.5';
+                });
+                
+                feature.addEventListener('dragend', function() {
+                    this.style.opacity = '1';
+                });
+            });
+            
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                
+                zone.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    
+                    const featureType = e.dataTransfer.getData('text/plain');
+                    const featureHTML = e.dataTransfer.getData('text/html');
+                    
+                    this.querySelector('.drop-area').innerHTML += featureHTML;
+                });
+            });
+        }
+
+        function checkSortingAnswers() {
+            const physicalZone = document.querySelector('[data-category=\"physical\"] .drop-area');
+            const politicalZone = document.querySelector('[data-category=\"political\"] .drop-area');
+            const resultElement = document.getElementById('sortingResult');
+            
+            let correct = 0;
+            let total = 0;
+            
+            // Check physical features
+            const physicalFeatures = physicalZone.querySelectorAll('.sortable-feature');
+            physicalFeatures.forEach(feature => {
+                total++;
+                if (feature.dataset.type === 'physical') {
+                    correct++;
+                    feature.style.border = '2px solid green';
+                } else {
+                    feature.style.border = '2px solid red';
+                }
+            });
+            
+            // Check political features
+            const politicalFeatures = politicalZone.querySelectorAll('.sortable-feature');
+            politicalFeatures.forEach(feature => {
+                total++;
+                if (feature.dataset.type === 'political') {
+                    correct++;
+                    feature.style.border = '2px solid green';
+                } else {
+                    feature.style.border = '2px solid red';
+                }
+            });
+            
+            const percentage = Math.round((correct / total) * 100);
+            
+            resultElement.innerHTML = `
+                <p>You got \${correct} out of \${total} correct (\${percentage}%)</p>
+                <p>\${percentage >= 75 ? 'Great job! You understand the difference between physical and political maps!' : 'Keep practicing! Remember: Physical maps show natural features, political maps show human-made boundaries.'}</p>
+            `;
+        }
+
+        // Progress tracking and badge system
+        function updateProgress() {
+            // Update Texas progress
+            const texasProgress = document.getElementById('texasProgress');
+            const texasScore = document.getElementById('texasScore');
+            const texasPercent = (geographyProgress.texasRegions / 6) * 100;
+            texasProgress.style.width = texasPercent + '%';
+            texasScore.textContent = `\${geographyProgress.texasRegions}/6`;
+            
+            // Update US progress
+            const usProgress = document.getElementById('usProgress');
+            const usScore = document.getElementById('usScore');
+            const usPercent = (geographyProgress.usRegions / 5) * 100;
+            usProgress.style.width = usPercent + '%';
+            usScore.textContent = `\${geographyProgress.usRegions}/5`;
+            
+            // Update skills progress
+            const skillsProgress = document.getElementById('skillsProgress');
+            const skillsScore = document.getElementById('skillsScore');
+            const totalSkills = Object.values(skillProgress).reduce((a, b) => a + b, 0);
+            const skillsPercent = (totalSkills / 4) * 100;
+            skillsProgress.style.width = skillsPercent + '%';
+            skillsScore.textContent = `\${totalSkills}/4`;
+            
+            // Update quiz progress
+            const quizProgressBar = document.getElementById('quizProgress');
+            const quizScoreElement = document.getElementById('quizScore');
+            const quizPercent = (geographyProgress.quizScore / 10) * 100;
+            quizProgressBar.style.width = quizPercent + '%';
+            quizScoreElement.textContent = `\${geographyProgress.quizScore}/10`;
+            
+            // Update main chapter progress
+            const mainProgress = document.querySelector('.chapter-navigation .progress-fill');
+            const totalProgress = (
+                (geographyProgress.texasRegions / 6) +
+                (geographyProgress.usRegions / 5) +
+                (totalSkills / 4) +
+                (geographyProgress.quizScore / 10)
+            ) / 4;
+            mainProgress.style.width = (totalProgress * 100) + '%';
+            
+            // Check for badge unlocks
+            checkBadgeUnlocks();
+        }
+
+        function checkBadgeUnlocks() {
+            // Texas Explorer badge
+            if (geographyProgress.texasRegions >= 6) {
+                unlockBadge('texasExplorerBadge', 'Explored all Texas regions!');
+            }
+            
+            // Map Master badge
+            if (Object.values(skillProgress).reduce((a, b) => a + b, 0) >= 4) {
+                unlockBadge('mapMasterBadge', 'Mastered all map skills!');
+            }
+            
+            // Compass Champion badge
+            if (directionScore >= 10) {
+                unlockBadge('compassChampionBadge', 'Excellent direction skills!');
+            }
+            
+            // Geography Genius badge
+            if (geographyProgress.quizScore >= 8) {
+                unlockBadge('geographyGenius', 'Outstanding geography knowledge!');
+            }
+        }
+
+        function unlockBadge(badgeId, message) {
+            const badge = document.getElementById(badgeId);
+            if (badge && badge.classList.contains('locked')) {
+                badge.classList.remove('locked');
+                badge.classList.add('unlocked');
+                
+                // Show celebration
+                showBadgeNotification(message);
+            }
+        }
+
+        function showBadgeNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'badge-notification';
+            notification.innerHTML = `
+                <div class=\"notification-content\">
+                    <span class=\"celebration\">\ud83c\udf89</span>
+                    <p>\${message}</p>
+                    <span class=\"celebration\">\ud83c\udf89</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Initialize all interactive components when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTexasExplorer();
+            initializeUSRegions();
+            initializeSymbolGame();
+            initializeDragAndDrop();
+            updateProgress();
+        });
     </script>
 </body>
 </html>
