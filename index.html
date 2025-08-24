@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!--
+VIHAAN'S 5TH GRADE LEARNING PLATFORM
+====================================
+Status: Epic 1 Complete → Epic 2 Ready to Start
+Next: Core Navigation & Dashboard (Task 2.1)
+See: PROJECT_STATUS.md for immediate handoff instructions
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive 5th grade learning platform with AI-powered remediation and STAAR/MAP test preparation">
+    <meta name="keywords" content="5th grade, learning, education, STAAR, MAP, Texas TEKS, AI remediation">
+    <meta name="author" content="Yallappa H">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Vihaan's 5th Grade Learning Platform">
+    <meta property="og:description" content="Interactive learning platform with AI-powered personalized remediation">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yvh1223.github.io/vihaan-learning-platform/">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4A90E2">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <title>Vihaan's 5th Grade Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="js/app.js" as="script">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Loading your learning adventure...</p>
+    </div>
+
+    <!-- Main Application Container -->
+    <div id="app" class="app-container" style="display: none;">
+        
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <img src="assets/icons/logo.png" alt="Learning Platform Logo" class="logo">
+                    <h1>5th Grade Learning Hub</h1>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="#dashboard" class="nav-link active">Dashboard</a></li>
+                        <li><a href="#progress" class="nav-link">Progress</a></li>
+                        <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                        <li><a href="#help" class="nav-link">Help</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-controls">
+                    <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+                    <button id="menu-toggle" class="btn-icon mobile-only" aria-label="Toggle menu">☰</button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Welcome Dashboard -->
+            <section id="dashboard" class="dashboard-section active">
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <h2>Welcome Back, Learner!</h2>
+                        <p>Ready to explore and master 5th grade concepts? Let's continue your learning journey!</p>
+                    </div>
+                    <div class="welcome-visual">
+                        <img src="assets/images/illustrations/welcome-student.png" alt="Student learning" class="welcome-image">
+                    </div>
+                </div>
+
+                <!-- Subject Selection Grid -->
+                <div class="subjects-grid">
+                    <div class="subject-card" data-subject="mathematics">
+                        <div class="card-header">
+                            <img src="assets/icons/subject-icons/math.png" alt="Mathematics" class="subject-icon">
+                            <h3>Mathematics</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Numbers, Geometry, Data Analysis & More</p>
+                            <div class="progress-indicator">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Complete</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-primary">Continue Learning</button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card" data-subject="science">
+                        <div class="card-header">
+                            <img src="assets/icons/subject-icons/science.png" alt="Science" class="subject-icon">
+                            <h3>Science</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Investigation, Matter, Energy & Life</p>
+                            <div class="progress-indicator">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Complete</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-primary">Continue Learning</button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card" data-subject="english">
+                        <div class="card-header">
+                            <img src="assets/icons/subject-icons/english.png" alt="English Language Arts" class="subject-icon">
+                            <h3>English Language Arts</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Reading, Writing, Speaking & Listening</p>
+                            <div class="progress-indicator">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Complete</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-primary">Continue Learning</button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card" data-subject="social-studies">
+                        <div class="card-header">
+                            <img src="assets/icons/subject-icons/social-studies.png" alt="Social Studies" class="subject-icon">
+                            <h3>Social Studies</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>History, Geography, Government & Culture</p>
+                            <div class="progress-indicator">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Complete</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-primary">Continue Learning</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <h4>Lessons Completed</h4>
+                            <span class="stat-number" id="lessons-completed">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-info">
+                            <h4>Achievements Earned</h4>
+                            <span class="stat-number" id="achievements-earned">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-info">
+                            <h4>Learning Streak</h4>
+                            <span class="stat-number" id="learning-streak">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-info">
+                            <h4>Time Spent</h4>
+                            <span class="stat-number" id="time-spent">0 min</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress" class="progress-section">
+                <h2>Your Learning Progress</h2>
+                <div class="progress-content">
+                    <p>Progress tracking will be implemented in Epic 8</p>
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section id="achievements" class="achievements-section">
+                <h2>Your Achievements</h2>
+                <div class="achievements-content">
+                    <p>Achievement system will be implemented in Epic 7</p>
+                </div>
+            </section>
+
+            <!-- Help Section -->
+            <section id="help" class="help-section">
+                <h2>Need Help?</h2>
+                <div class="help-content">
+                    <p>Help system and tutorials will be implemented in Epic 11</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 5th Grade Learning Platform. Built for educational excellence.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy</a>
+                    <a href="#terms">Terms</a>
+                    <a href="#support">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/app.js" defer></script>
+    <script src="js/progress.js" defer></script>
+    <script src="js/interactive.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/js/sw.js')
+                    .then(registration => {
+                        console.log('✅ SW registered: ', registration);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New content available, refresh page
+                                    if (confirm('New version available! Refresh to update?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('❌ SW registration failed: ', error);
+                    });
+            });
+        }
+        
+        // Request notification permission (for future use)
+        if ('Notification' in window && 'serviceWorker' in navigator) {
+            // Don't request immediately, wait for user interaction
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    if (Notification.permission === 'default') {
+                        // Could request permission here, but better to wait for user action
+                        console.log('📱 Notifications available but not requested yet');
+                    }
+                }, 5000);
+            });
+        }
+    </script>
+</body>
+</html>
