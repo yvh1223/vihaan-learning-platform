@@ -133,15 +133,32 @@ a:hover {
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: var(--text-white);
   box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-hover);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-color) 100%);
+  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .btn-icon {
@@ -175,11 +192,25 @@ a:hover {
 .loading-spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid var(--bg-accent);
+  border: 4px solid rgba(74, 144, 226, 0.1);
   border-top: 4px solid var(--primary-color);
+  border-right: 4px solid var(--secondary-color);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
   margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.loading-spinner::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid rgba(80, 200, 120, 0.2);
+  border-radius: 50%;
+  animation: spin 2s linear infinite reverse;
 }
 
 @keyframes spin {
@@ -274,7 +305,7 @@ a:hover {
 }
 
 .welcome-banner {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xxl);
   margin-bottom: var(--spacing-xxl);
@@ -283,6 +314,25 @@ a:hover {
   justify-content: space-between;
   color: var(--text-white);
   min-height: 200px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(74, 144, 226, 0.3);
+}
+
+.welcome-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  50% { transform: translate(-45%, -45%) rotate(180deg); }
 }
 
 .welcome-content h2 {
@@ -312,19 +362,39 @@ a:hover {
 }
 
 .subject-card {
-  background-color: var(--bg-card);
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(74, 144, 226, 0.02) 100%);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.subject-card:hover::before {
+  transform: scaleX(1);
 }
 
 .subject-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--primary-color);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(74, 144, 226, 0.15);
+  border-color: rgba(74, 144, 226, 0.2);
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(74, 144, 226, 0.05) 100%);
 }
 
 .card-header {
@@ -358,21 +428,41 @@ a:hover {
 }
 
 .chapter-link {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--bg-secondary);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(74, 144, 226, 0.05) 100%);
   color: var(--text-primary);
   text-decoration: none;
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
+  font-weight: 500;
   transition: all var(--transition-normal);
   border-left: 3px solid var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.chapter-link:hover::before {
+  left: 100%;
 }
 
 .chapter-link:hover {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: var(--text-white);
-  transform: translateX(4px);
+  transform: translateX(6px) translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .progress-indicator {

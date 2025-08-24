@@ -2,6 +2,39 @@
 
 /* Mobile First Approach - Base styles for mobile (320px+) */
 
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  .chapter-links {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .chapter-link {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .subject-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .subject-card:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .welcome-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-lg);
+    min-height: 180px;
+  }
+  
+  .welcome-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
 /* Tablet Styles (768px+) */
 @media (min-width: 768px) {
   /* Navigation adjustments */
