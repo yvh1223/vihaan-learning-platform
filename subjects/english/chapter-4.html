@@ -6,6 +6,1103 @@
     <title>Chapter 4 - English Language Arts</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <style>
+        /* Chapter 4 Communication Skills Styles */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-card, .technique-card, .category-card, .aid-card, .role-card, .scenario-card, .quality-card, .conflict-scenarios .scenario-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            border: 2px solid #d1e7ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .skill-card:hover, .technique-card:hover, .category-card:hover, .aid-card:hover, .role-card:hover, .scenario-card:hover, .quality-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+            border-color: #007bff;
+        }
+        
+        .content-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .activity-tabs, .skills-tabs, .collab-activities .activity-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+        }
+        
+        .tab-button {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px 8px 0 0;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-button:hover {
+            background: #e9ecef;
+            border-color: #007bff;
+        }
+        
+        .tab-button.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .listening-exercise, .speaking-trainer, .conversation-simulator {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .audio-controls, .timer-controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .audio-btn, .timer-btn, .generate-btn, .evaluate-btn, .next-btn, .prev-btn, .complete-btn, .practice-btn, .challenge-btn, .new-debate-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-btn:hover, .timer-btn:hover, .generate-btn:hover, .evaluate-btn:hover, .next-btn:hover, .prev-btn:hover, .complete-btn:hover, .practice-btn:hover, .challenge-btn:hover, .new-debate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .technique-grid, .aid-options, .team-roles, .conflict-scenarios, .quality-grid, .topic-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 10px;
+            background: #f8f9fa;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .step-number {
+            background: white;
+            color: #007bff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step.active .step-number {
+            background: #fff;
+            color: #007bff;
+        }
+        
+        .outline-builder, .visual-aids-creator, .practice-center {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .outline-section, .argument-component {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .outline-section textarea, .argument-component textarea, #debateResponse, #resolutionResponse, #leadershipResponse {
+            width: 100%;
+            min-height: 80px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .outline-section textarea:focus, .argument-component textarea:focus, #debateResponse:focus, #resolutionResponse:focus, #leadershipResponse:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        
+        .research-tools, .design-tips, .delivery-techniques {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .research-tips, .design-tips li, .delivery-techniques li {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .research-tips li, .design-tips li, .delivery-techniques li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .research-tips li:last-child, .design-tips li:last-child, .delivery-techniques li:last-child {
+            border-bottom: none;
+        }
+        
+        .color-palette {
+            margin: 1.5rem 0;
+        }
+        
+        .color-sets {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .color-set {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
+        
+        .color.blue { background-color: #007bff; }
+        .color.white { background-color: #ffffff; }
+        .color.green { background-color: #28a745; }
+        .color.cream { background-color: #f8f9fa; }
+        .color.purple { background-color: #6f42c1; }
+        .color.light-gray { background-color: #e9ecef; }
+        
+        .technique-checklist {
+            margin: 1.5rem 0;
+        }
+        
+        .technique-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid #e9ecef;
+        }
+        
+        .technique-item input[type=\"checkbox\"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .technique-item label {
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .practice-timer {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .timer-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #007bff;
+            margin: 1rem 0;
+        }
+        
+        .timer-display span {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .self-evaluation {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .evaluation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .eval-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 0.25rem;
+            margin: 0.5rem 0;
+        }
+        
+        .rating-stars span {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .rating-stars span:hover {
+            transform: scale(1.2);
+        }
+        
+        .debate-trainer, .collaboration-hub {
+            margin: 2rem 0;
+        }
+        
+        .argument-structure, .counter-trainer, .evidence-types {
+            margin: 1.5rem 0;
+        }
+        
+        .opposing-argument, .counter-response, .evidence-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .argument-display {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .argument-display p {
+            margin: 0.5rem 0;
+        }
+        
+        .counter-strategies {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .strategy-btn, .side-btn, .topic-btn, .scenario-btn, .option-btn, .eval-btn, .volume-btn, .pace-btn, .emotion-btn, .add-btn, .remove-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .strategy-btn:hover, .side-btn:hover, .topic-btn:hover, .scenario-btn:hover, .option-btn:hover, .eval-btn:hover, .volume-btn:hover, .pace-btn:hover, .emotion-btn:hover, .add-btn:hover {
+            background: #545b62;
+            transform: translateY(-1px);
+        }
+        
+        .side-btn.pro {
+            background: #28a745;
+        }
+        
+        .side-btn.con {
+            background: #dc3545;
+        }
+        
+        .eval-btn.strong {
+            background: #28a745;
+        }
+        
+        .eval-btn.weak {
+            background: #dc3545;
+        }
+        
+        .remove-btn {
+            background: #dc3545;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+        
+        .remove-btn:hover {
+            background: #c82333;
+        }
+        
+        .evidence-card {
+            border-left: 4px solid #007bff;
+        }
+        
+        .evidence-card .example {
+            background: #f8f9ff;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        
+        .evidence-practice {
+            margin: 2rem 0;
+        }
+        
+        .evidence-to-evaluate {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .evaluation-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            justify-content: center;
+        }
+        
+        .evaluation-result {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .debate-setup, .debate-session {
+            margin: 2rem 0;
+        }
+        
+        .topic-selector {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .selected-topic {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .topic-positions {
+            margin: 1rem 0;
+        }
+        
+        .position {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .position.pro {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+        }
+        
+        .position.con {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+        
+        .side-selection {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .debate-rounds {
+            margin: 2rem 0;
+        }
+        
+        .round-counter {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff;
+            margin: 1rem 0;
+        }
+        
+        .debate-prompt {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .round-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .debate-results {
+            background: #d4edda;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid #c3e6cb;
+            text-align: center;
+        }
+        
+        .score-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #28a745;
+            margin: 1rem 0;
+        }
+        
+        .detailed-feedback {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        
+        .detailed-feedback ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .detailed-feedback li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .teamwork-skills, .project-creation, .conflict-training, .leadership-training {
+            margin: 2rem 0;
+        }
+        
+        .skill-module {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .role-details, .quality-details, .practice-area, .communication-scenarios {
+            margin: 1.5rem 0;
+        }
+        
+        .role-details, .quality-details {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .role-details ul, .quality-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .role-details li, .quality-details li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .role-details li:last-child, .quality-details li:last-child {
+            border-bottom: none;
+        }
+        
+        .communication-scenarios {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .project-basics, .team-setup, .task-breakdown, .timeline-view {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .project-basics input, .member-input input, .task-input input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+        
+        .project-basics input:focus, .member-input input:focus, .task-input input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+        .member-input, .task-input {
+            display: flex;
+            gap: 1rem;
+            align-items: end;
+            margin: 1rem 0;
+        }
+        
+        .member-input input, .task-input input, .task-input select {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .member-list, .task-list {
+            margin: 1rem 0;
+        }
+        
+        .member-item, .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+        }
+        
+        .task-item.completed {
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+        
+        .task-item input[type=\"checkbox\"] {
+            margin-right: 1rem;
+        }
+        
+        .task-name {
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .task-assignee, .task-deadline {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin: 0 0.5rem;
+        }
+        
+        .timeline-display {
+            margin: 1.5rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #007bff;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .timeline-item.completed {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 1rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #007bff;
+            border: 3px solid white;
+        }
+        
+        .timeline-item.completed::before {
+            background: #28a745;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 0.875rem;
+        }
+        
+        .timeline-content {
+            margin: 0.5rem 0;
+        }
+        
+        .solution-guide {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .solution-guide ol {
+            padding-left: 1.5rem;
+        }
+        
+        .solution-guide li {
+            padding: 0.5rem 0;
+            line-height: 1.5;
+        }
+        
+        .example-solution {
+            background: #fff3cd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #ffeaa7;
+            font-style: italic;
+        }
+        
+        .practice-scenario {
+            margin: 2rem 0;
+        }
+        
+        .scenario-display {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .feedback-area {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .challenge-area, .challenge-scenario, .challenge-response {
+            margin: 1.5rem 0;
+        }
+        
+        .challenge-scenario {
+            background: #fff3cd;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid #ffeaa7;
+        }
+        
+        .challenge-tips {
+            background: #d1ecf1;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #bee5eb;
+        }
+        
+        .challenge-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .challenge-tips li {
+            padding: 0.25rem 0;
+        }
+        
+        .challenge-feedback {
+            margin: 1.5rem 0;
+        }
+        
+        .activity-box {
+            background: #e2e3e5;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        
+        .progress-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+        
+        .stat-card h4 {
+            margin: 0 0 1rem 0;
+            color: #495057;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .stat-card span {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #28a745;
+        }
+        
+        .achievement-badges {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .badge-collection {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            min-width: 120px;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+        
+        .badge.earned {
+            opacity: 1;
+            border-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            transform: scale(1.05);
+        }
+        
+        .badge-icon {
+            font-size: 2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .badge-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .skill-grid, .technique-grid, .aid-options, .team-roles, .quality-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .workflow-steps {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0;
+            }
+            
+            .activity-tabs, .skills-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                border-radius: 8px;
+                text-align: center;
+            }
+            
+            .evaluation-buttons, .side-selection, .round-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .counter-strategies, .communication-scenarios, .topic-selector {
+                flex-direction: column;
+            }
+            
+            .member-input, .task-input {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .progress-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .badge-collection {
+                gap: 1rem;
+            }
+        }
+        
+        /* Additional interactive elements */
+        .topic-list {
+            margin: 1rem 0;
+        }
+        
+        .topic-option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-option:hover {
+            border-color: #007bff;
+            background: #f8f9ff;
+        }
+        
+        .topic-option.selected {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .sample-slide {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .slide-content {
+            flex: 1;
+            line-height: 1.6;
+        }
+        
+        .slide-image {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 1rem;
+            border: 1px dashed #dee2e6;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        
+        .word-practice {
+            margin: 1rem 0;
+        }
+        
+        .practice-word {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .pronunciation {
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .emotion-practice, .volume-levels, .pace-controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .question-list, .response-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .question-list li, .response-list li {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #007bff;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .listening-questions {
+            margin: 1.5rem 0;
+        }
+        
+        .listening-question {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .question-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .question-feedback {
+            margin: 1rem 0;
+            padding: 0.75rem;
+            border-radius: 6px;
+            background: #f8f9fa;
+        }
+        
+        .listening-score {
+            text-align: center;
+            font-weight: bold;
+            color: #007bff;
+            margin: 1rem 0;
+        }
+        
+        .layout-section {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #28a745;
+        }
+        
+        .poster-layout {
+            margin: 1rem 0;
+        }
+        
+        .scenario-content {
+            margin: 1.5rem 0;
+        }
+        
+        .example-speech {
+            background: #d4edda;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #c3e6cb;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div id="header-container"></div>
@@ -23,7 +1120,7 @@
         <div class="chapter-navigation">
             <a href="chapter-3.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 35%"></div></div>
             </div>
             <a href="assessment-1.html" class="nav-button">Next →</a>
         </div>
