@@ -3,51 +3,677 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matter & Energy - 5th Grade Science</title>
+    <meta name="description" content="Matter & Energy - Interactive 5th grade science lesson with states of matter, properties, and chemical reactions">
+    <meta name="keywords" content="5th grade, science, matter, energy, states, properties, chemical reactions, experiments, STAAR">
+    <meta name="author" content="Yallappa H">
+    
+    <title>Matter & Energy - 5th Grade Science | Learning Platform</title>
+    
+    <!-- CSS Files -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    
+    <style>
+        /* Science Chapter 1 Specific Styles */
+        .experiment-station {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .states-of-matter {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .state-card {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 2px solid transparent;
+        }
+        
+        .state-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+        }
+        
+        .state-visual {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .molecule-animation {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            position: relative;
+            margin: var(--spacing-lg) auto;
+            overflow: hidden;
+        }
+        
+        .molecule {
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+        
+        .molecule.solid {
+            animation: vibrate 1s infinite;
+        }
+        
+        .molecule.liquid {
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        .molecule.gas {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes vibrate {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(1px, -1px); }
+            50% { transform: translate(-1px, 1px); }
+            75% { transform: translate(1px, 1px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-40px); }
+        }
+        
+        .property-tester {
+            background: linear-gradient(135deg, var(--success-color), var(--accent-color));
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            color: white;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .test-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .test-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .test-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .item-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .mixture-lab {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mixture-containers {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+        
+        .container {
+            width: 100px;
+            height: 120px;
+            border: 3px solid var(--primary-color);
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            position: relative;
+            background-color: var(--bg-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .container:hover {
+            transform: scale(1.1);
+        }
+        
+        .liquid-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            transition: all var(--transition-normal);
+        }
+        
+        .container-label {
+            text-align: center;
+            margin-top: var(--spacing-sm);
+            font-size: var(--font-size-sm);
+            font-weight: bold;
+        }
+        
+        .mix-button {
+            background-color: var(--warning-color);
+            color: white;
+            border: none;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin: var(--spacing-lg);
+        }
+        
+        .mix-button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        
+        .chemical-reaction {
+            background: linear-gradient(135deg, var(--error-color), var(--warning-color));
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            color: white;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .reaction-equation {
+            font-size: var(--font-size-xl);
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: var(--spacing-lg) 0;
+            padding: var(--spacing-lg);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+        }
+        
+        .safety-warning {
+            background-color: var(--warning-color);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .safety-icon {
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
 <body>
+    <!-- Include Shared Header -->
     <div id="header-container"></div>
+    
+    <!-- Main Chapter Content -->
     <main class="chapter-container">
+        <!-- Chapter Header -->
         <div class="chapter-header">
             <div class="chapter-number">Chapter 1</div>
             <h1 class="chapter-title">Matter & Energy</h1>
-            <p class="chapter-description">Explore physical and chemical properties, states of matter, mixtures, and solutions.</p>
+            <p class="chapter-description">
+                Explore the building blocks of everything around us! Discover states of matter, properties, chemical reactions, and energy through hands-on virtual experiments.
+            </p>
         </div>
+        
+        <!-- Lesson Content -->
         <div class="lesson-content">
+            <!-- Section 1: States of Matter -->
             <div class="lesson-section">
-                <h3><span class="section-icon">⚛️</span>Properties of Matter</h3>
-                <p>Learn about physical and chemical properties that help us identify different materials.</p>
+                <h3>
+                    <span class="section-icon">⚛️</span>
+                    States of Matter
+                </h3>
+                
+                <p>Everything around us is made of matter, and matter exists in different states. Let's explore solids, liquids, and gases!</p>
+                
+                <div class="states-of-matter">
+                    <div class="state-card" onclick="showMatterState('solid')">
+                        <div class="state-visual">🧊</div>
+                        <h4>Solid</h4>
+                        <p>Particles are close together and vibrate in place</p>
+                        <small>Examples: Ice, rocks, wood</small>
+                    </div>
+                    <div class="state-card" onclick="showMatterState('liquid')">
+                        <div class="state-visual">💧</div>
+                        <h4>Liquid</h4>
+                        <p>Particles flow freely but stay close together</p>
+                        <small>Examples: Water, juice, oil</small>
+                    </div>
+                    <div class="state-card" onclick="showMatterState('gas')">
+                        <div class="state-visual">💨</div>
+                        <h4>Gas</h4>
+                        <p>Particles spread out and move very fast</p>
+                        <small>Examples: Air, steam, helium</small>
+                    </div>
+                </div>
+                
+                <div class="experiment-station">
+                    <h4>🔬 Molecule Motion Simulator</h4>
+                    <p>Watch how molecules behave in different states of matter:</p>
+                    
+                    <div class="molecule-animation" id="molecule-demo">
+                        <!-- Molecules will be added by JavaScript -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: var(--spacing-lg);">
+                        <button class="activity-button" onclick="simulateState('solid')">Show Solid</button>
+                        <button class="activity-button" onclick="simulateState('liquid')" style="margin: 0 var(--spacing-sm);">Show Liquid</button>
+                        <button class="activity-button" onclick="simulateState('gas')">Show Gas</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: Properties of Matter -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🔍</span>
+                    Properties of Matter
+                </h3>
+                
+                <p>We can identify different materials by their properties. Let's test some common objects!</p>
+                
+                <div class="property-tester">
+                    <h4>🧪 Virtual Property Testing Lab</h4>
+                    <p>Click on each item to test its properties:</p>
+                    
+                    <div class="test-items">
+                        <div class="test-item" onclick="testProperty('wood', 'Hard, floats in water, burns easily, brown color')">
+                            <div class="item-icon">🪵</div>
+                            <h5>Wood Block</h5>
+                        </div>
+                        <div class="test-item" onclick="testProperty('metal', 'Shiny, conducts electricity, magnetic, very hard')">
+                            <div class="item-icon">🔩</div>
+                            <h5>Metal Coin</h5>
+                        </div>
+                        <div class="test-item" onclick="testProperty('rubber', 'Bouncy, waterproof, flexible, does not conduct electricity')">
+                            <div class="item-icon">🏀</div>
+                            <h5>Rubber Ball</h5>
+                        </div>
+                        <div class="test-item" onclick="testProperty('glass', 'Transparent, hard but brittle, smooth surface')">
+                            <div class="item-icon">🥛</div>
+                            <h5>Glass Cup</h5>
+                        </div>
+                        <div class="test-item" onclick="testProperty('paper', 'Lightweight, absorbs water, tears easily, flammable')">
+                            <div class="item-icon">📄</div>
+                            <h5>Paper Sheet</h5>
+                        </div>
+                        <div class="test-item" onclick="testProperty('plastic', 'Lightweight, waterproof, flexible, many colors')">
+                            <div class="item-icon">🧴</div>
+                            <h5>Plastic Bottle</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="try-it-button" onclick="startPropertyQuiz()">
+                    🎯 Take Properties Quiz
+                </button>
+            </div>
+            
+            <!-- Section 3: Mixtures & Solutions -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🥤</span>
+                    Mixtures & Solutions
+                </h3>
+                
+                <p>When we combine different materials, we create mixtures and solutions. Let's experiment!</p>
+                
+                <div class="mixture-lab">
+                    <h4>🧪 Virtual Mixing Laboratory</h4>
+                    <p>Combine different liquids and see what happens:</p>
+                    
+                    <div class="mixture-containers">
+                        <div>
+                            <div class="container" onclick="selectLiquid('water')">
+                                <div class="liquid-fill" style="height: 80px; background-color: #87CEEB;"></div>
+                            </div>
+                            <div class="container-label">Water</div>
+                        </div>
+                        <div>
+                            <div class="container" onclick="selectLiquid('oil')">
+                                <div class="liquid-fill" style="height: 60px; background-color: #FFD700;"></div>
+                            </div>
+                            <div class="container-label">Oil</div>
+                        </div>
+                        <div>
+                            <div class="container" onclick="selectLiquid('salt')">
+                                <div class="liquid-fill" style="height: 40px; background-color: #F0F8FF;"></div>
+                            </div>
+                            <div class="container-label">Salt Water</div>
+                        </div>
+                        <div>
+                            <div class="container" onclick="selectLiquid('sand')">
+                                <div class="liquid-fill" style="height: 70px; background-color: #F4A460;"></div>
+                            </div>
+                            <div class="container-label">Sand & Water</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button class="mix-button" onclick="mixLiquids()">🌪️ Mix Together!</button>
+                    </div>
+                    
+                    <div id="mixture-result" style="margin-top: var(--spacing-lg); text-align: center; font-weight: bold;"></div>
+                </div>
+            </div>
+            
+            <!-- Section 4: Chemical Reactions -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">🔥</span>
+                    Chemical Reactions
+                </h3>
+                
+                <div class="safety-warning">
+                    <div class="safety-icon">⚠️</div>
+                    <div>
+                        <strong>Safety First!</strong> Real chemical reactions can be dangerous. 
+                        Always have an adult help you with any real experiments!
+                    </div>
+                </div>
+                
+                <p>In chemical reactions, substances change into completely new substances with different properties!</p>
+                
+                <div class="chemical-reaction">
+                    <h4>🧪 Safe Virtual Reaction: Baking Soda + Vinegar</h4>
+                    
+                    <div class="reaction-equation" id="reaction-display">
+                        NaHCO₃ + CH₃COOH → CH₃COONa + H₂O + CO₂
+                    </div>
+                    
+                    <p style="text-align: center; margin: var(--spacing-lg) 0;">
+                        <strong>Baking Soda + Vinegar → Salt + Water + Carbon Dioxide Gas</strong>
+                    </p>
+                    
+                    <div style="text-align: center;">
+                        <button class="activity-button" onclick="startReaction()" style="background-color: white; color: var(--primary-color); font-size: var(--font-size-lg);">
+                            ⚗️ Start Safe Reaction!
+                        </button>
+                    </div>
+                    
+                    <div id="reaction-result" style="margin-top: var(--spacing-lg); text-align: center;"></div>
+                </div>
+                
+                <div class="experiment-station">
+                    <h4>🔬 Signs of Chemical Reactions</h4>
+                    <ul style="text-align: left; margin: var(--spacing-lg) 0;">
+                        <li><strong>Color Change:</strong> Substances change color (like an apple browning)</li>
+                        <li><strong>Gas Production:</strong> Bubbles form (like fizzing soda)</li>
+                        <li><strong>Temperature Change:</strong> Gets hotter or colder</li>
+                        <li><strong>Odor Change:</strong> New smells appear</li>
+                        <li><strong>Light Production:</strong> Glowing or sparkling</li>
+                    </ul>
+                </div>
             </div>
         </div>
+        
+        <!-- Chapter Navigation -->
         <div class="chapter-navigation">
-            <a href="index.html" class="nav-button">← Back to Science</a>
+            <a href="index.html" class="nav-button">
+                ← Back to Science
+            </a>
+            
             <div class="progress-indicator">
                 <div class="progress-text">Chapter Progress</div>
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
             </div>
-            <a href="chapter-2.html" class="nav-button">Next Chapter →</a>
+            
+            <a href="chapter-2.html" class="nav-button">
+                Next: Force, Motion & Energy →
+            </a>
         </div>
     </main>
+    
+    <!-- Include Shared Footer -->
     <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
     <script src="/js/app.js" defer></script>
     <script>
-        function loadSharedComponents() {
-            fetch('/subjects/shared/header.html')
-                .then(response => response.text())
-                .then(html => document.getElementById('header-container').innerHTML = html)
-                .catch(error => console.error('Error loading header:', error));
-            fetch('/subjects/shared/footer.html')
-                .then(response => response.text())
-                .then(html => document.getElementById('footer-container').innerHTML = html)
-                .catch(error => console.error('Error loading footer:', error));
-        }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadSharedComponents);
-        } else {
-            loadSharedComponents();
-        }
+        // Science Chapter 1: Matter & Energy JavaScript
+        (function() {
+            // Load shared components
+            function loadSharedComponents() {
+                fetch('/subjects/shared/header.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('header-container').innerHTML = html)
+                    .catch(error => console.error('Error loading header:', error));
+                
+                fetch('/subjects/shared/footer.html')
+                    .then(response => response.text())
+                    .then(html => document.getElementById('footer-container').innerHTML = html)
+                    .catch(error => console.error('Error loading footer:', error));
+            }
+            
+            // Selected liquids for mixing
+            let selectedLiquids = [];
+            
+            // Show matter state information
+            window.showMatterState = function(state) {
+                const stateInfo = {
+                    solid: 'Solids have a definite shape and volume. Particles vibrate in fixed positions. Examples: ice cubes, books, chairs.',
+                    liquid: 'Liquids have definite volume but take the shape of their container. Particles slide past each other. Examples: water, milk, juice.',
+                    gas: 'Gases have no definite shape or volume. Particles move freely and spread out. Examples: air, helium, steam.'
+                };
+                showNotification(`⚛️ ${state.toUpperCase()}: ${stateInfo[state]}`, 'success');
+                simulateState(state);
+            };
+            
+            // Simulate molecular motion
+            window.simulateState = function(state) {
+                const demoArea = document.getElementById('molecule-demo');
+                demoArea.innerHTML = ''; // Clear previous molecules
+                
+                const moleculeCount = state === 'gas' ? 8 : state === 'liquid' ? 12 : 16;
+                
+                for (let i = 0; i < moleculeCount; i++) {
+                    const molecule = document.createElement('div');
+                    molecule.className = `molecule ${state}`;
+                    
+                    if (state === 'solid') {
+                        // Arrange in grid pattern
+                        const row = Math.floor(i / 4);
+                        const col = i % 4;
+                        molecule.style.left = `${20 + col * 60}px`;
+                        molecule.style.top = `${20 + row * 40}px`;
+                    } else if (state === 'liquid') {
+                        // Random but somewhat clustered
+                        molecule.style.left = `${Math.random() * 260 + 20}px`;
+                        molecule.style.top = `${Math.random() * 120 + 40}px`;
+                    } else { // gas
+                        // Completely random and spread out
+                        molecule.style.left = `${Math.random() * 270 + 10}px`;
+                        molecule.style.top = `${Math.random() * 170 + 10}px`;
+                    }
+                    
+                    demoArea.appendChild(molecule);
+                }
+                
+                showNotification(`🔬 Showing ${state} molecular motion! Notice how particles behave differently.`, 'info');
+            };
+            
+            // Test material properties
+            window.testProperty = function(material, properties) {
+                showNotification(`🔍 Testing ${material.toUpperCase()}: ${properties}`, 'success');
+            };
+            
+            // Property quiz
+            window.startPropertyQuiz = function() {
+                const questions = [
+                    "Which material would be best for making a window? (Answer: Glass - transparent)",
+                    "What material bounces the highest? (Answer: Rubber - elastic)",
+                    "Which material conducts electricity? (Answer: Metal - conductive)",
+                    "What material burns easily? (Answer: Paper or Wood - flammable)"
+                ];
+                
+                const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+                showNotification(`🎯 Property Quiz: ${randomQuestion}`, 'success');
+            };
+            
+            // Select liquid for mixing
+            window.selectLiquid = function(liquid) {
+                if (selectedLiquids.includes(liquid)) {
+                    showNotification(`🧪 ${liquid.toUpperCase()} already selected!`, 'info');
+                    return;
+                }
+                
+                selectedLiquids.push(liquid);
+                showNotification(`✅ Selected ${liquid.toUpperCase()} for mixing. Choose another to mix!`, 'info');
+                
+                if (selectedLiquids.length >= 2) {
+                    document.querySelector('.mix-button').style.animation = 'pulse 1s infinite';
+                }
+            };
+            
+            // Mix selected liquids
+            window.mixLiquids = function() {
+                if (selectedLiquids.length < 2) {
+                    showNotification('🧪 Select at least 2 liquids to mix!', 'error');
+                    return;
+                }
+                
+                const resultDiv = document.getElementById('mixture-result');
+                
+                if (selectedLiquids.includes('water') && selectedLiquids.includes('oil')) {
+                    resultDiv.innerHTML = '🛢️ Oil floats on water! They don\'t mix because oil is less dense.';
+                } else if (selectedLiquids.includes('water') && selectedLiquids.includes('salt')) {
+                    resultDiv.innerHTML = '🧂 Salt dissolves completely in water, making a clear solution!';
+                } else if (selectedLiquids.includes('water') && selectedLiquids.includes('sand')) {
+                    resultDiv.innerHTML = '🏖️ Sand settles at the bottom. This is a mixture, not a solution.';
+                } else {
+                    resultDiv.innerHTML = '🌪️ Interesting mixture! Different liquids behave differently when combined.';
+                }
+                
+                selectedLiquids = []; // Reset selections
+                document.querySelector('.mix-button').style.animation = '';
+                showNotification('🧪 Mixing complete! Try different combinations!', 'success');
+            };
+            
+            // Start chemical reaction
+            window.startReaction = function() {
+                const resultDiv = document.getElementById('reaction-result');
+                const equation = document.getElementById('reaction-display');
+                
+                // Animate the reaction
+                equation.style.animation = 'pulse 1s infinite';
+                
+                setTimeout(() => {
+                    equation.style.animation = '';
+                    resultDiv.innerHTML = `
+                        <div style="font-size: var(--font-size-lg); margin: var(--spacing-md) 0;">
+                            🎉 REACTION COMPLETE! 🎉
+                        </div>
+                        <div style="background-color: rgba(255,255,255,0.2); padding: var(--spacing-md); border-radius: var(--radius-md);">
+                            You would see: Fizzing and bubbling as CO₂ gas is released!<br>
+                            The mixture would foam up and might overflow if you used too much!<br>
+                            <small>This is how volcanos work in science fair projects! 🌋</small>
+                        </div>
+                    `;
+                    showNotification('⚗️ Chemical reaction complete! New substances were formed with different properties.', 'success');
+                }, 2000);
+            };
+            
+            // Initialize molecule demo with solid state
+            function initializeMoleculeDemo() {
+                setTimeout(() => {
+                    simulateState('solid');
+                }, 1000);
+            }
+            
+            // Simple notification system
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? 'var(--success-color)' : 
+                                   type === 'error' ? 'var(--error-color)' : 'var(--primary-color)'};
+                    color: white;
+                    padding: var(--spacing-md) var(--spacing-lg);
+                    border-radius: var(--radius-md);
+                    box-shadow: var(--shadow-lg);
+                    z-index: 1000;
+                    max-width: 400px;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 6000);
+            }
+            
+            // Update progress tracking
+            function updateProgress() {
+                const currentProgress = JSON.parse(localStorage.getItem('science-progress') || '{}');
+                currentProgress['chapter-1'] = 25;
+                localStorage.setItem('science-progress', JSON.stringify(currentProgress));
+            }
+            
+            // Initialize on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    loadSharedComponents();
+                    initializeMoleculeDemo();
+                    updateProgress();
+                });
+            } else {
+                loadSharedComponents();
+                initializeMoleculeDemo();
+                updateProgress();
+            }
+        })();
     </script>
+    
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
 </body>
 </html>
