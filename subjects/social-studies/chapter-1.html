@@ -6,6 +6,660 @@
     <title>Chapter 1 - Social Studies</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <style>
+        /* Social Studies Chapter 1 Styles */
+        .history-hub {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .history-card, .activity-card, .founder-card, .job-card, .town-building {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4f4dd 100%);
+            border: 2px solid #a5d6a7;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .history-card:hover, .activity-card:hover, .founder-card:hover, .job-card:hover, .town-building:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.15);
+            border-color: #4caf50;
+        }
+        
+        .content-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-controls {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .period-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .period-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .period-btn:hover {
+            background: #545b62;
+            transform: translateY(-2px);
+        }
+        
+        .period-btn.active {
+            background: #28a745;
+            transform: scale(1.05);
+        }
+        
+        .historical-period {
+            margin: 2rem 0;
+        }
+        
+        .timeline-events {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .timeline-event {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .timeline-event:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+        }
+        
+        .event-year {
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        
+        .event-title {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-description {
+            color: #6c757d;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+        
+        .period-info {
+            background: #e8f5e8;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid #a5d6a7;
+        }
+        
+        .interactive-activity {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tribe-selector, .supply-choices, .colony-decisions, .choice-buttons, .constitutional-issues {
+            margin: 1rem 0;
+        }
+        
+        .tribe-selector button, .explorer-game button, .colony-builder button, .convention-game button {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tribe-selector button:hover, .explorer-game button:hover, .colony-builder button:hover, .convention-game button:hover {
+            background: #138496;
+            transform: translateY(-1px);
+        }
+        
+        .tribe-display, .colony-result, .constitution-result, #explorer-feedback, #revolution-feedback {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .supply-choices label, .colony-decisions label {
+            display: block;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+        
+        .supply-choices input, .colony-decisions input {
+            margin-right: 0.5rem;
+        }
+        
+        .decision-group {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .decision-group h6 {
+            margin: 0 0 0.5rem 0;
+            color: #495057;
+        }
+        
+        .scenario-display {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .scenario-options {
+            margin: 1rem 0;
+        }
+        
+        .option {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .patriot-option {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+        
+        .loyalist-option {
+            background: #d1ecf1;
+            border: 2px solid #bee5eb;
+        }
+        
+        .patriot-btn {
+            background: #dc3545;
+        }
+        
+        .patriot-btn:hover {
+            background: #c82333;
+        }
+        
+        .loyalist-btn {
+            background: #007bff;
+        }
+        
+        .loyalist-btn:hover {
+            background: #0056b3;
+        }
+        
+        .colonial-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px 8px 0 0;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-button:hover {
+            background: #e9ecef;
+            border-color: #4caf50;
+        }
+        
+        .tab-button.active {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+        
+        .colonial-tab {
+            margin: 2rem 0;
+        }
+        
+        .daily-schedule {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .time-period {
+            background: #e8f5e8;
+            border: 2px solid #a5d6a7;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .time-period:hover {
+            background: #d4f4dd;
+            border-color: #4caf50;
+            transform: translateY(-3px);
+        }
+        
+        .time-period h4 {
+            margin: 0 0 0.5rem 0;
+            color: #2e7d32;
+        }
+        
+        .activity-details, .job-details, .building-info {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px solid #d1e7ff;
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .job-card h4, .town-building h4 {
+            margin: 0 0 0.5rem 0;
+            color: #2e7d32;
+        }
+        
+        .town-map {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .survival-game {
+            background: #fff3cd;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 2px solid #ffeaa7;
+        }
+        
+        .survival-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .stat {
+            text-align: center;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: #f8f9fa;
+        }
+        
+        .survival-actions {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .survival-actions button {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .survival-actions button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .revolution-activities {
+            margin: 2rem 0;
+        }
+        
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .revolution-content {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .causes-effects, .battles-timeline, .heroes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .cause-card, .battle-card, .hero-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1rem;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .battle-card {
+            border-left-color: #28a745;
+        }
+        
+        .hero-card {
+            border-left-color: #007bff;
+        }
+        
+        .cause-card h4, .battle-card h4, .hero-card h4 {
+            margin: 0 0 0.5rem 0;
+            color: #495057;
+        }
+        
+        .declaration-analysis {
+            margin: 1.5rem 0;
+        }
+        
+        .declaration-part {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .declaration-part h4 {
+            margin: 0 0 1rem 0;
+            color: #495057;
+        }
+        
+        .founders-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .founder-profile {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .founder-details {
+            margin: 1.5rem 0;
+        }
+        
+        .achievements, .famous-quote, .fun-facts {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .achievements {
+            border-left-color: #28a745;
+        }
+        
+        .famous-quote {
+            border-left-color: #17a2b8;
+            font-style: italic;
+        }
+        
+        .fun-facts {
+            border-left-color: #ffc107;
+        }
+        
+        .achievements ul, .fun-facts ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .achievements li, .fun-facts li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .achievements li:last-child, .fun-facts li:last-child {
+            border-bottom: none;
+        }
+        
+        .progress-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4f4dd 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid #a5d6a7;
+        }
+        
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+        
+        .stat-card h4 {
+            margin: 0 0 1rem 0;
+            color: #495057;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .stat-card span {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #4caf50;
+        }
+        
+        .achievement-badges {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .badge-collection {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            min-width: 120px;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+        
+        .badge.earned {
+            opacity: 1;
+            border-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            transform: scale(1.05);
+        }
+        
+        .badge-icon {
+            font-size: 2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .badge-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .history-hub, .activity-grid, .founders-gallery, .jobs-grid, .town-map, .causes-effects, .battles-timeline, .heroes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .period-buttons {
+                flex-direction: column;
+            }
+            
+            .period-btn {
+                min-width: 100%;
+            }
+            
+            .timeline-event {
+                grid-template-columns: 80px 1fr;
+                gap: 0.5rem;
+            }
+            
+            .event-year {
+                font-size: 0.75rem;
+                padding: 0.25rem;
+            }
+            
+            .colonial-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                border-radius: 8px;
+                text-align: center;
+            }
+            
+            .daily-schedule, .survival-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .badge-collection {
+                gap: 1rem;
+            }
+            
+            .choice-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Additional interactive elements */
+        .issue {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .issue h6 {
+            margin: 0 0 0.5rem 0;
+            color: #495057;
+        }
+        
+        .issue label {
+            display: block;
+            padding: 0.25rem 0;
+            cursor: pointer;
+        }
+        
+        .feedback-list p {
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+    </style>"}, {"old_string": "        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();", "new_string": "        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();\n\n        // Chapter 1 American History JavaScript\n        let currentPeriod = 'native';\n        let survivalStats = { health: 100, food: 50, shelter: 25, money: 100 };\n        let currentSurvivalScenario = 0;\n        \n        const historicalData = {\n            tribes: {\n                iroquois: {\n                    name: 'Iroquois Confederacy',\n                    location: 'Northeast (New York area)',\n                    lifestyle: 'The Iroquois lived in longhouses and were skilled farmers, growing corn, beans, and squash (the \"Three Sisters\"). They formed a powerful confederacy of six nations with a democratic government that influenced the U.S. Constitution.',\n                    government: 'Democratic confederacy with elected chiefs and women choosing leaders',\n                    culture: 'Known for their Great Law of Peace and sophisticated political system'\n                },\n                pueblo: {\n                    name: 'Pueblo Peoples',\n                    location: 'Southwest (Arizona, New Mexico)',\n                    lifestyle: 'The Pueblo peoples built amazing cliff dwellings and adobe cities. They were expert farmers who developed irrigation systems to grow crops in the desert. They created beautiful pottery and textiles.',\n                    government: 'Village councils made important decisions together',\n                    culture: 'Master builders and artists, with strong spiritual connections to the land'\n                },\n                plains: {\n                    name: 'Plains Tribes (Lakota, Cheyenne, etc.)',\n                    location: 'Great Plains (Montana to Texas)',\n                    lifestyle: 'Plains tribes were skilled horsemen and buffalo hunters. They lived in portable tepees and followed buffalo herds across the grasslands. Buffalo provided them with food, clothing, and tools.',\n                    government: 'Chiefs and councils led by warrior societies',\n                    culture: 'Rich oral traditions, elaborate ceremonies, and deep respect for nature'\n                },\n                coastal: {\n                    name: 'Pacific Northwest Tribes',\n                    location: 'Pacific Coast (Washington, Oregon, California)',\n                    lifestyle: 'Coastal tribes were master fishermen and canoe builders. They lived in cedar plank houses and carved magnificent totem poles. The ocean and forests provided everything they needed.',\n                    government: 'Chiefs inherited positions and held potlatch ceremonies',\n                    culture: 'Renowned for artistic woodcarving, weaving, and storytelling'\n                }\n            },\n            \n            revolutionScenarios: [\n                {\n                    situation: \"Britain passes the Stamp Act, requiring colonists to buy stamps for all paper goods. This makes everything more expensive!\",\n                    patriot: \"This is taxation without representation! We should boycott British goods and protest.\",\n                    loyalist: \"Britain protected us in wars and needs money. We should pay our fair share.\",\n                    outcome: \"Many colonists joined boycotts, leading Britain to repeal the Stamp Act.\"\n                },\n                {\n                    situation: \"British soldiers are stationed in your town. Some colonists are angry, others think it keeps peace.\",\n                    patriot: \"Foreign soldiers shouldn't control American towns! This violates our rights.\",\n                    loyalist: \"The soldiers maintain order and protect us from threats.\",\n                    outcome: \"Tensions led to conflicts like the Boston Massacre.\"\n                },\n                {\n                    situation: \"The Boston Tea Party just happened. Britain has closed Boston Harbor in punishment.\",\n                    patriot: \"We must support Boston and resist British tyranny together!\",\n                    loyalist: \"Destroying property was wrong. We should follow British law.\",\n                    outcome: \"The other colonies sent supplies to Boston, uniting against Britain.\"\n                }\n            ],\n            \n            survivalScenarios: [\n                {\n                    scenario: \"Winter is coming! You need to prepare shelter. What do you do?\",\n                    choices: {\n                        A: { text: \"Build a log cabin (costs 50 money, +40 shelter)\", effects: { money: -50, shelter: 40 } },\n                        B: { text: \"Improve existing shelter (costs 20 money, +20 shelter)\", effects: { money: -20, shelter: 20 } },\n                        C: { text: \"Share shelter with neighbors (costs 10 food, +15 shelter)\", effects: { food: -10, shelter: 15 } }\n                    },\n                    feedback: \"Good choice! Proper shelter was crucial for colonial survival.\"\n                },\n                {\n                    scenario: \"Your crops didn't grow well this year. How do you get food?\",\n                    choices: {\n                        A: { text: \"Hunt in the forest (risky but could get lots of food)\", effects: { health: -10, food: 30 } },\n                        B: { text: \"Trade with Native Americans (costs 30 money, +25 food)\", effects: { money: -30, food: 25 } },\n                        C: { text: \"Ask neighbors for help (costs 20 money, +15 food)\", effects: { money: -20, food: 15 } }\n                    },\n                    feedback: \"Colonists had to be resourceful to find food!\"\n                },\n                {\n                    scenario: \"You've gotten sick and can't work. What do you do?\",\n                    choices: {\n                        A: { text: \"Rest and recover (lose 1 week of work but gain health)\", effects: { health: 20, money: -10 } },\n                        B: { text: \"Keep working anyway (keep earning but lose more health)\", effects: { health: -20, money: 15 } },\n                        C: { text: \"Use herbal medicine (costs 15 money, +10 health)\", effects: { money: -15, health: 10 } }\n                    },\n                    feedback: \"Colonial medicine was limited, so staying healthy was very important!\"\n                },\n                {\n                    scenario: \"A neighbor's barn burned down. They need help rebuilding.\",\n                    choices: {\n                        A: { text: \"Help for free (gain community respect, lose time)\", effects: { money: -5, health: 5 } },\n                        B: { text: \"Offer to help for payment (gain money but less respect)\", effects: { money: 20, health: -5 } },\n                        C: { text: \"Too busy with own work (keep resources but lose respect)\", effects: { health: -10 } }\n                    },\n                    feedback: \"Community cooperation was essential in colonial times!\"\n                }\n            ]\n        };\n        \n        const founderProfiles = {\n            washington: {\n                name: 'George Washington (1732-1799)',\n                nickname: '\"Father of His Country\"',\n                achievements: [\n                    '🏆 Led Continental Army to victory in Revolutionary War',\n                    '🇺🇸 First President of the United States (1789-1797)',\n                    '📏 Set important precedents for future presidents',\n                    '🤝 Kept America neutral in foreign wars',\n                    '🏛️ Helped establish the new government'\n                ],\n                quote: '\"I cannot tell a lie\" - from the famous cherry tree story',\n                funFacts: [\n                    'He was 6 feet 2 inches tall - very tall for his time!',\n                    'He had false teeth made from hippopotamus ivory',\n                    'He was the only president elected unanimously',\n                    'Mount Vernon, his home, had over 300 slaves'\n                ]\n            },\n            franklin: {\n                name: 'Benjamin Franklin (1706-1790)',\n                nickname: '\"The Renaissance Man\"',\n                achievements: [\n                    '⚡ Proved lightning was electricity with kite experiment',\n                    '📰 Published Poor Richard\\'s Almanac with wise sayings',\n                    '🇫🇷 Convinced France to help America in Revolutionary War',\n                    '📜 Helped write and signed the Declaration of Independence',\n                    '💡 Invented bifocals, lightning rods, and Franklin stove'\n                ],\n                quote: '\"Early to bed and early to rise, makes a man healthy, wealthy, and wise.\"',\n                funFacts: [\n                    'He only went to school for 2 years but became very educated',\n                    'He was the first American celebrity in Europe',\n                    'He started the first public library in America',\n                    'He played chess and invented a musical instrument called the glass harmonica'\n                ]\n            },\n            jefferson: {\n                name: 'Thomas Jefferson (1743-1826)',\n                nickname: '\"Man of the People\"',\n                achievements: [\n                    '✍️ Wrote the Declaration of Independence',\n                    '🇺🇸 3rd President of the United States (1801-1809)',\n                    '🗺️ Purchased Louisiana Territory, doubling the size of America',\n                    '🏛️ Founded University of Virginia',\n                    '📚 Built one of the largest personal libraries in America'\n                ],\n                quote: '\"All men are created equal\" - from the Declaration of Independence',\n                funFacts: [\n                    'He could speak 5 languages and read 7',\n                    'He was an architect and designed his home Monticello',\n                    'He loved ice cream and introduced it to America',\n                    'He owned over 600 slaves but wrote about freedom'\n                ]\n            },\n            adams: {\n                name: 'John Adams (1735-1826)',\n                nickname: '\"Atlas of Independence\"',\n                achievements: [\n                    '⚖️ Defended British soldiers after Boston Massacre',\n                    '🇺🇸 2nd President of the United States (1797-1801)',\n                    '✍️ Helped negotiate Treaty of Paris ending Revolutionary War',\n                    '🏛️ Kept America out of war with France',\n                    '📜 Father and son both became presidents'\n                ],\n                quote: '\"Facts are stubborn things.\"',\n                funFacts: [\n                    'He and Jefferson both died on July 4, 1826 - the 50th anniversary of independence',\n                    'He was the first president to live in the White House',\n                    'His wife Abigail was his closest advisor',\n                    'He was short and round, nicknamed \"His Rotundity\"'\n                ]\n            },\n            hamilton: {\n                name: 'Alexander Hamilton (1755-1804)',\n                nickname: '\"The Financial Genius\"',\n                achievements: [\n                    '💰 First Secretary of the Treasury',\n                    '🏦 Created America\\'s banking system and national currency',\n                    '📊 Established the U.S. Mint and financial credit',\n                    '📜 Co-wrote the Federalist Papers defending the Constitution',\n                    '🏭 Promoted manufacturing and trade'\n                ],\n                quote: '\"A national debt, if it is not excessive, will be to us a national blessing.\"',\n                funFacts: [\n                    'He was born in the Caribbean and came to America as a teenager',\n                    'He died in a duel with Aaron Burr',\n                    'His face is on the $10 bill',\n                    'A popular musical was written about his life'\n                ]\n            },\n            madison: {\n                name: 'James Madison (1751-1836)',\n                nickname: '\"Father of the Constitution\"',\n                achievements: [\n                    '📜 Wrote much of the U.S. Constitution',\n                    '🇺🇸 4th President of the United States (1809-1817)',\n                    '📋 Created the Bill of Rights',\n                    '🏛️ Co-founded the Democratic-Republican Party',\n                    '📚 Co-wrote the Federalist Papers'\n                ],\n                quote: '\"Knowledge will forever govern ignorance.\"',\n                funFacts: [\n                    'He was only 5 feet 4 inches tall and weighed 100 pounds',\n                    'He was the smallest president in U.S. history',\n                    'He took detailed notes during the Constitutional Convention',\n                    'His wife Dolley saved important documents when British burned White House'\n                ]\n            }\n        };\n        \n        // Main Navigation Functions\n        function showTimelineExplorer() {\n            hideAllSections();\n            document.getElementById('timelineExplorer').style.display = 'block';\n            showPeriod('native');\n        }\n        \n        function showColonialLife() {\n            hideAllSections();\n            document.getElementById('colonialLife').style.display = 'block';\n            showColonialTab('daily');\n        }\n        \n        function showRevolutionCenter() {\n            hideAllSections();\n            document.getElementById('revolutionCenter').style.display = 'block';\n        }\n        \n        function showFoundingFathers() {\n            hideAllSections();\n            document.getElementById('foundingFathers').style.display = 'block';\n        }\n        \n        function hideAllSections() {\n            const sections = ['timelineExplorer', 'colonialLife', 'revolutionCenter', 'foundingFathers'];\n            sections.forEach(section => {\n                document.getElementById(section).style.display = 'none';\n            });\n        }\n        \n        // Timeline Functions\n        function showPeriod(period) {\n            // Hide all periods\n            const periods = ['native', 'exploration', 'colonial', 'revolution', 'founding'];\n            periods.forEach(p => {\n                document.getElementById(p + '-period').style.display = 'none';\n                document.getElementById(p + '-btn').classList.remove('active');\n            });\n            \n            // Show selected period\n            document.getElementById(period + '-period').style.display = 'block';\n            document.getElementById(period + '-btn').classList.add('active');\n            currentPeriod = period;\n            \n            updateProgress('timeline', 20);\n        }\n        \n        function showEventDetails(eventId) {\n            const eventDetails = {\n                'event1': 'The first Americans likely crossed a land bridge from Asia during the last Ice Age, following animals and looking for new lands.',\n                'event2': 'By 1000 CE, Native Americans had built sophisticated cities like Cahokia and developed advanced farming techniques.',\n                'event3': 'By the 1400s, there were over 500 distinct Native American tribes, each with their own language, culture, and way of life.',\n                'columbus': 'Christopher Columbus\\'s voyage in 1492 began permanent contact between Europe and the Americas, changing both worlds forever.',\n                'conquistadors': 'Spanish conquistadors like Cortés and Pizarro conquered vast territories, seeking gold and spreading Christianity.',\n                'other-europeans': 'France, England, and the Netherlands competed for land and trade, establishing their own colonies.',\n                'jamestown': 'Jamestown was the first permanent English settlement, struggling with disease, starvation, and conflicts with Native Americans.',\n                'plymouth': 'The Pilgrims came seeking religious freedom and signed the Mayflower Compact, an early form of self-government.',\n                '13colonies': 'Each of the 13 colonies developed its own character: New England (trade, crafts), Middle (farming, tolerance), Southern (plantations).',\n                'taxes': 'After the French and Indian War, Britain taxed the colonies to pay war debts, leading to the cry \"No taxation without representation!\"',\n                'boston': 'Colonists disguised as Native Americans dumped British tea into Boston Harbor to protest the Tea Act.',\n                'declaration': 'Thomas Jefferson wrote that \"all men are created equal\" and listed grievances against King George III.',\n                'victory': 'With help from France, Spain, and the Netherlands, America won independence and became a free nation.',\n                'articles': 'The first government was too weak to solve the nation\\'s problems, leading to the need for a stronger Constitution.',\n                'convention': '55 delegates met in Philadelphia to create a new form of government with three branches and checks and balances.',\n                'constitution': 'The Constitution created a federal system where power is shared between national and state governments.',\n                'washington': 'George Washington set many precedents, including the peaceful transfer of power and the two-term tradition.'\n            };\n            \n            if (eventDetails[eventId]) {\n                alert('📚 Historical Detail:\\n\\n' + eventDetails[eventId]);\n                updateProgress('timeline', 5);\n            }\n        }\n        \n        function showTribeInfo(tribe) {\n            const tribeData = historicalData.tribes[tribe];\n            document.getElementById('tribe-info').innerHTML = `\n                <h4>${tribeData.name}</h4>\n                <p><strong>📍 Location:</strong> ${tribeData.location}</p>\n                <p><strong>🏠 Lifestyle:</strong> ${tribeData.lifestyle}</p>\n                <p><strong>🏛️ Government:</strong> ${tribeData.government}</p>\n                <p><strong>🎨 Culture:</strong> ${tribeData.culture}</p>\n            `;\n            updateProgress('timeline', 10);\n        }\n        \n        function evaluateExplorerChoices() {\n            const choices = document.querySelectorAll('.supply-choices input:checked');\n            const selectedValues = Array.from(choices).map(cb => cb.value);\n            \n            const feedback = document.getElementById('explorer-feedback');\n            const goodChoices = ['ships', 'food', 'medicine'];\n            const score = selectedValues.filter(choice => goodChoices.includes(choice)).length;\n            \n            let message = '';\n            if (score === 3) {\n                message = '🌟 Excellent! You made the most important choices for survival and exploration.';\n            } else if (score === 2) {\n                message = '👍 Good choices! You selected most of the essential items.';\n            } else {\n                message = '🤭 Think about what explorers would need most for long ocean voyages and survival in unknown lands.';\n            }\n            \n            feedback.innerHTML = `<p>${message}</p>`;\n            updateProgress('timeline', 10);\n        }\n        \n        function createColony() {\n            const location = document.querySelector('input[name=\"location\"]:checked');\n            const reason = document.querySelector('input[name=\"reason\"]:checked');\n            const economy = document.querySelector('input[name=\"economy\"]:checked');\n            \n            if (!location || !reason || !economy) {\n                alert('Please make all your colonial decisions first!');\n                return;\n            }\n            \n            const colonyTypes = {\n                north: 'New England Colony',\n                middle: 'Middle Colony',\n                south: 'Southern Colony'\n            };\n            \n            const result = document.getElementById('colony-result');\n            result.innerHTML = `\n                <h4>🏛️ Your ${colonyTypes[location.value]} is Founded!</h4>\n                <p><strong>⚖️ Main Purpose:</strong> ${reason.value === 'religious' ? 'Religious Freedom' : reason.value === 'economic' ? 'Economic Opportunity' : 'Land Ownership'}</p>\n                <p><strong>💼 Main Industry:</strong> ${economy.value === 'farming' ? 'Agriculture' : economy.value === 'trade' ? 'Trade and Commerce' : 'Crafts and Manufacturing'}</p>\n                <p>Your colony will face challenges but grow with hard work and determination!</p>\n            `;\n            updateProgress('colonial', 15);\n        }\n        \n        function generateRevolutionScenario() {\n            const scenario = historicalData.revolutionScenarios[Math.floor(Math.random() * historicalData.revolutionScenarios.length)];\n            \n            document.getElementById('current-scenario').innerHTML = `\n                <h4>⚖️ Revolutionary Dilemma</h4>\n                <p>${scenario.situation}</p>\n                <div class=\"scenario-options\">\n                    <div class=\"option patriot-option\">\n                        <strong>🇺🇸 Patriot View:</strong> ${scenario.patriot}\n                    </div>\n                    <div class=\"option loyalist-option\">\n                        <strong>🇬🇧 Loyalist View:</strong> ${scenario.loyalist}\n                    </div>\n                </div>\n            `;\n            \n            document.querySelector('.patriot-btn').style.display = 'inline-block';\n            document.querySelector('.loyalist-btn').style.display = 'inline-block';\n            document.getElementById('revolution-feedback').innerHTML = '';\n        }\n        \n        function choosePatriot() {\n            document.getElementById('revolution-feedback').innerHTML = `\n                <p style=\"color: #dc3545;\">🇺🇸 You chose the Patriot side! You believe in independence and self-governance.</p>\n                <p><strong>Historical Outcome:</strong> ${historicalData.revolutionScenarios[0].outcome}</p>\n            `;\n            updateProgress('revolution', 10);\n        }\n        \n        function chooseLoyalist() {\n            document.getElementById('revolution-feedback').innerHTML = `\n                <p style=\"color: #007bff;\">🇬🇧 You chose the Loyalist side! You believe in staying loyal to Britain.</p>\n                <p><strong>Historical Outcome:</strong> ${historicalData.revolutionScenarios[0].outcome}</p>\n            `;\n            updateProgress('revolution', 10);\n        }\n        \n        function solveConstitutionalIssues() {\n            const representation = document.querySelector('input[name=\"representation\"]:checked');\n            const power = document.querySelector('input[name=\"power\"]:checked');\n            const rights = document.querySelector('input[name=\"rights\"]:checked');\n            \n            if (!representation || !power || !rights) {\n                alert('Please answer all constitutional questions!');\n                return;\n            }\n            \n            const result = document.getElementById('constitution-result');\n            let score = 0;\n            let feedback = [];\n            \n            if (representation.value === 'both') {\n                score++;\n                feedback.push('✅ Correct! The Great Compromise created two houses - House (by population) and Senate (equal).');\n            } else {\n                feedback.push('❌ The Great Compromise solved this by creating two houses of Congress.');\n            }\n            \n            if (power.value === 'balanced') {\n                score++;\n                feedback.push('✅ Correct! Federalism balances power between federal and state governments.');\n            } else {\n                feedback.push('❌ The Constitution created federalism - shared power between levels of government.');\n            }\n            \n            if (rights.value === 'yes' || rights.value === 'later') {\n                score++;\n                feedback.push('✅ Correct! The Bill of Rights was added to protect individual freedoms.');\n            } else {\n                feedback.push('❌ The Bill of Rights was essential to protect people\\'s freedoms.');\n            }\n            \n            result.innerHTML = `\n                <h4>🏛️ Constitutional Convention Results</h4>\n                <p><strong>Your Score: ${score}/3</strong></p>\n                <div class=\"feedback-list\">${feedback.map(f => `<p>${f}</p>`).join('')}</div>\n                <p>The real Constitutional Convention faced these same difficult decisions!</p>\n            `;\n            updateProgress('timeline', 15);\n        }\n        \n        // Colonial Life Functions\n        function showColonialTab(tab) {\n            const tabs = ['daily', 'trades', 'town', 'survival'];\n            tabs.forEach(t => {\n                document.getElementById(t + '-tab').style.display = 'none';\n            });\n            \n            document.getElementById(tab + '-tab').style.display = 'block';\n            \n            // Update tab buttons\n            document.querySelectorAll('.colonial-tabs .tab-button').forEach(btn => btn.classList.remove('active'));\n            event.target.classList.add('active');\n        }\n        \n        function showDailyActivity(time) {\n            const activities = {\n                dawn: {\n                    title: '🌅 Dawn Activities (5:00 AM)',\n                    details: 'Colonial families woke up with the sun. Women started the fire and began cooking breakfast, usually cornmeal mush or leftovers from dinner. Men went outside to feed animals like chickens, pigs, and cows. Children helped with chores like gathering eggs or bringing in firewood.'\n                },\n                morning: {\n                    title: '🌞 Morning Work (8:00 AM)',\n                    details: 'After breakfast, everyone had jobs to do. Men worked in fields planting crops like corn, wheat, or tobacco, or worked in their shops as blacksmiths, carpenters, or other trades. Women spun thread, wove cloth, tended gardens, and prepared food. Children attended school if there was one nearby, or helped with family work.'\n                },\n                midday: {\n                    title: '☀️ Midday Rest (12:00 PM)',\n                    details: 'The main meal was at midday and was called \"dinner.\" Families ate together - often stew, bread, vegetables from the garden, and milk or cider to drink. After eating, people might rest briefly before returning to afternoon work. This was important on hot summer days.'\n                },\n                evening: {\n                    title: '🌅 Evening Time (6:00 PM)',\n                    details: 'Families gathered for supper, usually bread, cheese, and leftovers from dinner. After eating, they might tell stories, read the Bible, or work on crafts by candlelight. Children played simple games. Everyone went to bed early since candles were expensive and work started at dawn.'\n                }\n            };\n            \n            const activity = activities[time];\n            document.getElementById('daily-activity-details').innerHTML = `\n                <h4>${activity.title}</h4>\n                <p>${activity.details}</p>\n            `;\n            updateProgress('colonial', 5);\n        }\n        \n        function exploreJob(job) {\n            const jobs = {\n                blacksmith: {\n                    title: '⚒️ Blacksmith - The Village Metalworker',\n                    description: 'Blacksmiths were essential to colonial life. They heated iron in a forge and hammered it into useful items.',\n                    duties: ['Made horseshoes for horses', 'Created tools like hammers, nails, and plows', 'Repaired broken metal items', 'Made weapons and armor when needed'],\n                    importance: 'Every town needed a blacksmith because metal tools were essential for farming, building, and daily life.'\n                },\n                farmer: {\n                    title: '🌾 Farmer - Feeding the Community',\n                    description: 'Most colonists were farmers who grew food for their families and sold extra at markets.',\n                    duties: ['Planted and harvested crops like corn, wheat, and vegetables', 'Raised animals like cows, pigs, and chickens', 'Preserved food for winter months', 'Traded surplus crops for other goods'],\n                    importance: 'Farmers fed the colonies. Without successful farming, settlements could not survive.'\n                },\n                carpenter: {\n                    title: '🪚 Carpenter - Building the Community',\n                    description: 'Carpenters were skilled woodworkers who built the houses, shops, and furniture colonists needed.',\n                    duties: ['Built houses, barns, and other buildings', 'Made furniture like tables, chairs, and beds', 'Created wooden tools and household items', 'Repaired damaged wooden structures'],\n                    importance: 'Carpenters built the physical foundation of colonial communities, creating homes and buildings.'\n                },\n                tailor: {\n                    title: '✂️ Tailor - Clothing the Community',\n                    description: 'Tailors made all the clothes for colonial families, as there were no clothing stores.',\n                    duties: ['Sewed clothes for men, women, and children', 'Repaired torn or worn-out clothing', 'Created special garments for important occasions', 'Worked with different fabrics like wool, linen, and cotton'],\n                    importance: 'Tailors kept colonists properly clothed for work, weather, and special occasions.'\n                },\n                baker: {\n                    title: '🍞 Baker - Providing Daily Bread',\n                    description: 'Bakers provided bread and other baked goods, which were staple foods in colonial diets.',\n                    duties: ['Baked bread, rolls, and other grain products', 'Ground grain into flour', 'Made special treats for holidays and celebrations', 'Operated ovens that families could use for baking'],\n                    importance: 'Bread was a main food source, and bakers ensured communities had fresh baked goods daily.'\n                },\n                teacher: {\n                    title: '📚 Teacher - Educating the Future',\n                    description: 'Teachers educated colonial children, usually in one-room schoolhouses with students of all ages.',\n                    duties: ['Taught reading, writing, and arithmetic', 'Led lessons in religion and moral behavior', 'Managed students of different ages in one room', 'Prepared young people for adult responsibilities'],\n                    importance: 'Teachers ensured the next generation could read, write, and participate in colonial society.'\n                }\n            };\n            \n            const jobData = jobs[job];\n            document.getElementById('job-details').innerHTML = `\n                <h4>${jobData.title}</h4>\n                <p>${jobData.description}</p>\n                <h5>Daily Duties:</h5>\n                <ul>${jobData.duties.map(duty => `<li>${duty}</li>`).join('')}</ul>\n                <h5>Why This Job Mattered:</h5>\n                <p>${jobData.importance}</p>\n            `;\n            updateProgress('colonial', 8);\n        }\n        \n        function visitBuilding(building) {\n            const buildings = {\n                church: {\n                    title: '⛪ The Church - Heart of the Community',\n                    description: 'The church was the center of colonial community life, not just for worship but for town meetings and social gatherings.',\n                    activities: ['Sunday worship services', 'Town meetings to discuss community issues', 'Weddings, baptisms, and funerals', 'Community celebrations and festivals'],\n                    importance: 'Churches brought people together and helped make important community decisions.'\n                },\n                market: {\n                    title: '🛒 Market Square - Center of Trade',\n                    description: 'The market square was where colonists bought and sold goods, traded with each other, and heard news.',\n                    activities: ['Farmers sold fresh produce and meat', 'Craftsmen displayed and sold their goods', 'People traded items they made for things they needed', 'Town crier announced important news'],\n                    importance: 'Markets allowed colonists to get goods they couldn\\'t make themselves and stay connected with neighbors.'\n                },\n                school: {\n                    title: '🏫 One-Room Schoolhouse - Learning Center',\n                    description: 'Colonial schools were usually one room where children of all ages learned together.',\n                    activities: ['Children learned reading, writing, and arithmetic', 'Students practiced penmanship with quill pens', 'Older students helped teach younger ones', 'Everyone memorized Bible verses and moral lessons'],\n                    importance: 'Schools prepared children to be productive members of colonial society and read important documents.'\n                },\n                tavern: {\n                    title: '🍺 Tavern - Social Hub and Inn',\n                    description: 'Taverns served food and drinks, provided rooms for travelers, and were important gathering places.',\n                    activities: ['Travelers stayed overnight and ate meals', 'Local men discussed politics and business', 'People played games and shared news', 'Important meetings and negotiations took place'],\n                    importance: 'Taverns connected communities to the wider world through travelers and served as informal centers of information.'\n                },\n                mill: {\n                    title: '🌾 Grist Mill - Food Production Center',\n                    description: 'Grist mills ground grain into flour, which was essential for making bread and other food.',\n                    activities: ['Water wheel powered large grinding stones', 'Farmers brought corn and wheat to be ground', 'Miller kept some grain as payment for services', 'Fresh flour was distributed to families and bakers'],\n                    importance: 'Mills turned raw grain into usable flour, making it possible for colonists to have bread and other grain-based foods.'\n                }\n            };\n            \n            const buildingData = buildings[building];\n            document.getElementById('building-info').innerHTML = `\n                <h4>${buildingData.title}</h4>\n                <p>${buildingData.description}</p>\n                <h5>What Happened Here:</h5>\n                <ul>${buildingData.activities.map(activity => `<li>${activity}</li>`).join('')}</ul>\n                <h5>Why It Was Important:</h5>\n                <p>${buildingData.importance}</p>\n            `;\n            updateProgress('colonial', 8);\n        }\n        \n        // Survival Challenge Functions\n        function startSurvivalChallenge() {\n            currentSurvivalScenario = 0;\n            survivalStats = { health: 100, food: 50, shelter: 25, money: 100 };\n            updateSurvivalStats();\n            showNextSurvivalScenario();\n        }\n        \n        function showNextSurvivalScenario() {\n            if (currentSurvivalScenario >= historicalData.survivalScenarios.length) {\n                endSurvivalChallenge();\n                return;\n            }\n            \n            const scenario = historicalData.survivalScenarios[currentSurvivalScenario];\n            document.getElementById('survival-scenario').innerHTML = `\n                <h4>🎯 Survival Challenge ${currentSurvivalScenario + 1}</h4>\n                <p>${scenario.scenario}</p>\n            `;\n            \n            document.getElementById('choice-A').textContent = scenario.choices.A.text;\n            document.getElementById('choice-B').textContent = scenario.choices.B.text;\n            document.getElementById('choice-C').textContent = scenario.choices.C.text;\n            \n            document.getElementById('survival-choices').style.display = 'block';\n        }\n        \n        function makeChoice(choice) {\n            const scenario = historicalData.survivalScenarios[currentSurvivalScenario];\n            const choiceData = scenario.choices[choice];\n            \n            // Apply effects\n            Object.keys(choiceData.effects).forEach(stat => {\n                survivalStats[stat] += choiceData.effects[stat];\n                survivalStats[stat] = Math.max(0, Math.min(100, survivalStats[stat])); // Keep between 0-100\n            });\n            \n            updateSurvivalStats();\n            \n            document.getElementById('survival-result').innerHTML = `\n                <p><strong>You chose:</strong> ${choiceData.text}</p>\n                <p>${scenario.feedback}</p>\n            `;\n            \n            currentSurvivalScenario++;\n            updateProgress('colonial', 10);\n            \n            setTimeout(showNextSurvivalScenario, 2000);\n        }\n        \n        function updateSurvivalStats() {\n            document.getElementById('health').textContent = survivalStats.health;\n            document.getElementById('food').textContent = survivalStats.food;\n            document.getElementById('shelter').textContent = survivalStats.shelter;\n            document.getElementById('money').textContent = survivalStats.money;\n        }\n        \n        function endSurvivalChallenge() {\n            const totalScore = survivalStats.health + survivalStats.food + survivalStats.shelter + survivalStats.money;\n            let performance = '';\n            \n            if (totalScore >= 250) {\n                performance = 'Outstanding! You would have thrived in colonial times! 🌟';\n                checkForBadge('colonial-expert');\n            } else if (totalScore >= 200) {\n                performance = 'Good job! You made smart decisions and survived well! 👍';\n            } else if (totalScore >= 150) {\n                performance = 'You survived, but it was challenging. Colonial life was tough! 💪';\n            } else {\n                performance = 'Colonial life was very difficult! Try again with different strategies. 🤔';\n            }\n            \n            document.getElementById('survival-scenario').innerHTML = `\n                <h4>🏆 Survival Challenge Complete!</h4>\n                <p><strong>Final Score:</strong> ${totalScore}/400</p>\n                <p>${performance}</p>\n                <button onclick=\"startSurvivalChallenge()\">🔄 Try Again</button>\n            `;\n            \n            document.getElementById('survival-choices').style.display = 'none';\n        }\n        \n        // Revolution Center Functions\n        function showCausesEffects() {\n            document.getElementById('revolution-content').innerHTML = `\n                <h3>📋 Why Did the American Revolution Happen?</h3>\n                <div class=\"causes-effects\">\n                    <div class=\"cause-card\">\n                        <h4>💰 Taxes Without Representation</h4>\n                        <p>Britain taxed the colonists but didn't let them vote in the British Parliament. \"No taxation without representation!\" became their rallying cry.</p>\n                    </div>\n                    <div class=\"cause-card\">\n                        <h4>🪖 British Soldiers in Towns</h4>\n                        <p>Britain sent soldiers to live in colonial towns, which made colonists feel like they were being controlled by a foreign army.</p>\n                    </div>\n                    <div class=\"cause-card\">\n                        <h4>📜 Unfair Laws</h4>\n                        <p>Laws like the Stamp Act and Tea Act hurt colonial businesses and daily life, while benefiting British companies.</p>\n                    </div>\n                    <div class=\"cause-card\">\n                        <h4>🗽 Desire for Self-Government</h4>\n                        <p>Colonists had been governing themselves for over 100 years and didn't want Britain making all their decisions.</p>\n                    </div>\n                </div>\n                <p><strong>The Result:</strong> These causes led to protests, boycotts, and eventually armed conflict between Britain and the American colonies.</p>\n            `;\n            updateProgress('revolution', 15);\n        }\n        \n        function showKeyBattles() {\n            document.getElementById('revolution-content').innerHTML = `\n                <h3>⚔️ Important Battles of the Revolution</h3>\n                <div class=\"battles-timeline\">\n                    <div class=\"battle-card\">\n                        <h4>🔫 Lexington and Concord (1775)</h4>\n                        <p><strong>\"The Shot Heard 'Round the World\"</strong> - First battles of the Revolution. British tried to seize weapons, but colonial minutemen fought back.</p>\n                    </div>\n                    <div class=\"battle-card\">\n                        <h4>🏔️ Bunker Hill (1775)</h4>\n                        <p>British won but lost many soldiers. Proved Americans could fight bravely against professional British army.</p>\n                    </div>\n                    <div class=\"battle-card\">\n                        <h4>❄️ Trenton (1776)</h4>\n                        <p>Washington crossed the icy Delaware River on Christmas night and surprised the enemy, boosting American morale.</p>\n                    </div>\n                    <div class=\"battle-card\">\n                        <h4>🇫🇷 Saratoga (1777)</h4>\n                        <p>Major American victory that convinced France to join the war and help America fight Britain.</p>\n                    </div>\n                    <div class=\"battle-card\">\n                        <h4>🏆 Yorktown (1781)</h4>\n                        <p>Final major battle where British General Cornwallis surrendered, effectively ending the war.</p>\n                    </div>\n                </div>\n            `;\n            updateProgress('revolution', 15);\n        }\n        \n        function showKeyFigures() {\n            document.getElementById('revolution-content').innerHTML = `\n                <h3>👥 Heroes of the American Revolution</h3>\n                <div class=\"heroes-grid\">\n                    <div class=\"hero-card\">\n                        <h4>🏆 George Washington</h4>\n                        <p>Commander-in-Chief of the Continental Army. His leadership and determination kept the army together through difficult times.</p>\n                    </div>\n                    <div class=\"hero-card\">\n                        <h4>🇫🇷 Marquis de Lafayette</h4>\n                        <p>Young French volunteer who became Washington's trusted friend and helped bring French support to America.</p>\n                    </div>\n                    <div class=\"hero-card\">\n                        <h4>💪 Molly Pitcher</h4>\n                        <p>Women like Molly brought water to soldiers in battle and sometimes took their place when they were wounded.</p>\n                    </div>\n                    <div class=\"hero-card\">\n                        <h4>🕵️ Nathan Hale</h4>\n                        <p>American spy who said \"I only regret that I have but one life to lose for my country\" before being executed.</p>\n                    </div>\n                    <div class=\"hero-card\">\n                        <h4>⚖️ John Adams</h4>\n                        <p>Helped negotiate the Treaty of Paris that ended the war and secured American independence.</p>\n                    </div>\n                    <div class=\"hero-card\">\n                        <h4>✍️ Thomas Paine</h4>\n                        <p>Wrote \"Common Sense,\" a pamphlet that convinced many Americans to support independence.</p>\n                    </div>\n                </div>\n            `;\n            updateProgress('revolution', 15);\n        }\n        \n        function showDeclaration() {\n            document.getElementById('revolution-content').innerHTML = `\n                <h3>📜 The Declaration of Independence Deep Dive</h3>\n                <div class=\"declaration-analysis\">\n                    <div class=\"declaration-part\">\n                        <h4>🌟 Famous Opening</h4>\n                        <p><em>\"We hold these truths to be self-evident, that all men are created equal...\"</em></p>\n                        <p>This means everyone has the same basic rights just because they're human beings.</p>\n                    </div>\n                    <div class=\"declaration-part\">\n                        <h4>📋 List of Complaints</h4>\n                        <p>The Declaration lists 27 complaints against King George III, including:</p>\n                        <ul>\n                            <li>Taxing without consent</li>\n                            <li>Keeping soldiers in colonial homes</li>\n                            <li>Denying fair trials</li>\n                            <li>Cutting off trade with other countries</li>\n                        </ul>\n                    </div>\n                    <div class=\"declaration-part\">\n                        <h4>🗽 Final Declaration</h4>\n                        <p>The colonists tried to work things out peacefully, but Britain wouldn't listen. So they declared themselves \"Free and Independent States.\"</p>\n                    </div>\n                    <div class=\"declaration-part\">\n                        <h4>✍️ The Signers</h4>\n                        <p>56 brave men signed the Declaration, knowing they could be hanged for treason if America lost the war. Benjamin Franklin said, \"We must all hang together, or we shall all hang separately.\"</p>\n                    </div>\n                </div>\n            `;\n            updateProgress('revolution', 15);\n        }\n        \n        // Founding Fathers Functions\n        function showFounderProfile(founder) {\n            const profile = founderProfiles[founder];\n            document.getElementById('founder-profile').innerHTML = `\n                <h3>${profile.name}</h3>\n                <h4>${profile.nickname}</h4>\n                <div class=\"founder-details\">\n                    <div class=\"achievements\">\n                        <h5>🏆 Major Achievements:</h5>\n                        <ul>${profile.achievements.map(achievement => `<li>${achievement}</li>`).join('')}</ul>\n                    </div>\n                    <div class=\"famous-quote\">\n                        <h5>💬 Famous Quote:</h5>\n                        <p><em>${profile.quote}</em></p>\n                    </div>\n                    <div class=\"fun-facts\">\n                        <h5>🎯 Fun Facts:</h5>\n                        <ul>${profile.funFacts.map(fact => `<li>${fact}</li>`).join('')}</ul>\n                    </div>\n                </div>\n            `;\n            updateProgress('founders', 15);\n        }\n        \n        // Progress and Badge Functions\n        function updateProgress(skill, points) {\n            const progressElement = document.getElementById(skill + 'Progress');\n            const percentageElement = document.getElementById(skill + 'Percentage');\n            \n            let currentWidth = parseInt(progressElement.style.width) || 0;\n            currentWidth = Math.min(currentWidth + points, 100);\n            \n            progressElement.style.width = currentWidth + '%';\n            percentageElement.textContent = currentWidth + '%';\n            \n            // Check for badges\n            if (skill === 'timeline' && currentWidth >= 80) {\n                checkForBadge('timeline-master');\n            }\n            if (skill === 'colonial' && currentWidth >= 80) {\n                checkForBadge('colonial-expert');\n            }\n            if (skill === 'revolution' && currentWidth >= 80) {\n                checkForBadge('revolution-scholar');\n            }\n            \n            // Check for overall completion\n            checkOverallProgress();\n        }\n        \n        function checkOverallProgress() {\n            const skills = ['timeline', 'colonial', 'revolution', 'founders'];\n            const averageProgress = skills.reduce((sum, skill) => {\n                const element = document.getElementById(skill + 'Progress');\n                return sum + (parseInt(element.style.width) || 0);\n            }, 0) / skills.length;\n            \n            if (averageProgress >= 75) {\n                checkForBadge('history-champion');\n            }\n        }\n        \n        function checkForBadge(badgeId) {\n            const badge = document.getElementById('badge-' + badgeId);\n            if (badge && !badge.classList.contains('earned')) {\n                badge.classList.add('earned');\n                badge.style.opacity = '1';\n                badge.style.transform = 'scale(1.1)';\n                \n                // Show celebration\n                setTimeout(() => {\n                    alert(`🏆 Congratulations! You earned the \"${badge.querySelector('.badge-name').textContent}\" badge!`);\n                    badge.style.transform = 'scale(1)';\n                }, 500);\n            }\n        }\n        \n        // Initialize page\n        document.addEventListener('DOMContentLoaded', function() {\n            // Set initial progress to 10%\n            document.querySelector('.chapter-navigation .progress-fill').style.width = '10%';\n        });"}]
 </head>
 <body>
     <div id="header-container"></div>
@@ -23,7 +677,7 @@
         <div class="chapter-navigation">
             <a href="index.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
-                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 10%"></div></div>
             </div>
             <a href="chapter-2.html" class="nav-button">Next →</a>
         </div>
