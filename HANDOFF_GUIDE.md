@@ -6,10 +6,11 @@
 
 ```
 CURRENT STATUS: Epic 1 Complete ✅ → Epic 2 Ready to Start
-NEXT TASK: Task 2.1 - Main Navigation System  
-LOCATION: TASKS.md (line ~125)
-TIME ESTIMATE: 8 hours
+NEXT TASK: Task 2.1 - Main Navigation System & Modular Architecture Setup  
+LOCATION: TASKS.md (line ~200)
+TIME ESTIMATE: 12 hours (includes modular file structure)
 PRIORITY: HIGH (blocks all subject development)
+CRITICAL: Must implement modular architecture for chapter-level maintainability
 ```
 
 ## 🎯 30-Second Project Brief
@@ -133,12 +134,23 @@ npm run dev  # Opens localhost:3000
 - [ ] Screen reader accessibility
 - [ ] Smooth animations/transitions
 - [ ] Integration with existing design system
+- [ ] Breadcrumb navigation for chapter pages
 
-**Files to Create/Modify:**
-- Update `index.html` navigation structure
-- Enhance `js/app.js` with navigation logic
-- Add navigation styles to `css/main.css`
-- Test responsive behavior in `css/responsive.css`
+**Modular Architecture Requirements:**
+- [ ] Create all subject landing pages (`subjects/*/index.html`)
+- [ ] Create chapter page templates for each subject
+- [ ] Create assessment page templates
+- [ ] Implement shared components (header, footer, navigation)
+- [ ] Context-aware navigation (current subject/chapter highlighting)
+- [ ] Template system for consistent styling across all pages
+
+**Files to Create:**
+- `subjects/mathematics/index.html` + chapter-1.html through chapter-4.html + assessment-1.html
+- `subjects/science/index.html` + chapter-1.html through chapter-5.html + assessment-1.html  
+- `subjects/english/index.html` + chapter-1.html through chapter-4.html + assessment-1.html
+- `subjects/social-studies/index.html` + chapter-1.html through chapter-4.html + assessment-1.html
+- `subjects/shared/header.html`, `footer.html`, `chapter-template.html`
+- Enhanced `js/app.js` with modular navigation logic
 
 ## 📞 Getting Help
 

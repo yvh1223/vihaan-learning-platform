@@ -53,6 +53,14 @@
 - **Security**: No sensitive data in git, use GitHub Secrets
 - **Cost Optimization**: GPT-4o-mini ($0.0003/1K tokens vs $0.03 for GPT-4)
 
+#### 📁 MODULAR FILE ARCHITECTURE (CRITICAL):
+- **Main Dashboard**: `index.html` (navigation hub only)
+- **Subject Landing Pages**: `subjects/[subject]/index.html` (overview + chapter navigation)
+- **Chapter Pages**: `subjects/[subject]/chapter-[N].html` (individual lessons)
+- **Assessment Pages**: `subjects/[subject]/assessment-[N].html` (STAAR/MAP style tests)
+- **Shared Components**: Template-based approach with consistent navigation
+- **Benefit**: Easy chapter-level updates, maintainable content, scalable structure
+
 #### Quality Standards:
 - **Accessibility**: WCAG 2.1 AA compliance
 - **Performance**: <3s load time on 3G networks
@@ -189,15 +197,60 @@ npm run deploy
 **Dependencies**: Epic 1 Foundation  
 **Blocks**: All subject content development
 
-### 2.1 Main Navigation System
-- **Task**: Build intuitive navigation for 5th graders
+### 2.1 Main Navigation System & Modular Architecture Setup
+- **Task**: Build intuitive navigation for 5th graders + establish modular file structure
 - **Dependencies**: 1.3 Design System, 1.4 Responsive Framework
-- **Time**: 8 hours
+- **Time**: 12 hours (increased for modular setup)
 - **Acceptance Criteria**:
-  - Visual subject icons with labels
-  - Breadcrumb navigation
-  - Touch-friendly menu system
-  - Accessibility compliance (keyboard navigation)
+  - **Navigation System**:
+    - Visual subject icons with labels
+    - Breadcrumb navigation for chapter-level pages
+    - Touch-friendly menu system
+    - Accessibility compliance (keyboard navigation)
+  - **Modular Architecture Implementation**:
+    - Create subject landing pages: `subjects/mathematics/index.html`, `subjects/science/index.html`, etc.
+    - Template system for consistent navigation across all pages
+    - Chapter page templates: `subjects/[subject]/chapter-[N].html`
+    - Assessment page templates: `subjects/[subject]/assessment-[N].html`
+    - Shared components (header, footer, navigation) as reusable includes
+    - Navigation context awareness (current subject, current chapter)
+  - **File Structure Created**:
+    ```
+    subjects/
+    ├── mathematics/
+    │   ├── index.html (subject overview + chapter navigation)
+    │   ├── chapter-1.html (Numbers & Operations)
+    │   ├── chapter-2.html (Algebraic Reasoning)
+    │   ├── chapter-3.html (Geometry & Measurement)
+    │   ├── chapter-4.html (Data Analysis & Financial Literacy)
+    │   └── assessment-1.html (STAAR-style practice test)
+    ├── science/
+    │   ├── index.html
+    │   ├── chapter-1.html (Scientific Investigation)
+    │   ├── chapter-2.html (Matter & Energy)
+    │   ├── chapter-3.html (Forces & Motion)
+    │   ├── chapter-4.html (Earth & Space Science)
+    │   ├── chapter-5.html (Life Science)
+    │   └── assessment-1.html
+    ├── english/
+    │   ├── index.html
+    │   ├── chapter-1.html (Reading Comprehension)
+    │   ├── chapter-2.html (Writing Skills)
+    │   ├── chapter-3.html (Speaking & Listening)
+    │   ├── chapter-4.html (Grammar & Vocabulary)
+    │   └── assessment-1.html
+    ├── social-studies/
+    │   ├── index.html
+    │   ├── chapter-1.html (American History)
+    │   ├── chapter-2.html (Geography)
+    │   ├── chapter-3.html (Government & Citizenship)
+    │   ├── chapter-4.html (Economics & Culture)
+    │   └── assessment-1.html
+    └── shared/
+        ├── header.html (reusable navigation header)
+        ├── footer.html (reusable footer)
+        └── chapter-template.html (base template for all chapters)
+    ```
 
 ### 2.2 Dashboard/Home Page
 - **Task**: Create engaging landing page

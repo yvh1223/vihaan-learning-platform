@@ -5,10 +5,11 @@
 
 ## 🎯 IMMEDIATE ACTION REQUIRED
 
-**NEXT TASK**: Epic 2, Task 2.1 - Main Navigation System  
-**LOCATION**: See `TASKS.md` line ~97 for detailed requirements  
-**ESTIMATED TIME**: 8 hours  
-**BLOCKS**: All subject development until navigation is complete
+**NEXT TASK**: Epic 2, Task 2.1 - Main Navigation System & Modular Architecture Setup  
+**LOCATION**: See `TASKS.md` line ~200 for detailed requirements  
+**ESTIMATED TIME**: 12 hours (includes modular file structure setup)  
+**BLOCKS**: All subject development until navigation and file structure is complete  
+**CRITICAL**: Must implement modular architecture for chapter-level maintainability
 
 ## ✅ Current Status Summary
 
@@ -60,6 +61,13 @@ Create an interactive learning platform for **Vihaan (5th grader)** with:
 - **Performance**: <3s load time on 3G networks
 - **Security**: No sensitive data committed to git
 - **Cost**: Use GPT-4o-mini ($0.0003/1K vs $0.03 for GPT-4)
+
+### 🏗️ MODULAR ARCHITECTURE REQUIREMENT
+- **Structure**: Main dashboard + individual subject/chapter HTML files
+- **Benefits**: Easy chapter-level updates, maintainable content, scalable development
+- **Templates**: Shared components for consistent navigation and styling
+- **Navigation**: Context-aware breadcrumbs and subject/chapter awareness
+- **Must Implement**: Epic 2, Task 2.1 creates the complete modular file structure
 
 ### Tech Stack
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
