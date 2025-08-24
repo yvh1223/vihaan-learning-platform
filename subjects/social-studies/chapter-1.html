@@ -415,6 +415,235 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Colonial Life Section -->
+            <div id="colonialLife" class="content-section" style="display: none;">
+                <h2>🏘️ Colonial Life Experience</h2>
+                <div class="colonial-tabs">
+                    <button class="tab-button active" onclick="showColonialTab('daily')">Daily Life</button>
+                    <button class="tab-button" onclick="showColonialTab('trades')">Colonial Jobs</button>
+                    <button class="tab-button" onclick="showColonialTab('town')">Town Buildings</button>
+                    <button class="tab-button" onclick="showColonialTab('survival')">Survival Challenge</button>
+                </div>
+
+                <!-- Daily Life Tab -->
+                <div id="daily-tab" class="colonial-tab">
+                    <h3>🌅 A Day in Colonial Life</h3>
+                    <div class="daily-activities">
+                        <div class="activity-time" onclick="showDailyActivity('dawn')">
+                            <h4>🌅 Dawn (5:00 AM)</h4>
+                            <p>Wake up with the sun, start the fire, feed animals</p>
+                        </div>
+                        <div class="activity-time" onclick="showDailyActivity('morning')">
+                            <h4>🌞 Morning (8:00 AM)</h4>
+                            <p>Work begins - farming, crafts, teaching children</p>
+                        </div>
+                        <div class="activity-time" onclick="showDailyActivity('midday')">
+                            <h4>☀️ Midday (12:00 PM)</h4>
+                            <p>Main meal of the day and brief rest</p>
+                        </div>
+                        <div class="activity-time" onclick="showDailyActivity('evening')">
+                            <h4>🌅 Evening (6:00 PM)</h4>
+                            <p>Supper, family time, early to bed</p>
+                        </div>
+                    </div>
+                    <div id="daily-activity-details" class="info-display">
+                        <p>Click on a time of day to learn about colonial daily activities!</p>
+                    </div>
+                </div>
+
+                <!-- Colonial Jobs Tab -->
+                <div id="trades-tab" class="colonial-tab" style="display: none;">
+                    <h3>⚒️ Colonial Jobs and Trades</h3>
+                    <div class="jobs-grid">
+                        <div class="job-card" onclick="exploreJob('blacksmith')">
+                            <h4>⚒️ Blacksmith</h4>
+                            <p>Village metalworker</p>
+                        </div>
+                        <div class="job-card" onclick="exploreJob('farmer')">
+                            <h4>🌾 Farmer</h4>
+                            <p>Food provider</p>
+                        </div>
+                        <div class="job-card" onclick="exploreJob('carpenter')">
+                            <h4>🪚 Carpenter</h4>
+                            <p>Builder & craftsman</p>
+                        </div>
+                        <div class="job-card" onclick="exploreJob('tailor')">
+                            <h4>✂️ Tailor</h4>
+                            <p>Clothing maker</p>
+                        </div>
+                        <div class="job-card" onclick="exploreJob('baker')">
+                            <h4>🍞 Baker</h4>
+                            <p>Bread & food</p>
+                        </div>
+                        <div class="job-card" onclick="exploreJob('teacher')">
+                            <h4>📚 Teacher</h4>
+                            <p>Educator</p>
+                        </div>
+                    </div>
+                    <div id="job-details" class="info-display">
+                        <p>Select a job to learn about colonial trades and crafts!</p>
+                    </div>
+                </div>
+
+                <!-- Town Buildings Tab -->
+                <div id="town-tab" class="colonial-tab" style="display: none;">
+                    <h3>🏛️ Important Town Buildings</h3>
+                    <div class="buildings-grid">
+                        <div class="building-card" onclick="visitBuilding('church')">
+                            <h4>⛪ Church</h4>
+                            <p>Community center</p>
+                        </div>
+                        <div class="building-card" onclick="visitBuilding('market')">
+                            <h4>🛒 Market Square</h4>
+                            <p>Trade center</p>
+                        </div>
+                        <div class="building-card" onclick="visitBuilding('school')">
+                            <h4>🏫 Schoolhouse</h4>
+                            <p>Learning center</p>
+                        </div>
+                        <div class="building-card" onclick="visitBuilding('tavern')">
+                            <h4>🍺 Tavern</h4>
+                            <p>Social hub</p>
+                        </div>
+                        <div class="building-card" onclick="visitBuilding('mill')">
+                            <h4>🌾 Grist Mill</h4>
+                            <p>Food processing</p>
+                        </div>
+                    </div>
+                    <div id="building-info" class="info-display">
+                        <p>Visit a building to learn about colonial community life!</p>
+                    </div>
+                </div>
+
+                <!-- Survival Challenge Tab -->
+                <div id="survival-tab" class="colonial-tab" style="display: none;">
+                    <h3>💪 Colonial Survival Challenge</h3>
+                    <p>Can you survive as a colonist? Make decisions to keep your family healthy, fed, and sheltered!</p>
+                    
+                    <div class="survival-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">❤️ Health:</span>
+                            <span id="health" class="stat-value">100</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">🍖 Food:</span>
+                            <span id="food" class="stat-value">50</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">🏠 Shelter:</span>
+                            <span id="shelter" class="stat-value">25</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">💰 Money:</span>
+                            <span id="money" class="stat-value">100</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="startSurvivalChallenge()" class="survival-btn">🚀 Start Challenge</button>
+                    
+                    <div id="survival-scenario" class="scenario-display">
+                        <p>Click "Start Challenge" to begin your colonial survival adventure!</p>
+                    </div>
+                    
+                    <div id="survival-choices" class="choice-buttons" style="display: none;">
+                        <button id="choice-A" onclick="makeChoice('A')">Choice A</button>
+                        <button id="choice-B" onclick="makeChoice('B')">Choice B</button>
+                        <button id="choice-C" onclick="makeChoice('C')">Choice C</button>
+                    </div>
+                    
+                    <div id="survival-result" class="result-display"></div>
+                </div>
+            </div>
+
+            <!-- Revolution Center Section -->
+            <div id="revolutionCenter" class="content-section" style="display: none;">
+                <h2>⚔️ Revolution Center</h2>
+                <div class="revolution-tabs">
+                    <button class="tab-button active" onclick="showRevolutionTab('causes')">Causes & Effects</button>
+                    <button class="tab-button" onclick="showRevolutionTab('battles')">Key Battles</button>
+                    <button class="tab-button" onclick="showRevolutionTab('heroes')">Revolutionary Heroes</button>
+                    <button class="tab-button" onclick="showRevolutionTab('declaration')">Declaration Deep Dive</button>
+                    <button class="tab-button" onclick="showRevolutionTab('decisions')">Patriot vs Loyalist</button>
+                </div>
+
+                <div id="revolution-content" class="revolution-display">
+                    <div id="causes-tab" class="revolution-tab">
+                        <h3>📋 Why Did the American Revolution Happen?</h3>
+                        <div class="causes-effects">
+                            <div class="cause-card">
+                                <h4>💰 Taxes Without Representation</h4>
+                                <p>Britain taxed the colonists but didn't let them vote in the British Parliament. "No taxation without representation!" became their rallying cry.</p>
+                            </div>
+                            <div class="cause-card">
+                                <h4>🪖 British Soldiers in Towns</h4>
+                                <p>Britain sent soldiers to live in colonial towns, which made colonists feel like they were being controlled by a foreign army.</p>
+                            </div>
+                            <div class="cause-card">
+                                <h4>📜 Unfair Laws</h4>
+                                <p>Laws like the Stamp Act and Tea Act hurt colonial businesses and daily life, while benefiting British companies.</p>
+                            </div>
+                            <div class="cause-card">
+                                <h4>🗽 Desire for Self-Government</h4>
+                                <p>Colonists had been governing themselves for over 100 years and didn't want Britain making all their decisions.</p>
+                            </div>
+                        </div>
+                        <p><strong>The Result:</strong> These causes led to protests, boycotts, and eventually armed conflict between Britain and the American colonies.</p>
+                    </div>
+                </div>
+
+                <!-- Patriot vs Loyalist Decision Center -->
+                <div class="decision-center">
+                    <h3>🤔 You Decide: Patriot or Loyalist?</h3>
+                    <button onclick="generateRevolutionScenario()" class="scenario-btn">🎲 Get Revolution Scenario</button>
+                    
+                    <div id="current-scenario" class="scenario-display">
+                        <p>Click above to get a revolutionary dilemma and choose your side!</p>
+                    </div>
+                    
+                    <div class="decision-buttons">
+                        <button class="patriot-btn" onclick="choosePatriot()" style="display: none;">🇺🇸 Choose Patriot Side</button>
+                        <button class="loyalist-btn" onclick="chooseLoyalist()" style="display: none;">🇬🇧 Choose Loyalist Side</button>
+                    </div>
+                    
+                    <div id="revolution-feedback" class="feedback-display"></div>
+                </div>
+            </div>
+
+            <!-- Founding Fathers Section -->
+            <div id="foundingFathers" class="content-section" style="display: none;">
+                <h2>👨‍💼 Meet the Founding Fathers</h2>
+                <div class="founders-grid">
+                    <div class="founder-card" onclick="showFounderProfile('washington')">
+                        <h3>🏆 George Washington</h3>
+                        <p>"Father of His Country"</p>
+                    </div>
+                    <div class="founder-card" onclick="showFounderProfile('franklin')">
+                        <h3>⚡ Benjamin Franklin</h3>
+                        <p>"The Renaissance Man"</p>
+                    </div>
+                    <div class="founder-card" onclick="showFounderProfile('jefferson')">
+                        <h3>✍️ Thomas Jefferson</h3>
+                        <p>"Man of the People"</p>
+                    </div>
+                    <div class="founder-card" onclick="showFounderProfile('adams')">
+                        <h3>⚖️ John Adams</h3>
+                        <p>"Atlas of Independence"</p>
+                    </div>
+                    <div class="founder-card" onclick="showFounderProfile('hamilton')">
+                        <h3>💰 Alexander Hamilton</h3>
+                        <p>"The Financial Genius"</p>
+                    </div>
+                    <div class="founder-card" onclick="showFounderProfile('madison')">
+                        <h3>📜 James Madison</h3>
+                        <p>"Father of the Constitution"</p>
+                    </div>
+                </div>
+                
+                <div id="founder-profile" class="founder-details">
+                    <p>Click on a Founding Father above to learn about their life and contributions to America!</p>
+                </div>
+            </div>
             
             <!-- Daily Challenge -->
             <div class="daily-challenge">
@@ -512,19 +741,23 @@
         }
         
         function showColonialLife() {
-            alert('🏘️ Colonial Life section coming soon! This will include interactive colonial life simulations.');
+            hideAllSections();
+            document.getElementById('colonialLife').style.display = 'block';
+            showColonialTab('daily');
         }
         
         function showRevolutionCenter() {
-            alert('⚔️ Revolution Center coming soon! This will include Patriot vs Loyalist decision making.');
+            hideAllSections();
+            document.getElementById('revolutionCenter').style.display = 'block';
         }
         
         function showFoundingFathers() {
-            alert('👨‍💼 Founding Fathers section coming soon! Meet Washington, Jefferson, Franklin and more.');
+            hideAllSections();
+            document.getElementById('foundingFathers').style.display = 'block';
         }
         
         function hideAllSections() {
-            const sections = ['timelineExplorer'];
+            const sections = ['timelineExplorer', 'colonialLife', 'revolutionCenter', 'foundingFathers'];
             sections.forEach(section => {
                 const element = document.getElementById(section);
                 if (element) {
@@ -677,6 +910,625 @@
                 <div style="margin: var(--spacing-md) 0;">${feedback.map(f => `<p style="padding: 0.25rem 0;">${f}</p>`).join('')}</div>
                 <p>The real Constitutional Convention faced these same difficult decisions!</p>
             `;
+        }
+        
+        // Colonial Life Interactive Functions
+        function showColonialTab(tabName) {
+            // Hide all colonial tabs
+            const tabs = document.querySelectorAll('.colonial-tab');
+            tabs.forEach(tab => tab.style.display = 'none');
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.colonial-tabs .tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        function showDailyActivity(timeOfDay) {
+            const activities = {
+                dawn: {
+                    title: '🌅 Dawn (5:00 AM)',
+                    activity: 'Wake up before sunrise',
+                    description: 'Colonial families woke up early to make the most of daylight. There was no electricity, so they had to work with the sun!',
+                    tasks: ['Light the fireplace', 'Milk the cow', 'Feed the chickens', 'Collect eggs']
+                },
+                morning: {
+                    title: '🌤️ Morning (8:00 AM)', 
+                    activity: 'Breakfast and daily work',
+                    description: 'After morning chores, families ate a simple breakfast of porridge, bread, or leftover stew.',
+                    tasks: ['Eat breakfast', 'Tend the garden', 'Repair tools', 'Prepare for work']
+                },
+                midday: {
+                    title: '☀️ Midday (12:00 PM)',
+                    activity: 'Main meal and work',
+                    description: 'The largest meal of the day! Families worked hard and needed lots of energy.',
+                    tasks: ['Prepare dinner (main meal)', 'Work in fields or shop', 'Trade with neighbors', 'Teach children']
+                },
+                evening: {
+                    title: '🌆 Evening (6:00 PM)',
+                    activity: 'Family time and rest',
+                    description: 'As darkness fell, families gathered for simple evening activities before early bedtime.',
+                    tasks: ['Light candles', 'Share stories', 'Mend clothes', 'Go to bed early']
+                }
+            };
+            
+            const activity = activities[timeOfDay];
+            const display = document.getElementById('activity-info');
+            
+            display.innerHTML = `
+                <div class="activity-detail">
+                    <h4>${activity.title}</h4>
+                    <h5>${activity.activity}</h5>
+                    <p>${activity.description}</p>
+                    <h6>Daily Tasks:</h6>
+                    <ul>
+                        ${activity.tasks.map(task => `<li>${task}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+        
+        function exploreJob(jobType) {
+            const jobs = {
+                blacksmith: {
+                    title: '🔨 Blacksmith',
+                    description: 'The blacksmith was essential to colonial life, making and repairing metal tools.',
+                    dailyWork: 'Heat iron in a forge, hammer metal into tools, repair broken farm equipment',
+                    importance: 'Without blacksmiths, colonists couldn\'t have horseshoes, nails, or farm tools!',
+                    skills: ['Working with fire and metal', 'Physical strength', 'Tool-making knowledge']
+                },
+                farmer: {
+                    title: '🌾 Farmer',
+                    description: 'Most colonists were farmers, growing food for their families and communities.',
+                    dailyWork: 'Plant crops, tend animals, harvest grain, preserve food for winter',
+                    importance: 'Farmers fed the entire community and made survival possible!',
+                    skills: ['Knowledge of seasons', 'Animal care', 'Food preservation']
+                },
+                carpenter: {
+                    title: '🪚 Carpenter',
+                    description: 'Carpenters built the houses, furniture, and wooden tools colonists needed.',
+                    dailyWork: 'Cut lumber, build houses, make furniture, repair buildings',
+                    importance: 'Every building and piece of furniture was handmade by skilled carpenters!',
+                    skills: ['Woodworking', 'Building design', 'Tool crafting']
+                },
+                tailor: {
+                    title: '🧵 Tailor',
+                    description: 'Tailors made and repaired the clothes that kept colonists warm and presentable.',
+                    dailyWork: 'Sew clothes, repair tears, measure customers, work with different fabrics',
+                    importance: 'All clothing was handmade - there were no clothing stores!',
+                    skills: ['Sewing and mending', 'Fabric knowledge', 'Design skills']
+                },
+                baker: {
+                    title: '🍞 Baker',
+                    description: 'Bakers provided bread and baked goods for the community.',
+                    dailyWork: 'Grind grain into flour, bake bread and pastries, tend the ovens',
+                    importance: 'Bread was a main food source - bakers kept the community fed!',
+                    skills: ['Baking techniques', 'Grain knowledge', 'Oven management']
+                },
+                teacher: {
+                    title: '📚 Teacher',
+                    description: 'Teachers educated colonial children in reading, writing, and arithmetic.',
+                    dailyWork: 'Teach reading and writing, manage the classroom, discipline students',
+                    importance: 'Education was highly valued - teachers prepared children for adult life!',
+                    skills: ['Reading and writing', 'Patience and discipline', 'Knowledge of subjects']
+                }
+            };
+            
+            const job = jobs[jobType];
+            const display = document.getElementById('job-info');
+            
+            display.innerHTML = `
+                <div class="job-detail">
+                    <h4>${job.title}</h4>
+                    <p><strong>What they did:</strong> ${job.description}</p>
+                    <p><strong>Daily work:</strong> ${job.dailyWork}</p>
+                    <p><strong>Why important:</strong> ${job.importance}</p>
+                    <h6>Skills needed:</h6>
+                    <ul>
+                        ${job.skills.map(skill => `<li>${skill}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+        
+        function visitBuilding(buildingType) {
+            const buildings = {
+                church: {
+                    title: '⛪ Colonial Church',
+                    description: 'The church was the center of community life where everyone gathered.',
+                    activities: ['Sunday worship services', 'Community meetings', 'Weddings and celebrations', 'Education for children'],
+                    importance: 'Churches brought the community together and were often the first buildings built in new towns.',
+                    funFact: 'Many colonial churches had no heat - people brought hot coals in metal containers to keep warm!'
+                },
+                market: {
+                    title: '🏪 Town Market', 
+                    description: 'The market was where colonists bought, sold, and traded goods.',
+                    activities: ['Trading crops and goods', 'Meeting neighbors', 'Learning news', 'Buying supplies'],
+                    importance: 'Markets allowed colonists to get things they couldn\'t make themselves.',
+                    funFact: 'There was no paper money - colonists often traded goods instead of using coins!'
+                },
+                school: {
+                    title: '🏫 One-Room Schoolhouse',
+                    description: 'Colonial schools were small buildings where children of all ages learned together.',
+                    activities: ['Learning reading and writing', 'Arithmetic lessons', 'Memorizing Bible verses', 'Practicing penmanship'],
+                    importance: 'Education helped children become productive members of society.',
+                    funFact: 'Students wrote on slates (small blackboards) because paper was expensive!'
+                },
+                tavern: {
+                    title: '🍺 Colonial Tavern',
+                    description: 'Taverns were gathering places where travelers stayed and locals socialized.',
+                    activities: ['Sharing news and gossip', 'Playing games', 'Meetings and discussions', 'Providing lodging'],
+                    importance: 'Taverns were communication centers where people learned about events in other towns.',
+                    funFact: 'Taverns often served as courthouses, post offices, and meeting halls!'
+                },
+                mill: {
+                    title: '🌾 Grist Mill',
+                    description: 'Mills used water power to grind grain into flour for bread and cooking.',
+                    activities: ['Grinding corn and wheat', 'Processing grain', 'Community gathering', 'Trading flour'],
+                    importance: 'Mills were essential for turning grain into usable flour for cooking.',
+                    funFact: 'The miller was paid by keeping a portion of every farmer\'s grain - usually 1/8th!'
+                }
+            };
+            
+            const building = buildings[buildingType];
+            const display = document.getElementById('building-info');
+            
+            display.innerHTML = `
+                <div class="building-detail">
+                    <h4>${building.title}</h4>
+                    <p><strong>What it was:</strong> ${building.description}</p>
+                    <h6>Activities that happened here:</h6>
+                    <ul>
+                        ${building.activities.map(activity => `<li>${activity}</li>`).join('')}
+                    </ul>
+                    <p><strong>Why important:</strong> ${building.importance}</p>
+                    <p><strong>Fun fact:</strong> ${building.funFact}</p>
+                </div>
+            `;
+        }
+        
+        // Survival Challenge Game Logic
+        let survivalStats = {
+            health: 100,
+            food: 50,
+            shelter: 25,
+            money: 100,
+            day: 1,
+            gameActive: false
+        };
+        
+        const survivalScenarios = [
+            {
+                title: "🌨️ Winter is Coming",
+                description: "It's October and winter will be harsh. Your family needs to prepare!",
+                choices: [
+                    { text: "Buy extra firewood (-30 money, +15 shelter)", effect: { money: -30, shelter: 15 } },
+                    { text: "Hunt for meat (-10 health, +25 food)", effect: { health: -10, food: 25 } },
+                    { text: "Work extra jobs (+20 money, -15 health)", effect: { money: 20, health: -15 } }
+                ]
+            },
+            {
+                title: "🤒 Family Member is Sick", 
+                description: "Your child has a fever and needs care. What do you do?",
+                choices: [
+                    { text: "Visit the doctor (-50 money, +20 health)", effect: { money: -50, health: 20 } },
+                    { text: "Use home remedies (-5 food, +10 health)", effect: { food: -5, health: 10 } },
+                    { text: "Rest and pray (+5 health, -5 food)", effect: { health: 5, food: -5 } }
+                ]
+            },
+            {
+                title: "🌾 Crop Harvest Time",
+                description: "Your crops are ready! But storms are coming. How do you harvest?",
+                choices: [
+                    { text: "Harvest quickly alone (-20 health, +30 food)", effect: { health: -20, food: 30 } },
+                    { text: "Ask neighbors for help (-10 money, +40 food)", effect: { money: -10, food: 40 } },
+                    { text: "Risk the weather (+50 food or -30 food)", effect: { food: Math.random() > 0.5 ? 50 : -30 } }
+                ]
+            },
+            {
+                title: "🏠 Roof Needs Repair",
+                description: "Your roof is leaking and winter is approaching!",
+                choices: [
+                    { text: "Hire a carpenter (-40 money, +25 shelter)", effect: { money: -40, shelter: 25 } },
+                    { text: "Fix it yourself (-15 health, +15 shelter)", effect: { health: -15, shelter: 15 } },
+                    { text: "Wait until spring (-10 health per turn)", effect: { health: -10 } }
+                ]
+            },
+            {
+                title: "🦌 Native American Trade",
+                description: "Friendly Native Americans offer to trade. What do you exchange?",
+                choices: [
+                    { text: "Trade tools for furs (+20 shelter, -10 money)", effect: { shelter: 20, money: -10 } },
+                    { text: "Trade food for medicine (+15 health, -15 food)", effect: { health: 15, food: -15 } },
+                    { text: "Decline trade politely (no change)", effect: {} }
+                ]
+            }
+        ];
+        
+        let currentScenario = 0;
+        
+        function startSurvivalChallenge() {
+            survivalStats = { health: 100, food: 50, shelter: 25, money: 100, day: 1, gameActive: true };
+            currentScenario = 0;
+            updateSurvivalDisplay();
+            presentScenario();
+        }
+        
+        function updateSurvivalDisplay() {
+            document.getElementById('health').textContent = Math.max(0, survivalStats.health);
+            document.getElementById('food').textContent = Math.max(0, survivalStats.food);
+            document.getElementById('shelter').textContent = Math.max(0, survivalStats.shelter);
+            document.getElementById('money').textContent = Math.max(0, survivalStats.money);
+        }
+        
+        function presentScenario() {
+            if (!survivalStats.gameActive || currentScenario >= survivalScenarios.length) {
+                endGame();
+                return;
+            }
+            
+            const scenario = survivalScenarios[currentScenario];
+            const scenarioDiv = document.getElementById('survival-scenario');
+            const choicesDiv = document.getElementById('survival-choices');
+            
+            scenarioDiv.innerHTML = `
+                <h4>Day ${survivalStats.day}: ${scenario.title}</h4>
+                <p>${scenario.description}</p>
+            `;
+            
+            const choiceButtons = choicesDiv.querySelectorAll('button');
+            scenario.choices.forEach((choice, index) => {
+                if (choiceButtons[index]) {
+                    choiceButtons[index].textContent = choice.text;
+                    choiceButtons[index].style.display = 'block';
+                }
+            });
+            
+            // Hide unused choice buttons
+            for (let i = scenario.choices.length; i < choiceButtons.length; i++) {
+                choiceButtons[i].style.display = 'none';
+            }
+            
+            choicesDiv.style.display = 'block';
+        }
+        
+        function makeChoice(choiceIndex) {
+            const scenario = survivalScenarios[currentScenario];
+            const choiceNum = choiceIndex === 'A' ? 0 : choiceIndex === 'B' ? 1 : 2;
+            const choice = scenario.choices[choiceNum];
+            
+            if (!choice) return;
+            
+            // Apply effects
+            Object.keys(choice.effect).forEach(stat => {
+                survivalStats[stat] += choice.effect[stat];
+            });
+            
+            // Random events
+            survivalStats.food -= Math.floor(Math.random() * 5) + 3; // Daily food consumption
+            
+            // Check for game over conditions
+            if (survivalStats.health <= 0) {
+                endGame("💀 Your family's health failed. Survival was harder than expected!");
+                return;
+            }
+            if (survivalStats.food <= 0) {
+                survivalStats.health -= 20;
+                if (survivalStats.health <= 0) {
+                    endGame("🍖 Your family ran out of food and couldn't survive the harsh conditions!");
+                    return;
+                }
+            }
+            
+            // Update display and show results
+            updateSurvivalDisplay();
+            
+            const resultDiv = document.getElementById('survival-result');
+            resultDiv.innerHTML = `
+                <div class="choice-result">
+                    <p><strong>You chose:</strong> ${choice.text}</p>
+                    <p>Effects: ${Object.keys(choice.effect).map(stat => 
+                        `${stat.charAt(0).toUpperCase() + stat.slice(1)} ${choice.effect[stat] >= 0 ? '+' : ''}${choice.effect[stat]}`
+                    ).join(', ')}</p>
+                </div>
+            `;
+            
+            // Move to next scenario
+            survivalStats.day++;
+            currentScenario++;
+            
+            setTimeout(() => {
+                document.getElementById('survival-choices').style.display = 'none';
+                resultDiv.innerHTML = '';
+                
+                if (currentScenario < survivalScenarios.length && survivalStats.gameActive) {
+                    presentScenario();
+                } else {
+                    endGame();
+                }
+            }, 3000);
+        }
+        
+        function endGame(reason = null) {
+            survivalStats.gameActive = false;
+            const scenarioDiv = document.getElementById('survival-scenario');
+            const choicesDiv = document.getElementById('survival-choices');
+            
+            let message = reason || "🎉 Congratulations! Your family survived the colonial challenges!";
+            let score = survivalStats.health + survivalStats.food + survivalStats.shelter + Math.floor(survivalStats.money / 5);
+            
+            if (!reason && score > 150) {
+                message = "🏆 Outstanding! Your family thrived in colonial America!";
+            } else if (!reason && score > 100) {
+                message = "✅ Well done! Your family survived and did reasonably well!";
+            } else if (!reason) {
+                message = "😅 Your family survived, but it was tough going!";
+            }
+            
+            scenarioDiv.innerHTML = `
+                <div class="game-over">
+                    <h4>${message}</h4>
+                    <p><strong>Final Score:</strong> ${score} points</p>
+                    <p><strong>Days Survived:</strong> ${survivalStats.day - 1}</p>
+                    <button onclick="startSurvivalChallenge()" class="survival-btn">🔄 Try Again</button>
+                </div>
+            `;
+            
+            choicesDiv.style.display = 'none';
+            document.getElementById('survival-result').innerHTML = '';
+            
+            // Award gamification points
+            if (window.gamificationSystem && !reason) {
+                window.gamificationSystem.awardPoints('survival_challenge_complete');
+                window.gamificationSystem.celebrate('🏛️ Colonial Survivor!');
+            }
+        }
+        
+        // Revolution Center Functions
+        function showRevolutionTab(tabName) {
+            // Hide all revolution tabs
+            const tabs = document.querySelectorAll('.revolution-tab');
+            tabs.forEach(tab => tab.style.display = 'none');
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.revolution-tabs .tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab (causes tab is already visible, others need to be created)
+            if (tabName === 'causes') {
+                document.getElementById('causes-tab').style.display = 'block';
+            } else {
+                // For now, show a placeholder - these could be expanded later
+                const contentDiv = document.getElementById('revolution-content');
+                const placeholder = document.createElement('div');
+                placeholder.className = 'revolution-tab';
+                placeholder.innerHTML = `<h3>📚 ${tabName.charAt(0).toUpperCase() + tabName.slice(1)} Section</h3><p>This section is being developed with more interactive content!</p>`;
+                contentDiv.appendChild(placeholder);
+            }
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        const revolutionScenarios = [
+            {
+                title: "🏛️ The Boston Tea Party Decision",
+                description: "British tea ships have arrived in Boston Harbor. Parliament passed the Tea Act, giving the British East India Company a monopoly on tea sales. Your neighbors are planning to protest.",
+                patriotChoice: "Join the Sons of Liberty and dump the tea into the harbor to protest unfair taxation!",
+                loyalistChoice: "Respect British law and property - destroying tea is illegal and will only anger Britain more!",
+                outcome: {
+                    patriot: "You joined the Boston Tea Party! This act of defiance helped unite the colonies against British rule, but also led to the harsh Intolerable Acts as punishment.",
+                    loyalist: "You respected British property, but the Tea Party happened anyway. Your loyalty impressed British officials, but many colonists now distrust you."
+                }
+            },
+            {
+                title: "⚖️ The Stamp Act Crisis",
+                description: "Britain passed the Stamp Act, requiring expensive stamps on all paper documents - newspapers, legal documents, even playing cards! Colonists are organizing boycotts.",
+                patriotChoice: "Boycott British goods and join protests - 'No taxation without representation!'",
+                loyalistChoice: "Pay the stamp tax and stay loyal - Britain needs money to pay for protecting the colonies.",
+                outcome: {
+                    patriot: "Your boycotts worked! The Stamp Act was repealed after British merchants lost money. Colonists learned they had power when united.",
+                    loyalist: "You paid the tax, but it was repealed anyway due to colonial pressure. Many neighbors now question your loyalty to colonial rights."
+                }
+            },
+            {
+                title: "🔫 The Boston Massacre Response",
+                description: "British soldiers fired into a crowd of colonists, killing five people including Crispus Attucks. How do you respond to this tragedy?",
+                patriotChoice: "Spread the word about British brutality and demand the soldiers face justice!",
+                loyalistChoice: "The soldiers were provoked by the angry mob - both sides share blame for this tragedy.",
+                outcome: {
+                    patriot: "Your outrage helped turn colonial opinion against Britain. The soldiers were tried, and this event became a rallying cry for independence.",
+                    loyalist: "You tried to be fair, but most colonists saw this as unprovoked murder. Your moderate stance satisfied few on either side."
+                }
+            }
+        ];
+        
+        let currentRevolutionScenario = 0;
+        
+        function generateRevolutionScenario() {
+            if (currentRevolutionScenario >= revolutionScenarios.length) {
+                currentRevolutionScenario = 0; // Reset to beginning
+            }
+            
+            const scenario = revolutionScenarios[currentRevolutionScenario];
+            const scenarioDiv = document.getElementById('scenario-display');
+            const choicesDiv = document.getElementById('decision-choices');
+            
+            scenarioDiv.innerHTML = `
+                <div class="revolution-scenario">
+                    <h4>${scenario.title}</h4>
+                    <p>${scenario.description}</p>
+                </div>
+            `;
+            
+            choicesDiv.innerHTML = `
+                <div class="decision-buttons">
+                    <button class="patriot-choice" onclick="choosePatriot()">🇺🇸 ${scenario.patriotChoice}</button>
+                    <button class="loyalist-choice" onclick="chooseLoyalist()">🇬🇧 ${scenario.loyalistChoice}</button>
+                </div>
+            `;
+            
+            choicesDiv.style.display = 'block';
+        }
+        
+        function choosePatriot() {
+            showRevolutionOutcome('patriot');
+        }
+        
+        function chooseLoyalist() {
+            showRevolutionOutcome('loyalist');
+        }
+        
+        function showRevolutionOutcome(choice) {
+            const scenario = revolutionScenarios[currentRevolutionScenario];
+            const resultDiv = document.getElementById('decision-result');
+            
+            const outcome = scenario.outcome[choice];
+            const choiceType = choice === 'patriot' ? 'Patriot' : 'Loyalist';
+            const flag = choice === 'patriot' ? '🇺🇸' : '🇬🇧';
+            
+            resultDiv.innerHTML = `
+                <div class="revolution-outcome">
+                    <h4>${flag} You chose the ${choiceType} side!</h4>
+                    <p><strong>What happened:</strong> ${outcome}</p>
+                    <p><em>Historical note: Both Patriots and Loyalists were ordinary people making difficult decisions based on their beliefs and circumstances.</em></p>
+                    <button onclick="nextRevolutionScenario()" class="scenario-btn">📜 Next Scenario</button>
+                </div>
+            `;
+            
+            document.getElementById('decision-choices').style.display = 'none';
+            
+            // Award points for engagement
+            if (window.gamificationSystem) {
+                window.gamificationSystem.awardPoints('revolution_scenario_complete');
+                window.gamificationSystem.celebrate('📜 History Decision Maker!');
+            }
+        }
+        
+        function nextRevolutionScenario() {
+            currentRevolutionScenario++;
+            document.getElementById('decision-result').innerHTML = '';
+            
+            if (currentRevolutionScenario < revolutionScenarios.length) {
+                generateRevolutionScenario();
+            } else {
+                const scenarioDiv = document.getElementById('scenario-display');
+                scenarioDiv.innerHTML = `
+                    <div class="scenarios-complete">
+                        <h4>🎉 You've experienced the major events leading to the American Revolution!</h4>
+                        <p>These were real decisions that real colonists had to make. About 1/3 were Patriots, 1/3 were Loyalists, and 1/3 tried to stay neutral.</p>
+                        <button onclick="resetRevolutionScenarios()" class="scenario-btn">🔄 Experience Again</button>
+                    </div>
+                `;
+                document.getElementById('decision-choices').style.display = 'none';
+            }
+        }
+        
+        function resetRevolutionScenarios() {
+            currentRevolutionScenario = 0;
+            document.getElementById('scenario-display').innerHTML = '<p>Click "Get Revolution Scenario" to begin your journey through the events leading to the American Revolution!</p>';
+            document.getElementById('decision-choices').style.display = 'none';
+            document.getElementById('decision-result').innerHTML = '';
+        }
+        
+        // Founding Fathers Functions
+        const foundingFathers = {
+            washington: {
+                name: "George Washington",
+                nickname: "Father of His Country",
+                born: "1732",
+                role: "First President & Commander-in-Chief",
+                famous: "Led the Continental Army to victory and became the first President",
+                quote: "I cannot tell a lie.",
+                funFact: "He was 6 feet 2 inches tall - very tall for his time! He also had wooden teeth (actually made from ivory and other materials).",
+                achievements: ["Won the Revolutionary War", "First U.S. President", "Established many presidential traditions", "Farewell Address warned against political parties"]
+            },
+            jefferson: {
+                name: "Thomas Jefferson",
+                nickname: "Author of Independence", 
+                born: "1743",
+                role: "Third President & Main Author of Declaration",
+                famous: "Wrote the Declaration of Independence and made the Louisiana Purchase",
+                quote: "All men are created equal.",
+                funFact: "He was an inventor who created a rotating book stand and improved the design of the moldboard plow!",
+                achievements: ["Wrote Declaration of Independence", "Third U.S. President", "Louisiana Purchase doubled country's size", "Founded University of Virginia"]
+            },
+            franklin: {
+                name: "Benjamin Franklin",
+                nickname: "The Renaissance Man",
+                born: "1706", 
+                role: "Diplomat, Inventor, & Writer",
+                famous: "Proved lightning was electricity and helped convince France to support America",
+                quote: "Early to bed and early to rise, makes a man healthy, wealthy, and wise.",
+                funFact: "He invented bifocal glasses, the lightning rod, and the Franklin stove! He also started the first public library.",
+                achievements: ["Proved lightning is electricity", "Convinced France to help America", "Started first public library", "Invented bifocals and lightning rod"]
+            },
+            adams: {
+                name: "John Adams",
+                nickname: "Atlas of Independence",
+                born: "1735",
+                role: "Second President & Diplomat",
+                famous: "Defended British soldiers after Boston Massacre and was America's first Vice President", 
+                quote: "Facts are stubborn things.",
+                funFact: "He and Thomas Jefferson both died on the same day - July 4th, 1826, exactly 50 years after the Declaration of Independence!",
+                achievements: ["Defended British soldiers fairly", "First Vice President", "Second President", "Avoided war with France"]
+            },
+            hamilton: {
+                name: "Alexander Hamilton",
+                nickname: "Financial Wizard",
+                born: "1755",
+                role: "First Secretary of Treasury",
+                famous: "Created America's financial system and the first national bank",
+                quote: "Those who stand for nothing fall for anything.",
+                funFact: "He was born in the Caribbean and came to America as a teenager. He died in a duel with Aaron Burr in 1804!",
+                achievements: ["Created U.S. financial system", "First Secretary of Treasury", "Founded first national bank", "Wrote many Federalist Papers"]
+            },
+            madison: {
+                name: "James Madison",
+                nickname: "Father of the Constitution",
+                born: "1751", 
+                role: "Fourth President & Constitutional Designer",
+                famous: "Designed the Constitution and wrote the Bill of Rights",
+                quote: "If men were angels, no government would be necessary.",
+                funFact: "At 5 feet 4 inches and 100 pounds, he was the shortest and lightest President! But his ideas were mighty.",
+                achievements: ["Designed the Constitution", "Wrote the Bill of Rights", "Fourth U.S. President", "Father of the Constitution"]
+            }
+        };
+        
+        function showFounderProfile(founderId) {
+            const founder = foundingFathers[founderId];
+            const profileDiv = document.getElementById('founder-profile');
+            
+            profileDiv.innerHTML = `
+                <div class="founder-detail">
+                    <h3>${founder.name}</h3>
+                    <h4>"${founder.nickname}"</h4>
+                    <div class="founder-info">
+                        <p><strong>Born:</strong> ${founder.born}</p>
+                        <p><strong>Role:</strong> ${founder.role}</p>
+                        <p><strong>Famous for:</strong> ${founder.famous}</p>
+                        <p><strong>Famous quote:</strong> "${founder.quote}"</p>
+                        <p><strong>Fun fact:</strong> ${founder.funFact}</p>
+                    </div>
+                    <div class="founder-achievements">
+                        <h5>Major Achievements:</h5>
+                        <ul>
+                            ${founder.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            // Award points for learning about founders
+            if (window.gamificationSystem) {
+                window.gamificationSystem.awardPoints('founder_profile_view');
+                window.gamificationSystem.celebrate('🎩 History Explorer!');
+            }
         }
         
         function checkChallenge(answer) {
