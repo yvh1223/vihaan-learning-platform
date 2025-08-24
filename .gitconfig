@@ -1,0 +1,10 @@
+[user]
+    name = Yallappa H
+    email = yvh1223@gmail.com
+    signingkey = yvh1223@gmail.com
+
+[commit]
+    gpgsign = true
+
+[gpg]
+    program = gpg
