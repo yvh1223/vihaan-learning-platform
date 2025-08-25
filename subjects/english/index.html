@@ -24,42 +24,54 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         <div class="subject-hero">
             <div class="english-visual">📚✍️📖🎭📝</div>
             <h1>English Language Arts</h1>
             <p class="subject-description">Master reading, writing, speaking, and listening through engaging stories and creative expression!</p>
         </div>
         <div class="chapters-grid">
-            <div class="chapter-card" onclick="location.href='chapter-1.html'">
+            <div class="chapter-card" onclick="location.href='chapter-1.html'" role="link" tabindex="0" aria-label="Open Chapter 1: Reading Comprehension" onkeydown="if(event.key==='Enter'){location.href='chapter-1.html'}">
                 <div class="chapter-icon">📖</div>
                 <h3>Reading Comprehension</h3>
                 <p>Chapter 1 - Stories, poems, and informational texts</p>
                 <a href="chapter-1.html" class="start-button">Start →</a>
             </div>
-            <div class="chapter-card" onclick="location.href='chapter-2.html'">
+            <div class="chapter-card" onclick="location.href='chapter-2.html'" role="link" tabindex="0" aria-label="Open Chapter 2: Writing & Composition" onkeydown="if(event.key==='Enter'){location.href='chapter-2.html'}">
                 <div class="chapter-icon">✍️</div>
                 <h3>Writing & Composition</h3>
                 <p>Chapter 2 - Creative writing and essays</p>
                 <a href="chapter-2.html" class="start-button">Start →</a>
             </div>
-            <div class="chapter-card" onclick="location.href='chapter-3.html'">
+            <div class="chapter-card" onclick="location.href='chapter-3.html'" role="link" tabindex="0" aria-label="Open Chapter 3: Language & Vocabulary" onkeydown="if(event.key==='Enter'){location.href='chapter-3.html'}">
                 <div class="chapter-icon">📝</div>
                 <h3>Language & Vocabulary</h3>
                 <p>Chapter 3 - Grammar, spelling, and word study</p>
                 <a href="chapter-3.html" class="start-button">Start →</a>
             </div>
-            <div class="chapter-card" onclick="location.href='chapter-4.html'">
+            <div class="chapter-card" onclick="location.href='chapter-4.html'" role="link" tabindex="0" aria-label="Open Chapter 4: Speaking & Listening" onkeydown="if(event.key==='Enter'){location.href='chapter-4.html'}">
                 <div class="chapter-icon">🎭</div>
                 <h3>Speaking & Listening</h3>
                 <p>Chapter 4 - Presentations and discussions</p>
                 <a href="chapter-4.html" class="start-button">Start →</a>
             </div>
+            <div class="chapter-card" onclick="location.href='chapter-5.html'" role="link" tabindex="0" aria-label="Open Chapter 5: Literature Analysis & Literary Essay" onkeydown="if(event.key==='Enter'){location.href='chapter-5.html'}">
+                <div class="chapter-icon">📖</div>
+                <h3>Literature Analysis & Literary Essay</h3>
+                <p>Chapter 5 - Close reading and literary essays with text evidence</p>
+                <a href="chapter-5.html" class="start-button">Start →</a>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter-6.html'" role="link" tabindex="0" aria-label="Open Chapter 6: Fantasy Book Clubs" onkeydown="if(event.key==='Enter'){location.href='chapter-6.html'}">
+                <div class="chapter-icon">🐉</div>
+                <h3>Fantasy Book Clubs</h3>
+                <p>Chapter 6 - Reading and discussing fantasy texts with world-building analysis</p>
+                <a href="chapter-6.html" class="start-button">Start →</a>
+            </div>
         </div>
         <div class="assessment-section">
             <h2>📚 STAAR Reading Practice</h2>
             <p>Practice reading comprehension with STAAR-style passages and questions!</p>
-            <button class="assessment-button" onclick="location.href='assessment-1.html'">Take Practice Test</button>
+            <button type="button" class="assessment-button" onclick="location.href='assessment-1.html'" aria-label="Open STAAR Reading Practice assessment">Take Practice Test</button>
         </div>
     </main>
     <div id="footer-container"></div>

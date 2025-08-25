@@ -1060,7 +1060,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 3</div>
             <h1 class="chapter-title">Government & Citizenship Simulations</h1>
@@ -1129,8 +1129,8 @@
                             </div>
                         </div>
                     </div>
-                    <button onclick="checkPowerMatching()" class="check-answers-btn">Check Answers</button>
-                    <div id="powerMatchingResult"></div>
+                    <button type="button" onclick="checkPowerMatching()" class="check-answers-btn">Check Answers</button>
+                    <div id="powerMatchingResult" role="status" aria-live="polite"></div>
                 </div>
             </div>
 
@@ -1217,10 +1217,10 @@
                 <h3>🇺🇸 Citizenship Academy</h3>
                 <div class="citizenship-container">
                     <div class="citizenship-tabs">
-                        <button class="citizen-tab active" onclick="switchCitizenTab('rights')">Rights</button>
-                        <button class="citizen-tab" onclick="switchCitizenTab('responsibilities')">Responsibilities</button>
-                        <button class="citizen-tab" onclick="switchCitizenTab('participation')">Participation</button>
-                        <button class="citizen-tab" onclick="switchCitizenTab('quiz')">Citizenship Test</button>
+                        <button type="button" class="citizen-tab active" onclick="switchCitizenTab('rights')">Rights</button>
+                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('responsibilities')">Responsibilities</button>
+                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('participation')">Participation</button>
+                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('quiz')">Citizenship Test</button>
                     </div>
                     <div class="citizenship-content">
                         <div id="rightsTab" class="citizen-panel active">
@@ -1346,7 +1346,7 @@
                                                 <span>Casey Johnson</span>
                                             </div>
                                         </div>
-                                        <div id="voteResult" class="vote-result"></div>
+                                        <div id="voteResult" class="vote-result" role="status" aria-live="polite"></div>
                                     </div>
                                 </div>
                                 <div class="democracy-actions">
@@ -1369,7 +1369,7 @@
                                             <span class="action-name">Stay Informed</span>
                                         </div>
                                     </div>
-                                    <div id="actionResult" class="action-result"></div>
+                                    <div id="actionResult" class="action-result" role="status" aria-live="polite"></div>
                                 </div>
                             </div>
                         </div>
@@ -1378,10 +1378,10 @@
                             <div class="citizenship-test">
                                 <div id="citizenshipQuestion" class="test-question">
                                     <p>Test your knowledge of American government and citizenship!</p>
-                                    <button onclick="startCitizenshipTest()" class="start-test-btn">Start Citizenship Test</button>
+                                    <button type="button" onclick="startCitizenshipTest()" class="start-test-btn">Start Citizenship Test</button>
                                 </div>
                                 <div id="citizenshipOptions" class="test-options"></div>
-                                <div id="citizenshipFeedback" class="test-feedback"></div>
+                                <div id="citizenshipFeedback" class="test-feedback" role="status" aria-live="polite"></div>
                             </div>
                         </div>
                     </div>
@@ -1423,8 +1423,8 @@
                         <h4>🏫 Simulate: "More Recess Time Act"</h4>
                         <p>Follow this pretend bill through the lawmaking process!</p>
                         <div class="simulation-controls">
-                            <button onclick="startLawSimulation()" id="startSimButton">Start Simulation</button>
-                            <button onclick="nextLawStep()" id="nextStepButton" style="display: none;">Next Step</button>
+                            <button type="button" onclick="startLawSimulation()" id="startSimButton">Start Simulation</button>
+                            <button type="button" onclick="nextLawStep()" id="nextStepButton" style="display: none;">Next Step</button>
                         </div>
                         <div id="simulationStatus" class="simulation-status"></div>
                     </div>
@@ -1487,6 +1487,7 @@
         </div>
     </main>
     <div id="footer-container"></div>
+    <script src="../../js/interactive.js" defer></script>
     <script>
         function loadSharedComponents() {
             fetch('../shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
@@ -1957,7 +1958,7 @@
             `;
             
             optionsElement.innerHTML = question.options.map((option, index) => 
-                `<button class=\"test-option\" onclick=\"selectCitizenshipAnswer(\${index})\">\${option}</button>`
+                `<button type="button" class=\"test-option\" onclick=\"selectCitizenshipAnswer(\${index})\">\${option}</button>`
             ).join('');
         }
 
@@ -1972,7 +1973,7 @@
                 <div class=\"answer-feedback \${correct ? 'correct' : 'incorrect'}\">
                     <p><strong>\${correct ? 'Correct!' : 'Incorrect'}</strong></p>
                     <p>\${question.explanation}</p>
-                    <button onclick=\"nextCitizenshipQuestion()\">Next Question</button>
+                    <button type="button" onclick=\"nextCitizenshipQuestion()\">Next Question</button>
                 </div>
             `;
             
@@ -2020,7 +2021,7 @@
                         <span class=\"score-number\">\${percentage}%</span>
                     </div>
                     <p class=\"score-message\">\${message}</p>
-                    <button onclick=\"startCitizenshipTest()\" class=\"retry-btn\">Take Test Again</button>
+                    <button type="button" onclick=\"startCitizenshipTest()\" class=\"retry-btn\">Take Test Again</button>
                 </div>
             `;
         }

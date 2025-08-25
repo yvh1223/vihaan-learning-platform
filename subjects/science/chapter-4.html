@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 4</div>
             <h1 class="chapter-title">Organisms & Environments</h1>
@@ -43,43 +43,43 @@
                             <div class="category producers">
                                 <h5>Producers (Plants)</h5>
                                 <div class="organism-buttons">
-                                    <button onclick="addOrganism('tree')">🌳 Tree</button>
-                                    <button onclick="addOrganism('flower')">🌸 Flower</button>
-                                    <button onclick="addOrganism('grass')">🌿 Grass</button>
-                                    <button onclick="addOrganism('algae')">🌊 Algae</button>
+                                    <button type="button" onclick="addOrganism('tree')">🌳 Tree</button>
+                                    <button type="button" onclick="addOrganism('flower')">🌸 Flower</button>
+                                    <button type="button" onclick="addOrganism('grass')">🌿 Grass</button>
+                                    <button type="button" onclick="addOrganism('algae')">🌊 Algae</button>
                                 </div>
                             </div>
                             <div class="category primary-consumers">
                                 <h5>Primary Consumers (Herbivores)</h5>
                                 <div class="organism-buttons">
-                                    <button onclick="addOrganism('rabbit')">🐰 Rabbit</button>
-                                    <button onclick="addOrganism('deer')">🦌 Deer</button>
-                                    <button onclick="addOrganism('butterfly')">🦋 Butterfly</button>
-                                    <button onclick="addOrganism('bee')">🐝 Bee</button>
+                                    <button type="button" onclick="addOrganism('rabbit')">🐰 Rabbit</button>
+                                    <button type="button" onclick="addOrganism('deer')">🦌 Deer</button>
+                                    <button type="button" onclick="addOrganism('butterfly')">🦋 Butterfly</button>
+                                    <button type="button" onclick="addOrganism('bee')">🐝 Bee</button>
                                 </div>
                             </div>
                             <div class="category secondary-consumers">
                                 <h5>Secondary Consumers (Carnivores)</h5>
                                 <div class="organism-buttons">
-                                    <button onclick="addOrganism('hawk')">🦅 Hawk</button>
-                                    <button onclick="addOrganism('fox')">🦊 Fox</button>
-                                    <button onclick="addOrganism('snake')">🐍 Snake</button>
-                                    <button onclick="addOrganism('frog')">🐸 Frog</button>
+                                    <button type="button" onclick="addOrganism('hawk')">🦅 Hawk</button>
+                                    <button type="button" onclick="addOrganism('fox')">🦊 Fox</button>
+                                    <button type="button" onclick="addOrganism('snake')">🐍 Snake</button>
+                                    <button type="button" onclick="addOrganism('frog')">🐸 Frog</button>
                                 </div>
                             </div>
                             <div class="category decomposers">
                                 <h5>Decomposers</h5>
                                 <div class="organism-buttons">
-                                    <button onclick="addOrganism('mushroom')">🍄 Mushroom</button>
-                                    <button onclick="addOrganism('bacteria')">🦠 Bacteria</button>
-                                    <button onclick="addOrganism('worm')">🪱 Worm</button>
+                                    <button type="button" onclick="addOrganism('mushroom')">🍄 Mushroom</button>
+                                    <button type="button" onclick="addOrganism('bacteria')">🦠 Bacteria</button>
+                                    <button type="button" onclick="addOrganism('worm')">🪱 Worm</button>
                                 </div>
                             </div>
                         </div>
                         <div class="ecosystem-controls">
-                            <button onclick="clearEcosystem()">🗑️ Clear All</button>
-                            <button onclick="simulateEcosystem()">▶️ Simulate</button>
-                            <button onclick="analyzeEcosystem()">🔍 Analyze Balance</button>
+                            <button type="button" onclick="clearEcosystem()">🗑️ Clear All</button>
+                            <button type="button" onclick="simulateEcosystem()">▶️ Simulate</button>
+                            <button type="button" onclick="analyzeEcosystem()">🔍 Analyze Balance</button>
                         </div>
                     </div>
                 </div>
@@ -124,11 +124,11 @@
                         </div>
                     </div>
                     <div class="food-chain-controls">
-                        <button onclick="validateFoodChain()">✅ Validate Chain</button>
-                        <button onclick="clearFoodChain()">🗑️ Clear Chain</button>
-                        <button onclick="showEnergyFlow()">⚡ Show Energy Flow</button>
+                        <button type="button" onclick="validateFoodChain()">✅ Validate Chain</button>
+                        <button type="button" onclick="clearFoodChain()">🗑️ Clear Chain</button>
+                        <button type="button" onclick="showEnergyFlow()">⚡ Show Energy Flow</button>
                     </div>
-                    <div class="chain-feedback" id="chain-feedback" style="display: none;"></div>
+                    <div class="chain-feedback" id="chain-feedback" role="status" aria-live="polite" style="display: none;"></div>
                 </div>
             </div>
 
@@ -174,7 +174,7 @@
                     <div class="game-stats" id="game-stats">
                         <div>Correct: <span id="correct-count">0</span></div>
                         <div>Remaining: <span id="remaining-count">8</span></div>
-                        <button onclick="resetHabitatGame()">🔄 Reset Game</button>
+                        <button type="button" onclick="resetHabitatGame()">🔄 Reset Game</button>
                     </div>
                 </div>
             </div>
@@ -219,9 +219,9 @@
                         <p>Click on any stage to learn what happens during that phase of a plant's life.</p>
                     </div>
                     <div class="life-cycle-controls">
-                        <button onclick="startLifeCycleAnimation()">▶️ Play Animation</button>
-                        <button onclick="pauseLifeCycleAnimation()">⏸️ Pause</button>
-                        <button onclick="resetLifeCycle()">🔄 Reset</button>
+                        <button type="button" onclick="startLifeCycleAnimation()">▶️ Play Animation</button>
+                        <button type="button" onclick="pauseLifeCycleAnimation()">⏸️ Pause</button>
+                        <button type="button" onclick="resetLifeCycle()">🔄 Reset</button>
                         <div class="speed-control">
                             <label>Speed: <span id="cycle-speed">1x</span></label>
                             <input type="range" id="cycle-speed-slider" min="0.5" max="3" step="0.5" value="1">
@@ -237,13 +237,13 @@
                     <div class="quiz-question" id="organisms-quiz-question">
                         <p>Which of these is a producer in an ecosystem?</p>
                         <div class="quiz-options">
-                            <button onclick="checkOrganismsAnswer('A', true)">A) Grass</button>
-                            <button onclick="checkOrganismsAnswer('B', false)">B) Rabbit</button>
-                            <button onclick="checkOrganismsAnswer('C', false)">C) Fox</button>
-                            <button onclick="checkOrganismsAnswer('D', false)">D) Mushroom</button>
+                            <button type="button" onclick="checkOrganismsAnswer('A', true)">A) Grass</button>
+                            <button type="button" onclick="checkOrganismsAnswer('B', false)">B) Rabbit</button>
+                            <button type="button" onclick="checkOrganismsAnswer('C', false)">C) Fox</button>
+                            <button type="button" onclick="checkOrganismsAnswer('D', false)">D) Mushroom</button>
                         </div>
                     </div>
-                    <div class="quiz-feedback" id="organisms-quiz-feedback" style="display: none;"></div>
+                    <div class="quiz-feedback" id="organisms-quiz-feedback" role="status" aria-live="polite" style="display: none;"></div>
                     <div class="quiz-progress">
                         <span>Question <span id="organisms-question-number">1</span> of <span id="organisms-total-questions">7</span></span>
                         <div class="quiz-score">Score: <span id="organisms-quiz-score">0</span>/7</div>
@@ -262,6 +262,7 @@
     </main>
     <div id="footer-container"></div>
     <script src="../../js/app.js" defer></script>
+    <script src="../../js/interactive.js" defer></script>
     <script>
         // Load shared components
         function loadSharedComponents() {
@@ -715,7 +716,7 @@
                 <p>${question.question}</p>
                 <div class="quiz-options">
                     ${question.options.map((option, index) => 
-                        `<button onclick="checkOrganismsAnswer(${index}, ${index === question.correct})">${option}</button>`
+                        `<button type="button" onclick="checkOrganismsAnswer(${index}, ${index === question.correct})">${option}</button>`
                     ).join('')}
                 </div>
             `;
@@ -761,7 +762,7 @@
                     <h3>Quiz Complete!</h3>
                     <p>Your Score: ${organismsQuizScore}/${organismsQuestions.length} (${percentage}%)</p>
                     <p>${resultMessage}</p>
-                    <button onclick="restartOrganismsQuiz()">Take Quiz Again</button>
+                    <button type="button" onclick="restartOrganismsQuiz()">Take Quiz Again</button>
                 </div>
             `;
         }

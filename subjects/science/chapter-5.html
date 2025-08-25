@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 5</div>
             <h1 class="chapter-title">Scientific Investigation</h1>
@@ -84,10 +84,10 @@
                     <div class="experiment-selector">
                         <h4>Choose an Experiment:</h4>
                         <div class="experiment-options">
-                            <button onclick="startExperiment('plants')" class="experiment-btn">🌱 Plant Growth</button>
-                            <button onclick="startExperiment('dissolve')" class="experiment-btn">💧 Dissolving</button>
-                            <button onclick="startExperiment('magnets')" class="experiment-btn">🧲 Magnetism</button>
-                            <button onclick="startExperiment('temperature')" class="experiment-btn">🌡️ Temperature</button>
+                            <button type="button" onclick="startExperiment('plants')" class="experiment-btn">🌱 Plant Growth</button>
+                            <button type="button" onclick="startExperiment('dissolve')" class="experiment-btn">💧 Dissolving</button>
+                            <button type="button" onclick="startExperiment('magnets')" class="experiment-btn">🧲 Magnetism</button>
+                            <button type="button" onclick="startExperiment('temperature')" class="experiment-btn">🌡️ Temperature</button>
                         </div>
                     </div>
                     <div class="experiment-area" id="experiment-area">
@@ -126,17 +126,17 @@
                                     <div class="data-point">
                                         <input type="number" class="x-value" placeholder="X value">
                                         <input type="number" class="y-value" placeholder="Y value">
-                                        <button onclick="removeDataPoint(this)" class="remove-btn">×</button>
+                                        <button type="button" onclick="removeDataPoint(this)" class="remove-btn">×</button>
                                     </div>
                                 </div>
-                                <button onclick="addDataPoint()" class="add-data-btn">+ Add Data Point</button>
+                                <button type="button" onclick="addDataPoint()" class="add-data-btn">+ Add Data Point</button>
                             </div>
                         </div>
                     </div>
                     <div class="graph-section">
                         <div class="graph-controls">
-                            <button onclick="createGraph()">📊 Create Graph</button>
-                            <button onclick="clearGraph()">🗑️ Clear</button>
+                            <button type="button" onclick="createGraph()">📊 Create Graph</button>
+                            <button type="button" onclick="clearGraph()">🗑️ Clear</button>
                             <select id="graph-type">
                                 <option value="line">Line Graph</option>
                                 <option value="bar">Bar Chart</option>
@@ -166,14 +166,14 @@
                             </div>
                         </div>
                         <div class="observation-controls">
-                            <button onclick="startObservation()">🔍 Start Observation Challenge</button>
-                            <button onclick="showObservationScene()">👀 Show Scene</button>
-                            <button onclick="hideObservationScene()">🙈 Hide Scene</button>
+                            <button type="button" onclick="startObservation()">🔍 Start Observation Challenge</button>
+                            <button type="button" onclick="showObservationScene()">👀 Show Scene</button>
+                            <button type="button" onclick="hideObservationScene()">🙈 Hide Scene</button>
                         </div>
                         <div class="observation-questions" id="observation-questions" style="display: none;">
                             <h4>What did you observe?</h4>
                             <div class="questions-list" id="questions-list"></div>
-                            <button onclick="checkObservations()" id="check-observations-btn">Check Answers</button>
+                            <button type="button" onclick="checkObservations()" id="check-observations-btn">Check Answers</button>
                         </div>
                         <div class="observation-results" id="observation-results" style="display: none;"></div>
                     </div>
@@ -195,7 +195,7 @@
                                 <div class="measurement-input">
                                     <label>Your measurement: </label>
                                     <input type="number" id="length-guess" step="0.1"> cm
-                                    <button onclick="checkLengthMeasurement()">Check</button>
+                                    <button type="button" onclick="checkLengthMeasurement()">Check</button>
                                 </div>
                                 <div class="measurement-feedback" id="length-feedback"></div>
                             </div>
@@ -213,11 +213,11 @@
                                     </div>
                                 </div>
                                 <div class="volume-controls">
-                                    <button onclick="pourLiquid()">🥤 Pour Random Amount</button>
+                                    <button type="button" onclick="pourLiquid()">🥤 Pour Random Amount</button>
                                     <div class="measurement-input">
                                         <label>Volume reading: </label>
                                         <input type="number" id="volume-guess"> ml
-                                        <button onclick="checkVolumeMeasurement()">Check</button>
+                                        <button type="button" onclick="checkVolumeMeasurement()">Check</button>
                                     </div>
                                 </div>
                                 <div class="measurement-feedback" id="volume-feedback"></div>
@@ -237,11 +237,11 @@
                                     </div>
                                 </div>
                                 <div class="temp-controls">
-                                    <button onclick="setRandomTemperature()">🌡️ New Temperature</button>
+                                    <button type="button" onclick="setRandomTemperature()">🌡️ New Temperature</button>
                                     <div class="measurement-input">
                                         <label>Temperature reading: </label>
                                         <input type="number" id="temp-guess"> °C
-                                        <button onclick="checkTemperatureMeasurement()">Check</button>
+                                        <button type="button" onclick="checkTemperatureMeasurement()">Check</button>
                                     </div>
                                 </div>
                                 <div class="measurement-feedback" id="temp-feedback"></div>
@@ -258,10 +258,10 @@
                     <div class="quiz-question" id="science-method-quiz-question">
                         <p>What is the first step in the scientific method?</p>
                         <div class="quiz-options">
-                            <button onclick="checkScienceMethodAnswer('A', true)">A) Ask a question</button>
-                            <button onclick="checkScienceMethodAnswer('B', false)">B) Form a hypothesis</button>
-                            <button onclick="checkScienceMethodAnswer('C', false)">C) Conduct an experiment</button>
-                            <button onclick="checkScienceMethodAnswer('D', false)">D) Analyze data</button>
+                            <button type="button" onclick="checkScienceMethodAnswer('A', true)">A) Ask a question</button>
+                            <button type="button" onclick="checkScienceMethodAnswer('B', false)">B) Form a hypothesis</button>
+                            <button type="button" onclick="checkScienceMethodAnswer('C', false)">C) Conduct an experiment</button>
+                            <button type="button" onclick="checkScienceMethodAnswer('D', false)">D) Analyze data</button>
                         </div>
                     </div>
                     <div class="quiz-feedback" id="science-method-quiz-feedback" style="display: none;"></div>
@@ -283,6 +283,7 @@
     </main>
     <div id="footer-container"></div>
     <script src="../../js/app.js" defer></script>
+    <script src="../../js/interactive.js" defer></script>
     <script>
         // Load shared components
         function loadSharedComponents() {
@@ -496,7 +497,7 @@
                     <div class="experiment-conclusion">
                         <p><strong>Conclusion:</strong> ${currentExperiment.conclusion}</p>
                     </div>
-                    <button onclick="recordExperimentData()">📝 Record Data</button>
+                    <button type="button" onclick="recordExperimentData()">📝 Record Data</button>
                 </div>
             `;
         }
@@ -551,7 +552,7 @@
             newPoint.innerHTML = `
                 <input type="number" class="x-value" placeholder="X value">
                 <input type="number" class="y-value" placeholder="Y value">
-                <button onclick="removeDataPoint(this)" class="remove-btn">×</button>
+                <button type="button" onclick="removeDataPoint(this)" class="remove-btn">×</button>
             `;
             container.appendChild(newPoint);
         }
@@ -839,7 +840,7 @@
                 <p>${question.question}</p>
                 <div class="quiz-options">
                     ${question.options.map((option, index) => 
-                        `<button onclick="checkScienceMethodAnswer(${index}, ${index === question.correct})">${option}</button>`
+                        `<button type="button" onclick="checkScienceMethodAnswer(${index}, ${index === question.correct})">${option}</button>`
                     ).join('')}
                 </div>
             `;
@@ -885,7 +886,7 @@
                     <h3>Quiz Complete!</h3>
                     <p>Your Score: ${scienceMethodQuizScore}/${scienceMethodQuestions.length} (${percentage}%)</p>
                     <p>${resultMessage}</p>
-                    <button onclick="restartScienceMethodQuiz()">Take Quiz Again</button>
+                    <button type="button" onclick="restartScienceMethodQuiz()">Take Quiz Again</button>
                 </div>
             `;
         }

@@ -21,11 +21,11 @@
                     <div class="pos-selection">
                         <h3>Choose Your Focus</h3>
                         <div class="pos-buttons">
-                            <button class="pos-btn" onclick="loadPOSActivity('nouns')">📦 Nouns</button>
-                            <button class="pos-btn" onclick="loadPOSActivity('verbs')">⚡ Verbs</button>
-                            <button class="pos-btn" onclick="loadPOSActivity('adjectives')">🎨 Adjectives</button>
-                            <button class="pos-btn" onclick="loadPOSActivity('adverbs')">🏃 Adverbs</button>
-                            <button class="pos-btn" onclick="loadPOSActivity('mixed')">🎲 Mixed Practice</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('nouns')">📦 Nouns</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('verbs')">⚡ Verbs</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('adjectives')">🎨 Adjectives</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('adverbs')">🏃 Adverbs</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('mixed')">🎲 Mixed Practice</button>
                         </div>
                     </div>
                     
@@ -86,9 +86,9 @@
                                 <p class="drop-instruction">Drag words here to build your sentence</p>
                             </div>
                             <div class="construction-controls">
-                                <button class="control-btn" onclick="clearSentence()">🗑️ Clear</button>
-                                <button class="control-btn" onclick="checkSentence()">✅ Check Grammar</button>
-                                <button class="control-btn" onclick="generateRandomSentence()">🎲 Random Sentence</button>
+                                <button type="button" class="control-btn" onclick="clearSentence()">🗑️ Clear</button>
+                                <button type="button" class="control-btn" onclick="checkSentence()">✅ Check Grammar</button>
+                                <button type="button" class="control-btn" onclick="generateRandomSentence()">🎲 Random Sentence</button>
                             </div>
                         </div>
                         
@@ -103,11 +103,11 @@
                     <div class="punctuation-practice">
                         <h3>Fix the Sentences</h3>
                         <div class="practice-selector">
-                            <button class="practice-btn" onclick="loadPunctuationPractice('capitals')">🔤 Capitalization</button>
-                            <button class="practice-btn" onclick="loadPunctuationPractice('periods')">⚪ Periods</button>
-                            <button class="practice-btn" onclick="loadPunctuationPractice('questions')">❓ Question Marks</button>
-                            <button class="practice-btn" onclick="loadPunctuationPractice('exclamations')">❗ Exclamation Points</button>
-                            <button class="practice-btn" onclick="loadPunctuationPractice('commas')">📍 Commas</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('capitals')">🔤 Capitalization</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('periods')">⚪ Periods</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('questions')">❓ Question Marks</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('exclamations')">❗ Exclamation Points</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('commas')">📍 Commas</button>
                         </div>
                         
                         <div class="practice-content" id="punctuation-content">
@@ -128,9 +128,9 @@
                     <div class="synonym-antonym-game">
                         <h3>Synonym & Antonym Detective</h3>
                         <div class="game-mode-selector">
-                            <button class="mode-btn" onclick="startWordRelationGame('synonyms')">🤝 Synonyms</button>
-                            <button class="mode-btn" onclick="startWordRelationGame('antonyms')">⚡ Antonyms</button>
-                            <button class="mode-btn" onclick="startWordRelationGame('mixed')">🎭 Mixed Challenge</button>
+                            <button type="button" class="mode-btn" onclick="startWordRelationGame('synonyms')">🤝 Synonyms</button>
+                            <button type="button" class="mode-btn" onclick="startWordRelationGame('antonyms')">⚡ Antonyms</button>
+                            <button type="button" class="mode-btn" onclick="startWordRelationGame('mixed')">🎭 Mixed Challenge</button>
                         </div>
                         
                         <div class="word-game-content" id="word-game-content">
@@ -148,7 +148,7 @@
                         <div class="mystery-passage" id="mystery-passage">
                             <h4>🔍 Use Context Clues to Solve the Mystery</h4>
                             <p>Click the button below to get a passage with mystery words!</p>
-                            <button class="mystery-btn" onclick="loadContextCluesChallenge()">🎯 New Mystery</button>
+                            <button type="button" class="mystery-btn" onclick="loadContextCluesChallenge()">🎯 New Mystery</button>
                         </div>
                         
                         <div class="clues-content" id="clues-content"></div>
@@ -260,7 +260,7 @@
             }
             
             contentHTML += `
-                    <button class="start-practice-btn" onclick="startPOSPractice()">Start Practice</button>
+                    <button type="button" class="start-practice-btn" onclick="startPOSPractice()">Start Practice</button>
                 </div>
             `;
             
@@ -290,7 +290,7 @@
                     <p class="pos-prompt">What part of speech is the highlighted word "<strong>${question.word}</strong>"?</p>
                     <div class="pos-options">
                         ${question.options.map((option, i) => 
-                            `<button class="pos-option-btn" onclick="selectPOSAnswer(${questionIndex}, ${i})">${option}</button>`
+                            `<button type="button" class="pos-option-btn" onclick="selectPOSAnswer(${questionIndex}, ${i})">${option}</button>`
                         ).join('')}
                     </div>
                 </div>
@@ -334,8 +334,8 @@
                 <h4>Practice Complete!</h4>
                 <p><strong>Score: ${posScore}/${posQuestionsAnswered} (${percentage}%)</strong></p>
                 <p>${message}</p>
-                <button class="retry-btn" onclick="startPOSPractice()">Try Again</button>
-                <button class="new-topic-btn" onclick="document.getElementById('pos-progress').innerHTML = ''">Choose New Topic</button>
+                <button type="button" class="retry-btn" onclick="startPOSPractice()">Try Again</button>
+                <button type="button" class="new-topic-btn" onclick="document.getElementById('pos-progress').innerHTML = ''">Choose New Topic</button>
             `;
         }
 
@@ -535,7 +535,7 @@
                 <div class="punctuation-lesson">
                     <h4>${data.name}</h4>
                     <p class="punctuation-description">${data.description}</p>
-                    <button class="start-punctuation-btn" onclick="startPunctuationPractice()">Start Fixing Sentences</button>
+                    <button type="button" class="start-punctuation-btn" onclick="startPunctuationPractice()">Start Fixing Sentences</button>
                 </div>
             `;
             
@@ -567,7 +567,7 @@
                     <div class="fix-input">
                         <label>Your Fixed Version:</label>
                         <input type="text" id="fix-input" placeholder="Type the corrected sentence here..." />
-                        <button class="check-fix-btn" onclick="checkPunctuationFix(${questionIndex})">Check My Fix</button>
+                        <button type="button" class="check-fix-btn" onclick="checkPunctuationFix(${questionIndex})">Check My Fix</button>
                     </div>
                 </div>
             `;
@@ -612,8 +612,8 @@
                 <h4>Practice Complete!</h4>
                 <p><strong>Score: ${punctuationScore}/${punctuationQuestionsAnswered} (${percentage}%)</strong></p>
                 <p>${message}</p>
-                <button class="retry-btn" onclick="startPunctuationPractice()">Try Again</button>
-                <button class="new-punctuation-btn" onclick="document.getElementById('punctuation-score').innerHTML = ''">Choose New Topic</button>
+                <button type="button" class="retry-btn" onclick="startPunctuationPractice()">Try Again</button>
+                <button type="button" class="new-punctuation-btn" onclick="document.getElementById('punctuation-score').innerHTML = ''">Choose New Topic</button>
             `;
         }
 
@@ -667,7 +667,7 @@
                 <div class="word-relation-lesson">
                     <h4>${data.name}</h4>
                     <p class="word-relation-description">${data.description}</p>
-                    <button class="start-word-game-btn" onclick="loadWordRelationQuestion(0)">Start Game</button>
+                    <button type="button" class="start-word-game-btn" onclick="loadWordRelationQuestion(0)">Start Game</button>
                 </div>
             `;
             
@@ -709,7 +709,7 @@
                     <p class="word-question">${questionText}</p>
                     <div class="word-options">
                         ${allOptions.map((option, i) => 
-                            `<button class="word-option-btn" onclick="selectWordRelation(${questionIndex}, ${i}, ${correctIndex})">${option}</button>`
+                            `<button type="button" class="word-option-btn" onclick="selectWordRelation(${questionIndex}, ${i}, ${correctIndex})">${option}</button>`
                         ).join('')}
                     </div>
                 </div>
@@ -759,8 +759,8 @@
                 <h4>Game Complete!</h4>
                 <p><strong>Score: ${wordGameScore}/${wordGameQuestionsAnswered} (${percentage}%)</strong></p>
                 <p>${message}</p>
-                <button class="retry-btn" onclick="loadWordRelationQuestion(0)">Play Again</button>
-                <button class="new-game-btn" onclick="document.getElementById('word-game-stats').innerHTML = ''">Choose New Game</button>
+                <button type="button" class="retry-btn" onclick="loadWordRelationQuestion(0)">Play Again</button>
+                <button type="button" class="new-game-btn" onclick="document.getElementById('word-game-stats').innerHTML = ''">Choose New Game</button>
             `;
         }
 
@@ -809,7 +809,7 @@
                         <p>2. What clues in the passage helped you figure it out?</p>
                         <textarea id="clues-found" placeholder="List the clues you found..." rows="3"></textarea>
                         
-                        <button class="reveal-btn" onclick="revealContextAnswer('${passage.word}', '${passage.meaning}', '${passage.clues}')">Reveal Answer</button>
+                        <button type="button" class="reveal-btn" onclick="revealContextAnswer('${passage.word}', '${passage.meaning}', '${passage.clues}')">Reveal Answer</button>
                     </div>
                 </div>
             `;
@@ -838,7 +838,7 @@
             
             feedback += `
                     <p class="context-tip">💡 <strong>Tip:</strong> Context clues help us understand new words by looking at the words and sentences around them!</p>
-                    <button class="new-mystery-btn" onclick="loadContextCluesChallenge()">New Mystery Word</button>
+                    <button type="button" class="new-mystery-btn" onclick="loadContextCluesChallenge()">New Mystery Word</button>
                 </div>
             `;
             

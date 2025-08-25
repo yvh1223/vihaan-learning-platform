@@ -180,7 +180,7 @@
         <div id="header-container"></div>
         
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="main-content" id="main-content">
             <div class="content-header">
                 <h1>🏛️ Chapter 1: American History</h1>
                 <p>Journey through the founding of America - from Native American civilizations to the birth of our nation</p>
@@ -214,11 +214,11 @@
                 <h2>🕒 American History Timeline</h2>
                 <div class="timeline-controls">
                     <div class="period-buttons">
-                        <button id="native-btn" class="timeline-btn active" onclick="showPeriod('native')">Native Americans</button>
-                        <button id="exploration-btn" class="timeline-btn" onclick="showPeriod('exploration')">European Exploration</button>
-                        <button id="colonial-btn" class="timeline-btn" onclick="showPeriod('colonial')">Colonial Period</button>
-                        <button id="revolution-btn" class="timeline-btn" onclick="showPeriod('revolution')">Revolution</button>
-                        <button id="founding-btn" class="timeline-btn" onclick="showPeriod('founding')">Founding the Nation</button>
+                        <button type="button" id="native-btn" class="timeline-btn active" onclick="showPeriod('native')">Native Americans</button>
+                        <button type="button" id="exploration-btn" class="timeline-btn" onclick="showPeriod('exploration')">European Exploration</button>
+                        <button type="button" id="colonial-btn" class="timeline-btn" onclick="showPeriod('colonial')">Colonial Period</button>
+                        <button type="button" id="revolution-btn" class="timeline-btn" onclick="showPeriod('revolution')">Revolution</button>
+                        <button type="button" id="founding-btn" class="timeline-btn" onclick="showPeriod('founding')">Founding the Nation</button>
                     </div>
                 </div>
 
@@ -244,10 +244,10 @@
                     <div class="tribes-explorer">
                         <h4>🏕️ Explore Native American Tribes</h4>
                         <div class="tribe-buttons">
-                            <button class="tribe-btn" onclick="showTribeInfo('iroquois')">Iroquois Confederacy</button>
-                            <button class="tribe-btn" onclick="showTribeInfo('pueblo')">Pueblo Peoples</button>
-                            <button class="tribe-btn" onclick="showTribeInfo('plains')">Plains Tribes</button>
-                            <button class="tribe-btn" onclick="showTribeInfo('coastal')">Pacific Northwest</button>
+                            <button type="button" class="tribe-btn" onclick="showTribeInfo('iroquois')">Iroquois Confederacy</button>
+                            <button type="button" class="tribe-btn" onclick="showTribeInfo('pueblo')">Pueblo Peoples</button>
+                            <button type="button" class="tribe-btn" onclick="showTribeInfo('plains')">Plains Tribes</button>
+                            <button type="button" class="tribe-btn" onclick="showTribeInfo('coastal')">Pacific Northwest</button>
                         </div>
                         <div id="tribe-info" class="info-display">
                             <p>Select a tribe to learn about their way of life!</p>
@@ -284,8 +284,8 @@
                             <label><input type="checkbox" value="medicine"> Medicine for illness</label>
                             <label><input type="checkbox" value="clergy"> Priests to convert natives</label>
                         </div>
-                        <button onclick="evaluateExplorerChoices()" class="evaluation-btn">Evaluate My Choices</button>
-                        <div id="explorer-feedback" class="feedback-display"></div>
+                        <button type="button" onclick="evaluateExplorerChoices()" class="evaluation-btn">Evaluate My Choices</button>
+                        <div id="explorer-feedback" class="feedback-display" role="status" aria-live="polite"></div>
                     </div>
                 </div>
 
@@ -334,8 +334,8 @@
                             </div>
                         </div>
                         
-                        <button onclick="createColony()" class="build-btn">Found My Colony!</button>
-                        <div id="colony-result" class="result-display"></div>
+                        <button type="button" onclick="createColony()" class="build-btn">Found My Colony!</button>
+                        <div id="colony-result" class="result-display" role="status" aria-live="polite"></div>
                     </div>
                 </div>
 
@@ -410,8 +410,8 @@
                             </div>
                         </div>
                         
-                        <button onclick="solveConstitutionalIssues()" class="solve-btn">Solve the Issues!</button>
-                        <div id="constitution-result" class="result-display"></div>
+                        <button type="button" onclick="solveConstitutionalIssues()" class="solve-btn">Solve the Issues!</button>
+                        <div id="constitution-result" class="result-display" role="status" aria-live="polite"></div>
                     </div>
                 </div>
             </div>
@@ -420,10 +420,10 @@
             <div id="colonialLife" class="content-section" style="display: none;">
                 <h2>🏘️ Colonial Life Experience</h2>
                 <div class="colonial-tabs">
-                    <button class="tab-button active" onclick="showColonialTab('daily')">Daily Life</button>
-                    <button class="tab-button" onclick="showColonialTab('trades')">Colonial Jobs</button>
-                    <button class="tab-button" onclick="showColonialTab('town')">Town Buildings</button>
-                    <button class="tab-button" onclick="showColonialTab('survival')">Survival Challenge</button>
+                    <button type="button" class="tab-button active" onclick="showColonialTab('daily')">Daily Life</button>
+                    <button type="button" class="tab-button" onclick="showColonialTab('trades')">Colonial Jobs</button>
+                    <button type="button" class="tab-button" onclick="showColonialTab('town')">Town Buildings</button>
+                    <button type="button" class="tab-button" onclick="showColonialTab('survival')">Survival Challenge</button>
                 </div>
 
                 <!-- Daily Life Tab -->
@@ -540,19 +540,19 @@
                         </div>
                     </div>
                     
-                    <button onclick="startSurvivalChallenge()" class="survival-btn">🚀 Start Challenge</button>
+                    <button type="button" onclick="startSurvivalChallenge()" class="survival-btn">🚀 Start Challenge</button>
                     
                     <div id="survival-scenario" class="scenario-display">
                         <p>Click "Start Challenge" to begin your colonial survival adventure!</p>
                     </div>
                     
                     <div id="survival-choices" class="choice-buttons" style="display: none;">
-                        <button id="choice-A" onclick="makeChoice('A')">Choice A</button>
-                        <button id="choice-B" onclick="makeChoice('B')">Choice B</button>
-                        <button id="choice-C" onclick="makeChoice('C')">Choice C</button>
+                        <button type="button" id="choice-A" onclick="makeChoice('A')">Choice A</button>
+                        <button type="button" id="choice-B" onclick="makeChoice('B')">Choice B</button>
+                        <button type="button" id="choice-C" onclick="makeChoice('C')">Choice C</button>
                     </div>
                     
-                    <div id="survival-result" class="result-display"></div>
+                    <div id="survival-result" class="result-display" role="status" aria-live="polite"></div>
                 </div>
             </div>
 
@@ -560,11 +560,11 @@
             <div id="revolutionCenter" class="content-section" style="display: none;">
                 <h2>⚔️ Revolution Center</h2>
                 <div class="revolution-tabs">
-                    <button class="tab-button active" onclick="showRevolutionTab('causes')">Causes & Effects</button>
-                    <button class="tab-button" onclick="showRevolutionTab('battles')">Key Battles</button>
-                    <button class="tab-button" onclick="showRevolutionTab('heroes')">Revolutionary Heroes</button>
-                    <button class="tab-button" onclick="showRevolutionTab('declaration')">Declaration Deep Dive</button>
-                    <button class="tab-button" onclick="showRevolutionTab('decisions')">Patriot vs Loyalist</button>
+                    <button type="button" class="tab-button active" onclick="showRevolutionTab('causes')">Causes & Effects</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('battles')">Key Battles</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('heroes')">Revolutionary Heroes</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('declaration')">Declaration Deep Dive</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('decisions')">Patriot vs Loyalist</button>
                 </div>
 
                 <div id="revolution-content" class="revolution-display">
@@ -595,18 +595,18 @@
                 <!-- Patriot vs Loyalist Decision Center -->
                 <div class="decision-center">
                     <h3>🤔 You Decide: Patriot or Loyalist?</h3>
-                    <button onclick="generateRevolutionScenario()" class="scenario-btn">🎲 Get Revolution Scenario</button>
+                    <button type="button" onclick="generateRevolutionScenario()" class="scenario-btn">🎲 Get Revolution Scenario</button>
                     
                     <div id="current-scenario" class="scenario-display">
                         <p>Click above to get a revolutionary dilemma and choose your side!</p>
                     </div>
                     
                     <div class="decision-buttons">
-                        <button class="patriot-btn" onclick="choosePatriot()" style="display: none;">🇺🇸 Choose Patriot Side</button>
-                        <button class="loyalist-btn" onclick="chooseLoyalist()" style="display: none;">🇬🇧 Choose Loyalist Side</button>
+                        <button type="button" class="patriot-btn" onclick="choosePatriot()" style="display: none;">🇺🇸 Choose Patriot Side</button>
+                        <button type="button" class="loyalist-btn" onclick="chooseLoyalist()" style="display: none;">🇬🇧 Choose Loyalist Side</button>
                     </div>
                     
-                    <div id="revolution-feedback" class="feedback-display"></div>
+                    <div id="revolution-feedback" class="feedback-display" role="status" aria-live="polite"></div>
                 </div>
             </div>
 
@@ -652,12 +652,12 @@
                 <div id="challenge-question">
                     <p><strong>Question:</strong> Which Native American confederacy influenced the U.S. Constitution with their democratic government system?</p>
                     <div class="challenge-options">
-                        <button onclick="checkChallenge('iroquois')">Iroquois Confederacy</button>
-                        <button onclick="checkChallenge('pueblo')">Pueblo Peoples</button>
-                        <button onclick="checkChallenge('plains')">Plains Tribes</button>
-                        <button onclick="checkChallenge('coastal')">Pacific Northwest Tribes</button>
+                        <button type="button" onclick="checkChallenge('iroquois')">Iroquois Confederacy</button>
+                        <button type="button" onclick="checkChallenge('pueblo')">Pueblo Peoples</button>
+                        <button type="button" onclick="checkChallenge('plains')">Plains Tribes</button>
+                        <button type="button" onclick="checkChallenge('coastal')">Pacific Northwest Tribes</button>
                     </div>
-                    <div id="challenge-result"></div>
+                    <div id="challenge-result" role="status" aria-live="polite"></div>
                 </div>
             </div>
 
@@ -668,6 +668,7 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="../../js/interactive.js" defer></script>
     <script>
         // Shared component loader
         async function loadSharedComponents() {
@@ -1275,7 +1276,7 @@
                     <h4>${message}</h4>
                     <p><strong>Final Score:</strong> ${score} points</p>
                     <p><strong>Days Survived:</strong> ${survivalStats.day - 1}</p>
-                    <button onclick="startSurvivalChallenge()" class="survival-btn">🔄 Try Again</button>
+                    <button type="button" onclick="startSurvivalChallenge()" class="survival-btn">🔄 Try Again</button>
                 </div>
             `;
             
@@ -1368,8 +1369,8 @@
             
             choicesDiv.innerHTML = `
                 <div class="decision-buttons">
-                    <button class="patriot-choice" onclick="choosePatriot()">🇺🇸 ${scenario.patriotChoice}</button>
-                    <button class="loyalist-choice" onclick="chooseLoyalist()">🇬🇧 ${scenario.loyalistChoice}</button>
+                    <button type="button" class="patriot-choice" onclick="choosePatriot()">🇺🇸 ${scenario.patriotChoice}</button>
+                    <button type="button" class="loyalist-choice" onclick="chooseLoyalist()">🇬🇧 ${scenario.loyalistChoice}</button>
                 </div>
             `;
             
@@ -1397,7 +1398,7 @@
                     <h4>${flag} You chose the ${choiceType} side!</h4>
                     <p><strong>What happened:</strong> ${outcome}</p>
                     <p><em>Historical note: Both Patriots and Loyalists were ordinary people making difficult decisions based on their beliefs and circumstances.</em></p>
-                    <button onclick="nextRevolutionScenario()" class="scenario-btn">📜 Next Scenario</button>
+                    <button type="button" onclick="nextRevolutionScenario()" class="scenario-btn">📜 Next Scenario</button>
                 </div>
             `;
             
@@ -1422,7 +1423,7 @@
                     <div class="scenarios-complete">
                         <h4>🎉 You've experienced the major events leading to the American Revolution!</h4>
                         <p>These were real decisions that real colonists had to make. About 1/3 were Patriots, 1/3 were Loyalists, and 1/3 tried to stay neutral.</p>
-                        <button onclick="resetRevolutionScenarios()" class="scenario-btn">🔄 Experience Again</button>
+                        <button type="button" onclick="resetRevolutionScenarios()" class="scenario-btn">🔄 Experience Again</button>
                     </div>
                 `;
                 document.getElementById('decision-choices').style.display = 'none';

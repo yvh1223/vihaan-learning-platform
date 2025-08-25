@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 3</div>
             <h1 class="chapter-title">Earth & Space</h1>
@@ -55,8 +55,8 @@
                     </div>
                 </div>
                 <div class="solar-system-controls">
-                    <button onclick="toggleAnimation()">⏯️ Play/Pause</button>
-                    <button onclick="resetSolarSystem()">🔄 Reset</button>
+                    <button type="button" onclick="toggleAnimation()">⏯️ Play/Pause</button>
+                    <button type="button" onclick="resetSolarSystem()">🔄 Reset</button>
                     <div class="speed-control">
                         <label>Speed: <span id="speed-value">1x</span></label>
                         <input type="range" id="speed-slider" min="0.1" max="3" step="0.1" value="1">
@@ -107,9 +107,9 @@
                         </div>
                     </div>
                     <div class="moon-controls">
-                        <button onclick="previousPhase()">← Previous Phase</button>
-                        <button onclick="nextPhase()">Next Phase →</button>
-                        <button onclick="autoPlayPhases()">🎬 Auto Play</button>
+                        <button type="button" onclick="previousPhase()">← Previous Phase</button>
+                        <button type="button" onclick="nextPhase()">Next Phase →</button>
+                        <button type="button" onclick="autoPlayPhases()">🎬 Auto Play</button>
                     </div>
                     <div class="phases-chart">
                         <div class="phase-item" onclick="setPhase(0)">
@@ -175,11 +175,11 @@
                     <div class="weather-controls">
                         <div class="weather-selector">
                             <h4>Create Weather:</h4>
-                            <button onclick="createWeather('sunny')">☀️ Sunny</button>
-                            <button onclick="createWeather('cloudy')">☁️ Cloudy</button>
-                            <button onclick="createWeather('rainy')">🌧️ Rainy</button>
-                            <button onclick="createWeather('stormy')">⛈️ Stormy</button>
-                            <button onclick="createWeather('snowy')">❄️ Snowy</button>
+                            <button type="button" onclick="createWeather('sunny')">☀️ Sunny</button>
+                            <button type="button" onclick="createWeather('cloudy')">☁️ Cloudy</button>
+                            <button type="button" onclick="createWeather('rainy')">🌧️ Rainy</button>
+                            <button type="button" onclick="createWeather('stormy')">⛈️ Stormy</button>
+                            <button type="button" onclick="createWeather('snowy')">❄️ Snowy</button>
                         </div>
                         <div class="weather-info" id="weather-info">
                             <p>Select weather conditions to see how they form in different atmospheric layers.</p>
@@ -227,10 +227,10 @@
                     <div class="quiz-question" id="space-quiz-question">
                         <p>Which planet is closest to the Sun?</p>
                         <div class="quiz-options">
-                            <button onclick="checkSpaceAnswer('A', true)">A) Mercury</button>
-                            <button onclick="checkSpaceAnswer('B', false)">B) Venus</button>
-                            <button onclick="checkSpaceAnswer('C', false)">C) Earth</button>
-                            <button onclick="checkSpaceAnswer('D', false)">D) Mars</button>
+                            <button type="button" onclick="checkSpaceAnswer('A', true)">A) Mercury</button>
+                            <button type="button" onclick="checkSpaceAnswer('B', false)">B) Venus</button>
+                            <button type="button" onclick="checkSpaceAnswer('C', false)">C) Earth</button>
+                            <button type="button" onclick="checkSpaceAnswer('D', false)">D) Mars</button>
                         </div>
                     </div>
                     <div class="quiz-feedback" id="space-quiz-feedback" style="display: none;"></div>
@@ -252,6 +252,7 @@
     </main>
     <div id="footer-container"></div>
     <script src="../../js/app.js" defer></script>
+    <script src="../../js/interactive.js" defer></script>
     <script>
         // Load shared components
         function loadSharedComponents() {
@@ -564,7 +565,7 @@
                 <p>${question.question}</p>
                 <div class="quiz-options">
                     ${question.options.map((option, index) => 
-                        `<button onclick="checkSpaceAnswer(${index}, ${index === question.correct})">${option}</button>`
+                        `<button type="button" onclick="checkSpaceAnswer(${index}, ${index === question.correct})">${option}</button>`
                     ).join('')}
                 </div>
             `;
@@ -610,7 +611,7 @@
                     <h3>Quiz Complete!</h3>
                     <p>Your Score: ${spaceQuizScore}/${spaceQuestions.length} (${percentage}%)</p>
                     <p>${resultMessage}</p>
-                    <button onclick="restartSpaceQuiz()">Take Quiz Again</button>
+                    <button type="button" onclick="restartSpaceQuiz()">Take Quiz Again</button>
                 </div>
             `;
         }

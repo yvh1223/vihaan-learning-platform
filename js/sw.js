@@ -7,20 +7,19 @@ const DYNAMIC_CACHE_NAME = 'vihaan-dynamic-v1';
 
 // Essential files for offline functionality
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/css/main.css',
-  '/css/responsive.css', 
-  '/js/app.js',
-  '/js/progress.js',
-  '/js/interactive.js',
-  '/manifest.json',
-  '/assets/icons/logo.png',
-  '/assets/icons/subject-icons/math.png',
-  '/assets/icons/subject-icons/science.png', 
-  '/assets/icons/subject-icons/english.png',
-  '/assets/icons/subject-icons/social-studies.png',
-  '/assets/images/illustrations/welcome-student.png'
+  'index.html',
+  'css/main.css',
+  'css/responsive.css',
+  'js/app.js',
+  'js/progress.js',
+  'js/interactive.js',
+  'manifest.json',
+  'assets/icons/logo.png',
+  'assets/icons/subject-icons/math.png',
+  'assets/icons/subject-icons/science.png',
+  'assets/icons/subject-icons/english.png',
+  'assets/icons/subject-icons/social-studies.png',
+  'assets/images/illustrations/welcome-student.png'
 ];
 
 // Network-first resources (always try network first)
@@ -130,7 +129,7 @@ async function networkFirstStrategy(request) {
     
     // Ultimate fallback for HTML pages
     if (request.headers.get('accept').includes('text/html')) {
-      const offlinePage = await caches.match('/index.html');
+      const offlinePage = await caches.match('index.html');
       if (offlinePage) {
         return offlinePage;
       }
@@ -225,7 +224,7 @@ async function syncProgressData() {
     
     if (offlineData && offlineData.length > 0) {
       // Send to Supabase when online
-      const response = await fetch('/api/sync-progress', {
+      const response = await fetch('api/sync-progress', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -264,8 +263,8 @@ self.addEventListener('push', event => {
   const data = event.data.json();
   const options = {
     body: data.body,
-    icon: '/assets/icons/icon-192.png',
-    badge: '/assets/icons/badge-72.png',
+    icon: 'assets/icons/icon-192.png',
+    badge: 'assets/icons/badge-72.png',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
@@ -275,12 +274,12 @@ self.addEventListener('push', event => {
       {
         action: 'explore',
         title: 'Continue Learning',
-        icon: '/assets/icons/actions/explore.png'
+        icon: 'assets/icons/actions/explore.png'
       },
       {
         action: 'close',
         title: 'Close',
-        icon: '/assets/icons/actions/close.png'
+        icon: 'assets/icons/actions/close.png'
       }
     ]
   };
@@ -296,7 +295,7 @@ self.addEventListener('notificationclick', event => {
   
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/')
+      clients.openWindow('./')
     );
   }
 });

@@ -1,8 +1,9 @@
 <!-- Shared Navigation Header Component -->
 <!-- Used across all subject and chapter pages for consistent navigation -->
 
-<header class="main-header">
-    <nav class="navbar">
+<header class="main-header" aria-label="Main site header">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-brand">
             <a href="../../index.html" class="brand-link">
                 <img src="../../assets/icons/logo.svg" alt="Learning Platform Logo" class="logo">
@@ -33,8 +34,9 @@
         
         <!-- Navigation Controls -->
         <div class="nav-controls">
-            <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
-            <button id="menu-toggle" class="btn-icon mobile-only" aria-label="Toggle menu">☰</button>
+            <button type="button" id="theme-toggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+            <button type="button" id="text-size-toggle" class="btn-icon" aria-label="Increase text size" aria-pressed="false">A+</button>
+            <button type="button" id="menu-toggle" class="btn-icon mobile-only" aria-label="Toggle menu">☰</button>
         </div>
     </nav>
     
@@ -50,6 +52,25 @@
 
 <style>
 /* Shared Header Styles - Extends main.css */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    background: #000;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    z-index: 10000;
+}
 .brand-link {
     display: flex;
     align-items: center;
@@ -140,6 +161,7 @@
     function initializeHeaderNavigation() {
         updateActiveNavigation();
         updateBreadcrumbs();
+        ensureMainLandmark();
     }
     
     // Update active navigation based on current page
@@ -161,6 +183,14 @@
             document.querySelector('[data-nav="social-studies"]')?.classList.add('active');
         } else if (currentPath === '/' || currentPath.endsWith('index.html')) {
             document.querySelector('[data-nav="dashboard"]')?.classList.add('active');
+        }
+    }
+
+    // Ensure there is a main landmark with a consistent ID for skip link
+    function ensureMainLandmark() {
+        const mainEl = document.querySelector('main');
+        if (mainEl && !mainEl.id) {
+            mainEl.id = 'main-content';
         }
     }
     

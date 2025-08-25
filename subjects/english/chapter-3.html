@@ -21,10 +21,10 @@
                     <div class="story-selection">
                         <h3>Choose a Story to Analyze</h3>
                         <div class="story-buttons">
-                            <button class="story-btn" onclick="loadStoryAnalysis('brave-little-mouse')">🐭 The Brave Little Mouse</button>
-                            <button class="story-btn" onclick="loadStoryAnalysis('magic-garden')">🌿 The Magic Garden</button>
-                            <button class="story-btn" onclick="loadStoryAnalysis('friendship-bridge')">🌉 The Friendship Bridge</button>
-                            <button class="story-btn" onclick="loadStoryAnalysis('time-traveler')">⏰ The Time Traveler's Journal</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('brave-little-mouse')">🐭 The Brave Little Mouse</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('magic-garden')">🌿 The Magic Garden</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('friendship-bridge')">🌉 The Friendship Bridge</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('time-traveler')">⏰ The Time Traveler's Journal</button>
                         </div>
                     </div>
                     
@@ -55,10 +55,10 @@
                     <div class="poetry-analysis">
                         <h3>Analyze Famous Poems</h3>
                         <div class="poem-selector">
-                            <button class="poem-btn" onclick="loadPoemAnalysis('haiku')">Haiku Garden 🌸</button>
-                            <button class="poem-btn" onclick="loadPoemAnalysis('limerick')">Silly Limericks 😂</button>
-                            <button class="poem-btn" onclick="loadPoemAnalysis('acrostic')">Acrostic Adventures 🅰️</button>
-                            <button class="poem-btn" onclick="loadPoemAnalysis('free-verse')">Free Verse Freedom 🔆</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('haiku')">Haiku Garden 🌸</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('limerick')">Silly Limericks 😂</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('acrostic')">Acrostic Adventures 🅰️</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('free-verse')">Free Verse Freedom 🔆</button>
                         </div>
                         
                         <div class="poem-content" id="poem-content">
@@ -71,10 +71,10 @@
                         <div class="poem-creator" id="poem-creator">
                             <h3>✍️ Create Your Own Poem</h3>
                             <div class="creator-tools">
-                                <button class="creator-btn" onclick="startPoemCreation('haiku')">Write a Haiku</button>
-                                <button class="creator-btn" onclick="startPoemCreation('limerick')">Create a Limerick</button>
-                                <button class="creator-btn" onclick="startPoemCreation('acrostic')">Build an Acrostic</button>
-                                <button class="creator-btn" onclick="startPoemCreation('free-verse')">Free Verse Expression</button>
+                                <button type="button" class="creator-btn" onclick="startPoemCreation('haiku')">Write a Haiku</button>
+                                <button type="button" class="creator-btn" onclick="startPoemCreation('limerick')">Create a Limerick</button>
+                                <button type="button" class="creator-btn" onclick="startPoemCreation('acrostic')">Build an Acrostic</button>
+                                <button type="button" class="creator-btn" onclick="startPoemCreation('free-verse')">Free Verse Expression</button>
                             </div>
                             <div class="creation-space" id="creation-space"></div>
                         </div>
@@ -88,10 +88,10 @@
                     <div class="challenge-levels">
                         <h3>Choose Your Challenge Level</h3>
                         <div class="level-buttons">
-                            <button class="level-btn" onclick="loadComprehensionChallenge('inference')">🔍 Inference Detective</button>
-                            <button class="level-btn" onclick="loadComprehensionChallenge('main-idea')">🎯 Main Idea Hunter</button>
-                            <button class="level-btn" onclick="loadComprehensionChallenge('compare-contrast')">⚖️ Compare & Contrast</button>
-                            <button class="level-btn" onclick="loadComprehensionChallenge('cause-effect')">🔗 Cause & Effect Chain</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('inference')">🔍 Inference Detective</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('main-idea')">🎯 Main Idea Hunter</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('compare-contrast')">⚖️ Compare & Contrast</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('cause-effect')">🔗 Cause & Effect Chain</button>
                         </div>
                     </div>
                     
@@ -118,10 +118,10 @@
                     <div class="writing-techniques">
                         <h3>Master Writing Techniques</h3>
                         <div class="technique-selector">
-                            <button class="technique-btn" onclick="loadWritingTechnique('descriptive')">🎨 Descriptive Writing</button>
-                            <button class="technique-btn" onclick="loadWritingTechnique('narrative')">📚 Narrative Storytelling</button>
-                            <button class="technique-btn" onclick="loadWritingTechnique('persuasive')">🎤 Persuasive Arguments</button>
-                            <button class="technique-btn" onclick="loadWritingTechnique('expository')">📊 Expository Explanation</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('descriptive')">🎨 Descriptive Writing</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('narrative')">📚 Narrative Storytelling</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('persuasive')">🎤 Persuasive Arguments</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('expository')">📊 Expository Explanation</button>
                         </div>
                         
                         <div class="technique-content" id="technique-content">
@@ -253,13 +253,13 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                     <div class="analysis-tools">
                         <h4>🔍 Literary Detective Tools</h4>
                         <div class="tool-buttons">
-                            <button class="tool-btn" onclick="analyzeElement('character')">🎭 Character Analysis</button>
-                            <button class="tool-btn" onclick="analyzeElement('setting')">🌍 Setting Explorer</button>
-                            <button class="tool-btn" onclick="analyzeElement('plot')">📈 Plot Structure</button>
-                            <button class="tool-btn" onclick="analyzeElement('theme')">💎 Theme Hunter</button>
-                            <button class="tool-btn" onclick="analyzeElement('pov')">👁️ Point of View</button>
+                            <button type="button" class="tool-btn" onclick="analyzeElement('character')">🎭 Character Analysis</button>
+                            <button type="button" class="tool-btn" onclick="analyzeElement('setting')">🌍 Setting Explorer</button>
+                            <button type="button" class="tool-btn" onclick="analyzeElement('plot')">📈 Plot Structure</button>
+                            <button type="button" class="tool-btn" onclick="analyzeElement('theme')">💎 Theme Hunter</button>
+                            <button type="button" class="tool-btn" onclick="analyzeElement('pov')">👁️ Point of View</button>
                         </div>
-                        <button class="complete-analysis-btn" onclick="startLiteraryQuiz()">📝 Complete Analysis Quiz</button>
+                        <button type="button" class="complete-analysis-btn" onclick="startLiteraryQuiz()">📝 Complete Analysis Quiz</button>
                     </div>
                 </div>
             `;
@@ -420,7 +420,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                     <p class="quiz-question">${question.question}</p>
                     <div class="quiz-options">
                         ${question.options.map((option, i) => 
-                            `<button class="quiz-option-btn" onclick="selectLiteraryAnswer(${questionIndex}, ${i}, ${question.correct}, '${question.explanation}', ${JSON.stringify(questions).replace(/"/g, '&quot;')})">${option}</button>`
+                            `<button type="button" class="quiz-option-btn" onclick="selectLiteraryAnswer(${questionIndex}, ${i}, ${question.correct}, '${question.explanation}', ${JSON.stringify(questions).replace(/"/g, '&quot;')})">${option}</button>`
                         ).join('')}
                     </div>
                 </div>
@@ -474,8 +474,8 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                     <div class="badge-earned">${badge}</div>
                     <p><strong>Score: ${literaryScore}/${literaryQuestionsAnswered} (${percentage}%)</strong></p>
                     <p>${message}</p>
-                    <button class="retry-btn" onclick="startLiteraryQuiz()">Retake Quiz</button>
-                    <button class="new-story-btn" onclick="document.getElementById('analysis-results').innerHTML = ''">Analyze New Story</button>
+                    <button type="button" class="retry-btn" onclick="startLiteraryQuiz()">Retake Quiz</button>
+                    <button type="button" class="new-story-btn" onclick="document.getElementById('analysis-results').innerHTML = ''">Analyze New Story</button>
                 </div>
             `;
         }
@@ -586,7 +586,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                                     <span class="syllable-count" id="count3">0/5</span>
                                 </div>
                             </div>
-                            <button class="create-poem-btn" onclick="displayCreatedPoem('haiku')">Create Haiku</button>
+                            <button type="button" class="create-poem-btn" onclick="displayCreatedPoem('haiku')">Create Haiku</button>
                         </div>
                     `;
                     break;
@@ -601,7 +601,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                             <div class="acrostic-lines" id="acrostic-lines">
                                 <p>Type a word above to create your acrostic poem!</p>
                             </div>
-                            <button class="create-poem-btn" onclick="displayCreatedPoem('acrostic')" id="create-acrostic" style="display:none;">Create Acrostic</button>
+                            <button type="button" class="create-poem-btn" onclick="displayCreatedPoem('acrostic')" id="create-acrostic" style="display:none;">Create Acrostic</button>
                         </div>
                     `;
                     break;
@@ -620,7 +620,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                                 </div>
                             </div>
                             <textarea id="free-verse-text" placeholder="Let your creativity flow..." rows="8"></textarea>
-                            <button class="create-poem-btn" onclick="displayCreatedPoem('free-verse')">Share Your Poem</button>
+                            <button type="button" class="create-poem-btn" onclick="displayCreatedPoem('free-verse')">Share Your Poem</button>
                         </div>
                     `;
                     break;
@@ -651,7 +651,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                                     <input type="text" id="limerick-line5" placeholder="And [funny conclusion]">
                                 </div>
                             </div>
-                            <button class="create-poem-btn" onclick="displayCreatedPoem('limerick')">Create Limerick</button>
+                            <button type="button" class="create-poem-btn" onclick="displayCreatedPoem('limerick')">Create Limerick</button>
                         </div>
                     `;
                     break;
@@ -739,9 +739,9 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                         ${poemContent.replace(/\\n/g, '<br>')}
                     </div>
                     <div class="poem-actions">
-                        <button class="save-poem-btn" onclick="savePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>💾 Save Poem</button>
-                        <button class="share-poem-btn" onclick="sharePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>📤 Share Poem</button>
-                        <button class="new-poem-btn" onclick="startPoemCreation('${type}')")>✨ Create Another</button>
+                        <button type="button" class="save-poem-btn" onclick="savePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>💾 Save Poem</button>
+                        <button type="button" class="share-poem-btn" onclick="sharePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>📤 Share Poem</button>
+                        <button type="button" class="new-poem-btn" onclick="startPoemCreation('${type}')")>✨ Create Another</button>
                     </div>
                 </div>
             `;
@@ -852,7 +852,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                 <div class="comprehension-challenge-container">
                     <h4>${challenge.name}</h4>
                     <p class="challenge-description">${challenge.description}</p>
-                    <button class="start-challenge-btn" onclick="startComprehensionQuestions(0)">Start Challenge</button>
+                    <button type="button" class="start-challenge-btn" onclick="startComprehensionQuestions(0)">Start Challenge</button>
                 </div>
             `;
             
@@ -881,7 +881,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                         <p class="question">${passage.question}</p>
                         <div class="comprehension-options">
                             ${passage.options.map((option, i) => 
-                                `<button class="comprehension-option-btn" onclick="selectComprehensionAnswer(${questionIndex}, ${i}, ${passage.correct}, '${passage.explanation}')">${option}</button>`
+                                `<button type="button" class="comprehension-option-btn" onclick="selectComprehensionAnswer(${questionIndex}, ${i}, ${passage.correct}, '${passage.explanation}')">${option}</button>`
                             ).join('')}
                         </div>
                     </div>
@@ -932,8 +932,8 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                     <div class="badge-earned">${badge}</div>
                     <p><strong>Score: ${challengeScore}/${challengeQuestionsAnswered} (${percentage}%)</strong></p>
                     <p>${message}</p>
-                    <button class="retry-btn" onclick="startComprehensionQuestions(0)">Try Again</button>
-                    <button class="new-challenge-btn" onclick="document.getElementById('challenge-progress').innerHTML = ''">New Challenge</button>
+                    <button type="button" class="retry-btn" onclick="startComprehensionQuestions(0)">Try Again</button>
+                    <button type="button" class="new-challenge-btn" onclick="document.getElementById('challenge-progress').innerHTML = ''">New Challenge</button>
                 </div>
             `;
         }
@@ -1061,7 +1061,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                         </div>
                     </div>
                     
-                    <button class="start-writing-btn" onclick="startWritingPractice('${technique}')">Practice This Technique</button>
+                    <button type="button" class="start-writing-btn" onclick="startWritingPractice('${technique}')">Practice This Technique</button>
                 </div>
             `;
             
@@ -1092,7 +1092,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                                 </div>
                             </div>
                             <textarea id="descriptive-writing" placeholder="Describe your favorite place..." rows="8"></textarea>
-                            <button class="analyze-writing-btn" onclick="analyzeDescriptiveWriting()">Analyze My Writing</button>
+                            <button type="button" class="analyze-writing-btn" onclick="analyzeDescriptiveWriting()">Analyze My Writing</button>
                         </div>
                     `;
                     break;
@@ -1111,7 +1111,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                                 </div>
                             </div>
                             <textarea id="persuasive-writing" placeholder="Dear Principal..." rows="10"></textarea>
-                            <button class="analyze-writing-btn" onclick="analyzePersuasiveWriting()">Analyze My Argument</button>
+                            <button type="button" class="analyze-writing-btn" onclick="analyzePersuasiveWriting()">Analyze My Argument</button>
                         </div>
                     `;
                     break;
@@ -1123,7 +1123,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                                 <p><strong>Practice Prompt:</strong> Use the techniques you learned to write about any topic that interests you.</p>
                             </div>
                             <textarea id="general-writing" placeholder="Start writing here..." rows="8"></textarea>
-                            <button class="analyze-writing-btn" onclick="analyzeGeneralWriting('${technique}')">Review My Writing</button>
+                            <button type="button" class="analyze-writing-btn" onclick="analyzeGeneralWriting('${technique}')">Review My Writing</button>
                         </div>
                     `;
                     break;
@@ -1229,7 +1229,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                     <p><strong>Sentences:</strong> ${sentences}</p>
                     <p><strong>Average Words per Sentence:</strong> ${avgWordsPerSentence}</p>
                     <p>🎉 Great work practicing ${writingTechniques[technique].name.split(' - ')[0]}!</p>
-                    <button class="save-writing-btn" onclick="saveWriting('${technique}', '${writing.replace(/'/g, '\\\\\'')}')")>💾 Save My Writing</button>
+                    <button type="button" class="save-writing-btn" onclick="saveWriting('${technique}', '${writing.replace(/'/g, '\\\\\'')}')")>💾 Save My Writing</button>
                 </div>
             `;
             

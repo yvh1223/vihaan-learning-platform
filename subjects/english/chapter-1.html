@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 1</div>
             <h1 class="chapter-title">Reading & Writing Fundamentals</h1>
@@ -36,10 +36,10 @@
                                     <span class="timer-icon">⏱️</span>
                                     <span id="reading-timer">0:00</span>
                                 </div>
-                                <button id="narration-btn" class="narration-button" onclick="toggleNarration()" title="Listen to passage">
+                                <button type="button" id="narration-btn" class="narration-button" onclick="toggleNarration()" title="Listen to passage" aria-pressed="false">
                                     🔊 Listen
                                 </button>
-                                <button id="highlight-btn" class="highlight-button" onclick="toggleHighlighting()" title="Highlight as you read">
+                                <button type="button" id="highlight-btn" class="highlight-button" onclick="toggleHighlighting()" title="Highlight as you read" aria-pressed="false">
                                     ✨ Highlight
                                 </button>
                             </div>
@@ -53,8 +53,8 @@
                         </div>
                     </div>
                     
-                    <div class="comprehension-questions" id="comprehension-questions">
-                        <h4>📝 Reading Comprehension Questions</h4>
+                    <div class="comprehension-questions" id="comprehension-questions" role="region" aria-labelledby="reading-questions-title">
+                        <h4 id="reading-questions-title">📝 Reading Comprehension Questions</h4>
                         <div class="question-container">
                             <div class="question" data-question="1">
                                 <p><strong>1. What had Sarah always dreamed of doing?</strong></p>
@@ -87,8 +87,8 @@
                             </div>
                         </div>
                         
-                        <button class="check-answers-btn" onclick="checkReadingAnswers()">Check My Answers</button>
-                        <div class="results-display" id="reading-results"></div>
+                        <button type="button" class="check-answers-btn" onclick="checkReadingAnswers()" aria-label="Check my reading comprehension answers">Check My Answers</button>
+                        <div class="results-display" id="reading-results" role="status" aria-live="polite"></div>
                     </div>
                 </div>
             </div>
@@ -99,10 +99,10 @@
                     <div class="writing-prompt-container">
                         <h3>Story Starters</h3>
                         <div class="prompt-selector">
-                            <button class="prompt-btn" onclick="selectWritingPrompt('adventure')">Adventure</button>
-                            <button class="prompt-btn" onclick="selectWritingPrompt('mystery')">Mystery</button>
-                            <button class="prompt-btn" onclick="selectWritingPrompt('friendship')">Friendship</button>
-                            <button class="prompt-btn" onclick="selectWritingPrompt('fantasy')">Fantasy</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('adventure')">Adventure</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('mystery')">Mystery</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('friendship')">Friendship</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('fantasy')">Fantasy</button>
                         </div>
                         
                         <div class="current-prompt" id="writing-prompt">
@@ -114,10 +114,10 @@
                     <div class="writing-editor">
                         <h3>📝 Your Story</h3>
                         <div class="writing-tools">
-                            <button class="tool-btn" onclick="addDialogue()">💬 Add Dialogue</button>
-                            <button class="tool-btn" onclick="addDescription()">🎨 Add Description</button>
-                            <button class="tool-btn" onclick="showWritingTips()">💡 Writing Tips</button>
-                            <button class="tool-btn" onclick="saveStory()">💾 Save Story</button>
+                            <button type="button" class="tool-btn" onclick="addDialogue()">💬 Add Dialogue</button>
+                            <button type="button" class="tool-btn" onclick="addDescription()">🎨 Add Description</button>
+                            <button type="button" class="tool-btn" onclick="showWritingTips()">💡 Writing Tips</button>
+                            <button type="button" class="tool-btn" onclick="saveStory()">💾 Save Story</button>
                         </div>
                         
                         <textarea id="story-editor" placeholder="Start writing your story here..." rows="12"></textarea>
@@ -137,9 +137,9 @@
                     <div class="grammar-game-container">
                         <h3>Grammar Detective Game</h3>
                         <div class="game-selector">
-                            <button class="game-btn" onclick="startGrammarGame('punctuation')">Punctuation Police</button>
-                            <button class="game-btn" onclick="startGrammarGame('parts-of-speech')">Parts of Speech</button>
-                            <button class="game-btn" onclick="startGrammarGame('sentence-structure')">Sentence Builder</button>
+                            <button type="button" class="game-btn" onclick="startGrammarGame('punctuation')">Punctuation Police</button>
+                            <button type="button" class="game-btn" onclick="startGrammarGame('parts-of-speech')">Parts of Speech</button>
+                            <button type="button" class="game-btn" onclick="startGrammarGame('sentence-structure')">Sentence Builder</button>
                         </div>
                         
                         <div class="grammar-game" id="grammar-game">
@@ -163,10 +163,10 @@
                     <div class="vocab-explorer">
                         <h3>Word Explorer</h3>
                         <div class="vocab-categories">
-                            <button class="vocab-btn" onclick="loadVocabCategory('emotions')">😊 Emotions</button>
-                            <button class="vocab-btn" onclick="loadVocabCategory('nature')">🌳 Nature</button>
-                            <button class="vocab-btn" onclick="loadVocabCategory('adventure')">🗺️ Adventure</button>
-                            <button class="vocab-btn" onclick="loadVocabCategory('descriptive')">🎨 Descriptive</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('emotions')">😊 Emotions</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('nature')">🌳 Nature</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('adventure')">🗺️ Adventure</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('descriptive')">🎨 Descriptive</button>
                         </div>
                         
                         <div class="vocab-display" id="vocab-display">
@@ -176,20 +176,20 @@
                         </div>
                         
                         <div class="vocab-practice" id="vocab-practice">
-                            <button class="practice-btn" onclick="startVocabQuiz()">🧠 Test Your Knowledge</button>
-                            <button class="practice-btn" onclick="createWordStory()">📚 Use Words in Story</button>
+                            <button type="button" class="practice-btn" onclick="startVocabQuiz()">🧠 Test Your Knowledge</button>
+                            <button type="button" class="practice-btn" onclick="createWordStory()">📚 Use Words in Story</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="chapter-navigation">
-            <a href="index.html" class="nav-button">← Previous</a>
+            <a href="index.html" class="nav-button" aria-label="Previous: English overview">← Previous</a>
             <div class="progress-indicator">
                 <div class="progress-bar"><div class="progress-fill" style="width: 10%"></div></div>
                 <span class="progress-text">Chapter 1 Progress: 10%</span>
             </div>
-            <a href="chapter-2.html" class="nav-button">Next →</a>
+            <a href="chapter-2.html" class="nav-button" aria-label="Next: Chapter 2 Writing & Composition">Next →</a>
         </div>
     </main>
     <div id="footer-container"></div>
@@ -285,7 +285,7 @@
                 `;
             });
             
-            questionsHTML += '</div><button class="check-answers-btn" onclick="checkReadingAnswers()">Check My Answers</button><div class="results-display" id="reading-results"></div>';
+            questionsHTML += '</div><button type="button" class="check-answers-btn" onclick="checkReadingAnswers()" aria-label="Check my reading comprehension answers">Check My Answers</button><div class="results-display" id="reading-results" role="status" aria-live="polite"></div>';
             questionsContainer.innerHTML = questionsHTML;
             
             // Reset timer
@@ -645,7 +645,7 @@
                         <p class="sentence">${question.sentence.replace(/\*/g, '<strong>')}</p>
                         <div class="grammar-options">
                             ${question.options.map((option, i) => 
-                                `<button class="option-btn" onclick="selectGrammarAnswer(${questionIndex}, ${i})">${option}</button>`
+                                `<button type="button" class="option-btn" onclick="selectGrammarAnswer(${questionIndex}, ${i})">${option}</button>`
                             ).join('')}
                         </div>
                     </div>
@@ -657,7 +657,7 @@
                         <p class="prompt">${question.prompt}</p>
                         <div class="grammar-options">
                             ${question.options.map((option, i) => 
-                                `<button class="option-btn" onclick="selectGrammarAnswer(${questionIndex}, ${i})">${option}</button>`
+                                `<button type="button" class="option-btn" onclick="selectGrammarAnswer(${questionIndex}, ${i})">${option}</button>`
                             ).join('')}
                         </div>
                     </div>
@@ -701,7 +701,7 @@
                 <h4>Game Complete!</h4>
                 <p><strong>Final Score: ${gameScore}/${questionsAnswered} (${percentage}%)</strong></p>
                 <p>${message}</p>
-                <button class="play-again-btn" onclick="startGrammarGame('${currentGrammarGame}')">Play Again</button>
+                <button type="button" class="play-again-btn" onclick="startGrammarGame('${currentGrammarGame}')">Play Again</button>
             `;
         }
 
@@ -820,7 +820,7 @@
                     <p class="quiz-word"><strong>What does "${randomWord.word}" mean?</strong></p>
                     <div class="quiz-options">
                         ${options.map((option, i) => 
-                            `<button class="quiz-option-btn" onclick="checkVocabAnswer(${i}, ${correctIndex}, '${randomWord.word}', '${randomWord.example}')">${option}</button>`
+                            `<button type="button" class="quiz-option-btn" onclick="checkVocabAnswer(${i}, ${correctIndex}, '${randomWord.word}', '${randomWord.example}')">${option}</button>`
                         ).join('')}
                     </div>
                 </div>

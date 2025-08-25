@@ -904,7 +904,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 2</div>
             <h1 class="chapter-title">Geography & Interactive Maps</h1>
@@ -985,13 +985,13 @@
             <div class="lesson-section">
                 <h3>🎯 Geography Challenge</h3>
                 <div class="geography-quiz">
-                    <div class="quiz-question" id="quizQuestion">
+                    <div class="quiz-question" id="quizQuestion" aria-live="polite">
                         <h4>Geography Quiz</h4>
                         <p>Test your knowledge of geography!</p>
-                        <button onclick="startGeographyQuiz()" class="start-quiz-btn">Start Challenge</button>
+                        <button type="button" onclick="startGeographyQuiz()" class="start-quiz-btn">Start Challenge</button>
                     </div>
                     <div class="quiz-options" id="quizOptions"></div>
-                    <div class="quiz-feedback" id="quizFeedback"></div>
+                    <div class="quiz-feedback" id="quizFeedback" role="status" aria-live="polite"></div>
                 </div>
             </div>
 
@@ -1000,10 +1000,10 @@
                 <h3>🧭 Map Skills Laboratory</h3>
                 <div class="map-skills-container">
                     <div class="skills-tabs">
-                        <button class="skill-tab active" onclick="switchSkill('compass')">Compass Rose</button>
-                        <button class="skill-tab" onclick="switchSkill('scale')">Map Scale</button>
-                        <button class="skill-tab" onclick="switchSkill('coordinates')">Coordinates</button>
-                        <button class="skill-tab" onclick="switchSkill('symbols')">Map Symbols</button>
+                        <button type="button" class="skill-tab active" onclick="switchSkill('compass')">Compass Rose</button>
+                        <button type="button" class="skill-tab" onclick="switchSkill('scale')">Map Scale</button>
+                        <button type="button" class="skill-tab" onclick="switchSkill('coordinates')">Coordinates</button>
+                        <button type="button" class="skill-tab" onclick="switchSkill('symbols')">Map Symbols</button>
                     </div>
                     <div class="skill-content">
                         <div id="compassSkill" class="skill-panel active">
@@ -1023,7 +1023,7 @@
                                 </div>
                                 <div class="direction-challenge">
                                     <p id="directionQuestion">Click on the compass to practice directions!</p>
-                                    <button onclick="startDirectionChallenge()">Start Direction Challenge</button>
+                                    <button type="button" onclick="startDirectionChallenge()">Start Direction Challenge</button>
                                 </div>
                             </div>
                         </div>
@@ -1042,9 +1042,9 @@
                                     <div class="scale-question">
                                         <p>If the scale shows 1 inch = 50 miles, and two cities are 2 inches apart on the map, how far apart are they in real life?</p>
                                         <div class="scale-answers">
-                                            <button onclick="checkScaleAnswer(50)">50 miles</button>
-                                            <button onclick="checkScaleAnswer(100)">100 miles</button>
-                                            <button onclick="checkScaleAnswer(150)">150 miles</button>
+                                            <button type="button" onclick="checkScaleAnswer(50)">50 miles</button>
+                                            <button type="button" onclick="checkScaleAnswer(100)">100 miles</button>
+                                            <button type="button" onclick="checkScaleAnswer(150)">150 miles</button>
                                         </div>
                                     </div>
                                     <div id="scaleResult"></div>
@@ -1076,7 +1076,7 @@
                                 </div>
                                 <div class="coordinate-practice">
                                     <p>Find locations using coordinates!</p>
-                                    <button onclick="startCoordinateChallenge()">Practice Coordinates</button>
+                                    <button type="button" onclick="startCoordinateChallenge()">Practice Coordinates</button>
                                     <div id="coordinateQuestion"></div>
                                 </div>
                             </div>
@@ -1161,7 +1161,7 @@
                             </div>
                         </div>
                     </div>
-                    <button onclick="checkSortingAnswers()">Check Answers</button>
+                    <button type="button" onclick="checkSortingAnswers()">Check Answers</button>
                     <div id="sortingResult"></div>
                 </div>
             </div>
@@ -1222,6 +1222,7 @@
         </div>
     </main>
     <div id="footer-container"></div>
+    <script src="../../js/interactive.js" defer></script>
     <script>
         function loadSharedComponents() {
             fetch('../shared/header.html').then(r => r.text()).then(h => document.getElementById('header-container').innerHTML = h);
@@ -1511,7 +1512,7 @@
             `;
             
             optionsElement.innerHTML = question.options.map((option, index) => 
-                `<button class=\"quiz-option\" onclick=\"selectQuizAnswer(\${index})\">\${option}</button>`
+                `<button type="button" class=\"quiz-option\" onclick=\"selectQuizAnswer(\${index})\">\${option}</button>`
             ).join('');
             
             feedbackElement.innerHTML = '';
@@ -1528,7 +1529,7 @@
                 <div class=\"answer-feedback \${correct ? 'correct' : 'incorrect'}\">
                     <p><strong>\${correct ? 'Correct!' : 'Incorrect'}</strong></p>
                     <p>\${question.explanation}</p>
-                    <button onclick=\"nextQuizQuestion()\">Next Question</button>
+                    <button type="button" onclick=\"nextQuizQuestion()\">Next Question</button>
                 </div>
             `;
             
@@ -1576,7 +1577,7 @@
                     <div class=\"score-display\">
                         <span class=\"score-number\">\${percentage}%</span>
                     </div>
-                    <button onclick=\"startGeographyQuiz()\" class=\"retry-btn\">Try Again</button>
+                    <button type="button" onclick=\"startGeographyQuiz()\" class=\"retry-btn\">Try Again</button>
                 </div>
             `;
         }
@@ -1679,9 +1680,9 @@
             document.getElementById('coordinateQuestion').innerHTML = `
                 <p>What are the approximate coordinates for \${randomLocation.name}?</p>
                 <div class=\"coordinate-answers\">
-                    <button onclick=\"checkCoordinateAnswer(true)\">\${randomLocation.lat}, \${randomLocation.lng}</button>
-                    <button onclick=\"checkCoordinateAnswer(false)\">35\u00b0N, 85\u00b0W</button>
-                    <button onclick=\"checkCoordinateAnswer(false)\">40\u00b0N, 75\u00b0W</button>
+                    <button type="button" onclick=\"checkCoordinateAnswer(true)\">\${randomLocation.lat}, \${randomLocation.lng}</button>
+                    <button type="button" onclick=\"checkCoordinateAnswer(false)\">35\u00b0N, 85\u00b0W</button>
+                    <button type="button" onclick=\"checkCoordinateAnswer(false)\">40\u00b0N, 75\u00b0W</button>
                 </div>
                 <div id=\"coordinateResult\"></div>
             `;

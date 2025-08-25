@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 2</div>
             <h1 class="chapter-title">Force, Motion & Energy</h1>
@@ -34,7 +34,7 @@
                                 <label>Surface Friction: <span id="friction-value">10</span> N</label>
                                 <input type="range" id="friction-slider" min="0" max="30" value="10">
                             </div>
-                            <button onclick="resetDemo()">Reset Position</button>
+                            <button type="button" onclick="resetDemo()">Reset Position</button>
                         </div>
                     </div>
                     <div class="physics-explanation">
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button onclick="startPendulum()">Start Pendulum</button>
+                        <button type="button" onclick="startPendulum()">Start Pendulum</button>
                     </div>
 
                     <div class="spring-demo">
@@ -132,7 +132,7 @@
                             <input type="range" id="compression-slider" min="0" max="10" value="0">
                             <div class="energy-display">Stored Energy: <span id="spring-energy">0</span> J</div>
                         </div>
-                        <button onclick="releaseSpring()">Release Spring</button>
+                        <button type="button" onclick="releaseSpring()">Release Spring</button>
                     </div>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="friction-results" id="friction-results">
+                    <div class="friction-results" id="friction-results" role="status" aria-live="polite">
                         <div class="result-display">
                             <span>Current Surface: <strong id="current-surface">Select a surface</strong></span>
                             <span>Friction Coefficient: <strong id="friction-coefficient">-</strong></span>
@@ -172,16 +172,16 @@
             <div class="experiment-station quiz-station">
                 <h3><span class="section-icon">🧠</span>Physics Knowledge Check</h3>
                 <div class="quiz-container" id="physics-quiz">
-                    <div class="quiz-question" id="quiz-question">
+                    <div class="quiz-question" id="quiz-question" aria-live="polite">
                         <p>A ball rolls down a hill. What type of energy does it have at the top?</p>
                         <div class="quiz-options">
-                            <button onclick="checkAnswer('A', false)">A) Kinetic Energy</button>
-                            <button onclick="checkAnswer('B', true)">B) Potential Energy</button>
-                            <button onclick="checkAnswer('C', false)">C) Thermal Energy</button>
-                            <button onclick="checkAnswer('D', false)">D) Sound Energy</button>
+                            <button type="button" onclick="checkAnswer('A', false)">A) Kinetic Energy</button>
+                            <button type="button" onclick="checkAnswer('B', true)">B) Potential Energy</button>
+                            <button type="button" onclick="checkAnswer('C', false)">C) Thermal Energy</button>
+                            <button type="button" onclick="checkAnswer('D', false)">D) Sound Energy</button>
                         </div>
                     </div>
-                    <div class="quiz-feedback" id="quiz-feedback" style="display: none;"></div>
+                    <div class="quiz-feedback" id="quiz-feedback" role="status" aria-live="polite" style="display: none;"></div>
                     <div class="quiz-progress">
                         <span>Question <span id="question-number">1</span> of <span id="total-questions">5</span></span>
                         <div class="quiz-score">Score: <span id="quiz-score">0</span>/5</div>
@@ -200,6 +200,7 @@
     </main>
     <div id="footer-container"></div>
     <script src="../../js/app.js" defer></script>
+    <script src="../../js/interactive.js" defer></script>
     <script>
         // Load shared components
         function loadSharedComponents() {
@@ -490,7 +491,7 @@
                 <p>${question.question}</p>
                 <div class="quiz-options">
                     ${question.options.map((option, index) => 
-                        `<button onclick="checkAnswer(${index}, ${index === question.correct})">${option}</button>`
+                        `<button type="button" onclick="checkAnswer(${index}, ${index === question.correct})">${option}</button>`
                     ).join('')}
                 </div>
             `;
@@ -536,7 +537,7 @@
                     <h3>Quiz Complete!</h3>
                     <p>Your Score: ${quizScore}/${quizQuestions.length} (${percentage}%)</p>
                     <p>${resultMessage}</p>
-                    <button onclick="restartQuiz()">Take Quiz Again</button>
+                    <button type="button" onclick="restartQuiz()">Take Quiz Again</button>
                 </div>
             `;
         }

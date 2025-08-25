@@ -61,7 +61,7 @@
     <!-- Include Shared Header -->
     <div id="header-container"></div>
     
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         <!-- Subject Hero Section -->
         <div class="subject-hero">
             <div class="science-visual">🔬⚗️🌍🧬🌱</div>
@@ -75,7 +75,7 @@
         <!-- Science Chapters -->
         <div class="chapters-grid">
             <!-- Chapter 1: Matter & Energy -->
-            <div class="chapter-card" onclick="location.href='chapter-1.html'">
+            <div class="chapter-card" onclick="location.href='chapter-1.html'" role="link" tabindex="0" aria-label="Open Chapter 1: Matter & Energy" onkeydown="if(event.key==='Enter'){location.href='chapter-1.html'}">
                 <div class="chapter-icon">⚛️</div>
                 <h3>Matter & Energy</h3>
                 <div class="chapter-number">Chapter 1</div>
@@ -92,7 +92,7 @@
             </div>
             
             <!-- Chapter 2: Force, Motion & Energy -->
-            <div class="chapter-card" onclick="location.href='chapter-2.html'">
+            <div class="chapter-card" onclick="location.href='chapter-2.html'" role="link" tabindex="0" aria-label="Open Chapter 2: Force, Motion & Energy" onkeydown="if(event.key==='Enter'){location.href='chapter-2.html'}">
                 <div class="chapter-icon">⚡</div>
                 <h3>Force, Motion & Energy</h3>
                 <div class="chapter-number">Chapter 2</div>
@@ -109,7 +109,7 @@
             </div>
             
             <!-- Chapter 3: Earth & Space -->
-            <div class="chapter-card" onclick="location.href='chapter-3.html'">
+            <div class="chapter-card" onclick="location.href='chapter-3.html'" role="link" tabindex="0" aria-label="Open Chapter 3: Earth & Space" onkeydown="if(event.key==='Enter'){location.href='chapter-3.html'}">
                 <div class="chapter-icon">🌍</div>
                 <h3>Earth & Space</h3>
                 <div class="chapter-number">Chapter 3</div>
@@ -126,7 +126,7 @@
             </div>
             
             <!-- Chapter 4: Organisms & Environments -->
-            <div class="chapter-card" onclick="location.href='chapter-4.html'">
+            <div class="chapter-card" onclick="location.href='chapter-4.html'" role="link" tabindex="0" aria-label="Open Chapter 4: Organisms & Environments" onkeydown="if(event.key==='Enter'){location.href='chapter-4.html'}">
                 <div class="chapter-icon">🌿</div>
                 <h3>Organisms & Environments</h3>
                 <div class="chapter-number">Chapter 4</div>
@@ -143,7 +143,7 @@
             </div>
             
             <!-- Chapter 5: Scientific Investigation -->
-            <div class="chapter-card" onclick="location.href='chapter-5.html'">
+            <div class="chapter-card" onclick="location.href='chapter-5.html'" role="link" tabindex="0" aria-label="Open Chapter 5: Scientific Investigation & Reasoning" onkeydown="if(event.key==='Enter'){location.href='chapter-5.html'}">
                 <div class="chapter-icon">🔬</div>
                 <h3>Scientific Investigation & Reasoning</h3>
                 <div class="chapter-number">Chapter 5</div>
@@ -158,6 +158,57 @@
                     <a href="chapter-5.html" class="start-button">Start →</a>
                 </div>
             </div>
+
+            <!-- Chapter 6: Earth's Resources -->
+            <div class="chapter-card" onclick="location.href='chapter-6.html'" role="link" tabindex="0" aria-label="Open Chapter 6: Earth's Resources" onkeydown="if(event.key==='Enter'){location.href='chapter-6.html'}">
+                <div class="chapter-icon">🌍</div>
+                <h3>Earth's Resources</h3>
+                <div class="chapter-number">Chapter 6</div>
+                <p>Renewable and nonrenewable resources, conservation, and human impact on Earth.</p>
+                <ul class="topics-list">
+                    <li class="topic-tag">Natural Resources</li>
+                    <li class="topic-tag">Conservation</li>
+                    <li class="topic-tag">Sustainability</li>
+                    <li class="topic-tag">Human Impact</li>
+                </ul>
+                <div class="chapter-progress">
+                    <a href="chapter-6.html" class="start-button">Start →</a>
+                </div>
+            </div>
+
+            <!-- Chapter 7: Organisms & Environment -->
+            <div class="chapter-card" onclick="location.href='chapter-7.html'" role="link" tabindex="0" aria-label="Open Chapter 7: Organisms & Environment" onkeydown="if(event.key==='Enter'){location.href='chapter-7.html'}">
+                <div class="chapter-icon">🦋</div>
+                <h3>Organisms & Environment</h3>
+                <div class="chapter-number">Chapter 7</div>
+                <p>Ecosystems, food webs, environmental changes, and organism interactions.</p>
+                <ul class="topics-list">
+                    <li class="topic-tag">Ecosystems</li>
+                    <li class="topic-tag">Food Webs</li>
+                    <li class="topic-tag">Environmental Changes</li>
+                    <li class="topic-tag">Interactions</li>
+                </ul>
+                <div class="chapter-progress">
+                    <a href="chapter-7.html" class="start-button">Start →</a>
+                </div>
+            </div>
+
+            <!-- Chapter 8: Adaptations and Behaviors -->
+            <div class="chapter-card" onclick="location.href='chapter-8.html'" role="link" tabindex="0" aria-label="Open Chapter 8: Adaptations and Behaviors" onkeydown="if(event.key==='Enter'){location.href='chapter-8.html'}">
+                <div class="chapter-icon">🐾</div>
+                <h3>Adaptations and Behaviors</h3>
+                <div class="chapter-number">Chapter 8</div>
+                <p>How organisms adapt to survive, behavioral patterns, and survival strategies.</p>
+                <ul class="topics-list">
+                    <li class="topic-tag">Adaptations</li>
+                    <li class="topic-tag">Behaviors</li>
+                    <li class="topic-tag">Survival Strategies</li>
+                    <li class="topic-tag">Evolution</li>
+                </ul>
+                <div class="chapter-progress">
+                    <a href="chapter-8.html" class="start-button">Start →</a>
+                </div>
+            </div>
         </div>
         
         <!-- STAAR Practice Assessment -->
@@ -167,7 +218,7 @@
                 Test your science knowledge with authentic STAAR-style questions! 
                 Practice experiments, data analysis, and scientific reasoning.
             </p>
-            <button class="assessment-button" onclick="location.href='assessment-1.html'">
+            <button type="button" class="assessment-button" onclick="location.href='assessment-1.html'" aria-label="Open STAAR Science Practice assessment">
                 Take Practice Test
             </button>
         </div>

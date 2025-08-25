@@ -57,8 +57,13 @@ class LearningApp {
     }
 
     handleNavigation(e) {
+        const href = e.currentTarget.getAttribute('href') || '';
+        if (!href.startsWith('#')) {
+            // External or non-hash link: allow normal navigation
+            return;
+        }
         e.preventDefault();
-        const target = e.target.getAttribute('href').substring(1);
+        const target = href.substring(1);
         this.navigateToSection(target);
     }
 
@@ -76,9 +81,13 @@ class LearningApp {
 
         // Update navigation
         document.querySelectorAll('.nav-link').forEach(link => {
+            const href = link.getAttribute('href') || '';
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${sectionId}`) {
+            if (href === `#${sectionId}`) {
                 link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            } else if (href.startsWith('#')) {
+                link.removeAttribute('aria-current');
             }
         });
 

@@ -24,42 +24,66 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         <div class="subject-hero">
             <div class="social-visual">🏛️🗺️⚖️💰🇺🇸</div>
             <h1>Social Studies</h1>
             <p class="subject-description">Explore American history, geography, government, and economics through interactive timelines and maps!</p>
         </div>
         <div class="chapters-grid">
-            <div class="chapter-card" onclick="location.href='chapter-1.html'">
+            <div class="chapter-card" onclick="location.href='chapter-1.html'" role="link" tabindex="0" aria-label="Open Chapter 1: American History" onkeydown="if(event.key==='Enter'){location.href='chapter-1.html'}">
                 <div class="chapter-icon">🏛️</div>
                 <h3>American History</h3>
                 <p>Chapter 1 - Colonial times through the Civil War</p>
                 <a href="chapter-1.html" class="start-button">Start →</a>
             </div>
-            <div class="chapter-card" onclick="location.href='chapter-2.html'">
+            <div class="chapter-card" onclick="location.href='chapter-2.html'" role="link" tabindex="0" aria-label="Open Chapter 2: Geography & Cultures" onkeydown="if(event.key==='Enter'){location.href='chapter-2.html'}">
                 <div class="chapter-icon">🗺️</div>
                 <h3>Geography & Cultures</h3>
                 <p>Chapter 2 - Regions, landforms, and cultural diversity</p>
                 <a href="chapter-2.html" class="start-button">Start →</a>
             </div>
-            <div class="chapter-card" onclick="location.href='chapter-3.html'">
+            <div class="chapter-card" onclick="location.href='chapter-3.html'" role="link" tabindex="0" aria-label="Open Chapter 3: Government & Citizenship" onkeydown="if(event.key==='Enter'){location.href='chapter-3.html'}">
                 <div class="chapter-icon">⚖️</div>
                 <h3>Government & Citizenship</h3>
                 <p>Chapter 3 - Constitution, rights, and civic responsibilities</p>
                 <a href="chapter-3.html" class="start-button">Start →</a>
             </div>
-            <div class="chapter-card" onclick="location.href='chapter-4.html'">
+            <div class="chapter-card" onclick="location.href='chapter-4.html'" role="link" tabindex="0" aria-label="Open Chapter 4: Economics & Society" onkeydown="if(event.key==='Enter'){location.href='chapter-4.html'}">
                 <div class="chapter-icon">💰</div>
                 <h3>Economics & Society</h3>
                 <p>Chapter 4 - Supply and demand, trade, and economic systems</p>
                 <a href="chapter-4.html" class="start-button">Start →</a>
             </div>
+            <div class="chapter-card" onclick="location.href='chapter-5.html'" role="link" tabindex="0" aria-label="Open Chapter 5: Westward Expansion & Pioneer Life" onkeydown="if(event.key==='Enter'){location.href='chapter-5.html'}">
+                <div class="chapter-icon">🚂</div>
+                <h3>Westward Expansion & Pioneer Life</h3>
+                <p>Chapter 5 - Manifest Destiny, Oregon Trail, and frontier challenges</p>
+                <a href="chapter-5.html" class="start-button">Start →</a>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter-6.html'" role="link" tabindex="0" aria-label="Open Chapter 6: Civil War Era" onkeydown="if(event.key==='Enter'){location.href='chapter-6.html'}">
+                <div class="chapter-icon">⚔️</div>
+                <h3>Civil War Era</h3>
+                <p>Chapter 6 - Causes, battles, and impact of the American Civil War</p>
+                <a href="chapter-6.html" class="start-button">Start →</a>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter-7.html'" role="link" tabindex="0" aria-label="Open Chapter 7: Reconstruction & Industrial Growth" onkeydown="if(event.key==='Enter'){location.href='chapter-7.html'}">
+                <div class="chapter-icon">🏭</div>
+                <h3>Reconstruction & Industrial Growth</h3>
+                <p>Chapter 7 - Rebuilding the South and America's industrial revolution</p>
+                <a href="chapter-7.html" class="start-button">Start →</a>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter-8.html'" role="link" tabindex="0" aria-label="Open Chapter 8: Early 20th Century America" onkeydown="if(event.key==='Enter'){location.href='chapter-8.html'}">
+                <div class="chapter-icon">🌟</div>
+                <h3>Early 20th Century America</h3>
+                <p>Chapter 8 - World War I, Great Depression, and America's growing influence</p>
+                <a href="chapter-8.html" class="start-button">Start →</a>
+            </div>
         </div>
         <div class="assessment-section">
             <h2>🏛️ STAAR Social Studies Practice</h2>
             <p>Test your knowledge of American history, geography, and civics!</p>
-            <button class="assessment-button" onclick="location.href='assessment-1.html'">Take Practice Test</button>
+            <button type="button" class="assessment-button" onclick="location.href='assessment-1.html'" aria-label="Open STAAR Social Studies Practice assessment">Take Practice Test</button>
         </div>
     </main>
     <div id="footer-container"></div>

@@ -239,7 +239,7 @@
     <div id="header-container"></div>
     
     <!-- Main Chapter Content -->
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <!-- Chapter Header -->
         <div class="chapter-header">
             <div class="chapter-number">Chapter 1</div>
@@ -290,9 +290,9 @@
                     </div>
                     
                     <div style="text-align: center; margin-top: var(--spacing-lg);">
-                        <button class="activity-button" onclick="simulateState('solid')">Show Solid</button>
-                        <button class="activity-button" onclick="simulateState('liquid')" style="margin: 0 var(--spacing-sm);">Show Liquid</button>
-                        <button class="activity-button" onclick="simulateState('gas')">Show Gas</button>
+                        <button type="button" class="activity-button" onclick="simulateState('solid')">Show Solid</button>
+                        <button type="button" class="activity-button" onclick="simulateState('liquid')" style="margin: 0 var(--spacing-sm);">Show Liquid</button>
+                        <button type="button" class="activity-button" onclick="simulateState('gas')">Show Gas</button>
                     </div>
                 </div>
             </div>
@@ -338,7 +338,7 @@
                     </div>
                 </div>
                 
-                <button class="try-it-button" onclick="startPropertyQuiz()">
+                <button type="button" class="try-it-button" onclick="startPropertyQuiz()">
                     🎯 Take Properties Quiz
                 </button>
             </div>
@@ -384,10 +384,10 @@
                     </div>
                     
                     <div style="text-align: center;">
-                        <button class="mix-button" onclick="mixLiquids()">🌪️ Mix Together!</button>
+                        <button type="button" class="mix-button" onclick="mixLiquids()">🌪️ Mix Together!</button>
                     </div>
                     
-                    <div id="mixture-result" style="margin-top: var(--spacing-lg); text-align: center; font-weight: bold;"></div>
+                    <div id="mixture-result" role="status" aria-live="polite" style="margin-top: var(--spacing-lg); text-align: center; font-weight: bold;"></div>
                 </div>
             </div>
             
@@ -420,12 +420,12 @@
                     </p>
                     
                     <div style="text-align: center;">
-                        <button class="activity-button" onclick="startReaction()" style="background-color: white; color: var(--primary-color); font-size: var(--font-size-lg);">
+                        <button type="button" class="activity-button" onclick="startReaction()" style="background-color: white; color: var(--primary-color); font-size: var(--font-size-lg);">
                             ⚗️ Start Safe Reaction!
                         </button>
                     </div>
                     
-                    <div id="reaction-result" style="margin-top: var(--spacing-lg); text-align: center;"></div>
+                    <div id="reaction-result" role="status" aria-live="polite" style="margin-top: var(--spacing-lg); text-align: center;"></div>
                 </div>
                 
                 <div class="experiment-station">
@@ -465,6 +465,7 @@
     
     <!-- JavaScript -->
     <script src="../../js/app.js" defer></script>
+    <script src="../../js/interactive.js" defer></script>
     <script>
         // Science Chapter 1: Matter & Energy JavaScript
         (function() {

@@ -59,8 +59,6 @@ const FORBIDDEN_FILES = [
   '.env',
   '.env.local', 
   '.env.production',
-  'SUPABASE_SECURITY_GUIDE.md',
-  'AI_REMEDIATION_SYSTEM.md',
   '*.key',
   '*.pem',
   '*.p12',

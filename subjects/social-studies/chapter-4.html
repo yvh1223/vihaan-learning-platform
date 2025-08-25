@@ -397,7 +397,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 4</div>
             <h1 class="chapter-title">Economics & Cultural Heritage</h1>
@@ -406,10 +406,10 @@
 
         <!-- Tab Navigation -->
         <div class="tab-navigation">
-            <button class="tab-button active" onclick="showTab('economics')">🏦 Economics</button>
-            <button class="tab-button" onclick="showTab('culture')">🎭 Cultural Heritage</button>
-            <button class="tab-button" onclick="showTab('activities')">🎯 Activities</button>
-            <button class="tab-button" onclick="showTab('quiz')">📝 Knowledge Check</button>
+            <button type="button" class="tab-button active" onclick="showTab('economics')">🏦 Economics</button>
+            <button type="button" class="tab-button" onclick="showTab('culture')">🎭 Cultural Heritage</button>
+            <button type="button" class="tab-button" onclick="showTab('activities')">🎯 Activities</button>
+            <button type="button" class="tab-button" onclick="showTab('quiz')">📝 Knowledge Check</button>
         </div>
 
         <!-- Economics Tab -->
@@ -456,8 +456,8 @@
                     </div>
                 </div>
                 
-                <div id="sorting-result" style="margin-top: 20px;"></div>
-                <button onclick="checkSorting()" class="activity-button">Check My Sorting!</button>
+                <div id="sorting-result" role="status" aria-live="polite" style="margin-top: 20px;"></div>
+                <button type="button" onclick="checkSorting()" class="activity-button">Check My Sorting!</button>
             </div>
 
             <!-- Texas Economy Stats -->
@@ -610,7 +610,7 @@
                 <div class="activity-card economics-card">
                     <h3>🏪 Virtual Market</h3>
                     <p>Run your own business and learn about profit, costs, and customers!</p>
-                    <button onclick="startMarketGame()" class="activity-button">Start Business</button>
+                    <button type="button" onclick="startMarketGame()" class="activity-button">Start Business</button>
                     <div id="market-game-area" style="display: none; margin-top: 15px;">
                         <h4>🎯 Your Lemonade Stand</h4>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0;">
@@ -629,15 +629,15 @@
                             <p><strong>Expected Revenue:</strong> $<span id="total-revenue">20.00</span></p>
                             <p><strong>Expected Profit:</strong> $<span id="profit">15.00</span></p>
                         </div>
-                        <button onclick="sellLemonade()" class="activity-button">Start Selling!</button>
-                        <div id="sales-result" style="margin-top: 15px;"></div>
+                        <button type="button" onclick="sellLemonade()" class="activity-button">Start Selling!</button>
+                        <div id="sales-result" role="status" aria-live="polite" style="margin-top: 15px;"></div>
                     </div>
                 </div>
 
                 <div class="activity-card cultural-card">
                     <h3>🎉 Festival Planner</h3>
                     <p>Plan a multicultural festival celebrating Texas diversity!</p>
-                    <button onclick="startFestivalPlanner()" class="activity-button">Plan Festival</button>
+                    <button type="button" onclick="startFestivalPlanner()" class="activity-button">Plan Festival</button>
                     <div id="festival-planner" style="display: none; margin-top: 15px;">
                         <h4>🎪 Texas Unity Festival</h4>
                         <div style="margin: 15px 0;">
@@ -653,22 +653,22 @@
                                 <label><input type="checkbox" value="art"> 🎨 Cultural Art Displays</label>
                             </div>
                         </div>
-                        <button onclick="createFestival()" class="activity-button">Create My Festival!</button>
-                        <div id="festival-result" style="margin-top: 15px;"></div>
+                        <button type="button" onclick="createFestival()" class="activity-button">Create My Festival!</button>
+                        <div id="festival-result" role="status" aria-live="polite" style="margin-top: 15px;"></div>
                     </div>
                 </div>
 
                 <div class="activity-card economics-card">
                     <h3>💼 Career Explorer</h3>
                     <p>Explore different jobs and careers in the Texas economy!</p>
-                    <button onclick="exploreCareer()" class="activity-button">Explore Careers</button>
+                    <button type="button" onclick="exploreCareer()" class="activity-button">Explore Careers</button>
                     <div id="career-explorer" style="display: none; margin-top: 15px;"></div>
                 </div>
 
                 <div class="activity-card cultural-card">
                     <h3>🏛️ Heritage Museum</h3>
                     <p>Create exhibits showcasing Texas cultural heritage!</p>
-                    <button onclick="createMuseum()" class="activity-button">Build Museum</button>
+                    <button type="button" onclick="createMuseum()" class="activity-button">Build Museum</button>
                     <div id="museum-builder" style="display: none; margin-top: 15px;"></div>
                 </div>
             </div>
@@ -676,8 +676,8 @@
 
         <!-- Quiz Tab -->
         <div id="quiz" class="tab-content">
-            <div class="quiz-section">
-                <h2>📝 Economics & Cultural Heritage Quiz</h2>
+            <div class="quiz-section" role="region" aria-labelledby="economics-quiz-heading">
+                <h2 id="economics-quiz-heading">📝 Economics & Cultural Heritage Quiz</h2>
                 <p>Test your knowledge about Texas economics and cultural heritage!</p>
                 
                 <div id="quiz-container">
@@ -685,21 +685,21 @@
                         <h4>Question 1 of 10</h4>
                         <p id="current-question">What is the difference between goods and services?</p>
                         <div class="quiz-options">
-                            <button class="quiz-option" onclick="selectAnswer(this, false)">Goods are expensive, services are cheap</button>
-                            <button class="quiz-option" onclick="selectAnswer(this, true)">Goods are things you can touch, services are actions</button>
-                            <button class="quiz-option" onclick="selectAnswer(this, false)">Goods are new, services are old</button>
-                            <button class="quiz-option" onclick="selectAnswer(this, false)">There is no difference</button>
+                            <button type="button" class="quiz-option" onclick="selectAnswer(this, false)">Goods are expensive, services are cheap</button>
+                            <button type="button" class="quiz-option" onclick="selectAnswer(this, true)">Goods are things you can touch, services are actions</button>
+                            <button type="button" class="quiz-option" onclick="selectAnswer(this, false)">Goods are new, services are old</button>
+                            <button type="button" class="quiz-option" onclick="selectAnswer(this, false)">There is no difference</button>
                         </div>
                         <div id="answer-explanation" style="display: none; margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.2); border-radius: 5px;"></div>
                     </div>
-                    <button id="next-question-btn" onclick="nextQuestion()" style="display: none; margin-top: 15px;">Next Question</button>
+                    <button type="button" id="next-question-btn" onclick="nextQuestion()" style="display: none; margin-top: 15px;">Next Question</button>
                 </div>
                 
-                <div id="quiz-results" style="display: none; text-align: center; margin-top: 20px;">
+                <div id="quiz-results" role="status" aria-live="polite" style="display: none; text-align: center; margin-top: 20px;">
                     <h3>🎉 Quiz Complete!</h3>
                     <p>Your Score: <span id="final-score">0</span>/10</p>
                     <div id="score-message"></div>
-                    <button onclick="restartQuiz()" class="activity-button">Take Quiz Again</button>
+                    <button type="button" onclick="restartQuiz()" class="activity-button">Take Quiz Again</button>
                 </div>
             </div>
         </div>
@@ -778,11 +778,12 @@
     <div id="celebration-modal" class="celebration">
         <h2>🎉 Congratulations!</h2>
         <p id="celebration-message">You've achieved something great!</p>
-        <button onclick="closeCelebration()" class="activity-button">Continue Learning</button>
+        <button type="button" onclick="closeCelebration()" class="activity-button">Continue Learning</button>
     </div>
 
     <div id="footer-container"></div>
 
+    <script src="../../js/interactive.js" defer></script>
     <script>
         // Load shared components
         function loadSharedComponents() {
@@ -1314,7 +1315,7 @@
                     <h5>💼 Career Spotlight: ${randomCareer.title}</h5>
                     <p><strong>What they do:</strong> ${randomCareer.desc}</p>
                     <p><strong>Economics Role:</strong> They are a <em>producer</em> in our economy, creating goods or services that people need!</p>
-                    <button onclick="exploreCareer()" class="activity-button" style="margin-top: 10px;">Explore Another Career</button>
+                    <button type="button" onclick="exploreCareer()" class="activity-button" style="margin-top: 10px;">Explore Another Career</button>
                 </div>
             `;
             document.getElementById('career-explorer').style.display = 'block';

@@ -1,0 +1,34 @@
+{
+  "mathematics:chapter-1": "Aug 13 – Oct 9",
+  "mathematics:chapter-2": "Oct 14 – Dec 18",
+  "mathematics:chapter-3": "Jan 6 – Mar 13",
+  "mathematics:chapter-4": "Jan 6 – Mar 13",
+  "mathematics:chapter-5": "Jan 6 – Mar 13",
+  "mathematics:chapter-6": "Mar 23 – May 21",
+  "mathematics:chapter-7": "Mar 23 – May 21",
+
+  "science:chapter-1": "Aug 13 – Oct 9",
+  "science:chapter-2": "Aug 13 – Oct 9",
+  "science:chapter-3": "Oct 14 – Dec 18",
+  "science:chapter-4": "Oct 14 – Dec 18",
+  "science:chapter-5": "Jan 6 – Mar 13",
+  "science:chapter-6": "Jan 6 – Mar 13",
+  "science:chapter-7": "Jan 6 – Mar 13",
+  "science:chapter-8": "Mar 23 – May 21",
+
+  "english:chapter-1": "Aug 13 – Oct 9",
+  "english:chapter-2": "Oct 14 – Dec 18",
+  "english:chapter-3": "Oct 14 – Dec 18",
+  "english:chapter-4": "Jan 6 – Mar 13",
+  "english:chapter-5": "Mar 23 – May 21",
+  "english:chapter-6": "Mar 23 – May 21",
+
+  "social-studies:chapter-1": "Aug 13 – Oct 9",
+  "social-studies:chapter-2": "Aug 13 – Oct 9",
+  "social-studies:chapter-3": "Oct 14 – Dec 18",
+  "social-studies:chapter-4": "Oct 14 – Dec 18",
+  "social-studies:chapter-5": "Jan 6 – Mar 13",
+  "social-studies:chapter-6": "Jan 6 – Mar 13",
+  "social-studies:chapter-7": "Mar 23 – May 21",
+  "social-studies:chapter-8": "Mar 23 – May 21"
+}

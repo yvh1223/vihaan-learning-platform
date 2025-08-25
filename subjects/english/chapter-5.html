@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5 - Literature Analysis & Literary Essay</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+  <div id="header-container"></div>
+  <main class="chapter-container" id="main-content">
+    <div class="chapter-header">
+      <div class="chapter-number">Chapter 5</div>
+      <h1 class="chapter-title">Literature Analysis & Literary Essay</h1>
+      <p class="chapter-description">Close reading, character/theme analysis, and writing literary essays with text evidence.</p>
+    </div>
+    <div class="lesson-content">
+      <div class="lesson-section">
+        <h2>Coming Soon</h2>
+        <p>This chapter aligns to Unit 5 in the district syllabus. Interactive lessons and writing tasks will be added.</p>
+      </div>
+    </div>
+    <div class="chapter-navigation">
+      <a href="index.html" class="nav-button" aria-label="Back to English overview">← Back</a>
+      <a href="chapter-6.html" class="nav-button" aria-label="Next: Chapter 6 Fantasy Book Clubs">Next →</a>
+    </div>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../../js/interactive.js" defer></script>
+  <script>
+    const loadShared = () => {
+      fetch('../shared/header.html').then(r=>r.text()).then(h=>document.getElementById('header-container').innerHTML=h);
+      fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
+    };
+    document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+  </script>
+</body>
+</html>
+
