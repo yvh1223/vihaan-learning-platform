@@ -397,6 +397,77 @@
                     </div>
                 </div>
                 
+                <!-- More Addition with Regrouping Examples -->
+                <div style="margin: 2rem 0; padding: 1.5rem; border: 2px solid #4A90E2; border-radius: 1rem; background: #f8f9ff;">
+                    <h4>📚 More Addition with Regrouping Examples</h4>
+                    <p>Practice with these step-by-step examples:</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                        <!-- Example 1 -->
+                        <div style="background: white; padding: 1rem; border-radius: 0.5rem; border: 1px solid #ddd;">
+                            <h5 style="color: #FF6B35; margin-bottom: 1rem;">Example 1: 365 + 287</h5>
+                            <div class="math-problem" style="font-family: 'Courier New', monospace; font-size: 1.2rem; text-align: center; margin: 1rem 0;">
+                                <div style="margin: 0.25rem 0;">  3 6 5</div>
+                                <div style="margin: 0.25rem 0;">+ 2 8 7</div>
+                                <div style="margin: 0.25rem 0;">_____</div>
+                                <div style="margin: 0.25rem 0; color: #7ED321; font-weight: bold;">  6 5 2</div>
+                            </div>
+                            <div style="font-size: 0.9rem; color: #666;">
+                                <div>💡 Ones: 5 + 7 = 12 (write 2, carry 1)</div>
+                                <div>💡 Tens: 6 + 8 + 1 = 15 (write 5, carry 1)</div>
+                                <div>💡 Hundreds: 3 + 2 + 1 = 6</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Example 2 -->
+                        <div style="background: white; padding: 1rem; border-radius: 0.5rem; border: 1px solid #ddd;">
+                            <h5 style="color: #4ECDC4; margin-bottom: 1rem;">Example 2: 597 + 168</h5>
+                            <div class="math-problem" style="font-family: 'Courier New', monospace; font-size: 1.2rem; text-align: center; margin: 1rem 0;">
+                                <div style="margin: 0.25rem 0;">  5 9 7</div>
+                                <div style="margin: 0.25rem 0;">+ 1 6 8</div>
+                                <div style="margin: 0.25rem 0;">_____</div>
+                                <div style="margin: 0.25rem 0; color: #7ED321; font-weight: bold;">  7 6 5</div>
+                            </div>
+                            <div style="font-size: 0.9rem; color: #666;">
+                                <div>💡 Ones: 7 + 8 = 15 (write 5, carry 1)</div>
+                                <div>💡 Tens: 9 + 6 + 1 = 16 (write 6, carry 1)</div>
+                                <div>💡 Hundreds: 5 + 1 + 1 = 7</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Example 3 -->
+                        <div style="background: white; padding: 1rem; border-radius: 0.5rem; border: 1px solid #ddd;">
+                            <h5 style="color: #9013FE; margin-bottom: 1rem;">Example 3: 789 + 456</h5>
+                            <div class="math-problem" style="font-family: 'Courier New', monospace; font-size: 1.2rem; text-align: center; margin: 1rem 0;">
+                                <div style="margin: 0.25rem 0;">  7 8 9</div>
+                                <div style="margin: 0.25rem 0;">+ 4 5 6</div>
+                                <div style="margin: 0.25rem 0;">_____</div>
+                                <div style="margin: 0.25rem 0; color: #7ED321; font-weight: bold;">1 2 4 5</div>
+                            </div>
+                            <div style="font-size: 0.9rem; color: #666;">
+                                <div>💡 Ones: 9 + 6 = 15 (write 5, carry 1)</div>
+                                <div>💡 Tens: 8 + 5 + 1 = 14 (write 4, carry 1)</div>
+                                <div>💡 Hundreds: 7 + 4 + 1 = 12 (write 2, carry 1)</div>
+                                <div>💡 Thousands: 0 + 0 + 1 = 1</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Example 4 -->
+                        <div style="background: white; padding: 1rem; border-radius: 0.5rem; border: 1px solid #ddd;">
+                            <h5 style="color: #F7931E; margin-bottom: 1rem;">Practice: 847 + 395</h5>
+                            <div class="math-problem" style="font-family: 'Courier New', monospace; font-size: 1.2rem; text-align: center; margin: 1rem 0;">
+                                <div style="margin: 0.25rem 0;">  8 4 7</div>
+                                <div style="margin: 0.25rem 0;">+ 3 9 5</div>
+                                <div style="margin: 0.25rem 0;">_____</div>
+                                <div style="margin: 0.25rem 0; color: #999;">  ? ? ?</div>
+                            </div>
+                            <button type="button" onclick="revealAnswer('847 + 395 = 1,242')" style="width: 100%; padding: 0.5rem; background: #F7931E; color: white; border: none; border-radius: 0.25rem; cursor: pointer; margin-top: 0.5rem;">
+                                🎯 Reveal Answer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="interactive-activity">
                     <h4>🎲 Roll & Calculate Challenge</h4>
                     <p>Practice your skills with randomly generated problems!</p>
@@ -588,14 +659,309 @@
             
             // Start fraction activity
             window.startFractionActivity = function() {
-                showNotification('🎯 Fraction Practice starting soon! Visual manipulatives loading...', 'info');
-                // Future: Launch fraction manipulation activity
+                // Create comprehensive fraction activity
+                const gameContainer = document.createElement('div');
+                gameContainer.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center; overflow-y: auto;">
+                        <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto;">
+                            <h3>🧮 Interactive Fraction Manipulatives</h3>
+                            <p>Explore fractions with visual tools and hands-on activities!</p>
+                            
+                            <!-- Fraction Circles -->
+                            <div style="margin: 2rem 0;">
+                                <h4>🔴 Fraction Circles - Adding Same Denominators</h4>
+                                <p>Click the fraction circles to see how fractions with same denominators add together:</p>
+                                
+                                <div style="display: flex; gap: 2rem; justify-content: center; align-items: center; margin: 1.5rem 0;">
+                                    <div class="fraction-visual-set">
+                                        <div class="fraction-circle-demo" onclick="animateFractionAdd(1, 4)" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #4A90E2; background: conic-gradient(#4A90E2 0deg 90deg, #f0f0f0 90deg 360deg); cursor: pointer; position: relative;">
+                                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; color: #333;">1/4</div>
+                                        </div>
+                                        <p style="text-align: center; margin-top: 0.5rem;">1/4</p>
+                                    </div>
+                                    
+                                    <div style="font-size: 2rem; color: #4A90E2;">+</div>
+                                    
+                                    <div class="fraction-visual-set">
+                                        <div class="fraction-circle-demo" onclick="animateFractionAdd(1, 4)" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #4A90E2; background: conic-gradient(#4A90E2 0deg 90deg, #f0f0f0 90deg 360deg); cursor: pointer; position: relative;">
+                                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; color: #333;">1/4</div>
+                                        </div>
+                                        <p style="text-align: center; margin-top: 0.5rem;">1/4</p>
+                                    </div>
+                                    
+                                    <div style="font-size: 2rem; color: #4A90E2;">=</div>
+                                    
+                                    <div class="fraction-visual-set">
+                                        <div class="fraction-circle-demo result-circle" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #7ED321; background: conic-gradient(#7ED321 0deg 180deg, #f0f0f0 180deg 360deg); position: relative;">
+                                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; color: #333;">2/4</div>
+                                        </div>
+                                        <p style="text-align: center; margin-top: 0.5rem;">2/4 = 1/2</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- More Examples -->
+                                <div style="margin: 2rem 0;">
+                                    <h5>🎯 Practice More Examples:</h5>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                                        <div class="example-card" style="border: 2px solid #ddd; border-radius: 0.5rem; padding: 1rem; background: #f9f9f9;">
+                                            <div class="example-equation" style="font-size: 1.2rem; margin-bottom: 0.5rem; text-align: center;">
+                                                2/8 + 3/8 = ?
+                                            </div>
+                                            <button type="button" onclick="showFractionSolution('2/8 + 3/8 = 5/8')" style="width: 100%; padding: 0.5rem; background: #4A90E2; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">
+                                                Show Solution
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="example-card" style="border: 2px solid #ddd; border-radius: 0.5rem; padding: 1rem; background: #f9f9f9;">
+                                            <div class="example-equation" style="font-size: 1.2rem; margin-bottom: 0.5rem; text-align: center;">
+                                                1/6 + 2/6 = ?
+                                            </div>
+                                            <button type="button" onclick="showFractionSolution('1/6 + 2/6 = 3/6 = 1/2')" style="width: 100%; padding: 0.5rem; background: #4A90E2; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">
+                                                Show Solution
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="example-card" style="border: 2px solid #ddd; border-radius: 0.5rem; padding: 1rem; background: #f9f9f9;">
+                                            <div class="example-equation" style="font-size: 1.2rem; margin-bottom: 0.5rem; text-align: center;">
+                                                3/10 + 4/10 = ?
+                                            </div>
+                                            <button type="button" onclick="showFractionSolution('3/10 + 4/10 = 7/10')" style="width: 100%; padding: 0.5rem; background: #4A90E2; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">
+                                                Show Solution
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Fraction Bars -->
+                                <div style="margin: 2rem 0;">
+                                    <h4>📊 Fraction Bars - Visual Addition</h4>
+                                    <p>Watch how fraction bars show addition clearly:</p>
+                                    
+                                    <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; margin: 1.5rem 0;">
+                                        <div class="fraction-bar-example">
+                                            <div style="font-weight: bold; margin-bottom: 0.5rem;">2/5 + 1/5 =</div>
+                                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                                <div class="fraction-bar" style="width: 150px; height: 30px; border: 2px solid #333; display: flex;">
+                                                    <div style="width: 40%; background: #FF6B35;"></div>
+                                                    <div style="width: 60%; background: #f0f0f0;"></div>
+                                                </div>
+                                                <span style="font-size: 1.5rem;">+</span>
+                                                <div class="fraction-bar" style="width: 150px; height: 30px; border: 2px solid #333; display: flex;">
+                                                    <div style="width: 20%; background: #4ECDC4;"></div>
+                                                    <div style="width: 80%; background: #f0f0f0;"></div>
+                                                </div>
+                                                <span style="font-size: 1.5rem;">=</span>
+                                                <div class="fraction-bar" style="width: 150px; height: 30px; border: 2px solid #333; display: flex;">
+                                                    <div style="width: 60%; background: #7ED321;"></div>
+                                                    <div style="width: 40%; background: #f0f0f0;"></div>
+                                                </div>
+                                                <strong style="color: #7ED321;">3/5</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                                <button type="button" onclick="generateRandomFractionProblem()" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">
+                                    🎲 Generate New Problem
+                                </button>
+                                <button type="button" onclick="closeFractionActivity()" style="background: var(--accent-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">
+                                    Close Activity
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(gameContainer);
+                window.currentFractionGame = gameContainer;
+                showNotification('🧮 Fraction Manipulatives Loaded! Explore visual fraction operations.', 'success');
             };
             
-            // Start decimal activity
+            // Supporting functions for fraction activity
+            window.showFractionSolution = function(solution) {
+                showNotification('✅ ' + solution, 'success');
+            };
+            
+            window.animateFractionAdd = function(numerator, denominator) {
+                showNotification(`🎯 Adding ${numerator}/${denominator} + ${numerator}/${denominator} = ${numerator*2}/${denominator}`, 'info');
+            };
+            
+            window.generateRandomFractionProblem = function() {
+                const denominators = [4, 6, 8, 10, 12];
+                const denom = denominators[Math.floor(Math.random() * denominators.length)];
+                const num1 = Math.floor(Math.random() * (denom - 1)) + 1;
+                const num2 = Math.floor(Math.random() * (denom - num1)) + 1;
+                const answer = num1 + num2;
+                
+                showNotification(`🎲 New Problem: ${num1}/${denom} + ${num2}/${denom} = ${answer}/${denom}`, 'info');
+            };
+            
+            window.closeFractionActivity = function() {
+                if (window.currentFractionGame) {
+                    window.currentFractionGame.remove();
+                    delete window.currentFractionGame;
+                }
+            };
+            
+            // Start decimal activity - Enhanced with visual tools
             window.startDecimalActivity = function() {
-                showNotification('🔢 Decimal Explorer coming up! Interactive number lines loading...', 'info');
-                // Future: Launch decimal place value activity
+                const gameContainer = document.createElement('div');
+                gameContainer.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center; overflow-y: auto;">
+                        <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 800px; width: 95%; max-height: 90vh; overflow-y: auto;">
+                            <h3>📏 Decimal Place Value Explorer</h3>
+                            <p>Visual tools for comparing and ordering decimals!</p>
+                            
+                            <!-- Decimal Number Line -->
+                            <div style="margin: 2rem 0;">
+                                <h4>📊 Decimal Number Line</h4>
+                                <p>Click on the number line to explore decimal values:</p>
+                                
+                                <div style="margin: 1.5rem 0; text-align: center;">
+                                    <svg width="600" height="100" style="max-width: 100%;">
+                                        <!-- Main line -->
+                                        <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+                                        
+                                        <!-- Major marks -->
+                                        <line x1="50" y1="40" x2="50" y2="60" stroke="#333" stroke-width="2"/>
+                                        <text x="50" y="80" text-anchor="middle" font-size="14">0</text>
+                                        
+                                        <line x1="150" y1="40" x2="150" y2="60" stroke="#333" stroke-width="2"/>
+                                        <text x="150" y="80" text-anchor="middle" font-size="14">0.2</text>
+                                        
+                                        <line x1="250" y1="40" x2="250" y2="60" stroke="#333" stroke-width="2"/>
+                                        <text x="250" y="80" text-anchor="middle" font-size="14">0.4</text>
+                                        
+                                        <line x1="350" y1="40" x2="350" y2="60" stroke="#333" stroke-width="2"/>
+                                        <text x="350" y="80" text-anchor="middle" font-size="14">0.6</text>
+                                        
+                                        <line x1="450" y1="40" x2="450" y2="60" stroke="#333" stroke-width="2"/>
+                                        <text x="450" y="80" text-anchor="middle" font-size="14">0.8</text>
+                                        
+                                        <line x1="550" y1="40" x2="550" y2="60" stroke="#333" stroke-width="2"/>
+                                        <text x="550" y="80" text-anchor="middle" font-size="14">1.0</text>
+                                        
+                                        <!-- Interactive points -->
+                                        <circle cx="100" cy="50" r="6" fill="#FF6B35" onclick="explainDecimal(0.1)" style="cursor: pointer;"/>
+                                        <text x="100" y="30" text-anchor="middle" font-size="12" fill="#FF6B35">0.1</text>
+                                        
+                                        <circle cx="175" cy="50" r="6" fill="#4ECDC4" onclick="explainDecimal(0.25)" style="cursor: pointer;"/>
+                                        <text x="175" y="30" text-anchor="middle" font-size="12" fill="#4ECDC4">0.25</text>
+                                        
+                                        <circle cx="375" cy="50" r="6" fill="#9013FE" onclick="explainDecimal(0.65)" style="cursor: pointer;"/>
+                                        <text x="375" y="30" text-anchor="middle" font-size="12" fill="#9013FE">0.65</text>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <!-- Decimal Comparison -->
+                            <div style="margin: 2rem 0;">
+                                <h4>🔍 Compare Decimals</h4>
+                                <p>Which decimal is larger? Click to compare:</p>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                                    <div class="comparison-card" style="border: 2px solid #ddd; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+                                        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">0.7 vs 0.65</div>
+                                        <button type="button" onclick="compareDecimals(0.7, 0.65)" style="width: 100%; padding: 0.5rem; background: #FF6B35; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">
+                                            Compare
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="comparison-card" style="border: 2px solid #ddd; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+                                        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">0.3 vs 0.30</div>
+                                        <button type="button" onclick="compareDecimals(0.3, 0.30)" style="width: 100%; padding: 0.5rem; background: #4ECDC4; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">
+                                            Compare
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="comparison-card" style="border: 2px solid #ddd; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+                                        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">0.85 vs 0.8</div>
+                                        <button type="button" onclick="compareDecimals(0.85, 0.8)" style="width: 100%; padding: 0.5rem; background: #9013FE; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">
+                                            Compare
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Decimal Place Value -->
+                            <div style="margin: 2rem 0;">
+                                <h4>🎯 Decimal Place Value</h4>
+                                <p>Explore the value of each digit in a decimal:</p>
+                                
+                                <div style="display: flex; justify-content: center; align-items: center; margin: 1.5rem 0;">
+                                    <div class="decimal-breakdown" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; max-width: 400px; border: 2px solid #333; border-radius: 0.5rem; overflow: hidden;">
+                                        <div style="background: #FF6B35; color: white; padding: 1rem; text-align: center;">
+                                            <div style="font-size: 2rem; font-weight: bold;">3</div>
+                                            <div style="font-size: 0.8rem;">Ones</div>
+                                        </div>
+                                        <div style="background: #333; color: white; padding: 1rem; text-align: center;">
+                                            <div style="font-size: 2rem; font-weight: bold;">.</div>
+                                            <div style="font-size: 0.8rem;">Point</div>
+                                        </div>
+                                        <div style="background: #4ECDC4; color: white; padding: 1rem; text-align: center;">
+                                            <div style="font-size: 2rem; font-weight: bold;">7</div>
+                                            <div style="font-size: 0.8rem;">Tenths</div>
+                                        </div>
+                                        <div style="background: #9013FE; color: white; padding: 1rem; text-align: center;">
+                                            <div style="font-size: 2rem; font-weight: bold;">5</div>
+                                            <div style="font-size: 0.8rem;">Hundredths</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p style="text-align: center; font-size: 1.1rem;">3.75 = 3 ones + 7 tenths + 5 hundredths</p>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                                <button type="button" onclick="generateRandomDecimalProblem()" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">
+                                    🎲 Random Comparison
+                                </button>
+                                <button type="button" onclick="closeDecimalActivity()" style="background: var(--accent-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">
+                                    Close Activity
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(gameContainer);
+                window.currentDecimalGame = gameContainer;
+                showNotification('📏 Decimal Explorer Loaded! Click around to explore.', 'success');
+            };
+            
+            // Supporting functions for decimal activity
+            window.explainDecimal = function(value) {
+                showNotification(`🎯 ${value} is ${value * 10} tenths or ${value * 100} hundredths!`, 'info');
+            };
+            
+            window.compareDecimals = function(a, b) {
+                if (a > b) {
+                    showNotification(`✅ ${a} > ${b} because ${a} has a larger value!`, 'success');
+                } else if (a < b) {
+                    showNotification(`✅ ${b} > ${a} because ${b} has a larger value!`, 'success');
+                } else {
+                    showNotification(`✅ ${a} = ${b} - They are equal!`, 'success');
+                }
+            };
+            
+            window.generateRandomDecimalProblem = function() {
+                const a = (Math.random() * 0.9 + 0.1).toFixed(2);
+                const b = (Math.random() * 0.9 + 0.1).toFixed(2);
+                const larger = parseFloat(a) > parseFloat(b) ? a : b;
+                showNotification(`🎲 Compare: ${a} vs ${b}. Answer: ${larger} is larger!`, 'info');
+            };
+            
+            window.closeDecimalActivity = function() {
+                if (window.currentDecimalGame) {
+                    window.currentDecimalGame.remove();
+                    delete window.currentDecimalGame;
+                }
+            };
+            
+            // Reveal answer for practice problems
+            window.revealAnswer = function(answer) {
+                showNotification(answer, 'success');
             };
             
             // Generate practice problem

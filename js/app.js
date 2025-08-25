@@ -107,11 +107,12 @@ class LearningApp {
             card.style.transform = '';
         }, 150);
 
-        // Navigate to subject (will be implemented in later epics)
-        console.log(`Navigating to ${subject} - Implementation in Epic 3-6`);
+        // Navigate to subject - All modules are now available!
+        console.log(`Navigating to ${subject} subject`);
         
-        // Show placeholder message
-        this.showNotification(`${subject.charAt(0).toUpperCase() + subject.slice(1)} module will be available in Epic 3-6!`, 'info');
+        // Navigate to the subject index page
+        const subjectUrl = `subjects/${subject}/index.html`;
+        window.location.href = subjectUrl;
     }
 
     toggleTheme() {
