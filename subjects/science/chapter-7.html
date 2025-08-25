@@ -16,10 +16,35 @@
       <p class="chapter-description">Ecosystems, food webs, environmental changes, and organism interactions.</p>
     </div>
     <div class="lesson-content">
-      <div class="lesson-section">
-        <h2>Coming Soon</h2>
-        <p>This chapter aligns to Unit 7 in the district syllabus. Ecosystem simulations and environmental studies will be added.</p>
-      </div>
+      <section class="lesson-section">
+        <h2>🌿 Organisms & Environment Lab</h2>
+        <p>Explore how living things interact with their environments!</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="exploreEcosystem('forest')">
+            <div class="state-visual">🌲</div>
+            <h4>Forest Ecosystem</h4>
+            <p>Trees, animals, and interconnections</p>
+          </div>
+          <div class="state-card" onclick="exploreEcosystem('ocean')">
+            <div class="state-visual">🌊</div>
+            <h4>Ocean Ecosystem</h4>
+            <p>Marine life and water environments</p>
+          </div>
+          <div class="state-card" onclick="exploreEcosystem('desert')">
+            <div class="state-visual">🏜️</div>
+            <h4>Desert Ecosystem</h4>
+            <p>Survival in dry environments</p>
+          </div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>🦅 Food Chain Builder</h2>
+        <div class="experiment-station">
+          <h4>🌱 Energy Flow Simulator</h4>
+          <p>Build food chains and see how energy moves through ecosystems!</p>
+          <button type="button" class="try-it-button" onclick="startFoodChain()">🔗 Build Food Chains</button>
+        </div>
+      </section>
     </div>
     <div class="chapter-navigation">
       <a href="chapter-6.html" class="nav-button" aria-label="Previous: Chapter 6">← Previous</a>
@@ -28,12 +53,42 @@
   </main>
   <div id="footer-container"></div>
   <script src="../../js/interactive.js" defer></script>
+  <script src="../../js/gamification-system.js" defer></script>
   <script>
     const loadShared = () => {
       fetch('../shared/header.html').then(r=>r.text()).then(h=>document.getElementById('header-container').innerHTML=h);
       fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
     };
     document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.GamificationSystem) {
+        window.gamificationSystem = new GamificationSystem({ chapter: 'science-7', subject: 'science' });
+      }
+    });
+    
+    function exploreEcosystem(type) {
+      const messages = {
+        forest: '🌲 Forest: Trees provide oxygen, animals find shelter, and all life is connected!',
+        ocean: '🌊 Ocean: Coral reefs, fish, and marine plants create underwater cities!',
+        desert: '🏜️ Desert: Cacti store water, animals adapt to heat, survival strategies!'
+      };
+      showNotification(messages[type], 'success');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('ecosystem_explored', 4);
+    }
+    
+    function startFoodChain() {
+      showNotification('🔗 Food Chain Builder: Connect producers, consumers, and decomposers!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('food_chain_started', 10);
+    }
+    
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `position: fixed; top: 20px; right: 20px; z-index: 2000; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; font-weight: bold; background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 3000);
+    }
   </script>
 </body>
 </html>

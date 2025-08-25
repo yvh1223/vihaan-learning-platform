@@ -16,10 +16,47 @@
       <p class="chapter-description">Renewable and nonrenewable resources, conservation, and human impact.</p>
     </div>
     <div class="lesson-content">
-      <div class="lesson-section">
-        <h2>Coming Soon</h2>
-        <p>Aligned to Unit 6 in the syllabus. Interactive labs and case studies will be added.</p>
-      </div>
+      <section class="lesson-section">
+        <h2>🌎 Earth's Resource Explorer</h2>
+        <p>Discover renewable and nonrenewable resources around us!</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="exploreResource('renewable')">
+            <div class="state-visual">🌱</div>
+            <h4>Renewable Resources</h4>
+            <p>Resources that can be replaced naturally</p>
+          </div>
+          <div class="state-card" onclick="exploreResource('nonrenewable')">
+            <div class="state-visual">⛽</div>
+            <h4>Nonrenewable Resources</h4>
+            <p>Limited resources that cannot be replaced</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="lesson-section">
+        <h2>🌿 Conservation Lab</h2>
+        <div class="experiment-station">
+          <h4>💧 Water Conservation Simulator</h4>
+          <p>Learn how small actions make big differences!</p>
+          <button type="button" class="try-it-button" onclick="startConservationLab()">🧪 Start Lab</button>
+        </div>
+      </section>
+      
+      <section class="lesson-section">
+        <h2>🏭 Human Impact Assessment</h2>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="assessImpact('positive')">
+            <div class="state-visual">✅</div>
+            <h4>Positive Actions</h4>
+            <p>How humans help the environment</p>
+          </div>
+          <div class="state-card" onclick="assessImpact('negative')">
+            <div class="state-visual">⚠️</div>
+            <h4>Environmental Challenges</h4>
+            <p>Problems we need to solve together</p>
+          </div>
+        </div>
+      </section>
     </div>
     <div class="chapter-navigation">
       <a href="chapter-5.html" class="nav-button">← Previous</a>
@@ -28,12 +65,51 @@
   </main>
   <div id="footer-container"></div>
   <script src="../../js/interactive.js" defer></script>
+  <script src="../../js/gamification-system.js" defer></script>
   <script>
     const loadShared = () => {
       fetch('../shared/header.html').then(r=>r.text()).then(h=>document.getElementById('header-container').innerHTML=h);
       fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
     };
     document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+    
+    // Earth Resources functions
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.GamificationSystem) {
+        window.gamificationSystem = new GamificationSystem({ chapter: 'science-6', subject: 'science' });
+      }
+    });
+    
+    function exploreResource(type) {
+      if (type === 'renewable') {
+        showNotification('🌱 Renewable Resources: Solar, wind, water, and trees can be renewed!', 'success');
+      } else {
+        showNotification('⛽ Nonrenewable: Oil, coal, and natural gas take millions of years to form!', 'info');
+      }
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('resource_explored', 3);
+    }
+    
+    function startConservationLab() {
+      showNotification('💧 Conservation Lab: Every drop counts! Learn water-saving techniques.', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('lab_started', 8);
+    }
+    
+    function assessImpact(type) {
+      if (type === 'positive') {
+        showNotification('✅ Positive Impact: Recycling, conservation, and renewable energy help Earth!', 'success');
+      } else {
+        showNotification('⚠️ Environmental Challenges: Pollution and waste harm our planet.', 'info');
+      }
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('impact_assessed', 5);
+    }
+    
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `position: fixed; top: 20px; right: 20px; z-index: 2000; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; font-weight: bold; background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 3000);
+    }
   </script>
 </body>
 </html>

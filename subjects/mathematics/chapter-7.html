@@ -16,10 +16,33 @@
       <p class="chapter-description">Budgeting, saving, spending decisions, and understanding income and expenses.</p>
     </div>
     <div class="lesson-content">
-      <div class="lesson-section">
-        <h2>Coming Soon</h2>
-        <p>This chapter aligns to Unit 7 in the district syllabus. Financial literacy activities and simulations will be added.</p>
-      </div>
+      <section class="lesson-section">
+        <h2>💰 Personal Budget Simulator</h2>
+        <p>Learn to manage money with your virtual budget!</p>
+        <div class="activity-card">
+          <h4>💳 Budget Challenge</h4>
+          <p>Balance income and expenses in realistic scenarios</p>
+          <button type="button" class="try-it-button" onclick="startBudgetGame()">🎯 Start Budget Game</button>
+        </div>
+      </section>
+      
+      <section class="lesson-section">
+        <h2>🏪 Smart Shopping Decisions</h2>
+        <div class="fraction-grid">
+          <div class="fraction-card" onclick="startComparisonShopping()">
+            <h4>🛒 Comparison Shopping</h4>
+            <p>Find the best deals and value</p>
+          </div>
+          <div class="fraction-card" onclick="startSavingsGoal()">
+            <h4>🎯 Savings Goals</h4>
+            <p>Plan and track savings for purchases</p>
+          </div>
+          <div class="fraction-card" onclick="startNeedVsWant()">
+            <h4>🤔 Need vs Want</h4>
+            <p>Make smart spending decisions</p>
+          </div>
+        </div>
+      </section>
     </div>
     <div class="chapter-navigation">
       <a href="chapter-6.html" class="nav-button" aria-label="Previous: Chapter 6">← Previous</a>
@@ -28,12 +51,48 @@
   </main>
   <div id="footer-container"></div>
   <script src="../../js/interactive.js" defer></script>
+  <script src="../../js/gamification-system.js" defer></script>
   <script>
     const loadShared = () => {
       fetch('../shared/header.html').then(r=>r.text()).then(h=>document.getElementById('header-container').innerHTML=h);
       fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
     };
     document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+    
+    // Financial literacy functions
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.GamificationSystem) {
+        window.gamificationSystem = new GamificationSystem({ chapter: 'mathematics-7', subject: 'mathematics' });
+      }
+    });
+    
+    function startBudgetGame() {
+      showNotification('💰 Budget Challenge: Manage your virtual money wisely!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('budget_started', 10);
+    }
+    
+    function startComparisonShopping() {
+      showNotification('🛒 Comparison Shopping: Find the best deals!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('shopping_activity', 5);
+    }
+    
+    function startSavingsGoal() {
+      showNotification('🎯 Savings Goals: Plan your financial future!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('savings_activity', 8);
+    }
+    
+    function startNeedVsWant() {
+      showNotification('🤔 Need vs Want: Make smart money decisions!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('decision_activity', 7);
+    }
+    
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `position: fixed; top: 20px; right: 20px; z-index: 2000; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; font-weight: bold; background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 3000);
+    }
   </script>
 </body>
 </html>

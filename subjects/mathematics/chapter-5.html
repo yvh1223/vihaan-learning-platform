@@ -1,39 +1,783 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 5 - Fractions Mastery</title>
-  <link rel="stylesheet" href="../../css/main.css">
-  <link rel="stylesheet" href="../../css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fractions Mastery - Advanced fraction operations, mixed numbers, and real-world applications for 5th grade">
+    <meta name="keywords" content="5th grade, fractions, mixed numbers, equivalent fractions, operations, mathematics, STAAR, MAP">
+    <meta name="author" content="Yallappa H">
+    
+    <title>Fractions Mastery - 5th Grade Mathematics | Learning Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <style>
+        /* Fraction-specific styles */
+        .fraction-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .fraction-circles {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .fraction-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            position: relative;
+            background-color: var(--bg-secondary);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .fraction-circle:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+        }
+        
+        .fraction-segment {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            transform-origin: 0 0;
+            background-color: var(--secondary-color);
+            opacity: 0.8;
+        }
+        
+        .fraction-label {
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .pizza-slice {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            position: relative;
+            border: 3px solid #d2691e;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .pizza-slice:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+        
+        .pizza-toppings {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            right: 20%;
+            bottom: 20%;
+            background: radial-gradient(circle, #ff4757, #ff3742);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        .slice-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            transform-origin: 100% 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .mixed-number {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .whole-number {
+            font-size: var(--font-size-xxl);
+            color: var(--secondary-color);
+        }
+        
+        .fraction-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: var(--font-size-lg);
+        }
+        
+        .numerator {
+            border-bottom: 2px solid var(--primary-color);
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .denominator {
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .fraction-game {
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin: var(--spacing-lg) 0;
+            text-align: center;
+        }
+        
+        .fraction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .fraction-card {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .fraction-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+        
+        .fraction-card.selected {
+            border-color: var(--success-color);
+            background-color: rgba(var(--success-color-rgb), 0.1);
+        }
+        
+        .fraction-bar {
+            width: 100%;
+            height: 40px;
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--radius-md);
+            position: relative;
+            margin: var(--spacing-md) 0;
+            overflow: hidden;
+        }
+        
+        .fraction-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            transition: width 0.5s ease;
+            border-radius: var(--radius-sm);
+        }
+        
+        .operation-workspace {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: var(--spacing-md);
+            align-items: center;
+            justify-items: center;
+            background-color: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .operation-symbol {
+            font-size: var(--font-size-xxl);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .result-display {
+            background-color: var(--success-color);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-weight: bold;
+        }
+        
+        .progress-indicator {
+            width: 100%;
+            max-width: 400px;
+            height: 20px;
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) auto;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color), var(--accent-color));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: var(--radius-md);
+        }
+    </style>
 </head>
 <body>
-  <div id="header-container"></div>
-  <main class="chapter-container" id="main-content">
-    <div class="chapter-header">
-      <div class="chapter-number">Chapter 5</div>
-      <h1 class="chapter-title">Fractions Mastery</h1>
-      <p class="chapter-description">Advanced fraction operations, mixed numbers, and real-world fraction applications.</p>
-    </div>
-    <div class="lesson-content">
-      <div class="lesson-section">
-        <h2>Coming Soon</h2>
-        <p>This chapter aligns to Unit 5 in the district syllabus. Interactive fraction activities and problem-solving will be added.</p>
-      </div>
-    </div>
-    <div class="chapter-navigation">
-      <a href="chapter-4.html" class="nav-button" aria-label="Previous: Chapter 4">← Previous</a>
-      <a href="chapter-6.html" class="nav-button" aria-label="Next: Chapter 6">Next →</a>
-    </div>
-  </main>
-  <div id="footer-container"></div>
-  <script src="../../js/interactive.js" defer></script>
-  <script>
-    const loadShared = () => {
-      fetch('../shared/header.html').then(r=>r.text()).then(h=>document.getElementById('header-container').innerHTML=h);
-      fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
-    };
-    document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
-  </script>
+    <div id="header-container"></div>
+    <main class="chapter-container" id="main-content">
+        <div class="chapter-header">
+            <div class="chapter-number">Chapter 5</div>
+            <h1 class="chapter-title">Fractions Mastery</h1>
+            <p class="chapter-description">Advanced fraction operations, mixed numbers, and real-world fraction applications.</p>
+            <div class="progress-indicator">
+                <div class="progress-fill" id="chapter-progress"></div>
+            </div>
+        </div>
+        
+        <div class="lesson-content">
+            <!-- Section 1: Equivalent Fractions -->
+            <section class="lesson-section" id="equivalent-fractions">
+                <h2>🔄 Equivalent Fractions</h2>
+                <p class="section-intro">
+                    Discover fractions that represent the same amount but look different! 
+                    Master the art of finding equivalent fractions through visual exploration.
+                </p>
+                
+                <div class="fraction-game">
+                    <h3>Visual Fraction Explorer</h3>
+                    <p>Click on the circles to see different ways to represent the same fraction!</p>
+                    
+                    <div class="fraction-circles">
+                        <div class="fraction-circle" onclick="showFraction(1, 2, this)">
+                            <div class="fraction-label">1/2</div>
+                        </div>
+                        <div class="fraction-circle" onclick="showFraction(2, 4, this)">
+                            <div class="fraction-label">2/4</div>
+                        </div>
+                        <div class="fraction-circle" onclick="showFraction(3, 6, this)">
+                            <div class="fraction-label">3/6</div>
+                        </div>
+                        <div class="fraction-circle" onclick="showFraction(4, 8, this)">
+                            <div class="fraction-label">4/8</div>
+                        </div>
+                    </div>
+                    
+                    <div id="fraction-explanation" style="margin-top: var(--spacing-lg); min-height: 60px;">
+                        <p><em>Click any fraction circle to see the visual representation!</em></p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <h4>🎯 Equivalent Fractions Challenge</h4>
+                    <p>Match the equivalent fractions by clicking on pairs that represent the same amount!</p>
+                    <button type="button" class="try-it-button" onclick="startEquivalentGame()">
+                        🎮 Start Matching Game
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Section 2: Mixed Numbers -->
+            <section class="lesson-section" id="mixed-numbers">
+                <h2>🥧 Mixed Numbers & Improper Fractions</h2>
+                <p class="section-intro">
+                    Learn to work with mixed numbers and convert between mixed numbers and improper fractions 
+                    using delicious pizza examples!
+                </p>
+                
+                <div class="fraction-game">
+                    <h3>Pizza Party Mixed Numbers</h3>
+                    <p>See how many whole pizzas plus parts make up different amounts!</p>
+                    
+                    <div class="mixed-number-display" id="pizza-display">
+                        <div class="mixed-number">
+                            <span class="whole-number">2</span>
+                            <div class="fraction-display">
+                                <div class="numerator">3</div>
+                                <div class="denominator">4</div>
+                            </div>
+                            <span>=</span>
+                            <div class="fraction-display">
+                                <div class="numerator">11</div>
+                                <div class="denominator">4</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pizza-visualization" style="display: flex; gap: var(--spacing-md); justify-content: center; margin: var(--spacing-lg) 0;">
+                        <div class="pizza-slice"></div>
+                        <div class="pizza-slice"></div>
+                        <div class="pizza-slice" style="opacity: 0.7;"></div>
+                    </div>
+                    
+                    <button type="button" class="try-it-button" onclick="changeMixedNumber()">
+                        🔄 Try Different Amount
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Section 3: Fraction Operations -->
+            <section class="lesson-section" id="fraction-operations">
+                <h2>➕➖ Adding & Subtracting Fractions</h2>
+                <p class="section-intro">
+                    Master fraction operations with like and unlike denominators through step-by-step visual guidance.
+                </p>
+                
+                <div class="operation-workspace">
+                    <div class="fraction-display">
+                        <div class="numerator">1</div>
+                        <div class="denominator">4</div>
+                    </div>
+                    <div class="operation-symbol">+</div>
+                    <div class="fraction-display">
+                        <div class="numerator">1</div>
+                        <div class="denominator">4</div>
+                    </div>
+                    <div class="operation-symbol">=</div>
+                    <div class="result-display">
+                        <div class="fraction-display">
+                            <div class="numerator">2</div>
+                            <div class="denominator">4</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fraction-bars-demo">
+                    <div class="fraction-bar">
+                        <div class="fraction-fill" style="width: 25%;"></div>
+                    </div>
+                    <div style="text-align: center; margin: var(--spacing-sm) 0;">+</div>
+                    <div class="fraction-bar">
+                        <div class="fraction-fill" style="width: 25%;"></div>
+                    </div>
+                    <div style="text-align: center; margin: var(--spacing-sm) 0;">=</div>
+                    <div class="fraction-bar">
+                        <div class="fraction-fill" style="width: 50%;"></div>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <h4>🧮 Fraction Calculator Practice</h4>
+                    <p>Practice adding and subtracting fractions with visual feedback!</p>
+                    <button type="button" class="try-it-button" onclick="startOperationsGame()">
+                        🎯 Practice Operations
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Section 4: Real-World Applications -->
+            <section class="lesson-section" id="real-world">
+                <h2>🏪 Real-World Fraction Applications</h2>
+                <p class="section-intro">
+                    Apply your fraction skills to cooking, shopping, and everyday situations!
+                </p>
+                
+                <div class="fraction-grid">
+                    <div class="fraction-card" onclick="startCookingActivity()">
+                        <h4>👩‍🍳 Recipe Helper</h4>
+                        <p>Scale recipes up and down using fractions</p>
+                        <div class="fraction-visual">
+                            <div class="fraction-display">
+                                <div class="numerator">1</div>
+                                <div class="denominator">2</div>
+                            </div>
+                            <span>cup flour</span>
+                        </div>
+                    </div>
+                    
+                    <div class="fraction-card" onclick="startMeasurementActivity()">
+                        <h4>📏 Measurement Master</h4>
+                        <p>Work with fractional measurements and distances</p>
+                        <div class="fraction-visual">
+                            <div class="fraction-display">
+                                <div class="numerator">3</div>
+                                <div class="denominator">4</div>
+                            </div>
+                            <span>inch</span>
+                        </div>
+                    </div>
+                    
+                    <div class="fraction-card" onclick="startTimeActivity()">
+                        <h4>⏰ Time Fractions</h4>
+                        <p>Understand parts of hours and time calculations</p>
+                        <div class="fraction-visual">
+                            <div class="fraction-display">
+                                <div class="numerator">1</div>
+                                <div class="denominator">4</div>
+                            </div>
+                            <span>hour = 15 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="fraction-card" onclick="startShoppingActivity()">
+                        <h4>🛒 Shopping Fractions</h4>
+                        <p>Calculate discounts and compare fractional amounts</p>
+                        <div class="fraction-visual">
+                            <div class="fraction-display">
+                                <div class="numerator">1</div>
+                                <div class="denominator">3</div>
+                            </div>
+                            <span>off sale</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Progress Summary -->
+            <section class="lesson-section" id="progress-summary">
+                <h2>🎯 Chapter Progress</h2>
+                <div class="progress-summary">
+                    <p>Complete all activities to master fractions!</p>
+                    <ul class="progress-checklist">
+                        <li id="progress-equivalent">✅ Equivalent Fractions</li>
+                        <li id="progress-mixed">⏳ Mixed Numbers</li>
+                        <li id="progress-operations">⏳ Fraction Operations</li>
+                        <li id="progress-realworld">⏳ Real-World Applications</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        
+        <div class="chapter-navigation">
+            <a href="chapter-4.html" class="nav-button" aria-label="Previous: Chapter 4">← Previous</a>
+            <a href="chapter-6.html" class="nav-button" aria-label="Next: Chapter 6">Next →</a>
+        </div>
+    </main>
+    
+    <div id="footer-container"></div>
+    
+    <!-- Scripts -->
+    <script src="../../js/interactive.js" defer></script>
+    <script src="../../js/drag-drop-utils.js" defer></script>
+    <script src="../../js/gamification-system.js" defer></script>
+    
+    <script>
+        const loadShared = () => {
+            fetch('../shared/header.html').then(r=>r.text()).then(h=>document.getElementById('header-container').innerHTML=h);
+            fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
+        };
+        document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+        
+        // Fraction mastery variables
+        let chapterProgress = 0;
+        let activitiesCompleted = 0;
+        let gamificationSystem = null;
+        
+        // Initialize gamification when system loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                if (window.GamificationSystem) {
+                    gamificationSystem = new GamificationSystem({
+                        chapter: 'mathematics-5',
+                        subject: 'mathematics'
+                    });
+                }
+                updateProgress();
+            }, 100);
+        });
+        
+        // Visual fraction display function
+        function showFraction(numerator, denominator, element) {
+            const circles = document.querySelectorAll('.fraction-circle');
+            circles.forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+            
+            const explanation = document.getElementById('fraction-explanation');
+            const percentage = Math.round((numerator / denominator) * 100);
+            
+            // Create visual segments
+            element.innerHTML = `
+                <div class="fraction-label">${numerator}/${denominator}</div>
+                <div class="visual-segments"></div>
+            `;
+            
+            explanation.innerHTML = `
+                <p><strong>${numerator}/${denominator}</strong> represents <strong>${percentage}%</strong> of a whole.</p>
+                <p>This fraction shows <strong>${numerator}</strong> out of <strong>${denominator}</strong> equal parts.</p>
+            `;
+            
+            // Award points
+            if (gamificationSystem) {
+                gamificationSystem.awardPoints('fraction_explored', 1);
+            }
+            
+            showNotification(`🎯 Explored ${numerator}/${denominator} = ${percentage}%`, 'success');
+        }
+        
+        // Equivalent fractions matching game
+        function startEquivalentGame() {
+            const gameContainer = document.createElement('div');
+            gameContainer.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.8); z-index: 1000; display: flex; 
+                align-items: center; justify-content: center; padding: 2rem;
+            `;
+            
+            gameContainer.innerHTML = `
+                <div style="background: white; border-radius: 1rem; padding: 2rem; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem;">🎮 Equivalent Fractions Match</h3>
+                    <p style="text-align: center; margin-bottom: 2rem;">Click two equivalent fractions to match them!</p>
+                    
+                    <div class="fraction-matching-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                        ${generateMatchingCards()}
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button type="button" onclick="resetMatchingGame()" style="background: var(--secondary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">Reset</button>
+                        <button type="button" onclick="closeMatchingGame()" style="background: var(--accent-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;">Close</button>
+                    </div>
+                    
+                    <div id="matching-score" style="text-align: center; margin-top: 1rem; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            document.body.appendChild(gameContainer);
+            window.currentMatchingGame = gameContainer;
+            initializeMatchingGame();
+        }
+        
+        function generateMatchingCards() {
+            const pairs = [
+                ['1/2', '2/4'], ['1/3', '2/6'], ['1/4', '2/8'], ['3/4', '6/8']
+            ];
+            
+            const cards = [];
+            pairs.forEach(pair => cards.push(...pair));
+            
+            // Shuffle cards
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+            
+            return cards.map(fraction => `
+                <div class="matching-card" data-fraction="${fraction}" onclick="selectMatchingCard(this)" 
+                     style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 0.5rem; 
+                            text-align: center; font-size: 1.5rem; font-weight: bold; cursor: pointer; 
+                            border: 2px solid transparent; transition: all 0.2s ease;">
+                    ${fraction}
+                </div>
+            `).join('');
+        }
+        
+        let selectedCards = [];
+        let matchedPairs = 0;
+        
+        function initializeMatchingGame() {
+            selectedCards = [];
+            matchedPairs = 0;
+            updateMatchingScore();
+        }
+        
+        function selectMatchingCard(card) {
+            if (card.classList.contains('matched') || selectedCards.includes(card)) return;
+            
+            selectedCards.push(card);
+            card.style.borderColor = 'var(--primary-color)';
+            card.style.background = 'var(--accent-color)';
+            card.style.color = 'white';
+            
+            if (selectedCards.length === 2) {
+                setTimeout(checkMatch, 500);
+            }
+        }
+        
+        function checkMatch() {
+            const [card1, card2] = selectedCards;
+            const fraction1 = card1.dataset.fraction;
+            const fraction2 = card2.dataset.fraction;
+            
+            const isMatch = areEquivalent(fraction1, fraction2);
+            
+            if (isMatch) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                card1.style.borderColor = 'var(--success-color)';
+                card2.style.borderColor = 'var(--success-color)';
+                card1.style.background = 'var(--success-color)';
+                card2.style.background = 'var(--success-color)';
+                
+                matchedPairs++;
+                
+                if (gamificationSystem) {
+                    gamificationSystem.awardPoints('fraction_match', 5);
+                }
+                
+                showNotification(`🎉 Perfect match! ${fraction1} = ${fraction2}`, 'success');
+            } else {
+                card1.style.borderColor = 'transparent';
+                card2.style.borderColor = 'transparent';
+                card1.style.background = 'var(--bg-secondary)';
+                card2.style.background = 'var(--bg-secondary)';
+                card1.style.color = 'inherit';
+                card2.style.color = 'inherit';
+                
+                showNotification(`❌ Not equivalent. Try again!`, 'info');
+            }
+            
+            selectedCards = [];
+            updateMatchingScore();
+            
+            if (matchedPairs === 4) {
+                setTimeout(() => {
+                    showNotification('🏆 Amazing! All fractions matched!', 'success');
+                    if (gamificationSystem) {
+                        gamificationSystem.awardBadge('fraction_master');
+                        gamificationSystem.awardPoints('perfect_score', 10);
+                    }
+                    activitiesCompleted++;
+                    updateProgress();
+                }, 1000);
+            }
+        }
+        
+        function areEquivalent(frac1, frac2) {
+            const [n1, d1] = frac1.split('/').map(Number);
+            const [n2, d2] = frac2.split('/').map(Number);
+            return (n1 * d2) === (n2 * d1);
+        }
+        
+        function updateMatchingScore() {
+            const scoreElement = document.getElementById('matching-score');
+            if (scoreElement) {
+                scoreElement.textContent = `Matched: ${matchedPairs}/4 pairs`;
+            }
+        }
+        
+        function resetMatchingGame() {
+            const grid = document.querySelector('.fraction-matching-grid');
+            grid.innerHTML = generateMatchingCards();
+            initializeMatchingGame();
+        }
+        
+        function closeMatchingGame() {
+            if (window.currentMatchingGame) {
+                window.currentMatchingGame.remove();
+                delete window.currentMatchingGame;
+            }
+        }
+        
+        // Mixed number visualization
+        function changeMixedNumber() {
+            const mixedNumbers = [
+                {whole: 1, num: 1, den: 2, improper: [3, 2]},
+                {whole: 2, num: 3, den: 4, improper: [11, 4]},
+                {whole: 1, num: 3, den: 8, improper: [11, 8]},
+                {whole: 3, num: 1, den: 3, improper: [10, 3]}
+            ];
+            
+            const randomMixed = mixedNumbers[Math.floor(Math.random() * mixedNumbers.length)];
+            
+            document.querySelector('.whole-number').textContent = randomMixed.whole;
+            document.querySelector('.numerator').textContent = randomMixed.num;
+            document.querySelector('.denominator').textContent = randomMixed.den;
+            document.querySelectorAll('.fraction-display')[1].querySelector('.numerator').textContent = randomMixed.improper[0];
+            document.querySelectorAll('.fraction-display')[1].querySelector('.denominator').textContent = randomMixed.improper[1];
+            
+            if (gamificationSystem) {
+                gamificationSystem.awardPoints('mixed_number_practice', 2);
+            }
+            
+            showNotification(`🥧 New mixed number: ${randomMixed.whole} ${randomMixed.num}/${randomMixed.den}`, 'info');
+        }
+        
+        // Fraction operations practice
+        function startOperationsGame() {
+            showNotification('🧮 Fraction Operations Practice loading...', 'info');
+            
+            if (gamificationSystem) {
+                gamificationSystem.awardPoints('activity_started', 3);
+            }
+            
+            // Future: Full operations practice interface
+            activitiesCompleted++;
+            updateProgress();
+        }
+        
+        // Real-world activity functions
+        function startCookingActivity() {
+            showNotification('👩‍🍳 Recipe Helper: Scale ingredients using fractions!', 'info');
+            if (gamificationSystem) gamificationSystem.awardPoints('cooking_activity', 5);
+        }
+        
+        function startMeasurementActivity() {
+            showNotification('📏 Measurement Master: Work with fractional measurements!', 'info');
+            if (gamificationSystem) gamificationSystem.awardPoints('measurement_activity', 5);
+        }
+        
+        function startTimeActivity() {
+            showNotification('⏰ Time Fractions: Calculate parts of hours!', 'info');
+            if (gamificationSystem) gamificationSystem.awardPoints('time_activity', 5);
+        }
+        
+        function startShoppingActivity() {
+            showNotification('🛒 Shopping Fractions: Calculate discounts and compare amounts!', 'info');
+            if (gamificationSystem) gamificationSystem.awardPoints('shopping_activity', 5);
+        }
+        
+        // Progress tracking
+        function updateProgress() {
+            chapterProgress = (activitiesCompleted / 4) * 100;
+            
+            const progressFill = document.getElementById('chapter-progress');
+            if (progressFill) {
+                progressFill.style.width = chapterProgress + '%';
+            }
+            
+            // Update checklist
+            const items = ['equivalent', 'mixed', 'operations', 'realworld'];
+            items.forEach((item, index) => {
+                const element = document.getElementById(`progress-${item}`);
+                if (element && index < activitiesCompleted) {
+                    element.innerHTML = element.innerHTML.replace('⏳', '✅');
+                }
+            });
+            
+            if (chapterProgress === 100) {
+                showNotification('🎉 Chapter 5 Complete! Fraction Mastery Achieved!', 'success');
+                if (gamificationSystem) {
+                    gamificationSystem.awardBadge('chapter_5_complete');
+                    gamificationSystem.awardPoints('chapter_complete', 25);
+                }
+            }
+        }
+        
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 2000;
+                padding: 1rem 1.5rem; border-radius: 0.5rem; color: white;
+                font-weight: bold; max-width: 300px; word-wrap: break-word;
+                background: ${type === 'success' ? 'var(--success-color)' : type === 'info' ? 'var(--primary-color)' : 'var(--error-color)'};
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
