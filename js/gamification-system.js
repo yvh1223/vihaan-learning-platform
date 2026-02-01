@@ -11,6 +11,7 @@ class GamificationSystem {
             badgesEnabled: true,
             achievementsEnabled: true,
             leaderboardEnabled: false, // Single-user platform
+            uiEnabled: false,
             dailyChallengesEnabled: true,
             streaksEnabled: true,
             celebrationsEnabled: true,
@@ -295,8 +296,12 @@ class GamificationSystem {
 
     // UI Setup
     setupUI() {
-        this.createGameUI();
-        this.createCelebrationSystem();
+        if (this.options.uiEnabled) {
+            this.createGameUI();
+        }
+        if (this.options.celebrationsEnabled) {
+            this.createCelebrationSystem();
+        }
     }
 
     createGameUI() {
@@ -1065,6 +1070,7 @@ class GamificationSystem {
 
     // UI Update Methods
     updateUI() {
+        if (!this.options.uiEnabled) return;
         this.updateGameHeader();
         this.updateGameStats();
         this.updateDailyChallengeUI();

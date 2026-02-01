@@ -48,6 +48,9 @@ temp/
 .cache/
 .parcel-cache/
 
+# Development scripts (local use only)
+quick-push.sh
+
 # OS generated files
 .DS_Store
 .DS_Store?
