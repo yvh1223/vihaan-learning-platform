@@ -228,6 +228,97 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
+
+        .learning-guidance {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
+            box-shadow: var(--shadow-md);
+            color: var(--text-primary);
+        }
+
+        .learning-guidance h2 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+
+        .guidance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .guidance-card {
+            background: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .guidance-card h3 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-xs);
+            font-size: var(--font-size-lg);
+            color: var(--primary-color);
+        }
+
+        .guidance-card p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .guidance-step {
+            display: flex;
+            gap: var(--spacing-xs);
+            align-items: flex-start;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .guidance-step strong {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(80, 200, 120, 0.15);
+        }
+
+        .study-strategies {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(80, 200, 120, 0.12));
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+
+        .study-strategies h3 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-color);
+        }
+
+        .strategies-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: var(--spacing-sm);
+        }
+
+        .strategy-item {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: flex-start;
+        }
+
+        .strategy-icon {
+            font-size: 1.5rem;
+        }
     </style>
 </head>
 <body>
@@ -245,6 +336,57 @@
                 Master essential math concepts with hands-on activities and real-world applications.
             </p>
         </div>
+        
+        <section class="learning-guidance">
+            <h2>Learn with intention</h2>
+            <p class="chapter-description">
+                Follow this learning path to build number sense, algebraic thinking, and data literacy step by step.
+                Every chapter pairs manipulatives with quick practice so you can track progress and reflect on what stuck.
+            </p>
+            <div class="guidance-grid">
+                <article class="guidance-card">
+                    <h3>Learning Path</h3>
+                    <div class="guidance-step">
+                        <strong>1</strong>
+                        <p>Preview each chapter’s objectives so you know what questions you should answer by the end.</p>
+                    </div>
+                    <div class="guidance-step">
+                        <strong>2</strong>
+                        <p>Practice with the visual models, step-by-step examples, and interactive challenges embedded below.</p>
+                    </div>
+                    <div class="guidance-step">
+                        <strong>3</strong>
+                        <p>Reflect using the quick checks and self-assessment prompts, then record what still feels tricky.</p>
+                    </div>
+                </article>
+                <article class="guidance-card">
+                    <h3>Next up</h3>
+                    <p>After you shelter number sense, move into <strong>Algebraic Reasoning</strong> (Chapter 2) to see patterns and expressions.</p>
+                    <p>Each chapter in this path builds on the previous one. Use the STAAR-style assessment as a checkpoint whenever you want a fresh baseline.</p>
+                </article>
+            </div>
+            <div class="study-strategies">
+                <h3>Study strategies</h3>
+                <ul class="strategies-list">
+                    <li class="strategy-item">
+                        <span class="strategy-icon">🧭</span>
+                        <span>Work in 10–15 minute blocks with a short recap after each section to lock in the big idea.</span>
+                    </li>
+                    <li class="strategy-item">
+                        <span class="strategy-icon">🎧</span>
+                        <span>Talk through the steps aloud with a peer or pretend you are teaching someone else.</span>
+                    </li>
+                    <li class="strategy-item">
+                        <span class="strategy-icon">🧮</span>
+                        <span>Use the drag-and-drop or other interactive manipulatives to connect symbols to physical actions.</span>
+                    </li>
+                    <li class="strategy-item">
+                        <span class="strategy-icon">📈</span>
+                        <span>Track which chapter you completed last (scroll up to the cards) and revisit it the next day for spaced practice.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
         
         <!-- Mathematics Chapters -->
         <div class="chapters-grid">

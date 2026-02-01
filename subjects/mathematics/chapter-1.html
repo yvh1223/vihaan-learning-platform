@@ -209,6 +209,76 @@
             transform: translateY(-3px) scale(1.05);
             box-shadow: var(--shadow-xl);
         }
+
+        .learning-focus {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        .focus-card {
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .focus-card h3 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+            font-size: var(--font-size-lg);
+        }
+
+        .focus-card ul,
+        .focus-card ol {
+            margin: 0;
+            padding-left: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .focus-card li:not(:last-child) {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .learning-reflection {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(80, 200, 120, 0.12));
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-top: var(--spacing-xxl);
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            color: var(--text-primary);
+        }
+
+        .learning-reflection h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .reflection-prompts {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: var(--spacing-sm);
+        }
+
+        .reflection-prompts li {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+        }
+
+        .reflection-note {
+            margin-top: var(--spacing-md);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -228,6 +298,34 @@
         
         <!-- Lesson Content -->
         <div class="lesson-content">
+            <div class="learning-focus">
+                <div class="focus-card">
+                    <h3>Learning Objectives</h3>
+                    <ul>
+                        <li>Translate digits into place values and explain each position within 5-digit numbers.</li>
+                        <li>Model and add/subtract fractions with like denominators using visuals.</li>
+                        <li>Connect decimals to fractions through place value and number lines.</li>
+                        <li>Solve multi-digit addition problems using reasoning and regrouping strategies.</li>
+                    </ul>
+                </div>
+                <div class="focus-card">
+                    <h3>Key Vocabulary</h3>
+                    <ol>
+                        <li><strong>Place Value</strong> – the value of a digit based on its position.</li>
+                        <li><strong>Numerator/Denominator</strong> – parts of a fraction.</li>
+                        <li><strong>Equivalent</strong> – equal in value even when it looks different.</li>
+                        <li><strong>Regrouping</strong> – exchanging units from one place value to another.</li>
+                    </ol>
+                </div>
+                <div class="focus-card">
+                    <h3>How to use this chapter</h3>
+                    <ol>
+                        <li>Look at the manipulatives first and narrate what you notice (models, colors, steps).</li>
+                        <li>Work through the step-by-step examples, then replicate the thinking with another problem.</li>
+                        <li>Do the quick check without peeking, then read the reflection prompts to summarize.</li>
+                    </ol>
+                </div>
+            </div>
             <!-- Section 1: Place Value -->
             <div class="lesson-section">
                 <h3>
@@ -499,6 +597,18 @@
                         <li>0.08, 0.5, 0.75</li>
                     </ul>
                 </details>
+            </div>
+            
+            <div class="learning-reflection">
+                <h3>Reflection + next steps</h3>
+                <ul class="reflection-prompts">
+                    <li>Which visual model (place value chart, fraction circle, decimal ruler, or regrouping example) helped the most? Why?</li>
+                    <li>Where could I explain my thinking out loud so someone would understand the steps without seeing the page?</li>
+                    <li>What is one problem I still want to revisit tomorrow for spaced practice?</li>
+                </ul>
+                <p class="reflection-note">
+                    Save your favorite manipulatives by writing or sketching them in your notebook, and use the STAAR practice assessment whenever you are ready for a challenge.
+                </p>
             </div>
         </div>
         

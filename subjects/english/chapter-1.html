@@ -450,6 +450,24 @@
         let multimediaSystem = null;
         let isNarrating = false;
         let isHighlighting = false;
+
+        function initEnglishGamification() {
+            if (window.GamificationSystem && !window.gamificationSystem) {
+                window.gamificationSystem = new GamificationSystem({
+                    subject: 'english',
+                    chapter: 'english-1',
+                    pointsEnabled: true,
+                    badgesEnabled: true,
+                    achievementsEnabled: true
+                });
+            }
+        }
+
+        function awardEnglishPoints(action, amount = 1) {
+            if (window.gamificationSystem && typeof window.gamificationSystem.awardPoints === 'function') {
+                window.gamificationSystem.awardPoints(action, amount);
+            }
+        }
         
         // Initialize multimedia system and word count tracking
         document.addEventListener('DOMContentLoaded', () => {
@@ -459,6 +477,8 @@
                 loadReadingPassage(); // Load initial passage
             }
             
+            initEnglishGamification();
+
             // Initialize multimedia system
             if (window.MultimediaSystem) {
                 multimediaSystem = new MultimediaSystem({
@@ -469,9 +489,7 @@
                 });
                 
                 // Award points for using multimedia features
-                if (window.GamificationSystem) {
-                    window.gamificationSystem.awardPoints('engagement_feature');
-                }
+                awardEnglishPoints('engagement_feature');
             }
         });
         
@@ -499,16 +517,12 @@
                         btn.title = 'Listen to passage';
                         
                         // Award points for completing narration
-                        if (window.GamificationSystem) {
-                            window.gamificationSystem.awardPoints('narration_complete');
-                        }
+                        awardEnglishPoints('narration_complete');
                     }
                 });
                 
                 // Award points for using narration
-                if (window.GamificationSystem) {
-                    window.gamificationSystem.awardPoints('narration_start');
-                }
+                awardEnglishPoints('narration_start');
             } else {
                 isNarrating = false;
                 btn.innerHTML = '🔊 Listen';
@@ -537,9 +551,7 @@
                 );
                 
                 // Award points for using highlighting
-                if (window.GamificationSystem) {
-                    window.gamificationSystem.awardPoints('highlighting_start');
-                }
+                awardEnglishPoints('highlighting_start');
             } else {
                 isHighlighting = false;
                 btn.innerHTML = '✨ Highlight';
@@ -570,9 +582,7 @@
                     event.target.classList.add('highlighted-text');
                     
                     // Award points for highlighting
-                    if (window.GamificationSystem) {
-                        window.gamificationSystem.awardPoints('text_highlight');
-                    }
+                    awardEnglishPoints('text_highlight');
                 }
             }
         }

@@ -183,9 +183,13 @@
   .main-content {
     padding: var(--spacing-md);
   }
-  
+
   .navbar {
     padding: var(--spacing-md);
+  }
+
+  .study-grid {
+    grid-template-columns: 1fr;
   }
   
   /* Stack welcome banner on mobile */
