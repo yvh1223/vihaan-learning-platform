@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 7 - Organisms & Environment</title>
+  <meta name="description" content="Ecosystems in Balance - 5th grade science lesson on food webs, interactions, and environmental change.">
+  <meta name="keywords" content="5th grade, science, ecosystems, food webs, interactions, environmental change, STAAR">
+  <meta name="author" content="Yallappa H">
+  <title>Ecosystems in Balance - 5th Grade Science</title>
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/responsive.css">
 </head>
@@ -12,38 +15,114 @@
   <main class="chapter-container" id="main-content">
     <div class="chapter-header">
       <div class="chapter-number">Chapter 7</div>
-      <h1 class="chapter-title">Organisms & Environment</h1>
-      <p class="chapter-description">Ecosystems, food webs, environmental changes, and organism interactions.</p>
+      <h1 class="chapter-title">Ecosystems in Balance</h1>
+      <p class="chapter-description">Food webs, interactions, population balance, and environmental change.</p>
     </div>
     <div class="lesson-content">
       <section class="lesson-section">
-        <h2>🌿 Organisms & Environment Lab</h2>
-        <p>Explore how living things interact with their environments!</p>
+        <h2>🌿 Ecosystem Interactions</h2>
+        <p>Living things depend on each other for food, shelter, and survival. Ecosystems stay healthy when populations are balanced.</p>
         <div class="states-of-matter">
           <div class="state-card" onclick="exploreEcosystem('forest')">
             <div class="state-visual">🌲</div>
             <h4>Forest Ecosystem</h4>
-            <p>Trees, animals, and interconnections</p>
+            <p>Trees, animals, and layered habitats</p>
           </div>
           <div class="state-card" onclick="exploreEcosystem('ocean')">
             <div class="state-visual">🌊</div>
             <h4>Ocean Ecosystem</h4>
-            <p>Marine life and water environments</p>
+            <p>Producers, predators, and ocean zones</p>
           </div>
           <div class="state-card" onclick="exploreEcosystem('desert')">
             <div class="state-visual">🏜️</div>
             <h4>Desert Ecosystem</h4>
-            <p>Survival in dry environments</p>
+            <p>Adaptations for heat and scarce water</p>
           </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🔗 Food Web vs Food Chain</h4>
+          <p>A food chain shows one path of energy. A food web shows many connected paths.</p>
+          <button type="button" class="try-it-button" onclick="startFoodWeb()">🕸️ Build a Food Web</button>
+          <div id="food-web-tip" role="status" aria-live="polite" style="margin-top: 0.75rem;"></div>
         </div>
       </section>
       <section class="lesson-section">
-        <h2>🦅 Food Chain Builder</h2>
+        <h2>🤝 Ecosystem Relationships</h2>
+        <p>Organisms interact in different ways. Some help each other, some compete, and some hunt.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showInteraction('mutualism')">
+            <div class="state-visual">🤝</div>
+            <h4>Mutualism</h4>
+            <p>Both organisms benefit</p>
+          </div>
+          <div class="state-card" onclick="showInteraction('commensalism')">
+            <div class="state-visual">🪺</div>
+            <h4>Commensalism</h4>
+            <p>One benefits, one is unaffected</p>
+          </div>
+          <div class="state-card" onclick="showInteraction('parasitism')">
+            <div class="state-visual">🧫</div>
+            <h4>Parasitism</h4>
+            <p>One benefits, one is harmed</p>
+          </div>
+          <div class="state-card" onclick="showInteraction('competition')">
+            <div class="state-visual">🏁</div>
+            <h4>Competition</h4>
+            <p>Organisms compete for resources</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🧪 Relationship Example</h4>
+          <div id="interaction-result" role="status" aria-live="polite">Choose a relationship to see an example.</div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>🌦️ Environmental Change</h2>
+        <p>Natural events and human actions can change ecosystems. Healthy ecosystems can recover with time and care.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showChangeImpact('drought')">
+            <div class="state-visual">☀️</div>
+            <h4>Drought</h4>
+            <p>Less water changes food and shelter</p>
+          </div>
+          <div class="state-card" onclick="showChangeImpact('wildfire')">
+            <div class="state-visual">🔥</div>
+            <h4>Wildfire</h4>
+            <p>Habitats burn but can regrow</p>
+          </div>
+          <div class="state-card" onclick="showChangeImpact('invasive')">
+            <div class="state-visual">🚢</div>
+            <h4>Invasive Species</h4>
+            <p>New species can upset balance</p>
+          </div>
+          <div class="state-card" onclick="showChangeImpact('pollution')">
+            <div class="state-visual">🏭</div>
+            <h4>Pollution</h4>
+            <p>Contaminants harm living things</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🌱 Recovery Plan</h4>
+          <div id="change-result" role="status" aria-live="polite">Pick a change to see how ecosystems respond.</div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>🦅 Energy Flow Lab</h2>
         <div class="experiment-station">
           <h4>🌱 Energy Flow Simulator</h4>
           <p>Build food chains and see how energy moves through ecosystems!</p>
           <button type="button" class="try-it-button" onclick="startFoodChain()">🔗 Build Food Chains</button>
         </div>
+      </section>
+      <section class="lesson-section">
+        <h2>📝 Key Terms</h2>
+        <ul>
+          <li><strong>Food chain:</strong> A single path of energy from producer to consumer.</li>
+          <li><strong>Food web:</strong> Many connected food chains in one ecosystem.</li>
+          <li><strong>Population:</strong> All members of one species in an area.</li>
+          <li><strong>Symbiosis:</strong> A close relationship between two species.</li>
+          <li><strong>Balance:</strong> When resources and populations are stable.</li>
+        </ul>
       </section>
     </div>
     <div class="chapter-navigation">
@@ -67,14 +146,49 @@
       }
     });
     
+    const interactionExamples = {
+      mutualism: 'Bees and flowers: bees get nectar and flowers get pollinated.',
+      commensalism: 'Birds nesting in trees: birds get shelter, trees are unaffected.',
+      parasitism: 'Ticks on a deer: ticks benefit while the deer is harmed.',
+      competition: 'Two animals competing for the same food source.'
+    };
+    const changeExamples = {
+      drought: 'Less rainfall means fewer plants, so herbivores and predators may move away.',
+      wildfire: 'Some fires clear old plants and help new growth, but animals must find shelter.',
+      invasive: 'A new species can take resources from native plants and animals.',
+      pollution: 'Dirty water or air can make animals sick and reduce plant growth.'
+    };
+
     function exploreEcosystem(type) {
       const messages = {
-        forest: '🌲 Forest: Trees provide oxygen, animals find shelter, and all life is connected!',
-        ocean: '🌊 Ocean: Coral reefs, fish, and marine plants create underwater cities!',
-        desert: '🏜️ Desert: Cacti store water, animals adapt to heat, survival strategies!'
+        forest: '🌲 Forest: Plants, animals, and decomposers work together to recycle nutrients.',
+        ocean: '🌊 Ocean: Phytoplankton feed small animals, which feed larger predators.',
+        desert: '🏜️ Desert: Organisms conserve water and stay active at cooler times.'
       };
       showNotification(messages[type], 'success');
       if (window.gamificationSystem) window.gamificationSystem.awardPoints('ecosystem_explored', 4);
+    }
+
+    function startFoodWeb() {
+      const tip = 'Start with a producer, then add multiple consumers that share food sources.';
+      const target = document.getElementById('food-web-tip');
+      if (target) target.textContent = tip;
+      showNotification('🕸️ Food webs show many connections between organisms!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('food_web_started', 6);
+    }
+
+    function showInteraction(type) {
+      const target = document.getElementById('interaction-result');
+      if (target) target.textContent = interactionExamples[type] || '';
+      showNotification('🤝 Relationships help explain how ecosystems stay balanced.', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('interaction_learned', 3);
+    }
+
+    function showChangeImpact(type) {
+      const target = document.getElementById('change-result');
+      if (target) target.textContent = changeExamples[type] || '';
+      showNotification('🌦️ Ecosystems change over time. People can help them recover!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('change_explored', 4);
     }
     
     function startFoodChain() {

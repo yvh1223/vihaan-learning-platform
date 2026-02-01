@@ -476,6 +476,30 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Section 5: Quick Check -->
+            <div class="lesson-section">
+                <h3>
+                    <span class="section-icon">✅</span>
+                    Quick Check
+                </h3>
+                <p>Try these on your own. When you’re ready, open the answers.</p>
+                <ol>
+                    <li>What is the value of the 7 in 70,352?</li>
+                    <li>Write 0.63 as a fraction in simplest form.</li>
+                    <li>Find the sum: 426 + 389 = ?</li>
+                    <li>Order from least to greatest: 0.5, 0.08, 0.75.</li>
+                </ol>
+                <details>
+                    <summary>Show answers</summary>
+                    <ul>
+                        <li>70,000</li>
+                        <li>63/100</li>
+                        <li>815</li>
+                        <li>0.08, 0.5, 0.75</li>
+                    </ul>
+                </details>
+            </div>
         </div>
         
         <!-- Chapter Navigation -->
@@ -932,7 +956,8 @@
             
             // Supporting functions for decimal activity
             window.explainDecimal = function(value) {
-                showNotification(`🎯 ${value} is ${value * 10} tenths or ${value * 100} hundredths!`, 'info');
+                const hundredths = Math.round(value * 100);
+                showNotification(`🎯 ${value} = ${hundredths} hundredths`, 'info');
             };
             
             window.compareDecimals = function(a, b) {

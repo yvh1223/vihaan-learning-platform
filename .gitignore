@@ -71,6 +71,9 @@ SUPABASE_SECURITY_GUIDE.md
 AI_REMEDIATION_SYSTEM.md
 *_SECURITY_*.md
 
+# Git configuration documentation (contains account/auth details)
+GIT_CONFIG.md
+
 # Any files containing credentials or sensitive info
 *credentials*
 *secrets*

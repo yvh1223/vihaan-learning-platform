@@ -6,6 +6,38 @@
   <title>Chapter 7 - Personal Financial Literacy</title>
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/responsive.css">
+  <style>
+    .info-card {
+      background-color: var(--bg-card);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      margin: var(--spacing-lg) 0;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--spacing-md);
+    }
+
+    .mini-table th,
+    .mini-table td {
+      padding: var(--spacing-sm);
+      border-bottom: 1px solid var(--bg-accent);
+      text-align: left;
+    }
+
+    .mini-table th {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .tip-row {
+      font-weight: 600;
+      color: var(--success-color);
+    }
+  </style>
 </head>
 <body>
   <div id="header-container"></div>
@@ -19,6 +51,40 @@
       <section class="lesson-section">
         <h2>💰 Personal Budget Simulator</h2>
         <p>Learn to manage money with your virtual budget!</p>
+        <div class="info-card">
+          <h4>Income vs. Expenses</h4>
+          <p>Income is money you earn. Expenses are money you spend. Savings is what’s left.</p>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Weekly income</td>
+                <td>$12.00</td>
+              </tr>
+              <tr>
+                <td>Snacks</td>
+                <td>$3.50</td>
+              </tr>
+              <tr>
+                <td>Game time</td>
+                <td>$4.00</td>
+              </tr>
+              <tr>
+                <td>Gift for a friend</td>
+                <td>$2.00</td>
+              </tr>
+              <tr class="tip-row">
+                <td>Savings</td>
+                <td>$2.50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="activity-card">
           <h4>💳 Budget Challenge</h4>
           <p>Balance income and expenses in realistic scenarios</p>
@@ -28,6 +94,23 @@
       
       <section class="lesson-section">
         <h2>🏪 Smart Shopping Decisions</h2>
+        <div class="info-card">
+          <h4>Needs vs. Wants</h4>
+          <ul>
+            <li><strong>Needs:</strong> food, school supplies, transportation.</li>
+            <li><strong>Wants:</strong> toys, games, extra snacks.</li>
+          </ul>
+          <p>Smart shoppers compare prices and think about needs first.</p>
+        </div>
+        <div class="info-card">
+          <h4>Unit Price Example</h4>
+          <p>Which is the better deal?</p>
+          <ul>
+            <li>Pack A: 8 pencils for $6.00 → $0.75 each</li>
+            <li>Pack B: 5 pencils for $4.00 → $0.80 each</li>
+          </ul>
+          <p><strong>Answer:</strong> Pack A is the better deal.</p>
+        </div>
         <div class="fraction-grid">
           <div class="fraction-card" onclick="startComparisonShopping()">
             <h4>🛒 Comparison Shopping</h4>
@@ -41,6 +124,20 @@
             <h4>🤔 Need vs Want</h4>
             <p>Make smart spending decisions</p>
           </div>
+        </div>
+      </section>
+
+      <section class="lesson-section">
+        <h2>🎯 Savings Goals</h2>
+        <p>Set a goal and make a plan to reach it.</p>
+        <div class="info-card">
+          <p><strong>Goal:</strong> Save $18 for a book.</p>
+          <p><strong>Plan:</strong> Save $3 each week.</p>
+          <p><strong>Question:</strong> How many weeks will it take?</p>
+          <details>
+            <summary>Show answer</summary>
+            <p>6 weeks (because 18 ÷ 3 = 6).</p>
+          </details>
         </div>
       </section>
     </div>

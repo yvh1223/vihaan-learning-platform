@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 8 - Adaptations and Behaviors</title>
+  <meta name="description" content="Adaptations and Behaviors - 5th grade science lesson on survival adaptations, behavior patterns, and animal strategies.">
+  <meta name="keywords" content="5th grade, science, adaptations, behaviors, survival, migration, camouflage, STAAR">
+  <meta name="author" content="Yallappa H">
+  <title>Adaptations and Behaviors - 5th Grade Science</title>
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/responsive.css">
 </head>
@@ -16,10 +19,101 @@
       <p class="chapter-description">How organisms adapt to survive, behavioral patterns, and survival strategies.</p>
     </div>
     <div class="lesson-content">
-      <div class="lesson-section">
-        <h2>Interactive Content</h2>
-        <p>This chapter aligns to Unit 8 in the district syllabus. Interactive adaptation studies and animal behavior activities now available with engaging activities.</p>
-      </div>
+      <section class="lesson-section">
+        <h2>🧩 Types of Adaptations</h2>
+        <p>Adaptations are traits or behaviors that help living things survive in their environments.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showAdaptation('structural')">
+            <div class="state-visual">🦎</div>
+            <h4>Structural</h4>
+            <p>Body parts that help survival</p>
+          </div>
+          <div class="state-card" onclick="showAdaptation('behavioral')">
+            <div class="state-visual">🕊️</div>
+            <h4>Behavioral</h4>
+            <p>Actions that help survival</p>
+          </div>
+          <div class="state-card" onclick="showAdaptation('physiological')">
+            <div class="state-visual">🐪</div>
+            <h4>Physiological</h4>
+            <p>Internal processes that help survival</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🔎 Adaptation Example</h4>
+          <div id="adaptation-result" role="status" aria-live="polite">Select a type to see an example.</div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>🎭 Camouflage & Mimicry</h2>
+        <p>Some animals blend in to avoid predators, while others copy the look of dangerous species.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showCamouflage('camouflage')">
+            <div class="state-visual">🦗</div>
+            <h4>Camouflage</h4>
+            <p>Blend in with surroundings</p>
+          </div>
+          <div class="state-card" onclick="showCamouflage('mimicry')">
+            <div class="state-visual">🦋</div>
+            <h4>Mimicry</h4>
+            <p>Look like another species</p>
+          </div>
+          <div class="state-card" onclick="showCamouflage('warning')">
+            <div class="state-visual">🐸</div>
+            <h4>Warning Colors</h4>
+            <p>Bright colors send a message</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🧠 Spot the Strategy</h4>
+          <div id="camouflage-result" role="status" aria-live="polite">Choose a strategy to see an example.</div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>🧭 Behavior Patterns</h2>
+        <p>Behaviors help animals find food, stay safe, and survive seasonal changes.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showBehavior('migration')">
+            <div class="state-visual">✈️</div>
+            <h4>Migration</h4>
+            <p>Move to find food or warmth</p>
+          </div>
+          <div class="state-card" onclick="showBehavior('hibernation')">
+            <div class="state-visual">🛌</div>
+            <h4>Hibernation</h4>
+            <p>Rest through cold months</p>
+          </div>
+          <div class="state-card" onclick="showBehavior('nocturnal')">
+            <div class="state-visual">🌙</div>
+            <h4>Nocturnal</h4>
+            <p>Active at night</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>📌 Behavior Example</h4>
+          <div id="behavior-result" role="status" aria-live="polite">Pick a behavior to see an example.</div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>🏕️ Survival Scenario</h2>
+        <p>Choose a habitat to learn which adaptations help animals survive there.</p>
+        <div class="experiment-station">
+          <button type="button" class="try-it-button" onclick="runScenario('arctic')">❄️ Arctic</button>
+          <button type="button" class="try-it-button" onclick="runScenario('desert')">🏜️ Desert</button>
+          <button type="button" class="try-it-button" onclick="runScenario('rainforest')">🌧️ Rainforest</button>
+          <div id="scenario-result" role="status" aria-live="polite" style="margin-top: 0.75rem;"></div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>📝 Key Terms</h2>
+        <ul>
+          <li><strong>Adaptation:</strong> A trait or behavior that improves survival.</li>
+          <li><strong>Camouflage:</strong> Colors or patterns that help an organism blend in.</li>
+          <li><strong>Mimicry:</strong> Copying another organism's appearance.</li>
+          <li><strong>Migration:</strong> Seasonal movement to find resources.</li>
+          <li><strong>Habitat:</strong> The place where an organism lives.</li>
+        </ul>
+      </section>
     </div>
     <div class="chapter-navigation">
       <a href="chapter-7.html" class="nav-button" aria-label="Previous: Chapter 7">← Previous</a>
@@ -34,6 +128,59 @@
       fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
     };
     document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+
+    const adaptationExamples = {
+      structural: 'Polar bears have thick fur and fat to stay warm in cold climates.',
+      behavioral: 'Birds migrate to warmer places when food is scarce.',
+      physiological: 'Camels store fat to provide energy and water in dry deserts.'
+    };
+    const camouflageExamples = {
+      camouflage: 'A leaf insect looks like a leaf to avoid predators.',
+      mimicry: 'A harmless king snake looks like a venomous coral snake.',
+      warning: 'Poison dart frogs have bright colors that warn predators.'
+    };
+    const behaviorExamples = {
+      migration: 'Geese fly south in winter to find food.',
+      hibernation: 'Bears sleep through winter to save energy.',
+      nocturnal: 'Owls hunt at night when prey is active.'
+    };
+    const habitatScenarios = {
+      arctic: 'Arctic animals need thick fur, blubber, and white camouflage.',
+      desert: 'Desert animals conserve water, are active at night, and have heat-tolerant bodies.',
+      rainforest: 'Rainforest animals use camouflage, climbing skills, and bright warning colors.'
+    };
+
+    function showAdaptation(type) {
+      const target = document.getElementById('adaptation-result');
+      if (target) target.textContent = adaptationExamples[type] || '';
+      showNotification('🧩 Adaptations help organisms survive in their habitats.', 'info');
+    }
+
+    function showCamouflage(type) {
+      const target = document.getElementById('camouflage-result');
+      if (target) target.textContent = camouflageExamples[type] || '';
+      showNotification('🎭 Survival strategies can hide or protect organisms.', 'info');
+    }
+
+    function showBehavior(type) {
+      const target = document.getElementById('behavior-result');
+      if (target) target.textContent = behaviorExamples[type] || '';
+      showNotification('🧭 Behaviors help organisms respond to changing seasons.', 'info');
+    }
+
+    function runScenario(type) {
+      const target = document.getElementById('scenario-result');
+      if (target) target.textContent = habitatScenarios[type] || '';
+      showNotification('🏕️ Great choice! Think about how the habitat shapes behavior.', 'success');
+    }
+
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `position: fixed; top: 20px; right: 20px; z-index: 2000; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; font-weight: bold; background: ${type === 'success' ? 'var(--success-color)' : 'var(--primary-color)'};`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 3000);
+    }
   </script>
 </body>
 </html>

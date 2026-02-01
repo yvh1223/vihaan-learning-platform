@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 6 - Earth’s Resources</title>
+  <meta name="description" content="Earth's Resources - 5th grade science lesson on renewable and nonrenewable resources, conservation, and human impact.">
+  <meta name="keywords" content="5th grade, science, resources, renewable, nonrenewable, conservation, human impact, STAAR">
+  <meta name="author" content="Yallappa H">
+  <title>Earth's Resources - 5th Grade Science</title>
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/responsive.css">
 </head>
@@ -12,13 +15,13 @@
   <main class="chapter-container" id="main-content">
     <div class="chapter-header">
       <div class="chapter-number">Chapter 6</div>
-      <h1 class="chapter-title">Earth’s Resources</h1>
-      <p class="chapter-description">Renewable and nonrenewable resources, conservation, and human impact.</p>
+      <h1 class="chapter-title">Earth's Resources</h1>
+      <p class="chapter-description">Renewable and nonrenewable resources, conservation, and human impact on Earth systems.</p>
     </div>
     <div class="lesson-content">
       <section class="lesson-section">
         <h2>🌎 Earth's Resource Explorer</h2>
-        <p>Discover renewable and nonrenewable resources around us!</p>
+        <p>Resources are materials we use from Earth. Renewable resources can be replaced naturally in a short time, while nonrenewable resources take millions of years to form.</p>
         <div class="states-of-matter">
           <div class="state-card" onclick="exploreResource('renewable')">
             <div class="state-visual">🌱</div>
@@ -31,19 +34,32 @@
             <p>Limited resources that cannot be replaced</p>
           </div>
         </div>
+        <div class="experiment-station">
+          <h4>🧭 Quick Sort</h4>
+          <p>Click a card above and check the examples below.</p>
+          <div id="resource-examples" role="status" aria-live="polite">Select a resource type to see examples.</div>
+        </div>
       </section>
       
       <section class="lesson-section">
         <h2>🌿 Conservation Lab</h2>
+        <p>Conservation means using resources wisely so they last longer. Small choices make a big difference.</p>
+        <ul>
+          <li><strong>Water:</strong> Fix leaks, take shorter showers, and turn off the tap while brushing.</li>
+          <li><strong>Energy:</strong> Switch off lights, unplug chargers, and use sunlight when possible.</li>
+          <li><strong>Waste:</strong> Reduce, reuse, and recycle to keep trash out of landfills.</li>
+        </ul>
         <div class="experiment-station">
           <h4>💧 Water Conservation Simulator</h4>
           <p>Learn how small actions make big differences!</p>
           <button type="button" class="try-it-button" onclick="startConservationLab()">🧪 Start Lab</button>
+          <div id="conservation-tip" role="status" aria-live="polite" style="margin-top: 0.75rem;"></div>
         </div>
       </section>
       
       <section class="lesson-section">
         <h2>🏭 Human Impact Assessment</h2>
+        <p>Humans can help or harm Earth systems. Explore actions that protect resources and actions that create problems.</p>
         <div class="states-of-matter">
           <div class="state-card" onclick="assessImpact('positive')">
             <div class="state-visual">✅</div>
@@ -56,6 +72,20 @@
             <p>Problems we need to solve together</p>
           </div>
         </div>
+        <div class="experiment-station">
+          <h4>🧠 Cause & Effect</h4>
+          <div id="impact-result" role="status" aria-live="polite">Select an action to see cause-and-effect examples.</div>
+        </div>
+      </section>
+      <section class="lesson-section">
+        <h2>📝 Key Terms</h2>
+        <ul>
+          <li><strong>Renewable resource:</strong> A resource that can be replaced naturally in a short time.</li>
+          <li><strong>Nonrenewable resource:</strong> A resource that is limited and forms very slowly.</li>
+          <li><strong>Conservation:</strong> Using resources wisely to prevent waste.</li>
+          <li><strong>Pollution:</strong> Harmful substances added to air, water, or land.</li>
+          <li><strong>Sustainability:</strong> Meeting needs today while protecting resources for the future.</li>
+        </ul>
       </section>
     </div>
     <div class="chapter-navigation">
@@ -80,7 +110,39 @@
       }
     });
     
+    const resourceExamples = {
+      renewable: ['Sunlight (solar energy)', 'Wind', 'Water', 'Trees and plants'],
+      nonrenewable: ['Coal', 'Oil', 'Natural gas', 'Metal ores']
+    };
+    const conservationTips = [
+      'Turn off the tap while brushing your teeth.',
+      'Use both sides of paper before recycling.',
+      'Bring a reusable water bottle.',
+      'Turn off lights when you leave a room.',
+      'Take shorter showers to save water.'
+    ];
+    const impactExamples = {
+      positive: [
+        'Planting trees improves air quality.',
+        'Recycling reduces the need for new raw materials.',
+        'Using renewable energy lowers pollution.'
+      ],
+      negative: [
+        'Littering harms wildlife and waterways.',
+        'Burning fossil fuels adds greenhouse gases.',
+        'Overfishing reduces animal populations.'
+      ]
+    };
+
     function exploreResource(type) {
+      const examples = resourceExamples[type] || [];
+      const examplesTarget = document.getElementById('resource-examples');
+      if (examplesTarget) {
+        examplesTarget.innerHTML = `
+          <strong>Examples:</strong>
+          <ul>${examples.map(item => `<li>${item}</li>`).join('')}</ul>
+        `;
+      }
       if (type === 'renewable') {
         showNotification('🌱 Renewable Resources: Solar, wind, water, and trees can be renewed!', 'success');
       } else {
@@ -90,11 +152,24 @@
     }
     
     function startConservationLab() {
-      showNotification('💧 Conservation Lab: Every drop counts! Learn water-saving techniques.', 'info');
+      const tip = conservationTips[Math.floor(Math.random() * conservationTips.length)];
+      const tipTarget = document.getElementById('conservation-tip');
+      if (tipTarget) {
+        tipTarget.textContent = `Tip: ${tip}`;
+      }
+      showNotification('💧 Conservation Lab: Every drop counts! Try a new tip each time.', 'info');
       if (window.gamificationSystem) window.gamificationSystem.awardPoints('lab_started', 8);
     }
     
     function assessImpact(type) {
+      const impactTarget = document.getElementById('impact-result');
+      const items = impactExamples[type] || [];
+      if (impactTarget) {
+        impactTarget.innerHTML = `
+          <strong>${type === 'positive' ? 'Positive actions' : 'Environmental challenges'}:</strong>
+          <ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>
+        `;
+      }
       if (type === 'positive') {
         showNotification('✅ Positive Impact: Recycling, conservation, and renewable energy help Earth!', 'success');
       } else {
@@ -113,4 +188,3 @@
   </script>
 </body>
 </html>
-

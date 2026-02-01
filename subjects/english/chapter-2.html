@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="header-container"></div>
-    <main class="chapter-container">
+    <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 2</div>
             <h1 class="chapter-title">Grammar & Language Mechanics</h1>
@@ -29,14 +29,14 @@
                         </div>
                     </div>
                     
-                    <div class="pos-content" id="pos-content">
+                    <div class="pos-content" id="pos-content" aria-live="polite">
                         <div class="pos-instructions">
                             <h4>🎯 Parts of Speech Explorer</h4>
                             <p>Select a part of speech above to start learning and practicing!</p>
                         </div>
                     </div>
                     
-                    <div class="pos-progress" id="pos-progress"></div>
+                    <div class="pos-progress" id="pos-progress" role="status" aria-live="polite"></div>
                 </div>
             </div>
             
@@ -82,7 +82,7 @@
                         
                         <div class="sentence-construction">
                             <h4>Build Your Sentence</h4>
-                            <div class="sentence-dropzone" id="sentence-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="sentence-dropzone" id="sentence-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" role="region" aria-label="Sentence builder drop area">
                                 <p class="drop-instruction">Drag words here to build your sentence</p>
                             </div>
                             <div class="construction-controls">
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         
-                        <div class="sentence-feedback" id="sentence-feedback"></div>
+                        <div class="sentence-feedback" id="sentence-feedback" role="status" aria-live="polite"></div>
                     </div>
                 </div>
             </div>
@@ -110,14 +110,14 @@
                             <button type="button" class="practice-btn" onclick="loadPunctuationPractice('commas', this)">📍 Commas</button>
                         </div>
                         
-                        <div class="practice-content" id="punctuation-content">
+                        <div class="practice-content" id="punctuation-content" aria-live="polite">
                             <div class="practice-instructions">
                                 <h4>🔧 Punctuation Repair Shop</h4>
                                 <p>Choose a punctuation type above to start fixing sentences!</p>
                             </div>
                         </div>
                         
-                        <div class="practice-score" id="punctuation-score"></div>
+                        <div class="practice-score" id="punctuation-score" role="status" aria-live="polite"></div>
                     </div>
                 </div>
             </div>
@@ -133,14 +133,14 @@
                             <button type="button" class="mode-btn" onclick="startWordRelationGame('mixed', this)">🎭 Mixed Challenge</button>
                         </div>
                         
-                        <div class="word-game-content" id="word-game-content">
+                        <div class="word-game-content" id="word-game-content" aria-live="polite">
                             <div class="game-instructions">
                                 <h4>🕵️ Word Detective Game</h4>
                                 <p>Select a game mode above to start discovering word relationships!</p>
                             </div>
                         </div>
                         
-                        <div class="game-stats" id="word-game-stats"></div>
+                        <div class="game-stats" id="word-game-stats" role="status" aria-live="polite"></div>
                     </div>
                     
                     <div class="context-clues-activity">
@@ -151,7 +151,7 @@
                             <button type="button" class="mystery-btn" onclick="loadContextCluesChallenge()">🎯 New Mystery</button>
                         </div>
                         
-                        <div class="clues-content" id="clues-content"></div>
+                        <div class="clues-content" id="clues-content" role="status" aria-live="polite"></div>
                     </div>
                 </div>
             </div>

@@ -47,6 +47,36 @@
             font-weight: bold;
             color: var(--primary-color);
         }
+
+        .vocab-card {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .step-list {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .practice-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .practice-card {
+            background-color: var(--bg-card);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
     </style>
 </head>
 <body>
@@ -62,6 +92,24 @@
             <section class="lesson-section">
                 <h2>📍 Interactive Coordinate Plane</h2>
                 <p>Click anywhere on the grid to plot points and explore coordinates!</p>
+                <div class="vocab-card">
+                    <h4>Key Vocabulary</h4>
+                    <ul>
+                        <li><strong>Origin:</strong> (0, 0), where the axes cross.</li>
+                        <li><strong>x-axis:</strong> The horizontal line.</li>
+                        <li><strong>y-axis:</strong> The vertical line.</li>
+                        <li><strong>Ordered pair:</strong> (x, y), where x comes first.</li>
+                    </ul>
+                </div>
+                <div class="step-list">
+                    <h4>How to Plot a Point</h4>
+                    <ol>
+                        <li>Start at the origin (0, 0).</li>
+                        <li>Move <strong>left/right</strong> to the x-value.</li>
+                        <li>Move <strong>up/down</strong> to the y-value.</li>
+                    </ol>
+                    <p><strong>Example:</strong> (3, −2) means 3 right, 2 down.</p>
+                </div>
                 
                 <div class="coordinate-grid" onclick="plotPoint(event)"></div>
                 
@@ -78,6 +126,24 @@
             
             <section class="lesson-section">
                 <h2>🗺️ Real-World Applications</h2>
+                <p>Coordinates are used in maps, game boards, and data graphs.</p>
+                <div class="practice-points">
+                    <div class="practice-card">
+                        <strong>Plot these points:</strong>
+                        <div>A (2, 3)</div>
+                        <div>B (−1, 3)</div>
+                        <div>C (−1, −2)</div>
+                        <div>D (2, −2)</div>
+                    </div>
+                    <div class="practice-card">
+                        <strong>Challenge:</strong>
+                        <div>What shape do A, B, C, D make?</div>
+                        <details>
+                            <summary>Answer</summary>
+                            <div>Rectangle</div>
+                        </details>
+                    </div>
+                </div>
                 <div class="fraction-grid">
                     <div class="fraction-card" onclick="startMapActivity()">
                         <h4>🗺️ City Maps</h4>

@@ -420,6 +420,75 @@ a:hover {
   margin-bottom: var(--spacing-lg);
 }
 
+/* Learning Overview Blocks */
+.learning-overview {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid rgba(74, 144, 226, 0.15);
+}
+
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.learning-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.learning-card h4 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.big-ideas,
+.skills-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.essential-questions {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.essential-questions li {
+  margin-bottom: var(--spacing-sm);
+  padding-left: 1.2rem;
+  position: relative;
+  color: var(--text-secondary);
+}
+
+.essential-questions li::before {
+  content: '❓';
+  position: absolute;
+  left: 0;
+}
+
+.vocab-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.vocab-tag {
+  background: var(--bg-accent);
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.65rem;
+  font-size: var(--font-size-sm);
+  border: 1px solid rgba(74, 144, 226, 0.15);
+}
+
 .chapter-links {
   display: flex;
   flex-direction: column;

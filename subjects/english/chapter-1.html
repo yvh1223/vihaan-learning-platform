@@ -44,7 +44,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="passage-text" id="passage-text">
+                        <div class="passage-text" id="passage-text" aria-live="polite">
                             <p>Sarah had always dreamed of exploring the mysterious forest behind her grandmother's house. The towering trees seemed to whisper secrets, and the winding paths promised exciting discoveries. One sunny morning, she finally gathered the courage to venture into the unknown wilderness.</p>
                             
                             <p>As she walked deeper into the forest, Sarah noticed how the sunlight filtered through the leaves, creating dancing shadows on the forest floor. She heard the cheerful chirping of birds and the gentle rustling of leaves in the breeze. The air smelled fresh and earthy, filled with the scent of pine needles and wildflowers.</p>
@@ -120,13 +120,13 @@
                             <button type="button" class="tool-btn" onclick="saveStory()">💾 Save Story</button>
                         </div>
                         
-                        <textarea id="story-editor" placeholder="Start writing your story here..." rows="12"></textarea>
+                        <textarea id="story-editor" placeholder="Start writing your story here..." rows="12" aria-label="Story editor"></textarea>
                         
                         <div class="word-counter">
                             <span id="word-count">0</span> words | <span id="char-count">0</span> characters
                         </div>
                         
-                        <div class="writing-feedback" id="writing-feedback"></div>
+                        <div class="writing-feedback" id="writing-feedback" role="status" aria-live="polite"></div>
                     </div>
                 </div>
             </div>
@@ -147,11 +147,11 @@
                                 <p>Choose a grammar game above to start practicing!</p>
                             </div>
                             
-                            <div class="game-content" id="game-content">
+                            <div class="game-content" id="game-content" aria-live="polite">
                                 <!-- Game content will be loaded here -->
                             </div>
                             
-                            <div class="game-score" id="game-score"></div>
+                            <div class="game-score" id="game-score" role="status" aria-live="polite"></div>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                         </div>
                         
                         <div class="vocab-display" id="vocab-display">
-                            <div class="vocab-card-container" id="vocab-cards">
+                            <div class="vocab-card-container" id="vocab-cards" aria-live="polite">
                                 <p>Select a category to explore new words!</p>
                             </div>
                         </div>
