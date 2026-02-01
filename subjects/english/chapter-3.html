@@ -742,6 +742,12 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                 return;
             }
             
+            // Store poem data safely
+            window.lastCreatedPoem = {
+                type: type,
+                content: poemContent
+            };
+            
             const displayHTML = `
                 <div class="created-poem">
                     <h4>🎉 Your Beautiful ${poetryDatabase[type].name.split(' - ')[0]}!</h4>
@@ -749,9 +755,9 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                         ${poemContent.replace(/\\n/g, '<br>')}
                     </div>
                     <div class="poem-actions">
-                        <button type="button" class="save-poem-btn" onclick="savePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')">💾 Save Poem</button>
-                        <button type="button" class="share-poem-btn" onclick="sharePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')">📤 Share Poem</button>
-                        <button type="button" class="new-poem-btn" onclick="startPoemCreation('${type}')">✨ Create Another</button>
+                        <button type="button" class="save-poem-btn" data-poem-type="${type}">💾 Save Poem</button>
+                        <button type="button" class="share-poem-btn" data-poem-type="${type}">📤 Share Poem</button>
+                        <button type="button" class="new-poem-btn" data-poem-type="${type}">✨ Create Another</button>
                     </div>
                 </div>
             `;
@@ -1242,6 +1248,11 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             const sentences = writing.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
             const avgWordsPerSentence = Math.round(wordCount / sentences);
             
+            // Store writing data safely
+            const uniqueId = 'writing-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            if (!window.savedWritings) window.savedWritings = {};
+            window.savedWritings[uniqueId] = writing;
+            
             let feedback = `
                 <div class="writing-analysis">
                     <h5>📊 Writing Analysis</h5>
@@ -1249,7 +1260,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                     <p><strong>Sentences:</strong> ${sentences}</p>
                     <p><strong>Average Words per Sentence:</strong> ${avgWordsPerSentence}</p>
                     <p>🎉 Great work practicing ${writingTechniques[technique].name.split(' - ')[0]}!</p>
-                    <button type="button" class="save-writing-btn" onclick="saveWriting('${technique}', '${writing.replace(/'/g, '\\\\\'')}')">💾 Save My Writing</button>
+                    <button type="button" class="save-writing-btn" data-technique="${technique}" data-writing-id="${uniqueId}">💾 Save My Writing</button>
                 </div>
             `;
             
@@ -1269,6 +1280,39 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             
             alert('💾 Your writing has been saved!');
         }
+
+        // Delegated event listeners for safe handling
+        document.addEventListener('click', function(event) {
+            // Handle poem buttons
+            const savePoemBtn = event.target.closest('.save-poem-btn');
+            if (savePoemBtn && window.lastCreatedPoem) {
+                savePoem(window.lastCreatedPoem.type, window.lastCreatedPoem.content);
+                return;
+            }
+            
+            const sharePoemBtn = event.target.closest('.share-poem-btn');
+            if (sharePoemBtn && window.lastCreatedPoem) {
+                sharePoem(window.lastCreatedPoem.type, window.lastCreatedPoem.content);
+                return;
+            }
+            
+            const newPoemBtn = event.target.closest('.new-poem-btn');
+            if (newPoemBtn && window.lastCreatedPoem) {
+                startPoemCreation(window.lastCreatedPoem.type);
+                return;
+            }
+            
+            // Handle writing save button
+            const saveWritingBtn = event.target.closest('.save-writing-btn');
+            if (saveWritingBtn) {
+                const technique = saveWritingBtn.dataset.technique;
+                const writingId = saveWritingBtn.dataset.writingId;
+                if (window.savedWritings && window.savedWritings[writingId]) {
+                    saveWriting(technique, window.savedWritings[writingId]);
+                }
+                return;
+            }
+        });
     </script>
 </body>
 </html>

@@ -1932,10 +1932,12 @@
                 'Stay Informed': 'Smart choice! Reading news and learning about issues helps you make good voting decisions.'
             };
             
+            const response = actionResponses[actionName] ?? 'No response available for that action.';
+            
             resultElement.innerHTML = `
                 <div class=\"action-feedback\">
                     <h5>You chose: ${actionName}</h5>
-                    <p>${actionResponses[actionName]}</p>
+                    <p>${response}</p>
                 </div>
             `;
             
