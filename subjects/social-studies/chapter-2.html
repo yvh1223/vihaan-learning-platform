@@ -1000,10 +1000,10 @@
                 <h3>🧭 Map Skills Laboratory</h3>
                 <div class="map-skills-container">
                     <div class="skills-tabs">
-                        <button type="button" class="skill-tab active" onclick="switchSkill('compass')">Compass Rose</button>
-                        <button type="button" class="skill-tab" onclick="switchSkill('scale')">Map Scale</button>
-                        <button type="button" class="skill-tab" onclick="switchSkill('coordinates')">Coordinates</button>
-                        <button type="button" class="skill-tab" onclick="switchSkill('symbols')">Map Symbols</button>
+                        <button type="button" class="skill-tab active" onclick="switchSkill('compass', this)">Compass Rose</button>
+                        <button type="button" class="skill-tab" onclick="switchSkill('scale', this)">Map Scale</button>
+                        <button type="button" class="skill-tab" onclick="switchSkill('coordinates', this)">Coordinates</button>
+                        <button type="button" class="skill-tab" onclick="switchSkill('symbols', this)">Map Symbols</button>
                     </div>
                     <div class="skill-content">
                         <div id="compassSkill" class="skill-panel active">
@@ -1426,20 +1426,20 @@
             
             nameElement.textContent = region.name;
             descriptionElement.innerHTML = `
-                <p><strong>Description:</strong> \${region.description}</p>
+                <p><strong>Description:</strong> ${region.description}</p>
                 <div class=\"region-features\">
                     <h5>Key Features:</h5>
                     <ul>
-                        \${region.features.map(feature => `<li>\${feature}</li>`).join('')}
+                        ${region.features.map(feature => `<li>${feature}</li>`).join('')}
                     </ul>
                 </div>
                 <div class=\"region-cities\">
                     <h5>Major Cities:</h5>
-                    <p>\${region.cities.join(', ')}</p>
+                    <p>${region.cities.join(', ')}</p>
                 </div>
                 <div class=\"region-climate\">
                     <h5>Climate:</h5>
-                    <p>\${region.climate}</p>
+                    <p>${region.climate}</p>
                 </div>
             `;
         }
@@ -1467,22 +1467,22 @@
             const infoElement = document.getElementById('usRegionDetails');
             
             infoElement.innerHTML = `
-                <h5>\${region.name}</h5>
-                <p><strong>Description:</strong> \${region.description}</p>
+                <h5>${region.name}</h5>
+                <p><strong>Description:</strong> ${region.description}</p>
                 <div class=\"region-info-grid\">
                     <div class=\"info-section\">
                         <h6>Key Features:</h6>
                         <ul>
-                            \${region.features.map(feature => `<li>\${feature}</li>`).join('')}
+                            ${region.features.map(feature => `<li>${feature}</li>`).join('')}
                         </ul>
                     </div>
                     <div class=\"info-section\">
                         <h6>Climate:</h6>
-                        <p>\${region.climate}</p>
+                        <p>${region.climate}</p>
                     </div>
                     <div class=\"info-section\">
                         <h6>Economy:</h6>
-                        <p>\${region.economy}</p>
+                        <p>${region.economy}</p>
                     </div>
                 </div>
             `;
@@ -1507,12 +1507,12 @@
             const feedbackElement = document.getElementById('quizFeedback');
             
             questionElement.innerHTML = `
-                <h4>Question \${currentQuizQuestion + 1} of \${geographyQuestions.length}</h4>
-                <p>\${question.question}</p>
+                <h4>Question ${currentQuizQuestion + 1} of ${geographyQuestions.length}</h4>
+                <p>${question.question}</p>
             `;
             
             optionsElement.innerHTML = question.options.map((option, index) => 
-                `<button type="button" class=\"quiz-option\" onclick=\"selectQuizAnswer(\${index})\">\${option}</button>`
+                `<button type="button" class=\"quiz-option\" onclick=\"selectQuizAnswer(${index})\">${option}</button>`
             ).join('');
             
             feedbackElement.innerHTML = '';
@@ -1526,9 +1526,9 @@
             quizAnswers.push(correct);
             
             feedbackElement.innerHTML = `
-                <div class=\"answer-feedback \${correct ? 'correct' : 'incorrect'}\">
-                    <p><strong>\${correct ? 'Correct!' : 'Incorrect'}</strong></p>
-                    <p>\${question.explanation}</p>
+                <div class=\"answer-feedback ${correct ? 'correct' : 'incorrect'}\">
+                    <p><strong>${correct ? 'Correct!' : 'Incorrect'}</strong></p>
+                    <p>${question.explanation}</p>
                     <button type="button" onclick=\"nextQuizQuestion()\">Next Question</button>
                 </div>
             `;
@@ -1555,7 +1555,7 @@
             
             questionElement.innerHTML = `
                 <h4>Quiz Complete!</h4>
-                <p>You got \${correctAnswers} out of \${geographyQuestions.length} questions correct!</p>
+                <p>You got ${correctAnswers} out of ${geographyQuestions.length} questions correct!</p>
             `;
             
             optionsElement.innerHTML = '';
@@ -1573,9 +1573,9 @@
             
             feedbackElement.innerHTML = `
                 <div class=\"quiz-results\">
-                    <p class=\"score-message\">\${message}</p>
+                    <p class=\"score-message\">${message}</p>
                     <div class=\"score-display\">
-                        <span class=\"score-number\">\${percentage}%</span>
+                        <span class=\"score-number\">${percentage}%</span>
                     </div>
                     <button type="button" onclick=\"startGeographyQuiz()\" class=\"retry-btn\">Try Again</button>
                 </div>
@@ -1583,12 +1583,17 @@
         }
 
         // Map skills functionality
-        function switchSkill(skillName) {
+        function switchSkill(skillName, triggerEl) {
             currentSkill = skillName;
             
             // Update tab appearance
             document.querySelectorAll('.skill-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+            const tabs = Array.from(document.querySelectorAll('.skill-tab'));
+            const targetTab = triggerEl || tabs.find(tab => {
+                const handler = tab.getAttribute('onclick') || '';
+                return handler.includes(`'${skillName}'`) || handler.includes(`\"${skillName}\"`);
+            });
+            if (targetTab) targetTab.classList.add('active');
             
             // Show appropriate skill panel
             document.querySelectorAll('.skill-panel').forEach(panel => panel.classList.remove('active'));
@@ -1601,7 +1606,7 @@
             currentDirectionChallenge = randomDirection;
             
             document.getElementById('directionQuestion').textContent = 
-                `Click on the direction: \${getDirectionName(randomDirection)}`;
+                `Click on the direction: ${getDirectionName(randomDirection)}`;
                 
             // Add click listeners to compass directions
             document.querySelectorAll('.direction').forEach(dir => {
@@ -1633,7 +1638,7 @@
                     updateProgress();
                 }
             } else {
-                questionElement.textContent = `Incorrect. \${getDirectionName(selectedDirection)} was selected, but the answer was \${getDirectionName(currentDirectionChallenge)}.`;
+                questionElement.textContent = `Incorrect. ${getDirectionName(selectedDirection)} was selected, but the answer was ${getDirectionName(currentDirectionChallenge)}.`;
                 questionElement.className = 'incorrect';
             }
             
@@ -1678,9 +1683,9 @@
             const randomLocation = locations[Math.floor(Math.random() * locations.length)];
             
             document.getElementById('coordinateQuestion').innerHTML = `
-                <p>What are the approximate coordinates for \${randomLocation.name}?</p>
+                <p>What are the approximate coordinates for ${randomLocation.name}?</p>
                 <div class=\"coordinate-answers\">
-                    <button type="button" onclick=\"checkCoordinateAnswer(true)\">\${randomLocation.lat}, \${randomLocation.lng}</button>
+                    <button type="button" onclick=\"checkCoordinateAnswer(true)\">${randomLocation.lat}, ${randomLocation.lng}</button>
                     <button type="button" onclick=\"checkCoordinateAnswer(false)\">35\u00b0N, 85\u00b0W</button>
                     <button type="button" onclick=\"checkCoordinateAnswer(false)\">40\u00b0N, 75\u00b0W</button>
                 </div>
@@ -1723,9 +1728,9 @@
                         case 'capital': correctName = 'State Capital'; break;
                     }
                     
-                    questionElement.textContent = `You identified: \${correctName}! Click another feature.`;
+                    questionElement.textContent = `You identified: ${correctName}! Click another feature.`;
                     symbolScore++;
-                    scoreElement.textContent = `Score: \${symbolScore}`;
+                    scoreElement.textContent = `Score: ${symbolScore}`;
                     
                     this.style.opacity = '0.5';
                     this.style.pointerEvents = 'none';
@@ -1814,8 +1819,8 @@
             const percentage = Math.round((correct / total) * 100);
             
             resultElement.innerHTML = `
-                <p>You got \${correct} out of \${total} correct (\${percentage}%)</p>
-                <p>\${percentage >= 75 ? 'Great job! You understand the difference between physical and political maps!' : 'Keep practicing! Remember: Physical maps show natural features, political maps show human-made boundaries.'}</p>
+                <p>You got ${correct} out of ${total} correct (${percentage}%)</p>
+                <p>${percentage >= 75 ? 'Great job! You understand the difference between physical and political maps!' : 'Keep practicing! Remember: Physical maps show natural features, political maps show human-made boundaries.'}</p>
             `;
         }
 
@@ -1826,14 +1831,14 @@
             const texasScore = document.getElementById('texasScore');
             const texasPercent = (geographyProgress.texasRegions / 6) * 100;
             texasProgress.style.width = texasPercent + '%';
-            texasScore.textContent = `\${geographyProgress.texasRegions}/6`;
+            texasScore.textContent = `${geographyProgress.texasRegions}/6`;
             
             // Update US progress
             const usProgress = document.getElementById('usProgress');
             const usScore = document.getElementById('usScore');
             const usPercent = (geographyProgress.usRegions / 5) * 100;
             usProgress.style.width = usPercent + '%';
-            usScore.textContent = `\${geographyProgress.usRegions}/5`;
+            usScore.textContent = `${geographyProgress.usRegions}/5`;
             
             // Update skills progress
             const skillsProgress = document.getElementById('skillsProgress');
@@ -1841,14 +1846,14 @@
             const totalSkills = Object.values(skillProgress).reduce((a, b) => a + b, 0);
             const skillsPercent = (totalSkills / 4) * 100;
             skillsProgress.style.width = skillsPercent + '%';
-            skillsScore.textContent = `\${totalSkills}/4`;
+            skillsScore.textContent = `${totalSkills}/4`;
             
             // Update quiz progress
             const quizProgressBar = document.getElementById('quizProgress');
             const quizScoreElement = document.getElementById('quizScore');
             const quizPercent = (geographyProgress.quizScore / 10) * 100;
             quizProgressBar.style.width = quizPercent + '%';
-            quizScoreElement.textContent = `\${geographyProgress.quizScore}/10`;
+            quizScoreElement.textContent = `${geographyProgress.quizScore}/10`;
             
             // Update main chapter progress
             const mainProgress = document.querySelector('.chapter-navigation .progress-fill');
@@ -1903,7 +1908,7 @@
             notification.innerHTML = `
                 <div class=\"notification-content\">
                     <span class=\"celebration\">\ud83c\udf89</span>
-                    <p>\${message}</p>
+                    <p>${message}</p>
                     <span class=\"celebration\">\ud83c\udf89</span>
                 </div>
             `;

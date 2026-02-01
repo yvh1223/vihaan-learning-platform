@@ -144,15 +144,15 @@
                     <div class="surface-selector">
                         <h4>Test Different Surfaces:</h4>
                         <div class="surface-options">
-                            <div class="surface-option" onclick="setSurface('ice')">
+                            <div class="surface-option" onclick="setSurface('ice', this)">
                                 <div class="surface-sample ice">🧊</div>
                                 <span>Ice (Low Friction)</span>
                             </div>
-                            <div class="surface-option" onclick="setSurface('wood')">
+                            <div class="surface-option" onclick="setSurface('wood', this)">
                                 <div class="surface-sample wood">🪵</div>
                                 <span>Wood (Medium Friction)</span>
                             </div>
-                            <div class="surface-option" onclick="setSurface('sandpaper')">
+                            <div class="surface-option" onclick="setSurface('sandpaper', this)">
                                 <div class="surface-sample sandpaper">📋</div>
                                 <span>Sandpaper (High Friction)</span>
                             </div>
@@ -423,7 +423,7 @@
         }
 
         // Friction Investigation
-        function setSurface(surfaceType) {
+        function setSurface(surfaceType, element) {
             const surfaces = {
                 ice: { name: 'Ice', coefficient: 0.1, distance: '50m' },
                 wood: { name: 'Wood', coefficient: 0.4, distance: '12m' },
@@ -439,7 +439,8 @@
             document.querySelectorAll('.surface-option').forEach(option => {
                 option.classList.remove('selected');
             });
-            event.target.closest('.surface-option').classList.add('selected');
+            const target = element || (typeof event !== 'undefined' ? event.target.closest('.surface-option') : null);
+            if (target) target.classList.add('selected');
         }
 
         // Physics Quiz System

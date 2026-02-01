@@ -21,10 +21,10 @@
                     <div class="story-selection">
                         <h3>Choose a Story to Analyze</h3>
                         <div class="story-buttons">
-                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('brave-little-mouse')">🐭 The Brave Little Mouse</button>
-                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('magic-garden')">🌿 The Magic Garden</button>
-                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('friendship-bridge')">🌉 The Friendship Bridge</button>
-                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('time-traveler')">⏰ The Time Traveler's Journal</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('brave-little-mouse', this)">🐭 The Brave Little Mouse</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('magic-garden', this)">🌿 The Magic Garden</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('friendship-bridge', this)">🌉 The Friendship Bridge</button>
+                            <button type="button" class="story-btn" onclick="loadStoryAnalysis('time-traveler', this)">⏰ The Time Traveler's Journal</button>
                         </div>
                     </div>
                     
@@ -55,10 +55,10 @@
                     <div class="poetry-analysis">
                         <h3>Analyze Famous Poems</h3>
                         <div class="poem-selector">
-                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('haiku')">Haiku Garden 🌸</button>
-                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('limerick')">Silly Limericks 😂</button>
-                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('acrostic')">Acrostic Adventures 🅰️</button>
-                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('free-verse')">Free Verse Freedom 🔆</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('haiku', this)">Haiku Garden 🌸</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('limerick', this)">Silly Limericks 😂</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('acrostic', this)">Acrostic Adventures 🅰️</button>
+                            <button type="button" class="poem-btn" onclick="loadPoemAnalysis('free-verse', this)">Free Verse Freedom 🔆</button>
                         </div>
                         
                         <div class="poem-content" id="poem-content">
@@ -88,10 +88,10 @@
                     <div class="challenge-levels">
                         <h3>Choose Your Challenge Level</h3>
                         <div class="level-buttons">
-                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('inference')">🔍 Inference Detective</button>
-                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('main-idea')">🎯 Main Idea Hunter</button>
-                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('compare-contrast')">⚖️ Compare & Contrast</button>
-                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('cause-effect')">🔗 Cause & Effect Chain</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('inference', this)">🔍 Inference Detective</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('main-idea', this)">🎯 Main Idea Hunter</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('compare-contrast', this)">⚖️ Compare & Contrast</button>
+                            <button type="button" class="level-btn" onclick="loadComprehensionChallenge('cause-effect', this)">🔗 Cause & Effect Chain</button>
                         </div>
                     </div>
                     
@@ -118,10 +118,10 @@
                     <div class="writing-techniques">
                         <h3>Master Writing Techniques</h3>
                         <div class="technique-selector">
-                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('descriptive')">🎨 Descriptive Writing</button>
-                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('narrative')">📚 Narrative Storytelling</button>
-                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('persuasive')">🎤 Persuasive Arguments</button>
-                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('expository')">📊 Expository Explanation</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('descriptive', this)">🎨 Descriptive Writing</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('narrative', this)">📚 Narrative Storytelling</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('persuasive', this)">🎤 Persuasive Arguments</button>
+                            <button type="button" class="technique-btn" onclick="loadWritingTechnique('expository', this)">📊 Expository Explanation</button>
                         </div>
                         
                         <div class="technique-content" id="technique-content">
@@ -235,7 +235,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             }
         };
 
-        function loadStoryAnalysis(storyId) {
+        function loadStoryAnalysis(storyId, triggerEl) {
             currentStory = storyId;
             literaryScore = 0;
             literaryQuestionsAnswered = 0;
@@ -267,8 +267,13 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             document.getElementById('story-display').innerHTML = storyHTML;
             
             // Update button styles
-            document.querySelectorAll('.story-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.story-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${storyId}'`) || handler.includes(`\"${storyId}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function analyzeElement(element) {
@@ -522,7 +527,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             }
         };
 
-        function loadPoemAnalysis(poemType) {
+        function loadPoemAnalysis(poemType, triggerEl) {
             currentPoemType = poemType;
             const poetry = poetryDatabase[poemType];
             
@@ -555,8 +560,13 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             document.getElementById('poem-content').innerHTML = poemHTML;
             
             // Update button styles
-            document.querySelectorAll('.poem-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.poem-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${poemType}'`) || handler.includes(`\"${poemType}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function startPoemCreation(type) {
@@ -739,9 +749,9 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                         ${poemContent.replace(/\\n/g, '<br>')}
                     </div>
                     <div class="poem-actions">
-                        <button type="button" class="save-poem-btn" onclick="savePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>💾 Save Poem</button>
-                        <button type="button" class="share-poem-btn" onclick="sharePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')")>📤 Share Poem</button>
-                        <button type="button" class="new-poem-btn" onclick="startPoemCreation('${type}')")>✨ Create Another</button>
+                        <button type="button" class="save-poem-btn" onclick="savePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')">💾 Save Poem</button>
+                        <button type="button" class="share-poem-btn" onclick="sharePoem('${type}', '${poemContent.replace(/'/g, '\\\\\'')}')">📤 Share Poem</button>
+                        <button type="button" class="new-poem-btn" onclick="startPoemCreation('${type}')">✨ Create Another</button>
                     </div>
                 </div>
             `;
@@ -842,7 +852,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             }
         };
 
-        function loadComprehensionChallenge(challengeType) {
+        function loadComprehensionChallenge(challengeType, triggerEl) {
             currentChallenge = challengeType;
             challengeScore = 0;
             challengeQuestionsAnswered = 0;
@@ -859,8 +869,13 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             document.getElementById('challenge-content').innerHTML = challengeHTML;
             
             // Update button styles
-            document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.level-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${challengeType}'`) || handler.includes(`\"${challengeType}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function startComprehensionQuestions(questionIndex) {
@@ -1012,7 +1027,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             }
         };
 
-        function loadWritingTechnique(technique) {
+        function loadWritingTechnique(technique, triggerEl) {
             currentTechnique = technique;
             const tech = writingTechniques[technique];
             
@@ -1068,8 +1083,13 @@ When Maya graduated high school, she buried a time capsule containing her own jo
             document.getElementById('technique-content').innerHTML = techniqueHTML;
             
             // Update button styles
-            document.querySelectorAll('.technique-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.technique-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${technique}'`) || handler.includes(`\"${technique}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function startWritingPractice(technique) {
@@ -1229,7 +1249,7 @@ When Maya graduated high school, she buried a time capsule containing her own jo
                     <p><strong>Sentences:</strong> ${sentences}</p>
                     <p><strong>Average Words per Sentence:</strong> ${avgWordsPerSentence}</p>
                     <p>🎉 Great work practicing ${writingTechniques[technique].name.split(' - ')[0]}!</p>
-                    <button type="button" class="save-writing-btn" onclick="saveWriting('${technique}', '${writing.replace(/'/g, '\\\\\'')}')")>💾 Save My Writing</button>
+                    <button type="button" class="save-writing-btn" onclick="saveWriting('${technique}', '${writing.replace(/'/g, '\\\\\'')}')">💾 Save My Writing</button>
                 </div>
             `;
             

@@ -21,11 +21,11 @@
                     <div class="pos-selection">
                         <h3>Choose Your Focus</h3>
                         <div class="pos-buttons">
-                            <button type="button" class="pos-btn" onclick="loadPOSActivity('nouns')">📦 Nouns</button>
-                            <button type="button" class="pos-btn" onclick="loadPOSActivity('verbs')">⚡ Verbs</button>
-                            <button type="button" class="pos-btn" onclick="loadPOSActivity('adjectives')">🎨 Adjectives</button>
-                            <button type="button" class="pos-btn" onclick="loadPOSActivity('adverbs')">🏃 Adverbs</button>
-                            <button type="button" class="pos-btn" onclick="loadPOSActivity('mixed')">🎲 Mixed Practice</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('nouns', this)">📦 Nouns</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('verbs', this)">⚡ Verbs</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('adjectives', this)">🎨 Adjectives</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('adverbs', this)">🏃 Adverbs</button>
+                            <button type="button" class="pos-btn" onclick="loadPOSActivity('mixed', this)">🎲 Mixed Practice</button>
                         </div>
                     </div>
                     
@@ -103,11 +103,11 @@
                     <div class="punctuation-practice">
                         <h3>Fix the Sentences</h3>
                         <div class="practice-selector">
-                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('capitals')">🔤 Capitalization</button>
-                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('periods')">⚪ Periods</button>
-                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('questions')">❓ Question Marks</button>
-                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('exclamations')">❗ Exclamation Points</button>
-                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('commas')">📍 Commas</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('capitals', this)">🔤 Capitalization</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('periods', this)">⚪ Periods</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('questions', this)">❓ Question Marks</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('exclamations', this)">❗ Exclamation Points</button>
+                            <button type="button" class="practice-btn" onclick="loadPunctuationPractice('commas', this)">📍 Commas</button>
                         </div>
                         
                         <div class="practice-content" id="punctuation-content">
@@ -128,9 +128,9 @@
                     <div class="synonym-antonym-game">
                         <h3>Synonym & Antonym Detective</h3>
                         <div class="game-mode-selector">
-                            <button type="button" class="mode-btn" onclick="startWordRelationGame('synonyms')">🤝 Synonyms</button>
-                            <button type="button" class="mode-btn" onclick="startWordRelationGame('antonyms')">⚡ Antonyms</button>
-                            <button type="button" class="mode-btn" onclick="startWordRelationGame('mixed')">🎭 Mixed Challenge</button>
+                            <button type="button" class="mode-btn" onclick="startWordRelationGame('synonyms', this)">🤝 Synonyms</button>
+                            <button type="button" class="mode-btn" onclick="startWordRelationGame('antonyms', this)">⚡ Antonyms</button>
+                            <button type="button" class="mode-btn" onclick="startWordRelationGame('mixed', this)">🎭 Mixed Challenge</button>
                         </div>
                         
                         <div class="word-game-content" id="word-game-content">
@@ -236,7 +236,7 @@
             }
         };
 
-        function loadPOSActivity(type) {
+        function loadPOSActivity(type, triggerEl) {
             currentPOSActivity = type;
             posScore = 0;
             posQuestionsAnswered = 0;
@@ -267,8 +267,13 @@
             document.getElementById('pos-content').innerHTML = contentHTML;
             
             // Update button styles
-            document.querySelectorAll('.pos-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.pos-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${type}'`) || handler.includes(`\"${type}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function startPOSPractice() {
@@ -525,7 +530,7 @@
             }
         };
 
-        function loadPunctuationPractice(type) {
+        function loadPunctuationPractice(type, triggerEl) {
             currentPunctuationPractice = type;
             punctuationScore = 0;
             punctuationQuestionsAnswered = 0;
@@ -542,8 +547,13 @@
             document.getElementById('punctuation-content').innerHTML = contentHTML;
             
             // Update button styles
-            document.querySelectorAll('.practice-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.practice-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${type}'`) || handler.includes(`\"${type}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function startPunctuationPractice() {
@@ -657,7 +667,7 @@
             }
         };
 
-        function startWordRelationGame(type) {
+        function startWordRelationGame(type, triggerEl) {
             currentWordGame = type;
             wordGameScore = 0;
             wordGameQuestionsAnswered = 0;
@@ -674,8 +684,13 @@
             document.getElementById('word-game-content').innerHTML = contentHTML;
             
             // Update button styles
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.mode-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${type}'`) || handler.includes(`\"${type}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function loadWordRelationQuestion(questionIndex) {

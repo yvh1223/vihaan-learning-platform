@@ -1217,10 +1217,10 @@
                 <h3>🇺🇸 Citizenship Academy</h3>
                 <div class="citizenship-container">
                     <div class="citizenship-tabs">
-                        <button type="button" class="citizen-tab active" onclick="switchCitizenTab('rights')">Rights</button>
-                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('responsibilities')">Responsibilities</button>
-                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('participation')">Participation</button>
-                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('quiz')">Citizenship Test</button>
+                        <button type="button" class="citizen-tab active" onclick="switchCitizenTab('rights', this)">Rights</button>
+                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('responsibilities', this)">Responsibilities</button>
+                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('participation', this)">Participation</button>
+                        <button type="button" class="citizen-tab" onclick="switchCitizenTab('quiz', this)">Citizenship Test</button>
                     </div>
                     <div class="citizenship-content">
                         <div id="rightsTab" class="citizen-panel active">
@@ -1333,15 +1333,15 @@
                                         <h5>🗳️ Cast Your Vote!</h5>
                                         <p>Click on your choice:</p>
                                         <div class="ballot">
-                                            <div class="ballot-option" onclick="castVote('alex')">
+                                            <div class="ballot-option" data-candidate="alex" onclick="castVote('alex', this)">
                                                 <span class="ballot-checkbox">⬜</span>
                                                 <span>Alex Rodriguez</span>
                                             </div>
-                                            <div class="ballot-option" onclick="castVote('jordan')">
+                                            <div class="ballot-option" data-candidate="jordan" onclick="castVote('jordan', this)">
                                                 <span class="ballot-checkbox">⬜</span>
                                                 <span>Jordan Smith</span>
                                             </div>
-                                            <div class="ballot-option" onclick="castVote('casey')">
+                                            <div class="ballot-option" data-candidate="casey" onclick="castVote('casey', this)">
                                                 <span class="ballot-checkbox">⬜</span>
                                                 <span>Casey Johnson</span>
                                             </div>
@@ -1745,8 +1745,8 @@
             
             resultElement.innerHTML = `
                 <div class=\"matching-result\">
-                    <p>You got \${correct} out of \${total} correct (\${percentage}%)</p>
-                    <p>\${percentage >= 80 ? 'Excellent! You understand checks and balances!' : 'Keep learning about how the branches check each other\\'s power.'}</p>
+                    <p>You got ${correct} out of ${total} correct (${percentage}%)</p>
+                    <p>${percentage >= 80 ? 'Excellent! You understand checks and balances!' : 'Keep learning about how the branches check each other\\'s power.'}</p>
                 </div>
             `;
             
@@ -1777,13 +1777,13 @@
             const detailsElement = document.getElementById('constitutionDetails');
             
             detailsElement.innerHTML = `
-                <h4>\${data.title}</h4>
-                <p class=\"const-text\">\${data.text}</p>
+                <h4>${data.title}</h4>
+                <p class=\"const-text\">${data.text}</p>
                 <div class=\"const-explanation\">
                     <h5>What it means:</h5>
-                    <p>\${data.explanation}</p>
+                    <p>${data.explanation}</p>
                     <ul>
-                        \${data.keyPoints.map(point => `<li>\${point}</li>`).join('')}
+                        ${data.keyPoints.map(point => `<li>${point}</li>`).join('')}
                     </ul>
                 </div>
             `;
@@ -1811,12 +1811,12 @@
             const explanationElement = document.getElementById('rightExplanation');
             
             explanationElement.innerHTML = `
-                <h5>\${amendmentNumber}\${getOrdinalSuffix(amendmentNumber)} Amendment: \${right.name}</h5>
-                <p>\${right.description}</p>
+                <h5>${amendmentNumber}${getOrdinalSuffix(amendmentNumber)} Amendment: ${right.name}</h5>
+                <p>${right.description}</p>
                 <div class=\"right-examples\">
                     <h6>Examples:</h6>
                     <ul>
-                        \${right.examples.map(example => `<li>\${example}</li>`).join('')}
+                        ${right.examples.map(example => `<li>${example}</li>`).join('')}
                     </ul>
                 </div>
             `;
@@ -1829,10 +1829,15 @@
         }
 
         // Citizenship tabs
-        function switchCitizenTab(tabName) {
+        function switchCitizenTab(tabName, triggerEl) {
             // Update tab buttons
             document.querySelectorAll('.citizen-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+            const tabs = Array.from(document.querySelectorAll('.citizen-tab'));
+            const targetTab = triggerEl || tabs.find(tab => {
+                const handler = tab.getAttribute('onclick') || '';
+                return handler.includes(`'${tabName}'`) || handler.includes(`\"${tabName}\"`);
+            });
+            if (targetTab) targetTab.classList.add('active');
             
             // Show appropriate panel
             document.querySelectorAll('.citizen-panel').forEach(panel => panel.classList.remove('active'));
@@ -1879,7 +1884,7 @@
         }
 
         // Voting simulation
-        function castVote(candidate) {
+        function castVote(candidate, triggerEl) {
             // Clear previous selections
             document.querySelectorAll('.ballot-option').forEach(option => {
                 option.classList.remove('selected');
@@ -1887,8 +1892,11 @@
             });
             
             // Mark selected option
-            event.target.classList.add('selected');
-            event.target.querySelector('.ballot-checkbox').textContent = '✅';
+            const optionEl = triggerEl || document.querySelector(`.ballot-option[data-candidate="${candidate}"]`);
+            if (optionEl) {
+                optionEl.classList.add('selected');
+                optionEl.querySelector('.ballot-checkbox').textContent = '✅';
+            }
             
             const resultElement = document.getElementById('voteResult');
             const candidateNames = {
@@ -1900,7 +1908,7 @@
             resultElement.innerHTML = `
                 <div class=\"vote-cast\">
                     <h5>🎉 Vote Cast!</h5>
-                    <p>You voted for \${candidateNames[candidate]}!</p>
+                    <p>You voted for ${candidateNames[candidate]}!</p>
                     <p>In a real election, your vote would be secret and counted with all others.</p>
                 </div>
             `;
@@ -1926,8 +1934,8 @@
             
             resultElement.innerHTML = `
                 <div class=\"action-feedback\">
-                    <h5>You chose: \${actionName}</h5>
-                    <p>\${actionResponses[actionName]}</p>
+                    <h5>You chose: ${actionName}</h5>
+                    <p>${actionResponses[actionName]}</p>
                 </div>
             `;
             
@@ -1953,12 +1961,12 @@
             const optionsElement = document.getElementById('citizenshipOptions');
             
             questionElement.innerHTML = `
-                <h5>Question \${currentCitizenshipQuestion + 1} of \${citizenshipQuestions.length}</h5>
-                <p>\${question.question}</p>
+                <h5>Question ${currentCitizenshipQuestion + 1} of ${citizenshipQuestions.length}</h5>
+                <p>${question.question}</p>
             `;
             
             optionsElement.innerHTML = question.options.map((option, index) => 
-                `<button type="button" class=\"test-option\" onclick=\"selectCitizenshipAnswer(\${index})\">\${option}</button>`
+                `<button type="button" class=\"test-option\" onclick=\"selectCitizenshipAnswer(${index})\">${option}</button>`
             ).join('');
         }
 
@@ -1970,9 +1978,9 @@
             citizenshipAnswers.push(correct);
             
             feedbackElement.innerHTML = `
-                <div class=\"answer-feedback \${correct ? 'correct' : 'incorrect'}\">
-                    <p><strong>\${correct ? 'Correct!' : 'Incorrect'}</strong></p>
-                    <p>\${question.explanation}</p>
+                <div class=\"answer-feedback ${correct ? 'correct' : 'incorrect'}\">
+                    <p><strong>${correct ? 'Correct!' : 'Incorrect'}</strong></p>
+                    <p>${question.explanation}</p>
                     <button type="button" onclick=\"nextCitizenshipQuestion()\">Next Question</button>
                 </div>
             `;
@@ -1999,7 +2007,7 @@
             
             questionElement.innerHTML = `
                 <h4>Citizenship Test Complete!</h4>
-                <p>You got \${correctAnswers} out of \${citizenshipQuestions.length} questions correct!</p>
+                <p>You got ${correctAnswers} out of ${citizenshipQuestions.length} questions correct!</p>
             `;
             
             optionsElement.innerHTML = '';
@@ -2018,9 +2026,9 @@
             feedbackElement.innerHTML = `
                 <div class=\"test-results\">
                     <div class=\"score-display\">
-                        <span class=\"score-number\">\${percentage}%</span>
+                        <span class=\"score-number\">${percentage}%</span>
                     </div>
-                    <p class=\"score-message\">\${message}</p>
+                    <p class=\"score-message\">${message}</p>
                     <button type="button" onclick=\"startCitizenshipTest()\" class=\"retry-btn\">Take Test Again</button>
                 </div>
             `;
@@ -2047,8 +2055,8 @@
                 const statusElement = document.getElementById('simulationStatus');
                 statusElement.innerHTML = `
                     <div class=\"step-active\">
-                        <h5>Step \${currentLawStep + 1}: \${document.querySelectorAll('.process-step')[currentLawStep].querySelector('.step-title').textContent}</h5>
-                        <p>\${steps[currentLawStep]}</p>
+                        <h5>Step ${currentLawStep + 1}: ${document.querySelectorAll('.process-step')[currentLawStep].querySelector('.step-title').textContent}</h5>
+                        <p>${steps[currentLawStep]}</p>
                     </div>
                 `;
                 
@@ -2087,28 +2095,28 @@
             const branchesScore = document.getElementById('branchesScore');
             const branchesPercent = (governmentProgress.branches / 3) * 100;
             branchesProgress.style.width = branchesPercent + '%';
-            branchesScore.textContent = `\${governmentProgress.branches}/3`;
+            branchesScore.textContent = `${governmentProgress.branches}/3`;
             
             // Update constitution progress (3 sections + 10 amendments)
             const constitutionProgress = document.getElementById('constitutionProgress');
             const constitutionScore = document.getElementById('constitutionScore');
             const constitutionPercent = (governmentProgress.constitution / 13) * 100;
             constitutionProgress.style.width = constitutionPercent + '%';
-            constitutionScore.textContent = `\${governmentProgress.constitution}/13`;
+            constitutionScore.textContent = `${governmentProgress.constitution}/13`;
             
             // Update citizenship progress (5 rights + 5 responsibilities)
             const citizenshipProgress = document.getElementById('citizenshipProgressBar');
             const citizenshipScore = document.getElementById('citizenshipScore');
             const citizenshipPercent = (governmentProgress.citizenship / 10) * 100;
             citizenshipProgress.style.width = citizenshipPercent + '%';
-            citizenshipScore.textContent = `\${governmentProgress.citizenship}/10`;
+            citizenshipScore.textContent = `${governmentProgress.citizenship}/10`;
             
             // Update test progress
             const testProgress = document.getElementById('testProgress');
             const testScore = document.getElementById('testScore');
             const testPercent = (governmentProgress.testScore / 10) * 100;
             testProgress.style.width = testPercent + '%';
-            testScore.textContent = `\${governmentProgress.testScore}/10`;
+            testScore.textContent = `${governmentProgress.testScore}/10`;
             
             // Update main chapter progress
             const mainProgress = document.querySelector('.chapter-navigation .progress-fill');
@@ -2163,7 +2171,7 @@
             notification.innerHTML = `
                 <div class=\"notification-content\">
                     <span class=\"celebration\">🎉</span>
-                    <p>\${message}</p>
+                    <p>${message}</p>
                     <span class=\"celebration\">🎉</span>
                 </div>
             `;

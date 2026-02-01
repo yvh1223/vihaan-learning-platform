@@ -420,10 +420,10 @@
             <div id="colonialLife" class="content-section" style="display: none;">
                 <h2>🏘️ Colonial Life Experience</h2>
                 <div class="colonial-tabs">
-                    <button type="button" class="tab-button active" onclick="showColonialTab('daily')">Daily Life</button>
-                    <button type="button" class="tab-button" onclick="showColonialTab('trades')">Colonial Jobs</button>
-                    <button type="button" class="tab-button" onclick="showColonialTab('town')">Town Buildings</button>
-                    <button type="button" class="tab-button" onclick="showColonialTab('survival')">Survival Challenge</button>
+                    <button type="button" class="tab-button active" onclick="showColonialTab('daily', this)">Daily Life</button>
+                    <button type="button" class="tab-button" onclick="showColonialTab('trades', this)">Colonial Jobs</button>
+                    <button type="button" class="tab-button" onclick="showColonialTab('town', this)">Town Buildings</button>
+                    <button type="button" class="tab-button" onclick="showColonialTab('survival', this)">Survival Challenge</button>
                 </div>
 
                 <!-- Daily Life Tab -->
@@ -560,11 +560,11 @@
             <div id="revolutionCenter" class="content-section" style="display: none;">
                 <h2>⚔️ Revolution Center</h2>
                 <div class="revolution-tabs">
-                    <button type="button" class="tab-button active" onclick="showRevolutionTab('causes')">Causes & Effects</button>
-                    <button type="button" class="tab-button" onclick="showRevolutionTab('battles')">Key Battles</button>
-                    <button type="button" class="tab-button" onclick="showRevolutionTab('heroes')">Revolutionary Heroes</button>
-                    <button type="button" class="tab-button" onclick="showRevolutionTab('declaration')">Declaration Deep Dive</button>
-                    <button type="button" class="tab-button" onclick="showRevolutionTab('decisions')">Patriot vs Loyalist</button>
+                    <button type="button" class="tab-button active" onclick="showRevolutionTab('causes', this)">Causes & Effects</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('battles', this)">Key Battles</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('heroes', this)">Revolutionary Heroes</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('declaration', this)">Declaration Deep Dive</button>
+                    <button type="button" class="tab-button" onclick="showRevolutionTab('decisions', this)">Patriot vs Loyalist</button>
                 </div>
 
                 <div id="revolution-content" class="revolution-display">
@@ -914,7 +914,7 @@
         }
         
         // Colonial Life Interactive Functions
-        function showColonialTab(tabName) {
+        function showColonialTab(tabName, triggerEl) {
             // Hide all colonial tabs
             const tabs = document.querySelectorAll('.colonial-tab');
             tabs.forEach(tab => tab.style.display = 'none');
@@ -927,7 +927,11 @@
             document.getElementById(tabName + '-tab').style.display = 'block';
             
             // Add active class to clicked button
-            event.target.classList.add('active');
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${tabName}'`) || handler.includes(`\"${tabName}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
         
         function showDailyActivity(timeOfDay) {
@@ -1291,7 +1295,7 @@
         }
         
         // Revolution Center Functions
-        function showRevolutionTab(tabName) {
+        function showRevolutionTab(tabName, triggerEl) {
             // Hide all revolution tabs
             const tabs = document.querySelectorAll('.revolution-tab');
             tabs.forEach(tab => tab.style.display = 'none');
@@ -1313,7 +1317,11 @@
             }
             
             // Add active class to clicked button
-            event.target.classList.add('active');
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${tabName}'`) || handler.includes(`\"${tabName}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
         
         const revolutionScenarios = [

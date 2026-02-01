@@ -99,10 +99,10 @@
                     <div class="writing-prompt-container">
                         <h3>Story Starters</h3>
                         <div class="prompt-selector">
-                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('adventure')">Adventure</button>
-                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('mystery')">Mystery</button>
-                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('friendship')">Friendship</button>
-                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('fantasy')">Fantasy</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('adventure', this)">Adventure</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('mystery', this)">Mystery</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('friendship', this)">Friendship</button>
+                            <button type="button" class="prompt-btn" onclick="selectWritingPrompt('fantasy', this)">Fantasy</button>
                         </div>
                         
                         <div class="current-prompt" id="writing-prompt">
@@ -137,9 +137,9 @@
                     <div class="grammar-game-container">
                         <h3>Grammar Detective Game</h3>
                         <div class="game-selector">
-                            <button type="button" class="game-btn" onclick="startGrammarGame('punctuation')">Punctuation Police</button>
-                            <button type="button" class="game-btn" onclick="startGrammarGame('parts-of-speech')">Parts of Speech</button>
-                            <button type="button" class="game-btn" onclick="startGrammarGame('sentence-structure')">Sentence Builder</button>
+                            <button type="button" class="game-btn" onclick="startGrammarGame('punctuation', this)">Punctuation Police</button>
+                            <button type="button" class="game-btn" onclick="startGrammarGame('parts-of-speech', this)">Parts of Speech</button>
+                            <button type="button" class="game-btn" onclick="startGrammarGame('sentence-structure', this)">Sentence Builder</button>
                         </div>
                         
                         <div class="grammar-game" id="grammar-game">
@@ -163,10 +163,10 @@
                     <div class="vocab-explorer">
                         <h3>Word Explorer</h3>
                         <div class="vocab-categories">
-                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('emotions')">😊 Emotions</button>
-                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('nature')">🌳 Nature</button>
-                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('adventure')">🗺️ Adventure</button>
-                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('descriptive')">🎨 Descriptive</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('emotions', this)">😊 Emotions</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('nature', this)">🌳 Nature</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('adventure', this)">🗺️ Adventure</button>
+                            <button type="button" class="vocab-btn" onclick="loadVocabCategory('descriptive', this)">🎨 Descriptive</button>
                         </div>
                         
                         <div class="vocab-display" id="vocab-display">
@@ -374,14 +374,19 @@
             ]
         };
 
-        function selectWritingPrompt(category) {
+        function selectWritingPrompt(category, triggerEl) {
             const prompts = writingPrompts[category];
             const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
             document.getElementById('prompt-text').textContent = randomPrompt;
             
             // Update button styles
-            document.querySelectorAll('.prompt-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.prompt-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${category}'`) || handler.includes(`\"${category}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function addDialogue() {
@@ -610,7 +615,7 @@
             }
         };
 
-        function startGrammarGame(gameType) {
+        function startGrammarGame(gameType, triggerEl) {
             currentGrammarGame = gameType;
             gameScore = 0;
             questionsAnswered = 0;
@@ -624,8 +629,13 @@
             loadGrammarQuestion(0);
             
             // Update button styles
-            document.querySelectorAll('.game-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.game-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${gameType}'`) || handler.includes(`\"${gameType}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function loadGrammarQuestion(questionIndex) {
@@ -752,7 +762,7 @@
         let currentVocabCategory = null;
         let vocabQuizMode = false;
 
-        function loadVocabCategory(category) {
+        function loadVocabCategory(category, triggerEl) {
             currentVocabCategory = category;
             const vocab = vocabularyCategories[category];
             
@@ -777,8 +787,13 @@
             document.getElementById('vocab-cards').innerHTML = cardsHTML;
             
             // Update button styles
-            document.querySelectorAll('.vocab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll('.vocab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetButton = triggerEl || Array.from(buttons).find(btn => {
+                const handler = btn.getAttribute('onclick') || '';
+                return handler.includes(`'${category}'`) || handler.includes(`\"${category}\"`);
+            });
+            if (targetButton) targetButton.classList.add('active');
         }
 
         function flipVocabCard(index) {
