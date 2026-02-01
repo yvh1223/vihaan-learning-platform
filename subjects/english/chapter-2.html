@@ -844,11 +844,11 @@
             `;
             
             if (userMeaning) {
-                feedback += `<p><strong>Your guess:</strong> ${userMeaning}</p>`;
+                feedback += `<p><strong>Your guess:</strong> ${escapeHtml(userMeaning)}</p>`;
             }
             
             if (userClues) {
-                feedback += `<p><strong>Clues you found:</strong> ${userClues}</p>`;
+                feedback += `<p><strong>Clues you found:</strong> ${escapeHtml(userClues)}</p>`;
             }
             
             feedback += `
@@ -858,6 +858,15 @@
             `;
             
             document.getElementById('clues-content').innerHTML = feedback;
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
     </script>
 </body>
