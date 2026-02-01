@@ -56,6 +56,68 @@
           <div id="conservation-tip" role="status" aria-live="polite" style="margin-top: 0.75rem;"></div>
         </div>
       </section>
+
+      <section class="lesson-section">
+        <h2>🔁 Resource Systems</h2>
+        <p>Earth systems work together. Water, air, soil, and minerals support life and are connected.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showResourceSystem('water')">
+            <div class="state-visual">💧</div>
+            <h4>Water System</h4>
+            <p>Rivers, lakes, groundwater, and oceans</p>
+          </div>
+          <div class="state-card" onclick="showResourceSystem('air')">
+            <div class="state-visual">🌬️</div>
+            <h4>Air System</h4>
+            <p>Oxygen, carbon dioxide, and winds</p>
+          </div>
+          <div class="state-card" onclick="showResourceSystem('soil')">
+            <div class="state-visual">🪴</div>
+            <h4>Soil System</h4>
+            <p>Nutrients that grow plants</p>
+          </div>
+          <div class="state-card" onclick="showResourceSystem('minerals')">
+            <div class="state-visual">⛰️</div>
+            <h4>Mineral System</h4>
+            <p>Rocks and metals we use</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🧩 System Connection</h4>
+          <div id="system-result" role="status" aria-live="polite">Choose a system to learn how it supports life.</div>
+        </div>
+      </section>
+
+      <section class="lesson-section">
+        <h2>⚡ Energy Choices Lab</h2>
+        <p>Energy sources impact the environment in different ways. Compare options and decide which are cleaner.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="compareEnergy('solar')">
+            <div class="state-visual">☀️</div>
+            <h4>Solar</h4>
+            <p>Renewable, low pollution</p>
+          </div>
+          <div class="state-card" onclick="compareEnergy('wind')">
+            <div class="state-visual">🌬️</div>
+            <h4>Wind</h4>
+            <p>Renewable, clean air</p>
+          </div>
+          <div class="state-card" onclick="compareEnergy('hydro')">
+            <div class="state-visual">🌊</div>
+            <h4>Hydropower</h4>
+            <p>Uses moving water</p>
+          </div>
+          <div class="state-card" onclick="compareEnergy('fossil')">
+            <div class="state-visual">🛢️</div>
+            <h4>Fossil Fuels</h4>
+            <p>Nonrenewable, more pollution</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🔎 Energy Trade-offs</h4>
+          <div id="energy-result" role="status" aria-live="polite">Select an energy source to see its benefits and challenges.</div>
+        </div>
+      </section>
       
       <section class="lesson-section">
         <h2>🏭 Human Impact Assessment</h2>
@@ -75,6 +137,36 @@
         <div class="experiment-station">
           <h4>🧠 Cause & Effect</h4>
           <div id="impact-result" role="status" aria-live="polite">Select an action to see cause-and-effect examples.</div>
+        </div>
+      </section>
+
+      <section class="lesson-section">
+        <h2>✅ Conservation Mission</h2>
+        <p>Pick a mission and see how your choices protect Earth's resources.</p>
+        <div class="experiment-station">
+          <button type="button" class="try-it-button" onclick="startMission()">🌟 Get a Mission</button>
+          <button type="button" class="try-it-button" onclick="completeMission()">🏁 Mark as Done</button>
+          <div id="mission-result" role="status" aria-live="polite" style="margin-top: 0.75rem;"></div>
+        </div>
+      </section>
+
+      <section class="experiment-station quiz-station">
+        <h3><span class="section-icon">🧠</span>Earth's Resources Knowledge Challenge</h3>
+        <div class="quiz-container" id="resources-quiz">
+          <div class="quiz-question" id="resources-quiz-question">
+            <p>Which resource is renewable?</p>
+            <div class="quiz-options">
+              <button type="button" onclick="checkResourcesAnswer(0)">A) Coal</button>
+              <button type="button" onclick="checkResourcesAnswer(1)">B) Wind</button>
+              <button type="button" onclick="checkResourcesAnswer(2)">C) Natural gas</button>
+              <button type="button" onclick="checkResourcesAnswer(3)">D) Metal ore</button>
+            </div>
+          </div>
+          <div class="quiz-feedback" id="resources-quiz-feedback" role="status" aria-live="polite" style="display: none;"></div>
+          <div class="quiz-progress">
+            <span>Question <span id="resources-question-number">1</span> of <span id="resources-total-questions">8</span></span>
+            <div class="quiz-score">Score: <span id="resources-quiz-score">0</span>/8</div>
+          </div>
         </div>
       </section>
       <section class="lesson-section">
@@ -121,6 +213,25 @@
       'Turn off lights when you leave a room.',
       'Take shorter showers to save water.'
     ];
+    const resourceSystems = {
+      water: 'Water cycles through evaporation, condensation, and precipitation. Clean water is essential for life.',
+      air: 'The atmosphere provides oxygen for breathing and helps regulate Earth\'s temperature.',
+      soil: 'Soil holds nutrients and water for plants. Healthy soil helps prevent erosion.',
+      minerals: 'Minerals and rocks provide metals and materials used in buildings and tools.'
+    };
+    const energySources = {
+      solar: 'Solar energy is renewable and produces no air pollution, but it depends on sunlight.',
+      wind: 'Wind energy is renewable and clean, but it works best in windy areas.',
+      hydro: 'Hydropower uses moving water to make electricity, but dams can change river habitats.',
+      fossil: 'Fossil fuels provide a lot of energy but create pollution and are nonrenewable.'
+    };
+    const conservationMissions = [
+      'Use a reusable bottle instead of a plastic one today.',
+      'Turn off lights and screens when you leave a room.',
+      'Reuse a piece of paper before recycling it.',
+      'Take a 5-minute shower to save water.',
+      'Pick up three pieces of litter outside.'
+    ];
     const impactExamples = {
       positive: [
         'Planting trees improves air quality.',
@@ -160,6 +271,20 @@
       showNotification('💧 Conservation Lab: Every drop counts! Try a new tip each time.', 'info');
       if (window.gamificationSystem) window.gamificationSystem.awardPoints('lab_started', 8);
     }
+
+    function showResourceSystem(type) {
+      const target = document.getElementById('system-result');
+      if (target) target.textContent = resourceSystems[type] || '';
+      showNotification('🔁 Earth systems are connected. Protecting one helps the others!', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('system_explored', 4);
+    }
+
+    function compareEnergy(type) {
+      const target = document.getElementById('energy-result');
+      if (target) target.textContent = energySources[type] || '';
+      showNotification('⚡ Energy choices affect air, water, and land.', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('energy_compared', 4);
+    }
     
     function assessImpact(type) {
       const impactTarget = document.getElementById('impact-result');
@@ -176,6 +301,152 @@
         showNotification('⚠️ Environmental Challenges: Pollution and waste harm our planet.', 'info');
       }
       if (window.gamificationSystem) window.gamificationSystem.awardPoints('impact_assessed', 5);
+    }
+
+    let activeMission = null;
+
+    function startMission() {
+      activeMission = conservationMissions[Math.floor(Math.random() * conservationMissions.length)];
+      const target = document.getElementById('mission-result');
+      if (target) target.textContent = `Mission: ${activeMission}`;
+      showNotification('🌟 Try your mission today to protect Earth!', 'success');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('mission_started', 6);
+    }
+
+    function completeMission() {
+      const target = document.getElementById('mission-result');
+      if (!activeMission) {
+        if (target) target.textContent = 'Pick a mission first!';
+        return;
+      }
+      if (target) target.textContent = `Completed: ${activeMission}`;
+      showNotification('🏁 Mission completed! Great conservation work.', 'success');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('mission_completed', 10);
+    }
+
+    const resourcesQuizQuestions = [
+      {
+        question: 'Which resource is renewable?',
+        options: ['Coal', 'Wind', 'Natural gas', 'Metal ore'],
+        correct: 1,
+        explanation: 'Wind is a renewable resource because it is naturally replenished.'
+      },
+      {
+        question: 'Which action best conserves water?',
+        options: ['Letting the faucet run', 'Fixing a leak', 'Washing the driveway', 'Taking a longer shower'],
+        correct: 1,
+        explanation: 'Fixing leaks prevents water from being wasted.'
+      },
+      {
+        question: 'Fossil fuels are called nonrenewable because they:',
+        options: ['Never run out', 'Form quickly', 'Take millions of years to form', 'Are made by humans'],
+        correct: 2,
+        explanation: 'Fossil fuels take millions of years to form, so they cannot be replaced quickly.'
+      },
+      {
+        question: 'Which resource comes from living things?',
+        options: ['Sunlight', 'Trees', 'Metal', 'Natural gas'],
+        correct: 1,
+        explanation: 'Trees are living and can be replanted, making them renewable.'
+      },
+      {
+        question: 'Recycling helps Earth because it:',
+        options: ['Creates more trash', 'Uses more raw materials', 'Reduces the need for new resources', 'Stops all pollution'],
+        correct: 2,
+        explanation: 'Recycling reduces the amount of new resources we need to take from Earth.'
+      },
+      {
+        question: 'Which is a positive human impact?',
+        options: ['Littering in parks', 'Planting trees', 'Burning trash', 'Dumping oil'],
+        correct: 1,
+        explanation: 'Planting trees improves air quality and habitats.'
+      },
+      {
+        question: 'Soil is important because it:',
+        options: ['Only holds rocks', 'Provides nutrients for plants', 'Is made of metal', 'Never changes'],
+        correct: 1,
+        explanation: 'Soil holds nutrients and water that plants need to grow.'
+      },
+      {
+        question: 'Which energy source creates the most air pollution?',
+        options: ['Solar', 'Wind', 'Hydropower', 'Fossil fuels'],
+        correct: 3,
+        explanation: 'Fossil fuels release pollutants and greenhouse gases when burned.'
+      }
+    ];
+
+    let currentResourcesQuestion = 0;
+    let resourcesQuizScore = 0;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeResourcesQuiz();
+    });
+
+    function initializeResourcesQuiz() {
+      document.getElementById('resources-total-questions').textContent = resourcesQuizQuestions.length;
+      showResourcesQuestion();
+    }
+
+    function showResourcesQuestion() {
+      const current = resourcesQuizQuestions[currentResourcesQuestion];
+      const questionEl = document.getElementById('resources-quiz-question');
+      if (!current || !questionEl) return;
+
+      questionEl.innerHTML = `
+        <p>${current.question}</p>
+        <div class="quiz-options">
+          ${current.options.map((option, index) => `
+            <button type="button" onclick="checkResourcesAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('resources-question-number').textContent = currentResourcesQuestion + 1;
+      const feedback = document.getElementById('resources-quiz-feedback');
+      if (feedback) feedback.style.display = 'none';
+    }
+
+    function checkResourcesAnswer(selectedIndex) {
+      const current = resourcesQuizQuestions[currentResourcesQuestion];
+      const feedback = document.getElementById('resources-quiz-feedback');
+      if (!current || !feedback) return;
+
+      const isCorrect = selectedIndex === current.correct;
+      if (isCorrect) {
+        resourcesQuizScore += 1;
+        feedback.textContent = `✅ Correct! ${current.explanation}`;
+        feedback.className = 'quiz-feedback correct';
+      } else {
+        feedback.textContent = `❌ Not quite. ${current.explanation}`;
+        feedback.className = 'quiz-feedback incorrect';
+      }
+      feedback.style.display = 'block';
+      document.getElementById('resources-quiz-score').textContent = resourcesQuizScore;
+
+      document.querySelectorAll('#resources-quiz-question .quiz-options button').forEach(btn => {
+        btn.disabled = true;
+      });
+
+      setTimeout(() => {
+        currentResourcesQuestion += 1;
+        if (currentResourcesQuestion < resourcesQuizQuestions.length) {
+          showResourcesQuestion();
+        } else {
+          document.getElementById('resources-quiz-question').innerHTML = `
+            <div class="quiz-complete">
+              <h4>🎉 Quiz Complete!</h4>
+              <p>You scored ${resourcesQuizScore} out of ${resourcesQuizQuestions.length}.</p>
+              <button type="button" onclick="restartResourcesQuiz()">Try Again</button>
+            </div>
+          `;
+        }
+      }, 1200);
+    }
+
+    function restartResourcesQuiz() {
+      currentResourcesQuestion = 0;
+      resourcesQuizScore = 0;
+      document.getElementById('resources-quiz-score').textContent = '0';
+      showResourcesQuestion();
     }
     
     function showNotification(message, type = 'info') {

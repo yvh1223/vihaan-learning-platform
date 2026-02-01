@@ -15,6 +15,20 @@
       margin: var(--spacing-lg) 0;
     }
 
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+    }
+
+    .concept-card {
+      background-color: var(--bg-secondary);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      border: 2px solid transparent;
+    }
+
     .mini-table {
       width: 100%;
       border-collapse: collapse;
@@ -37,6 +51,42 @@
       font-weight: 600;
       color: var(--success-color);
     }
+
+    .calculator-card {
+      background-color: var(--bg-card);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      margin: var(--spacing-lg) 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border: 1px solid var(--bg-accent);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+    }
+
+    .result-box {
+      margin-top: var(--spacing-md);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      background-color: var(--bg-secondary);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .result-box.negative {
+      color: #c0392b;
+    }
   </style>
 </head>
 <body>
@@ -48,6 +98,39 @@
       <p class="chapter-description">Budgeting, saving, spending decisions, and understanding income and expenses.</p>
     </div>
     <div class="lesson-content">
+      <section class="lesson-section">
+        <h2>📘 Money Basics</h2>
+        <p>Financial literacy starts with understanding key words and habits.</p>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <h4>Important Words</h4>
+            <ul>
+              <li><strong>Income:</strong> money you earn.</li>
+              <li><strong>Expense:</strong> money you spend.</li>
+              <li><strong>Savings:</strong> money you keep.</li>
+              <li><strong>Budget:</strong> a plan for your money.</li>
+            </ul>
+          </div>
+          <div class="concept-card">
+            <h4>Fixed vs. Variable</h4>
+            <ul>
+              <li><strong>Fixed:</strong> same cost each time.</li>
+              <li><strong>Variable:</strong> changes week to week.</li>
+            </ul>
+            <p>Example: bus pass (fixed) and snacks (variable).</p>
+          </div>
+          <div class="concept-card">
+            <h4>Money Habit</h4>
+            <p>Try the 50/30/20 idea:</p>
+            <ul>
+              <li>50% needs</li>
+              <li>30% wants</li>
+              <li>20% savings</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section class="lesson-section">
         <h2>💰 Personal Budget Simulator</h2>
         <p>Learn to manage money with your virtual budget!</p>
@@ -91,6 +174,30 @@
           <button type="button" class="try-it-button" onclick="startBudgetGame()">🎯 Start Budget Game</button>
         </div>
       </section>
+
+      <section class="lesson-section">
+        <h2>🧮 Build a Budget</h2>
+        <p>Type values and see how saving changes.</p>
+        <div class="calculator-card">
+          <h4>Weekly Budget Calculator</h4>
+          <div class="form-grid">
+            <label>
+              Weekly income ($)
+              <input type="number" step="0.01" min="0" class="input-field" id="income-input">
+            </label>
+            <label>
+              Fixed expenses ($)
+              <input type="number" step="0.01" min="0" class="input-field" id="fixed-input">
+            </label>
+            <label>
+              Variable expenses ($)
+              <input type="number" step="0.01" min="0" class="input-field" id="variable-input">
+            </label>
+          </div>
+          <button type="button" class="try-it-button" onclick="calculateBudget()">Calculate savings</button>
+          <div class="result-box" id="budget-result" role="status">Enter numbers to see your savings.</div>
+        </div>
+      </section>
       
       <section class="lesson-section">
         <h2>🏪 Smart Shopping Decisions</h2>
@@ -128,15 +235,75 @@
       </section>
 
       <section class="lesson-section">
+        <h2>📊 Compare Unit Prices</h2>
+        <p>Unit price helps you find the best deal.</p>
+        <div class="calculator-card">
+          <h4>Deal Finder</h4>
+          <div class="form-grid">
+            <label>
+              Pack A price ($)
+              <input type="number" step="0.01" min="0" class="input-field" id="price-a">
+            </label>
+            <label>
+              Pack A quantity
+              <input type="number" step="1" min="1" class="input-field" id="qty-a">
+            </label>
+            <label>
+              Pack B price ($)
+              <input type="number" step="0.01" min="0" class="input-field" id="price-b">
+            </label>
+            <label>
+              Pack B quantity
+              <input type="number" step="1" min="1" class="input-field" id="qty-b">
+            </label>
+          </div>
+          <button type="button" class="try-it-button" onclick="compareUnitPrice()">Compare deals</button>
+          <div class="result-box" id="deal-result" role="status">Add prices and quantities to compare.</div>
+        </div>
+      </section>
+
+      <section class="lesson-section">
         <h2>🎯 Savings Goals</h2>
         <p>Set a goal and make a plan to reach it.</p>
         <div class="info-card">
-          <p><strong>Goal:</strong> Save $18 for a book.</p>
-          <p><strong>Plan:</strong> Save $3 each week.</p>
-          <p><strong>Question:</strong> How many weeks will it take?</p>
+          <p><strong>Example:</strong> Save $18 for a book by saving $3 each week.</p>
           <details>
             <summary>Show answer</summary>
             <p>6 weeks (because 18 ÷ 3 = 6).</p>
+          </details>
+        </div>
+        <div class="calculator-card">
+          <h4>Savings Goal Planner</h4>
+          <div class="form-grid">
+            <label>
+              Goal amount ($)
+              <input type="number" step="0.01" min="0" class="input-field" id="goal-input">
+            </label>
+            <label>
+              Weekly savings ($)
+              <input type="number" step="0.01" min="0" class="input-field" id="weekly-input">
+            </label>
+          </div>
+          <button type="button" class="try-it-button" onclick="calculateSavingsGoal()">Calculate weeks</button>
+          <div class="result-box" id="goal-result" role="status">Enter a goal and weekly savings.</div>
+        </div>
+      </section>
+
+      <section class="lesson-section">
+        <h2>✅ Quick Check</h2>
+        <div class="info-card">
+          <ol>
+            <li>If you earn $15 and spend $9, how much is saved?</li>
+            <li>Which is a need: lunch or a new video game?</li>
+            <li>If a notebook costs $4 for 2 notebooks, what is the unit price?</li>
+          </ol>
+          <details>
+            <summary>Show answers</summary>
+            <ol>
+              <li>$6</li>
+              <li>Lunch</li>
+              <li>$2 per notebook</li>
+            </ol>
           </details>
         </div>
       </section>
@@ -181,6 +348,61 @@
     function startNeedVsWant() {
       showNotification('🤔 Need vs Want: Make smart money decisions!', 'info');
       if (window.gamificationSystem) window.gamificationSystem.awardPoints('decision_activity', 7);
+    }
+
+    function calculateBudget() {
+      const income = parseFloat(document.getElementById('income-input').value);
+      const fixed = parseFloat(document.getElementById('fixed-input').value);
+      const variable = parseFloat(document.getElementById('variable-input').value);
+      const result = document.getElementById('budget-result');
+
+      if (Number.isNaN(income) || Number.isNaN(fixed) || Number.isNaN(variable)) {
+        result.textContent = 'Please fill in all three numbers.';
+        result.classList.remove('negative');
+        return;
+      }
+
+      const savings = income - fixed - variable;
+      result.textContent = savings >= 0
+        ? `You saved $${savings.toFixed(2)} this week.`
+        : `You are over budget by $${Math.abs(savings).toFixed(2)}.`;
+      result.classList.toggle('negative', savings < 0);
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('budget_calculated', 5);
+    }
+
+    function compareUnitPrice() {
+      const priceA = parseFloat(document.getElementById('price-a').value);
+      const qtyA = parseFloat(document.getElementById('qty-a').value);
+      const priceB = parseFloat(document.getElementById('price-b').value);
+      const qtyB = parseFloat(document.getElementById('qty-b').value);
+      const result = document.getElementById('deal-result');
+
+      if ([priceA, qtyA, priceB, qtyB].some((value) => Number.isNaN(value) || value <= 0)) {
+        result.textContent = 'Enter positive numbers for both packs.';
+        return;
+      }
+
+      const unitA = priceA / qtyA;
+      const unitB = priceB / qtyB;
+      const better = unitA < unitB ? 'Pack A' : unitB < unitA ? 'Pack B' : 'Both packs';
+
+      result.textContent = `${better} is the better deal. Pack A: $${unitA.toFixed(2)} each, Pack B: $${unitB.toFixed(2)} each.`;
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('unit_price_checked', 5);
+    }
+
+    function calculateSavingsGoal() {
+      const goal = parseFloat(document.getElementById('goal-input').value);
+      const weekly = parseFloat(document.getElementById('weekly-input').value);
+      const result = document.getElementById('goal-result');
+
+      if (Number.isNaN(goal) || Number.isNaN(weekly) || goal <= 0 || weekly <= 0) {
+        result.textContent = 'Enter a positive goal and weekly savings amount.';
+        return;
+      }
+
+      const weeks = Math.ceil(goal / weekly);
+      result.textContent = `It will take about ${weeks} week${weeks === 1 ? '' : 's'} to reach your goal.`;
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('goal_planned', 6);
     }
     
     function showNotification(message, type = 'info') {

@@ -6,6 +6,55 @@
   <title>Chapter 5 - Literature Analysis & Literary Essay</title>
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/responsive.css">
+  <style>
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .skill-card {
+      background: #f8f9ff;
+      border: 2px solid #e0e6ff;
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .content-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    #claim-input,
+    .evidence-input,
+    .evidence-explain {
+      width: 100%;
+      margin: 0.4rem 0 1rem;
+      padding: 0.6rem;
+      border: 1px solid #d8d8d8;
+      border-radius: 8px;
+    }
+
+    #essay-draft {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border: 1px solid #d8d8d8;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
   <div id="header-container"></div>
@@ -17,12 +66,129 @@
     </div>
     <div class="lesson-content">
       <div class="lesson-section">
-        <h2>Interactive Content</h2>
-        <p>This chapter aligns to Unit 5 in the district syllabus. Interactive lessons and writing tasks now available with engaging activities.</p>
+        <h2><span class="section-icon">📖</span>Close Reading Studio</h2>
+        <p>Choose a passage, read closely, and identify evidence that supports your ideas.</p>
+        <div class="reading-passage-container">
+          <div class="passage-selector">
+            <label for="lit-passage-select">Choose a Passage:</label>
+            <select id="lit-passage-select" onchange="loadLitPassage()">
+              <option value="courage">The Bridge of Courage</option>
+              <option value="mystery">The Hidden Letter</option>
+              <option value="justice">The Fair Trade</option>
+            </select>
+          </div>
+          <div class="reading-passage" id="lit-passage">
+            <div class="passage-header">
+              <h3 id="lit-passage-title">The Bridge of Courage</h3>
+              <div class="reading-controls">
+                <button type="button" class="highlight-button" onclick="toggleEvidenceHints()" aria-pressed="false">✨ Evidence Hints</button>
+              </div>
+            </div>
+            <div class="passage-text" id="lit-passage-text" aria-live="polite">
+              <p>Jaya paused at the first plank of the bridge. The river below was loud, and the boards swayed slightly in the wind. She gripped the rope rail, remembering her brother's words: "Courage isn't the absence of fear. It's choosing to move while you're afraid."</p>
+              <p>Halfway across, a gust pushed her shoulder. She stopped, breathed in, and looked at the far bank where her team waited with a banner. Jaya took one careful step, then another, until the bridge was behind her and her smile was as wide as the river.</p>
+            </div>
+            <div class="comprehension-questions" id="lit-questions">
+              <h4>📝 Close Reading Questions</h4>
+              <div class="question-container">
+                <div class="question">
+                  <p><strong>1. What does the author show about Jaya's character?</strong></p>
+                  <div class="answer-options">
+                    <label><input type="radio" name="lit-q1" value="a"> She avoids challenges</label>
+                    <label><input type="radio" name="lit-q1" value="b"> She is brave even when afraid</label>
+                    <label><input type="radio" name="lit-q1" value="c"> She dislikes her team</label>
+                    <label><input type="radio" name="lit-q1" value="d"> She is careless</label>
+                  </div>
+                </div>
+                <div class="question">
+                  <p><strong>2. Which line best supports the theme of courage?</strong></p>
+                  <div class="answer-options">
+                    <label><input type="radio" name="lit-q2" value="a"> "The river below was loud."</label>
+                    <label><input type="radio" name="lit-q2" value="b"> "She gripped the rope rail."</label>
+                    <label><input type="radio" name="lit-q2" value="c"> "Courage isn't the absence of fear..."</label>
+                    <label><input type="radio" name="lit-q2" value="d"> "Her smile was as wide as the river."</label>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="check-answers-btn" onclick="checkLitAnswers()">Check My Answers</button>
+              <div class="results-display" id="lit-results" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h2><span class="section-icon">🧭</span>Character & Theme Analyzer</h2>
+        <p>Select a focus to get guiding questions for deeper analysis.</p>
+        <div class="skill-grid" id="analysis-grid">
+          <div class="skill-card" data-analysis="character">
+            <h3>🧑‍🎓 Character</h3>
+            <p>Motivation, growth, and choices.</p>
+          </div>
+          <div class="skill-card" data-analysis="theme">
+            <h3>🌟 Theme</h3>
+            <p>Big ideas and lessons.</p>
+          </div>
+          <div class="skill-card" data-analysis="conflict">
+            <h3>⚡ Conflict</h3>
+            <p>Problems that drive the plot.</p>
+          </div>
+          <div class="skill-card" data-analysis="setting">
+            <h3>🌍 Setting</h3>
+            <p>Place, time, and atmosphere.</p>
+          </div>
+        </div>
+        <div class="content-section" id="analysis-detail">
+          <h3>Choose a focus card to get analysis prompts.</h3>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h2><span class="section-icon">🗂️</span>Evidence Organizer</h2>
+        <p>Collect evidence and explain how it supports your claim.</p>
+        <div class="content-section">
+          <label for="claim-input"><strong>Your Claim:</strong></label>
+          <input id="claim-input" type="text" placeholder="Example: Jaya shows courage by facing her fear." />
+          <div class="evidence-list">
+            <label><strong>Evidence 1:</strong></label>
+            <input class="evidence-input" type="text" placeholder="Quote or detail from the text" />
+            <label><strong>Explanation:</strong></label>
+            <input class="evidence-explain" type="text" placeholder="How does this evidence support your claim?" />
+            <label><strong>Evidence 2:</strong></label>
+            <input class="evidence-input" type="text" placeholder="Quote or detail from the text" />
+            <label><strong>Explanation:</strong></label>
+            <input class="evidence-explain" type="text" placeholder="How does this evidence support your claim?" />
+            <label><strong>Evidence 3:</strong></label>
+            <input class="evidence-input" type="text" placeholder="Quote or detail from the text" />
+            <label><strong>Explanation:</strong></label>
+            <input class="evidence-explain" type="text" placeholder="How does this evidence support your claim?" />
+          </div>
+          <button type="button" class="practice-btn" onclick="generateOutline()">Build Essay Outline</button>
+          <div id="outline-output" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h2><span class="section-icon">✍️</span>Literary Essay Builder</h2>
+        <p>Follow a simple structure to draft a strong literary essay.</p>
+        <div class="content-section">
+          <ol>
+            <li><strong>Introduction:</strong> Hook + context + thesis.</li>
+            <li><strong>Body Paragraph 1:</strong> Claim + evidence + explanation.</li>
+            <li><strong>Body Paragraph 2:</strong> Claim + evidence + explanation.</li>
+            <li><strong>Conclusion:</strong> Restate thesis + insight.</li>
+          </ol>
+          <button type="button" class="practice-btn" onclick="loadEssayTemplate()">Load Essay Template</button>
+          <textarea id="essay-draft" rows="10" placeholder="Your essay draft will appear here..."></textarea>
+        </div>
       </div>
     </div>
     <div class="chapter-navigation">
-      <a href="index.html" class="nav-button" aria-label="Back to English overview">← Back</a>
+      <a href="chapter-4.html" class="nav-button" aria-label="Previous: Chapter 4 Communication & Collaboration">← Previous</a>
+      <div class="progress-indicator">
+        <div class="progress-bar"><div class="progress-fill" style="width: 45%"></div></div>
+        <span class="progress-text">Chapter 5 Progress: 45%</span>
+      </div>
       <a href="chapter-6.html" class="nav-button" aria-label="Next: Chapter 6 Fantasy Book Clubs">Next →</a>
     </div>
   </main>
@@ -34,7 +200,201 @@
       fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
     };
     document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+
+    const litPassages = {
+      courage: {
+        title: 'The Bridge of Courage',
+        text: `<p>Jaya paused at the first plank of the bridge. The river below was loud, and the boards swayed slightly in the wind. She gripped the rope rail, remembering her brother's words: "Courage isn't the absence of fear. It's choosing to move while you're afraid."</p>
+               <p>Halfway across, a gust pushed her shoulder. She stopped, breathed in, and looked at the far bank where her team waited with a banner. Jaya took one careful step, then another, until the bridge was behind her and her smile was as wide as the river.</p>`,
+        answers: ['b', 'c']
+      },
+      mystery: {
+        title: 'The Hidden Letter',
+        text: `<p>Leo found the letter tucked inside a library book, the ink faded but still clear. It was signed only with the letter "R" and ended with a clue: "Meet me where the music sleeps."</p>
+               <p>He listened for the quietest place in school. The band room after practice was silent except for a soft hum from the piano. Inside the bench, he found a second letter and a sketch of a key.</p>`,
+        answers: ['a', 'b']
+      },
+      justice: {
+        title: 'The Fair Trade',
+        text: `<p>When the market ran out of clean water, Ms. Ortiz suggested each family take one jug. Some people wanted two, but she reminded them that fairness keeps a community strong.</p>
+               <p>Later, a neighbor quietly returned a second jug and offered to help deliver water instead. The market stayed calm because people chose what was right, not just what was easy.</p>`,
+        answers: ['b', 'd']
+      }
+    };
+
+    const litQuestions = {
+      courage: [
+        {
+          question: 'What does the author show about Jaya's character?',
+          options: ['She avoids challenges', 'She is brave even when afraid', 'She dislikes her team', 'She is careless'],
+          correct: 'b'
+        },
+        {
+          question: 'Which line best supports the theme of courage?',
+          options: ['"The river below was loud."', '"She gripped the rope rail."', '"Courage isn't the absence of fear..."', '"Her smile was as wide as the river."'],
+          correct: 'c'
+        }
+      ],
+      mystery: [
+        {
+          question: 'What clue helps Leo know where to go?',
+          options: ['"Where the music sleeps."', '"The loudest room."', '"The lunch table."', '"The gym."'],
+          correct: 'a'
+        },
+        {
+          question: 'What does Leo find inside the piano bench?',
+          options: ['A key', 'A second letter and a sketch of a key', 'A metronome', 'A medal'],
+          correct: 'b'
+        }
+      ],
+      justice: [
+        {
+          question: 'Why does Ms. Ortiz suggest one jug per family?',
+          options: ['She wants to close early', 'She wants fairness', 'She likes rules', 'She wants more water'],
+          correct: 'b'
+        },
+        {
+          question: 'What choice shows the neighbor doing the right thing?',
+          options: ['Taking extra water', 'Leaving the market', 'Ignoring the rule', 'Returning the second jug'],
+          correct: 'd'
+        }
+      ]
+    };
+
+    const analysisPrompts = {
+      character: [
+        'What does the character want most?',
+        'What choice shows their values?',
+        'How does the character change by the end?'
+      ],
+      theme: [
+        'What lesson does the story suggest?',
+        'Which repeated idea supports the theme?',
+        'How do characters learn from challenges?'
+      ],
+      conflict: [
+        'What problem must be solved?',
+        'Who or what stands in the way?',
+        'How does the conflict shape the character?'
+      ],
+      setting: [
+        'How does the setting affect the mood?',
+        'What details show time or place?',
+        'How would the story change in a new setting?'
+      ]
+    };
+
+    function loadLitPassage() {
+      const select = document.getElementById('lit-passage-select');
+      const data = litPassages[select.value];
+      const questions = litQuestions[select.value];
+      document.getElementById('lit-passage-title').textContent = data.title;
+      document.getElementById('lit-passage-text').innerHTML = data.text;
+      const questionHTML = `
+        <h4>📝 Close Reading Questions</h4>
+        <div class="question-container">
+          ${questions.map((q, idx) => `
+            <div class="question">
+              <p><strong>${idx + 1}. ${q.question}</strong></p>
+              <div class="answer-options">
+                ${q.options.map((opt, i) => {
+                  const letter = String.fromCharCode(97 + i);
+                  return `<label><input type="radio" name="lit-q${idx + 1}" value="${letter}"> ${opt}</label>`;
+                }).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <button type="button" class="check-answers-btn" onclick="checkLitAnswers()">Check My Answers</button>
+        <div class="results-display" id="lit-results" role="status" aria-live="polite"></div>
+      `;
+      document.getElementById('lit-questions').innerHTML = questionHTML;
+    }
+
+    function checkLitAnswers() {
+      const select = document.getElementById('lit-passage-select');
+      const questions = litQuestions[select.value];
+      let score = 0;
+      const feedback = questions.map((q, idx) => {
+        const selected = document.querySelector(`input[name="lit-q${idx + 1}"]:checked`);
+        if (selected && selected.value === q.correct) {
+          score++;
+          return `✅ Question ${idx + 1}: Correct`;
+        }
+        return `❌ Question ${idx + 1}: Review the passage for evidence.`;
+      });
+      const percent = Math.round((score / questions.length) * 100);
+      document.getElementById('lit-results').innerHTML = `
+        <h4>Your Results</h4>
+        <p><strong>Score: ${score}/${questions.length} (${percent}%)</strong></p>
+        <div>${feedback.join('<br>')}</div>
+      `;
+    }
+
+    function toggleEvidenceHints() {
+      const btn = document.querySelector('.highlight-button');
+      const hints = document.getElementById('lit-passage-text');
+      const isActive = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', String(!isActive));
+      if (!isActive) {
+        hints.insertAdjacentHTML('afterbegin', '<p id="evidence-hint"><strong>Hint:</strong> Look for words that show feelings, choices, or change.</p>');
+      } else {
+        const hint = document.getElementById('evidence-hint');
+        if (hint) hint.remove();
+      }
+    }
+
+    function generateOutline() {
+      const claim = document.getElementById('claim-input').value.trim() || 'My claim goes here.';
+      const evidence = Array.from(document.querySelectorAll('.evidence-input')).map(input => input.value.trim() || 'Evidence detail');
+      const explanations = Array.from(document.querySelectorAll('.evidence-explain')).map(input => input.value.trim() || 'Explanation');
+      document.getElementById('outline-output').innerHTML = `
+        <h4>Essay Outline</h4>
+        <p><strong>Thesis:</strong> ${claim}</p>
+        <ul>
+          ${evidence.map((item, idx) => `<li><strong>Evidence ${idx + 1}:</strong> ${item} -- ${explanations[idx]}</li>`).join('')}
+        </ul>
+      `;
+    }
+
+    function loadEssayTemplate() {
+      const template = `Introduction:
+Hook:
+Context:
+Thesis:
+
+Body Paragraph 1:
+Claim:
+Evidence:
+Explanation:
+
+Body Paragraph 2:
+Claim:
+Evidence:
+Explanation:
+
+Conclusion:
+Restate thesis:
+Insight:`;
+      document.getElementById('essay-draft').value = template;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadLitPassage();
+      const grid = document.getElementById('analysis-grid');
+      const detail = document.getElementById('analysis-detail');
+      if (grid && detail) {
+        grid.addEventListener('click', event => {
+          const card = event.target.closest('.skill-card');
+          if (!card) return;
+          const prompts = analysisPrompts[card.dataset.analysis];
+          detail.innerHTML = `
+            <h3>${card.querySelector('h3').textContent}</h3>
+            <ul>${prompts.map(prompt => `<li>${prompt}</li>`).join('')}</ul>
+          `;
+        });
+      }
+    });
   </script>
 </body>
 </html>
-

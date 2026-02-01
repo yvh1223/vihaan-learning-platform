@@ -6,6 +6,62 @@
   <title>Chapter 6 - Fantasy Book Clubs</title>
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/responsive.css">
+  <style>
+    .club-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .club-card {
+      background: #f7f6ff;
+      border: 2px solid #dcd6ff;
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .club-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .content-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .prompt-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .prompt-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+
+    .tracker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tracker-card {
+      background: #f8f9ff;
+      border: 1px solid #e0e6ff;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+  </style>
 </head>
 <body>
   <div id="header-container"></div>
@@ -17,12 +73,111 @@
     </div>
     <div class="lesson-content">
       <div class="lesson-section">
-        <h2>Interactive Content</h2>
-        <p>This chapter aligns to Unit 6 in the district syllabus. Book club guides and activities now available with engaging activities.</p>
+        <h2><span class="section-icon">📚</span>Book Club Kickoff</h2>
+        <p>Pick a role and explore how great book clubs keep conversations meaningful.</p>
+        <div class="club-grid" id="club-roles">
+          <div class="club-card" data-role="leader">
+            <h3>🧑‍🏫 Discussion Leader</h3>
+            <p>Guides the conversation with questions.</p>
+          </div>
+          <div class="club-card" data-role="summarizer">
+            <h3>📝 Summarizer</h3>
+            <p>Shares the key events and ideas.</p>
+          </div>
+          <div class="club-card" data-role="connector">
+            <h3>🔗 Connector</h3>
+            <p>Connects the story to real life.</p>
+          </div>
+          <div class="club-card" data-role="illustrator">
+            <h3>🎨 Illustrator</h3>
+            <p>Creates visual moments from the text.</p>
+          </div>
+        </div>
+        <div class="content-section" id="role-detail">
+          <h3>Choose a role to get tips and responsibilities.</h3>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h2><span class="section-icon">🗺️</span>World-Building Atlas</h2>
+        <p>Fantasy stories shine through rich settings. Select an element to explore.</p>
+        <div class="club-grid" id="world-elements">
+          <div class="club-card" data-world="place">
+            <h3>🏔️ Place</h3>
+            <p>Landscapes, cities, and hidden realms.</p>
+          </div>
+          <div class="club-card" data-world="magic">
+            <h3>✨ Magic Rules</h3>
+            <p>How power works and its limits.</p>
+          </div>
+          <div class="club-card" data-world="culture">
+            <h3>🏛️ Culture</h3>
+            <p>Traditions, foods, and celebrations.</p>
+          </div>
+          <div class="club-card" data-world="creatures">
+            <h3>🐉 Creatures</h3>
+            <p>Myths, guardians, and companions.</p>
+          </div>
+        </div>
+        <div class="content-section" id="world-detail">
+          <h3>Select an element to see guiding questions.</h3>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h2><span class="section-icon">🧭</span>Character Arc Tracker</h2>
+        <p>Track how a character changes over time.</p>
+        <div class="club-grid" id="character-select">
+          <div class="club-card" data-character="ari">
+            <h3>Ari the Sky-Runner</h3>
+            <p>Dreams of flying beyond the city walls.</p>
+          </div>
+          <div class="club-card" data-character="mira">
+            <h3>Mira the Spell-Binder</h3>
+            <p>Hides her magic until a crisis hits.</p>
+          </div>
+        </div>
+        <div class="content-section" id="character-arc">
+          <h3>Pick a character to see their arc.</h3>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h2><span class="section-icon">💬</span>Discussion Prompts</h2>
+        <p>Use these prompts to spark deep conversation during book club.</p>
+        <button type="button" class="practice-btn" onclick="generatePrompt()">🎲 New Prompt</button>
+        <div class="content-section" id="prompt-output">
+          <p>Click "New Prompt" to begin.</p>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h2><span class="section-icon">📜</span>Fantasy Excerpt Lab</h2>
+        <p>Read the excerpt and discuss how the author builds the fantasy world.</p>
+        <div class="reading-passage">
+          <div class="passage-header">
+            <h3>The Lantern City</h3>
+          </div>
+          <div class="passage-text">
+            <p>The city floated above the desert on a ring of wind. Each night, hundreds of lanterns were lit, and the glow drifted down like a waterfall of stars. Ari tightened the straps on the glider wings, listening to the wind hum through the towers.</p>
+            <p>Below, the dunes shifted like waves. Above, the Council's bells rang once, the signal that the gates would open for a single flight. Ari stepped forward, heart racing, determined to prove that the sky belonged to dreamers.</p>
+          </div>
+        </div>
+        <div class="content-section">
+          <ul class="prompt-list">
+            <li>What details show that this world is different from ours?</li>
+            <li>How does the author build mood in the first paragraph?</li>
+            <li>What might Ari want most, based on the excerpt?</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="chapter-navigation">
       <a href="chapter-5.html" class="nav-button" aria-label="Previous: Chapter 5">← Previous</a>
+      <div class="progress-indicator">
+        <div class="progress-bar"><div class="progress-fill" style="width: 55%"></div></div>
+        <span class="progress-text">Chapter 6 Progress: 55%</span>
+      </div>
       <a href="index.html" class="nav-button" aria-label="Back to English overview">Back →</a>
     </div>
   </main>
@@ -34,7 +189,138 @@
       fetch('../shared/footer.html').then(r=>r.text()).then(h=>document.getElementById('footer-container').innerHTML=h);
     };
     document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadShared):loadShared();
+
+    const roleDetails = {
+      leader: {
+        title: '🧑‍🏫 Discussion Leader',
+        tips: [
+          'Ask open-ended questions that begin with "why" or "how."',
+          'Invite quieter voices to share.',
+          'Summarize the group's ideas before moving on.'
+        ]
+      },
+      summarizer: {
+        title: '📝 Summarizer',
+        tips: [
+          'Retell key events in order.',
+          'Mention the biggest problem and how it changed.',
+          'Keep it short and clear.'
+        ]
+      },
+      connector: {
+        title: '🔗 Connector',
+        tips: [
+          'Link the story to real life or other books.',
+          'Share a personal experience related to the theme.',
+          'Ask others if they've seen a similar idea.'
+        ]
+      },
+      illustrator: {
+        title: '🎨 Illustrator',
+        tips: [
+          'Sketch a scene that shows the setting.',
+          'Include symbols that represent the theme.',
+          'Explain why you chose those details.'
+        ]
+      }
+    };
+
+    const worldDetails = {
+      place: [
+        'What makes the landscape unique?',
+        'Which locations feel safe or dangerous?',
+        'How does the setting shape the characters?'
+      ],
+      magic: [
+        'What can magic do? What can't it do?',
+        'Who controls magic in this world?',
+        'What is the cost of using power?'
+      ],
+      culture: [
+        'What traditions or rituals stand out?',
+        'How do people greet each other?',
+        'What values are most important?'
+      ],
+      creatures: [
+        'Which creatures are allies or threats?',
+        'How do they affect the plot?',
+        'What do they symbolize?'
+      ]
+    };
+
+    const characterArcs = {
+      ari: {
+        name: 'Ari the Sky-Runner',
+        stages: [
+          'Beginning: Dreams of flying beyond the city walls.',
+          'Challenge: Faces strict rules and a risky trial.',
+          'Turning Point: Decides to fly despite fear.',
+          'End: Proves that courage and skill can change the rules.'
+        ]
+      },
+      mira: {
+        name: 'Mira the Spell-Binder',
+        stages: [
+          'Beginning: Hides her magic to stay safe.',
+          'Challenge: A crisis threatens her village.',
+          'Turning Point: Uses magic to protect others.',
+          'End: Accepts her power and earns respect.'
+        ]
+      }
+    };
+
+    const discussionPrompts = [
+      'Which character changed the most, and why?',
+      'What is one rule of the fantasy world you would keep or change?',
+      'How does the setting make the story more exciting?',
+      'What choice showed real courage in this chapter?',
+      'Which moment surprised you the most?'
+    ];
+
+    function generatePrompt() {
+      const prompt = discussionPrompts[Math.floor(Math.random() * discussionPrompts.length)];
+      document.getElementById('prompt-output').innerHTML = `<p><strong>${prompt}</strong></p>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const roleGrid = document.getElementById('club-roles');
+      const roleDetail = document.getElementById('role-detail');
+      roleGrid.addEventListener('click', event => {
+        const card = event.target.closest('.club-card');
+        if (!card) return;
+        const detail = roleDetails[card.dataset.role];
+        roleDetail.innerHTML = `
+          <h3>${detail.title}</h3>
+          <ul>${detail.tips.map(tip => `<li>${tip}</li>`).join('')}</ul>
+        `;
+      });
+
+      const worldGrid = document.getElementById('world-elements');
+      const worldDetail = document.getElementById('world-detail');
+      worldGrid.addEventListener('click', event => {
+        const card = event.target.closest('.club-card');
+        if (!card) return;
+        const prompts = worldDetails[card.dataset.world];
+        worldDetail.innerHTML = `
+          <h3>${card.querySelector('h3').textContent}</h3>
+          <ul>${prompts.map(prompt => `<li>${prompt}</li>`).join('')}</ul>
+        `;
+      });
+
+      const characterGrid = document.getElementById('character-select');
+      const characterDetail = document.getElementById('character-arc');
+      characterGrid.addEventListener('click', event => {
+        const card = event.target.closest('.club-card');
+        if (!card) return;
+        const arc = characterArcs[card.dataset.character];
+        characterDetail.innerHTML = `
+          <h3>${arc.name}</h3>
+          <div class="tracker-grid">
+            ${arc.stages.map(stage => `<div class="tracker-card">${stage}</div>`).join('')}
+          </div>
+        `;
+      });
+    });
   </script>
 </body>
 </html>
-

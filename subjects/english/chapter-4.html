@@ -38,6 +38,14 @@
             margin: 2rem 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
         
         .activity-tabs, .skills-tabs, .collab-activities .activity-tabs {
             display: flex;
@@ -1109,20 +1117,151 @@
     <main class="chapter-container" id="main-content">
         <div class="chapter-header">
             <div class="chapter-number">Chapter 4</div>
-            <h1 class="chapter-title">English Chapter 4</h1>
+            <h1 class="chapter-title">Communication & Collaboration</h1>
+            <p class="chapter-description">Practice active listening, confident speaking, and teamwork with real-life scenarios.</p>
         </div>
         <div class="lesson-content">
             <div class="lesson-section">
-                <h3>Chapter Content</h3>
-                <p>Content will be enhanced with reading passages, writing activities, and interactive elements.</p>
+                <h2><span class="section-icon">🧠</span>Communication Skills Playbook</h2>
+                <p class="section-intro">Choose a skill card to learn what great communicators do and how to practice it.</p>
+                <div class="skill-grid" id="skill-grid">
+                    <div class="skill-card" data-skill="listening">
+                        <h3>🎧 Active Listening</h3>
+                        <p>Show you understand before you respond.</p>
+                    </div>
+                    <div class="skill-card" data-skill="speaking">
+                        <h3>🗣️ Clear Speaking</h3>
+                        <p>Use strong openings, organized ideas, and calm pacing.</p>
+                    </div>
+                    <div class="skill-card" data-skill="nonverbal">
+                        <h3>🙌 Nonverbal Signals</h3>
+                        <p>Body language that matches your message.</p>
+                    </div>
+                    <div class="skill-card" data-skill="empathy">
+                        <h3>💛 Empathy & Respect</h3>
+                        <p>Listen for feelings and value different viewpoints.</p>
+                    </div>
+                </div>
+                <div class="content-section" id="skill-detail">
+                    <h3>Choose a skill card to get tips and a quick practice.</h3>
+                    <p>You can click different cards to compare how skills work together.</p>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">🎙️</span>Communication Labs</h2>
+                <div class="activity-tabs" id="comm-tabs">
+                    <button type="button" class="tab-button active" data-tab="listening-lab">Listening Lab</button>
+                    <button type="button" class="tab-button" data-tab="speaking-lab">Speaking Lab</button>
+                    <button type="button" class="tab-button" data-tab="collaboration-lab">Collaboration Lab</button>
+                </div>
+                
+                <div class="content-section tab-content active" id="listening-lab">
+                    <h3>🎧 Listening Lab</h3>
+                    <div class="listening-exercise">
+                        <p><strong>Mini Dialogue:</strong> "I'm worried about the science fair. I don't think our volcano will work." "Let's test it together and make a checklist of supplies."</p>
+                        <p><strong>Goal:</strong> Identify the speaker's feeling and the helpful response.</p>
+                        <div class="audio-controls">
+                            <button type="button" class="audio-btn" onclick="startListeningTimer()">⏱️ Start 60s Focus Timer</button>
+                            <button type="button" class="audio-btn" onclick="stopListeningTimer()">⏹️ Stop Timer</button>
+                        </div>
+                        <p id="listening-timer" aria-live="polite">Timer: 60s</p>
+                        <div class="listening-questions">
+                            <p><strong>Question:</strong> What feeling is the first speaker showing?</p>
+                            <div class="answer-options">
+                                <label><input type="radio" name="listen-q1" value="a"> Excitement</label>
+                                <label><input type="radio" name="listen-q1" value="b"> Worry</label>
+                                <label><input type="radio" name="listen-q1" value="c"> Anger</label>
+                                <label><input type="radio" name="listen-q1" value="d"> Boredom</label>
+                            </div>
+                            <button type="button" class="evaluate-btn" onclick="checkListeningAnswer()">Check Answer</button>
+                            <div id="listening-feedback" role="status" aria-live="polite"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-section tab-content" id="speaking-lab">
+                    <h3>🗣️ Speaking Lab</h3>
+                    <div class="speaking-trainer">
+                        <p>Generate a speaking prompt, plan your points, then practice aloud.</p>
+                        <div class="audio-controls">
+                            <button type="button" class="generate-btn" onclick="generateSpeakingPrompt()">🎲 New Prompt</button>
+                            <button type="button" class="timer-btn" onclick="startSpeakingTimer()">⏱️ 90s Practice Timer</button>
+                        </div>
+                        <div id="speaking-prompt" class="content-section">
+                            <h4>Prompt:</h4>
+                            <p>Click "New Prompt" to begin.</p>
+                        </div>
+                        <div class="quality-grid">
+                            <div class="quality-card">Strong opening</div>
+                            <div class="quality-card">Clear main idea</div>
+                            <div class="quality-card">Two supporting details</div>
+                            <div class="quality-card">Confident ending</div>
+                        </div>
+                        <div id="speaking-feedback" role="status" aria-live="polite"></div>
+                    </div>
+                </div>
+                
+                <div class="content-section tab-content" id="collaboration-lab">
+                    <h3>🤝 Collaboration Lab</h3>
+                    <div class="conversation-simulator">
+                        <p>Pick a scenario and practice respectful, solution-focused teamwork.</p>
+                        <div class="conflict-scenarios">
+                            <div class="scenario-card" onclick="loadCollabScenario('project')">
+                                <h4>Group Project</h4>
+                                <p>One teammate isn't doing their part.</p>
+                            </div>
+                            <div class="scenario-card" onclick="loadCollabScenario('debate')">
+                                <h4>Team Debate</h4>
+                                <p>Two people disagree on the best idea.</p>
+                            </div>
+                            <div class="scenario-card" onclick="loadCollabScenario('deadline')">
+                                <h4>Deadline Rush</h4>
+                                <p>You have one day left to finish.</p>
+                            </div>
+                        </div>
+                        <div class="content-section" id="collab-output">
+                            <h4>Choose a scenario to get teamwork tips.</h4>
+                        </div>
+                        <div class="team-roles">
+                            <div class="role-card">Leader</div>
+                            <div class="role-card">Researcher</div>
+                            <div class="role-card">Designer</div>
+                            <div class="role-card">Presenter</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-section">
+                <h2><span class="section-icon">🎯</span>Presentation Studio</h2>
+                <div class="content-section">
+                    <p>Build a short presentation with a strong hook, clear structure, and confident delivery.</p>
+                    <div class="technique-grid">
+                        <div class="technique-card" onclick="loadPresentationTip('hook')">🎣 The Hook</div>
+                        <div class="technique-card" onclick="loadPresentationTip('structure')">🧱 Structure</div>
+                        <div class="technique-card" onclick="loadPresentationTip('voice')">🎚️ Voice & Pace</div>
+                        <div class="technique-card" onclick="loadPresentationTip('visuals')">🖼️ Visual Aids</div>
+                    </div>
+                    <div class="content-section" id="presentation-tip">
+                        <h4>Click a technique to get tips and an example.</h4>
+                    </div>
+                    <div class="aid-options">
+                        <div class="aid-card">Title Slide</div>
+                        <div class="aid-card">Photo + Caption</div>
+                        <div class="aid-card">Simple Chart</div>
+                        <div class="aid-card">Quote Card</div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chapter-navigation">
             <a href="chapter-3.html" class="nav-button">← Previous</a>
             <div class="progress-indicator">
                 <div class="progress-bar"><div class="progress-fill" style="width: 35%"></div></div>
+                <span class="progress-text">Chapter 4 Progress: 35%</span>
             </div>
-            <a href="assessment-1.html" class="nav-button">Next →</a>
+            <a href="chapter-5.html" class="nav-button">Next →</a>
         </div>
     </main>
     <div id="footer-container"></div>
@@ -1132,6 +1271,221 @@
             fetch('../shared/footer.html').then(r => r.text()).then(h => document.getElementById('footer-container').innerHTML = h);
         }
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', loadSharedComponents) : loadSharedComponents();
+
+        const skillDetails = {
+            listening: {
+                title: '🎧 Active Listening',
+                tips: [
+                    'Face the speaker and keep eye contact.',
+                    'Paraphrase what you heard before giving your opinion.',
+                    'Ask a follow-up question to show curiosity.'
+                ],
+                practice: 'Practice: Listen to a friend explain a game. Repeat the rules in your own words.'
+            },
+            speaking: {
+                title: '🗣️ Clear Speaking',
+                tips: [
+                    'Start with your main idea in one sentence.',
+                    'Use two supporting details or examples.',
+                    'End with a memorable closing line.'
+                ],
+                practice: 'Practice: Explain your favorite hobby in 3 sentences.'
+            },
+            nonverbal: {
+                title: '🙌 Nonverbal Signals',
+                tips: [
+                    'Stand tall with relaxed shoulders.',
+                    'Use hand gestures to highlight key points.',
+                    'Match your facial expression to your words.'
+                ],
+                practice: 'Practice: Say "I'm excited about this!" with matching body language.'
+            },
+            empathy: {
+                title: '💛 Empathy & Respect',
+                tips: [
+                    'Listen for feelings, not just facts.',
+                    'Use phrases like "I can see why..."',
+                    'Respect different ideas and ask for reasons.'
+                ],
+                practice: 'Practice: Respond to a friend who is nervous about a test.'
+            }
+        };
+
+        const speakingPrompts = [
+            'Describe a time you helped someone and why it mattered.',
+            'Convince your class to add a new recess activity.',
+            'Explain the rules of a game to a new student.',
+            'Share your opinion on whether homework should be shorter.'
+        ];
+
+        const collaborationScenarios = {
+            project: {
+                title: 'Group Project',
+                steps: [
+                    'Ask the teammate what's getting in the way.',
+                    'Offer a clear role and a short deadline.',
+                    'Check in with a friendly reminder.'
+                ],
+                line: 'Try saying: "What part would you like to own? I can help if you're stuck."'
+            },
+            debate: {
+                title: 'Team Debate',
+                steps: [
+                    'State each idea fairly before voting.',
+                    'Look for evidence to compare options.',
+                    'Combine the best parts of both ideas.'
+                ],
+                line: 'Try saying: "Let's list pros and cons so we choose the strongest plan."'
+            },
+            deadline: {
+                title: 'Deadline Rush',
+                steps: [
+                    'Split tasks into small, clear steps.',
+                    'Assign who does what and by when.',
+                    'Celebrate quick wins to stay motivated.'
+                ],
+                line: 'Try saying: "If I draft the slides, can you finish the research?"'
+            }
+        };
+
+        const presentationTips = {
+            hook: {
+                title: '🎣 The Hook',
+                example: '"Imagine our school had a garden that could feed 100 students."',
+                guidance: 'Open with a question, surprising fact, or vivid image.'
+            },
+            structure: {
+                title: '🧱 Structure',
+                example: 'Main idea → Detail 1 → Detail 2 → Closing',
+                guidance: 'Keep your ideas in a simple, easy-to-follow order.'
+            },
+            voice: {
+                title: '🎚️ Voice & Pace',
+                example: 'Pause after important points so listeners can think.',
+                guidance: 'Speak clearly, vary your tone, and avoid rushing.'
+            },
+            visuals: {
+                title: '🖼️ Visual Aids',
+                example: 'Use one strong image and a short caption.',
+                guidance: 'Make visuals support your words, not replace them.'
+            }
+        };
+
+        let listeningTimeLeft = 60;
+        let listeningInterval = null;
+        let speakingInterval = null;
+
+        function updateListeningTimer() {
+            const timerEl = document.getElementById('listening-timer');
+            timerEl.textContent = `Timer: ${listeningTimeLeft}s`;
+        }
+
+        function startListeningTimer() {
+            if (listeningInterval) clearInterval(listeningInterval);
+            listeningTimeLeft = 60;
+            updateListeningTimer();
+            listeningInterval = setInterval(() => {
+                listeningTimeLeft--;
+                updateListeningTimer();
+                if (listeningTimeLeft <= 0) {
+                    clearInterval(listeningInterval);
+                }
+            }, 1000);
+        }
+
+        function stopListeningTimer() {
+            if (listeningInterval) clearInterval(listeningInterval);
+        }
+
+        function checkListeningAnswer() {
+            const selected = document.querySelector('input[name="listen-q1"]:checked');
+            const feedback = document.getElementById('listening-feedback');
+            if (!selected) {
+                feedback.textContent = 'Choose an answer before checking.';
+                return;
+            }
+            feedback.textContent = selected.value === 'b'
+                ? '✅ Correct! The speaker is worried.'
+                : '❌ Not quite. The speaker is worried about the project.';
+        }
+
+        function generateSpeakingPrompt() {
+            const prompt = speakingPrompts[Math.floor(Math.random() * speakingPrompts.length)];
+            document.getElementById('speaking-prompt').innerHTML = `
+                <h4>Prompt:</h4>
+                <p>${prompt}</p>
+                <p><strong>Plan:</strong> Write a 1-sentence main idea and two details.</p>
+            `;
+        }
+
+        function startSpeakingTimer() {
+            const feedback = document.getElementById('speaking-feedback');
+            let timeLeft = 90;
+            if (speakingInterval) clearInterval(speakingInterval);
+            feedback.textContent = `Practice Timer: ${timeLeft}s`;
+            speakingInterval = setInterval(() => {
+                timeLeft--;
+                feedback.textContent = `Practice Timer: ${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(speakingInterval);
+                    feedback.textContent = 'Time! Review your opening, details, and closing.';
+                }
+            }, 1000);
+        }
+
+        function loadCollabScenario(key) {
+            const scenario = collaborationScenarios[key];
+            const output = document.getElementById('collab-output');
+            output.innerHTML = `
+                <h4>${scenario.title}</h4>
+                <ol>
+                    ${scenario.steps.map(step => `<li>${step}</li>`).join('')}
+                </ol>
+                <p><strong>${scenario.line}</strong></p>
+            `;
+        }
+
+        function loadPresentationTip(key) {
+            const tip = presentationTips[key];
+            const target = document.getElementById('presentation-tip');
+            target.innerHTML = `
+                <h4>${tip.title}</h4>
+                <p><strong>Tip:</strong> ${tip.guidance}</p>
+                <p><strong>Example:</strong> ${tip.example}</p>
+            `;
+        }
+
+        function activateTab(tabId) {
+            document.querySelectorAll('#comm-tabs .tab-button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabId);
+            });
+            document.querySelectorAll('.tab-content').forEach(section => {
+                section.classList.toggle('active', section.id === tabId);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillGrid = document.getElementById('skill-grid');
+            const detail = document.getElementById('skill-detail');
+            if (skillGrid && detail) {
+                skillGrid.addEventListener('click', event => {
+                    const card = event.target.closest('.skill-card');
+                    if (!card) return;
+                    const skill = skillDetails[card.dataset.skill];
+                    detail.innerHTML = `
+                        <h3>${skill.title}</h3>
+                        <ul>
+                            ${skill.tips.map(tip => `<li>${tip}</li>`).join('')}
+                        </ul>
+                        <p><strong>${skill.practice}</strong></p>
+                    `;
+                });
+            }
+            
+            document.querySelectorAll('#comm-tabs .tab-button').forEach(button => {
+                button.addEventListener('click', () => activateTab(button.dataset.tab));
+            });
+        });
     </script>
 </body>
 </html>

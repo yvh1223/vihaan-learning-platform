@@ -46,6 +46,33 @@
           <div id="food-web-tip" role="status" aria-live="polite" style="margin-top: 0.75rem;"></div>
         </div>
       </section>
+
+      <section class="lesson-section">
+        <h2>🧭 Energy Roles</h2>
+        <p>Energy starts with producers, moves to consumers, and ends with decomposers recycling nutrients.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showEnergyRole('producer')">
+            <div class="state-visual">🌿</div>
+            <h4>Producers</h4>
+            <p>Make their own food</p>
+          </div>
+          <div class="state-card" onclick="showEnergyRole('consumer')">
+            <div class="state-visual">🦊</div>
+            <h4>Consumers</h4>
+            <p>Eat other organisms</p>
+          </div>
+          <div class="state-card" onclick="showEnergyRole('decomposer')">
+            <div class="state-visual">🍄</div>
+            <h4>Decomposers</h4>
+            <p>Recycle nutrients</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🔬 Role Spotlight</h4>
+          <div id="energy-role-result" role="status" aria-live="polite">Pick a role to see examples.</div>
+        </div>
+      </section>
+
       <section class="lesson-section">
         <h2>🤝 Ecosystem Relationships</h2>
         <p>Organisms interact in different ways. Some help each other, some compete, and some hunt.</p>
@@ -106,12 +133,58 @@
           <div id="change-result" role="status" aria-live="polite">Pick a change to see how ecosystems respond.</div>
         </div>
       </section>
+
+      <section class="lesson-section">
+        <h2>⚖️ Population Balance Simulator</h2>
+        <p>When one population changes, others feel the impact. Adjust the numbers to see what happens.</p>
+        <div class="experiment-station">
+          <div class="population-controls">
+            <div><strong>Rabbits:</strong> <span id="rabbit-count">12</span>
+              <button type="button" class="try-it-button" onclick="adjustPopulation('rabbit', 1)">+1</button>
+              <button type="button" class="try-it-button" onclick="adjustPopulation('rabbit', -1)">-1</button>
+            </div>
+            <div style="margin-top: 0.5rem;"><strong>Foxes:</strong> <span id="fox-count">4</span>
+              <button type="button" class="try-it-button" onclick="adjustPopulation('fox', 1)">+1</button>
+              <button type="button" class="try-it-button" onclick="adjustPopulation('fox', -1)">-1</button>
+            </div>
+          </div>
+          <div id="population-result" role="status" aria-live="polite" style="margin-top: 0.75rem;">Balance is healthy. Try changing a population.</div>
+        </div>
+      </section>
+
       <section class="lesson-section">
         <h2>🦅 Energy Flow Lab</h2>
         <div class="experiment-station">
           <h4>🌱 Energy Flow Simulator</h4>
           <p>Build food chains and see how energy moves through ecosystems!</p>
           <button type="button" class="try-it-button" onclick="startFoodChain()">🔗 Build Food Chains</button>
+          <div class="food-chain-builder" style="margin-top: 0.75rem;">
+            <button type="button" class="try-it-button" onclick="addFoodWebItem('producer')">Add Producer</button>
+            <button type="button" class="try-it-button" onclick="addFoodWebItem('consumer')">Add Consumer</button>
+            <button type="button" class="try-it-button" onclick="addFoodWebItem('decomposer')">Add Decomposer</button>
+            <button type="button" class="try-it-button" onclick="resetFoodWeb()">Reset</button>
+            <div id="food-web-builder" role="status" aria-live="polite" style="margin-top: 0.75rem;">Your food chain will appear here.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="experiment-station quiz-station">
+        <h3><span class="section-icon">🧠</span>Ecosystems Knowledge Challenge</h3>
+        <div class="quiz-container" id="ecosystems-quiz">
+          <div class="quiz-question" id="ecosystems-quiz-question">
+            <p>What is a producer?</p>
+            <div class="quiz-options">
+              <button type="button" onclick="checkEcosystemsAnswer(0)">A) An organism that makes its own food</button>
+              <button type="button" onclick="checkEcosystemsAnswer(1)">B) An animal that eats meat</button>
+              <button type="button" onclick="checkEcosystemsAnswer(2)">C) A decomposer</button>
+              <button type="button" onclick="checkEcosystemsAnswer(3)">D) A nonliving thing</button>
+            </div>
+          </div>
+          <div class="quiz-feedback" id="ecosystems-quiz-feedback" role="status" aria-live="polite" style="display: none;"></div>
+          <div class="quiz-progress">
+            <span>Question <span id="ecosystems-question-number">1</span> of <span id="ecosystems-total-questions">8</span></span>
+            <div class="quiz-score">Score: <span id="ecosystems-quiz-score">0</span>/8</div>
+          </div>
         </div>
       </section>
       <section class="lesson-section">
@@ -152,6 +225,11 @@
       parasitism: 'Ticks on a deer: ticks benefit while the deer is harmed.',
       competition: 'Two animals competing for the same food source.'
     };
+    const energyRoleExamples = {
+      producer: 'Producers like grass, algae, and trees use sunlight to make food.',
+      consumer: 'Consumers like rabbits and foxes get energy by eating plants or animals.',
+      decomposer: 'Decomposers like fungi and worms break down dead matter and recycle nutrients.'
+    };
     const changeExamples = {
       drought: 'Less rainfall means fewer plants, so herbivores and predators may move away.',
       wildfire: 'Some fires clear old plants and help new growth, but animals must find shelter.',
@@ -177,6 +255,13 @@
       if (window.gamificationSystem) window.gamificationSystem.awardPoints('food_web_started', 6);
     }
 
+    function showEnergyRole(type) {
+      const target = document.getElementById('energy-role-result');
+      if (target) target.textContent = energyRoleExamples[type] || '';
+      showNotification('🧭 Energy flows from producers to consumers to decomposers.', 'info');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('energy_role_learned', 4);
+    }
+
     function showInteraction(type) {
       const target = document.getElementById('interaction-result');
       if (target) target.textContent = interactionExamples[type] || '';
@@ -194,6 +279,187 @@
     function startFoodChain() {
       showNotification('🔗 Food Chain Builder: Connect producers, consumers, and decomposers!', 'info');
       if (window.gamificationSystem) window.gamificationSystem.awardPoints('food_chain_started', 10);
+    }
+
+    let rabbitCount = 12;
+    let foxCount = 4;
+
+    function adjustPopulation(type, change) {
+      if (type === 'rabbit') {
+        rabbitCount = Math.max(0, rabbitCount + change);
+        document.getElementById('rabbit-count').textContent = rabbitCount;
+      }
+      if (type === 'fox') {
+        foxCount = Math.max(0, foxCount + change);
+        document.getElementById('fox-count').textContent = foxCount;
+      }
+      updatePopulationResult();
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('population_adjusted', 2);
+    }
+
+    function updatePopulationResult() {
+      const target = document.getElementById('population-result');
+      if (!target) return;
+      if (rabbitCount === 0) {
+        target.textContent = 'No rabbits means foxes may struggle to find food.';
+      } else if (foxCount === 0) {
+        target.textContent = 'No foxes means rabbits could overpopulate and eat too many plants.';
+      } else if (rabbitCount / foxCount > 5) {
+        target.textContent = 'Lots of rabbits means plants may get eaten quickly.';
+      } else if (foxCount / rabbitCount > 0.5) {
+        target.textContent = 'Too many foxes could reduce the rabbit population.';
+      } else {
+        target.textContent = 'Balance is healthy. Resources and populations are stable.';
+      }
+    }
+
+    const foodWebItems = {
+      producer: ['Grass', 'Algae', 'Oak Tree'],
+      consumer: ['Rabbit', 'Deer', 'Fox'],
+      decomposer: ['Mushroom', 'Worm', 'Bacteria']
+    };
+    const currentFoodChain = [];
+
+    function addFoodWebItem(type) {
+      const options = foodWebItems[type] || [];
+      const choice = options[Math.floor(Math.random() * options.length)];
+      currentFoodChain.push(choice);
+      const target = document.getElementById('food-web-builder');
+      if (target) target.textContent = currentFoodChain.join(' → ');
+      showNotification(`🌱 Added ${choice} to the chain.`, 'success');
+      if (window.gamificationSystem) window.gamificationSystem.awardPoints('food_chain_built', 3);
+    }
+
+    function resetFoodWeb() {
+      currentFoodChain.length = 0;
+      const target = document.getElementById('food-web-builder');
+      if (target) target.textContent = 'Your food chain will appear here.';
+    }
+
+    const ecosystemsQuizQuestions = [
+      {
+        question: 'What is a producer?',
+        options: ['An organism that makes its own food', 'An animal that eats meat', 'A decomposer', 'A nonliving thing'],
+        correct: 0,
+        explanation: 'Producers make their own food using sunlight (photosynthesis).'
+      },
+      {
+        question: 'Which is an example of mutualism?',
+        options: ['Ticks on a deer', 'Bees and flowers', 'Hawks hunting rabbits', 'Two deer fighting'],
+        correct: 1,
+        explanation: 'Both bees and flowers benefit from pollination.'
+      },
+      {
+        question: 'What happens if a drought reduces plant life?',
+        options: ['Herbivores have less food', 'Predators grow quickly', 'Nothing changes', 'More water appears'],
+        correct: 0,
+        explanation: 'Herbivores depend on plants for energy.'
+      },
+      {
+        question: 'What is the role of decomposers?',
+        options: ['Make sunlight', 'Recycle nutrients', 'Hunt animals', 'Store water'],
+        correct: 1,
+        explanation: 'Decomposers break down dead matter and return nutrients to soil.'
+      },
+      {
+        question: 'A food web shows:',
+        options: ['One path of energy', 'Many connected food chains', 'Only animals', 'Only plants'],
+        correct: 1,
+        explanation: 'Food webs show multiple interconnected energy paths.'
+      },
+      {
+        question: 'Which is a negative effect of invasive species?',
+        options: ['More biodiversity', 'Native species lose resources', 'More balance', 'Cleaner water'],
+        correct: 1,
+        explanation: 'Invasive species can outcompete native species for food and space.'
+      },
+      {
+        question: 'If foxes disappear, rabbits may:',
+        options: ['Decrease', 'Stay the same', 'Increase', 'Turn into foxes'],
+        correct: 2,
+        explanation: 'Without predators, rabbit populations can increase quickly.'
+      },
+      {
+        question: 'Which is an abiotic factor?',
+        options: ['Bird', 'Sunlight', 'Grass', 'Mushroom'],
+        correct: 1,
+        explanation: 'Sunlight is nonliving, so it is abiotic.'
+      }
+    ];
+
+    let currentEcosystemsQuestion = 0;
+    let ecosystemsQuizScore = 0;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeEcosystemsQuiz();
+      updatePopulationResult();
+    });
+
+    function initializeEcosystemsQuiz() {
+      document.getElementById('ecosystems-total-questions').textContent = ecosystemsQuizQuestions.length;
+      showEcosystemsQuestion();
+    }
+
+    function showEcosystemsQuestion() {
+      const current = ecosystemsQuizQuestions[currentEcosystemsQuestion];
+      const questionEl = document.getElementById('ecosystems-quiz-question');
+      if (!current || !questionEl) return;
+
+      questionEl.innerHTML = `
+        <p>${current.question}</p>
+        <div class="quiz-options">
+          ${current.options.map((option, index) => `
+            <button type="button" onclick="checkEcosystemsAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('ecosystems-question-number').textContent = currentEcosystemsQuestion + 1;
+      const feedback = document.getElementById('ecosystems-quiz-feedback');
+      if (feedback) feedback.style.display = 'none';
+    }
+
+    function checkEcosystemsAnswer(selectedIndex) {
+      const current = ecosystemsQuizQuestions[currentEcosystemsQuestion];
+      const feedback = document.getElementById('ecosystems-quiz-feedback');
+      if (!current || !feedback) return;
+
+      const isCorrect = selectedIndex === current.correct;
+      if (isCorrect) {
+        ecosystemsQuizScore += 1;
+        feedback.textContent = `✅ Correct! ${current.explanation}`;
+        feedback.className = 'quiz-feedback correct';
+      } else {
+        feedback.textContent = `❌ Not quite. ${current.explanation}`;
+        feedback.className = 'quiz-feedback incorrect';
+      }
+      feedback.style.display = 'block';
+      document.getElementById('ecosystems-quiz-score').textContent = ecosystemsQuizScore;
+
+      document.querySelectorAll('#ecosystems-quiz-question .quiz-options button').forEach(btn => {
+        btn.disabled = true;
+      });
+
+      setTimeout(() => {
+        currentEcosystemsQuestion += 1;
+        if (currentEcosystemsQuestion < ecosystemsQuizQuestions.length) {
+          showEcosystemsQuestion();
+        } else {
+          document.getElementById('ecosystems-quiz-question').innerHTML = `
+            <div class="quiz-complete">
+              <h4>🎉 Quiz Complete!</h4>
+              <p>You scored ${ecosystemsQuizScore} out of ${ecosystemsQuizQuestions.length}.</p>
+              <button type="button" onclick="restartEcosystemsQuiz()">Try Again</button>
+            </div>
+          `;
+        }
+      }, 1200);
+    }
+
+    function restartEcosystemsQuiz() {
+      currentEcosystemsQuestion = 0;
+      ecosystemsQuizScore = 0;
+      document.getElementById('ecosystems-quiz-score').textContent = '0';
+      showEcosystemsQuestion();
     }
     
     function showNotification(message, type = 'info') {

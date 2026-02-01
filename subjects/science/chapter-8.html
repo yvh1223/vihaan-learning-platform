@@ -44,6 +44,19 @@
           <div id="adaptation-result" role="status" aria-live="polite">Select a type to see an example.</div>
         </div>
       </section>
+
+      <section class="lesson-section">
+        <h2>🧪 Adaptation Challenge</h2>
+        <p>Read the scenario and pick the best adaptation. Then try a new one!</p>
+        <div class="experiment-station">
+          <button type="button" class="try-it-button" onclick="startAdaptationChallenge()">🎯 New Challenge</button>
+          <div id="adaptation-challenge" role="status" aria-live="polite" style="margin-top: 0.75rem;">
+            Click "New Challenge" to begin.
+          </div>
+          <div id="adaptation-options" style="margin-top: 0.75rem;"></div>
+        </div>
+      </section>
+
       <section class="lesson-section">
         <h2>🎭 Camouflage & Mimicry</h2>
         <p>Some animals blend in to avoid predators, while others copy the look of dangerous species.</p>
@@ -69,6 +82,33 @@
           <div id="camouflage-result" role="status" aria-live="polite">Choose a strategy to see an example.</div>
         </div>
       </section>
+
+      <section class="lesson-section">
+        <h2>🧠 Instinct vs Learned</h2>
+        <p>Some behaviors are instinctive (born with them) and some are learned from experience.</p>
+        <div class="states-of-matter">
+          <div class="state-card" onclick="showBehaviorType('instinct')">
+            <div class="state-visual">🧬</div>
+            <h4>Instinct</h4>
+            <p>Born with the behavior</p>
+          </div>
+          <div class="state-card" onclick="showBehaviorType('learned')">
+            <div class="state-visual">🎓</div>
+            <h4>Learned</h4>
+            <p>Gained from practice</p>
+          </div>
+          <div class="state-card" onclick="showBehaviorType('both')">
+            <div class="state-visual">🔁</div>
+            <h4>Both</h4>
+            <p>Needs instinct and learning</p>
+          </div>
+        </div>
+        <div class="experiment-station">
+          <h4>🧭 Behavior Spotlight</h4>
+          <div id="behavior-type-result" role="status" aria-live="polite">Pick a behavior type to see examples.</div>
+        </div>
+      </section>
+
       <section class="lesson-section">
         <h2>🧭 Behavior Patterns</h2>
         <p>Behaviors help animals find food, stay safe, and survive seasonal changes.</p>
@@ -104,6 +144,26 @@
           <div id="scenario-result" role="status" aria-live="polite" style="margin-top: 0.75rem;"></div>
         </div>
       </section>
+
+      <section class="experiment-station quiz-station">
+        <h3><span class="section-icon">🧠</span>Adaptations Knowledge Challenge</h3>
+        <div class="quiz-container" id="adaptations-quiz">
+          <div class="quiz-question" id="adaptations-quiz-question">
+            <p>What is camouflage used for?</p>
+            <div class="quiz-options">
+              <button type="button" onclick="checkAdaptationsAnswer(0)">A) Finding water</button>
+              <button type="button" onclick="checkAdaptationsAnswer(1)">B) Blending in to avoid predators</button>
+              <button type="button" onclick="checkAdaptationsAnswer(2)">C) Making food</button>
+              <button type="button" onclick="checkAdaptationsAnswer(3)">D) Growing faster</button>
+            </div>
+          </div>
+          <div class="quiz-feedback" id="adaptations-quiz-feedback" role="status" aria-live="polite" style="display: none;"></div>
+          <div class="quiz-progress">
+            <span>Question <span id="adaptations-question-number">1</span> of <span id="adaptations-total-questions">8</span></span>
+            <div class="quiz-score">Score: <span id="adaptations-quiz-score">0</span>/8</div>
+          </div>
+        </div>
+      </section>
       <section class="lesson-section">
         <h2>📝 Key Terms</h2>
         <ul>
@@ -134,10 +194,41 @@
       behavioral: 'Birds migrate to warmer places when food is scarce.',
       physiological: 'Camels store fat to provide energy and water in dry deserts.'
     };
+    const adaptationChallenges = [
+      {
+        prompt: 'A lizard lives on sand and needs to avoid predators.',
+        options: ['Sand-colored scales', 'Long eyelashes', 'Bright warning colors'],
+        correct: 0,
+        explanation: 'Sand-colored scales provide camouflage in the desert.'
+      },
+      {
+        prompt: 'A bird lives in a cold mountain climate.',
+        options: ['Thin feathers', 'Thick insulating feathers', 'No feathers'],
+        correct: 1,
+        explanation: 'Thick feathers help trap heat and keep the bird warm.'
+      },
+      {
+        prompt: 'A fish needs to breathe in water.',
+        options: ['Gills', 'Fur', 'Sharp claws'],
+        correct: 0,
+        explanation: 'Gills allow fish to take oxygen from water.'
+      },
+      {
+        prompt: 'A plant grows in a dry desert.',
+        options: ['Wide leaves', 'Water-storing stem', 'No roots'],
+        correct: 1,
+        explanation: 'Water-storing stems help plants survive drought.'
+      }
+    ];
     const camouflageExamples = {
       camouflage: 'A leaf insect looks like a leaf to avoid predators.',
       mimicry: 'A harmless king snake looks like a venomous coral snake.',
       warning: 'Poison dart frogs have bright colors that warn predators.'
+    };
+    const behaviorTypeExamples = {
+      instinct: 'Sea turtles crawl toward the ocean after hatching. They are born with this behavior.',
+      learned: 'A dolphin learns new tricks by watching and practicing.',
+      both: 'Birds have an instinct to sing, but they learn the exact song from adults.'
     };
     const behaviorExamples = {
       migration: 'Geese fly south in winter to find food.',
@@ -150,16 +241,48 @@
       rainforest: 'Rainforest animals use camouflage, climbing skills, and bright warning colors.'
     };
 
+    let currentAdaptationChallenge = null;
+
     function showAdaptation(type) {
       const target = document.getElementById('adaptation-result');
       if (target) target.textContent = adaptationExamples[type] || '';
       showNotification('🧩 Adaptations help organisms survive in their habitats.', 'info');
     }
 
+    function startAdaptationChallenge() {
+      currentAdaptationChallenge = adaptationChallenges[Math.floor(Math.random() * adaptationChallenges.length)];
+      const challengeTarget = document.getElementById('adaptation-challenge');
+      const optionsTarget = document.getElementById('adaptation-options');
+      if (challengeTarget) challengeTarget.textContent = currentAdaptationChallenge.prompt;
+      if (optionsTarget) {
+        optionsTarget.innerHTML = currentAdaptationChallenge.options.map((option, index) => `
+          <button type="button" class="try-it-button" onclick="checkAdaptationChallenge(${index})">${option}</button>
+        `).join('');
+      }
+    }
+
+    function checkAdaptationChallenge(selectedIndex) {
+      if (!currentAdaptationChallenge) return;
+      const challengeTarget = document.getElementById('adaptation-challenge');
+      if (selectedIndex === currentAdaptationChallenge.correct) {
+        if (challengeTarget) challengeTarget.textContent = `✅ Correct! ${currentAdaptationChallenge.explanation}`;
+        showNotification('🎯 Great match! That adaptation fits the habitat.', 'success');
+      } else {
+        if (challengeTarget) challengeTarget.textContent = `❌ Not quite. ${currentAdaptationChallenge.explanation}`;
+        showNotification('🔁 Try another challenge to practice.', 'info');
+      }
+    }
+
     function showCamouflage(type) {
       const target = document.getElementById('camouflage-result');
       if (target) target.textContent = camouflageExamples[type] || '';
       showNotification('🎭 Survival strategies can hide or protect organisms.', 'info');
+    }
+
+    function showBehaviorType(type) {
+      const target = document.getElementById('behavior-type-result');
+      if (target) target.textContent = behaviorTypeExamples[type] || '';
+      showNotification('🧠 Behaviors can be instinctive or learned.', 'info');
     }
 
     function showBehavior(type) {
@@ -180,6 +303,131 @@
       notification.textContent = message;
       document.body.appendChild(notification);
       setTimeout(() => notification.remove(), 3000);
+    }
+
+    const adaptationsQuizQuestions = [
+      {
+        question: 'What is camouflage used for?',
+        options: ['Finding water', 'Blending in to avoid predators', 'Making food', 'Growing faster'],
+        correct: 1,
+        explanation: 'Camouflage helps animals hide from predators or prey.'
+      },
+      {
+        question: 'Which is a behavioral adaptation?',
+        options: ['Thick fur', 'Hibernation', 'Sharp claws', 'Long beak'],
+        correct: 1,
+        explanation: 'Hibernation is a behavior that helps animals survive winter.'
+      },
+      {
+        question: 'A camel storing fat in its hump is a:',
+        options: ['Structural adaptation', 'Physiological adaptation', 'Behavioral adaptation', 'Learned behavior'],
+        correct: 1,
+        explanation: 'Storing fat for energy and water is a physiological adaptation.'
+      },
+      {
+        question: 'Mimicry helps animals by:',
+        options: ['Making food', 'Looking like another species', 'Making nests', 'Changing seasons'],
+        correct: 1,
+        explanation: 'Mimicry allows animals to resemble dangerous species for protection.'
+      },
+      {
+        question: 'Which is an instinct behavior?',
+        options: ['A dog learning a trick', 'Sea turtles crawling to the ocean', 'A bird learning a new song', 'A dolphin copying humans'],
+        correct: 1,
+        explanation: 'Sea turtles are born with the instinct to move toward the ocean.'
+      },
+      {
+        question: 'Nocturnal animals are active:',
+        options: ['In the morning', 'At night', 'Only in winter', 'Only in summer'],
+        correct: 1,
+        explanation: 'Nocturnal animals are active at night to avoid heat or predators.'
+      },
+      {
+        question: 'An Arctic fox\'s white fur helps it:',
+        options: ['Swim faster', 'Blend in with snow', 'Eat plants', 'Grow larger'],
+        correct: 1,
+        explanation: 'White fur provides camouflage in snowy environments.'
+      },
+      {
+        question: 'Migration is:',
+        options: ['A physical body part', 'Seasonal movement for resources', 'A way to photosynthesize', 'A type of camouflage'],
+        correct: 1,
+        explanation: 'Migration helps animals find food or warmer climates.'
+      }
+    ];
+
+    let currentAdaptationsQuestion = 0;
+    let adaptationsQuizScore = 0;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeAdaptationsQuiz();
+    });
+
+    function initializeAdaptationsQuiz() {
+      document.getElementById('adaptations-total-questions').textContent = adaptationsQuizQuestions.length;
+      showAdaptationsQuestion();
+    }
+
+    function showAdaptationsQuestion() {
+      const current = adaptationsQuizQuestions[currentAdaptationsQuestion];
+      const questionEl = document.getElementById('adaptations-quiz-question');
+      if (!current || !questionEl) return;
+
+      questionEl.innerHTML = `
+        <p>${current.question}</p>
+        <div class="quiz-options">
+          ${current.options.map((option, index) => `
+            <button type="button" onclick="checkAdaptationsAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('adaptations-question-number').textContent = currentAdaptationsQuestion + 1;
+      const feedback = document.getElementById('adaptations-quiz-feedback');
+      if (feedback) feedback.style.display = 'none';
+    }
+
+    function checkAdaptationsAnswer(selectedIndex) {
+      const current = adaptationsQuizQuestions[currentAdaptationsQuestion];
+      const feedback = document.getElementById('adaptations-quiz-feedback');
+      if (!current || !feedback) return;
+
+      const isCorrect = selectedIndex === current.correct;
+      if (isCorrect) {
+        adaptationsQuizScore += 1;
+        feedback.textContent = `✅ Correct! ${current.explanation}`;
+        feedback.className = 'quiz-feedback correct';
+      } else {
+        feedback.textContent = `❌ Not quite. ${current.explanation}`;
+        feedback.className = 'quiz-feedback incorrect';
+      }
+      feedback.style.display = 'block';
+      document.getElementById('adaptations-quiz-score').textContent = adaptationsQuizScore;
+
+      document.querySelectorAll('#adaptations-quiz-question .quiz-options button').forEach(btn => {
+        btn.disabled = true;
+      });
+
+      setTimeout(() => {
+        currentAdaptationsQuestion += 1;
+        if (currentAdaptationsQuestion < adaptationsQuizQuestions.length) {
+          showAdaptationsQuestion();
+        } else {
+          document.getElementById('adaptations-quiz-question').innerHTML = `
+            <div class="quiz-complete">
+              <h4>🎉 Quiz Complete!</h4>
+              <p>You scored ${adaptationsQuizScore} out of ${adaptationsQuizQuestions.length}.</p>
+              <button type="button" onclick="restartAdaptationsQuiz()">Try Again</button>
+            </div>
+          `;
+        }
+      }, 1200);
+    }
+
+    function restartAdaptationsQuiz() {
+      currentAdaptationsQuestion = 0;
+      adaptationsQuizScore = 0;
+      document.getElementById('adaptations-quiz-score').textContent = '0';
+      showAdaptationsQuestion();
     }
   </script>
 </body>

@@ -48,6 +48,19 @@
             color: var(--primary-color);
         }
 
+        .axis-label {
+            position: absolute;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .tick-label {
+            position: absolute;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
         .vocab-card {
             background-color: var(--bg-card);
             padding: var(--spacing-lg);
@@ -77,6 +90,76 @@
             text-align: center;
             box-shadow: var(--shadow-sm);
         }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .concept-card {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .practice-lab {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .practice-task {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border: 2px solid transparent;
+        }
+
+        .practice-task.correct {
+            border-color: var(--success-color);
+            background-color: rgba(var(--success-color-rgb), 0.08);
+        }
+
+        .practice-task.incorrect {
+            border-color: var(--accent-color);
+            background-color: rgba(255, 99, 71, 0.08);
+        }
+
+        .input-row {
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: center;
+            justify-content: center;
+            margin: var(--spacing-md) 0;
+            flex-wrap: wrap;
+        }
+
+        .input-field {
+            width: 70px;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--bg-accent);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            text-align: center;
+        }
+
+        .answer-feedback {
+            margin-top: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .quick-check {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin: var(--spacing-lg) 0;
+        }
     </style>
 </head>
 <body>
@@ -89,6 +172,40 @@
         </div>
         
         <div class="lesson-content">
+            <section class="lesson-section">
+                <h2>🧭 Coordinate Plane Basics</h2>
+                <p>The coordinate plane is a map made of two number lines that cross.</p>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h4>Learning Goals</h4>
+                        <ul>
+                            <li>Identify the x-axis, y-axis, and origin.</li>
+                            <li>Plot and read ordered pairs (x, y).</li>
+                            <li>Describe locations using directions and distance.</li>
+                        </ul>
+                    </div>
+                    <div class="concept-card">
+                        <h4>Key Parts</h4>
+                        <ul>
+                            <li><strong>Origin:</strong> (0, 0)</li>
+                            <li><strong>x-axis:</strong> left ↔ right</li>
+                            <li><strong>y-axis:</strong> down ↕ up</li>
+                            <li><strong>Scale:</strong> Each grid step is 1 unit</li>
+                        </ul>
+                    </div>
+                    <div class="concept-card">
+                        <h4>Quadrants (Extension)</h4>
+                        <p>Quadrants are the four regions made by the axes.</p>
+                        <ul>
+                            <li>Quadrant I: (+, +)</li>
+                            <li>Quadrant II: (−, +)</li>
+                            <li>Quadrant III: (−, −)</li>
+                            <li>Quadrant IV: (+, −)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
             <section class="lesson-section">
                 <h2>📍 Interactive Coordinate Plane</h2>
                 <p>Click anywhere on the grid to plot points and explore coordinates!</p>
@@ -121,6 +238,58 @@
                     <button type="button" class="try-it-button" onclick="startShapeBuilder()">
                         🔷 Shape Builder
                     </button>
+                    <button type="button" class="try-it-button" onclick="clearPlottedPoints()">
+                        🧹 Clear Grid
+                    </button>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧪 Coordinate Practice Lab</h2>
+                <p>Read the clue, enter your answer, and check your work.</p>
+                <div class="practice-lab">
+                    <div class="practice-task" data-type="pair" data-expected="4,2">
+                        <h4>Robot Moves</h4>
+                        <p>Start at (0, 0). Move 4 right and 2 up.</p>
+                        <div class="input-row">
+                            <label>
+                                x:
+                                <input type="number" class="input-field coord-x" aria-label="x coordinate">
+                            </label>
+                            <label>
+                                y:
+                                <input type="number" class="input-field coord-y" aria-label="y coordinate">
+                            </label>
+                        </div>
+                        <button type="button" class="try-it-button" onclick="checkPracticeAnswer(this)">Check</button>
+                        <div class="answer-feedback" role="status"></div>
+                    </div>
+                    <div class="practice-task" data-type="pair" data-expected="-3,-1">
+                        <h4>Treasure Clue</h4>
+                        <p>Move 3 left and 1 down from the origin.</p>
+                        <div class="input-row">
+                            <label>
+                                x:
+                                <input type="number" class="input-field coord-x" aria-label="x coordinate">
+                            </label>
+                            <label>
+                                y:
+                                <input type="number" class="input-field coord-y" aria-label="y coordinate">
+                            </label>
+                        </div>
+                        <button type="button" class="try-it-button" onclick="checkPracticeAnswer(this)">Check</button>
+                        <div class="answer-feedback" role="status"></div>
+                    </div>
+                    <div class="practice-task" data-type="number" data-expected="7">
+                        <h4>Distance on a Line</h4>
+                        <p>How far apart are (−2, 4) and (5, 4) horizontally?</p>
+                        <div class="input-row">
+                            <input type="number" class="input-field single-answer" aria-label="distance answer">
+                            <span>units</span>
+                        </div>
+                        <button type="button" class="try-it-button" onclick="checkPracticeAnswer(this)">Check</button>
+                        <div class="answer-feedback" role="status"></div>
+                    </div>
                 </div>
             </section>
             
@@ -144,6 +313,28 @@
                         </details>
                     </div>
                 </div>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h4>Table to Graph</h4>
+                        <p>Plot the points from this table.</p>
+                        <ul>
+                            <li>(1, 2)</li>
+                            <li>(2, 4)</li>
+                            <li>(3, 6)</li>
+                            <li>(4, 8)</li>
+                        </ul>
+                        <p>What pattern do you notice?</p>
+                    </div>
+                    <div class="concept-card">
+                        <h4>Coordinate Stories</h4>
+                        <p>A delivery drone starts at (−1, 1) and flies to (2, 1).</p>
+                        <p>How far did it travel? Which direction?</p>
+                        <details>
+                            <summary>Answer</summary>
+                            <div>3 units to the right.</div>
+                        </details>
+                    </div>
+                </div>
                 <div class="fraction-grid">
                     <div class="fraction-card" onclick="startMapActivity()">
                         <h4>🗺️ City Maps</h4>
@@ -153,6 +344,25 @@
                         <h4>📊 Data Plotting</h4>
                         <p>Create graphs from real data</p>
                     </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ Quick Check</h2>
+                <div class="quick-check">
+                    <ol>
+                        <li>What ordered pair is 2 left and 5 up from the origin?</li>
+                        <li>If x = 0, where is the point located?</li>
+                        <li>Which quadrant has x positive and y negative?</li>
+                    </ol>
+                    <details>
+                        <summary>Show answers</summary>
+                        <ol>
+                            <li>(−2, 5)</li>
+                            <li>On the y-axis.</li>
+                            <li>Quadrant IV.</li>
+                        </ol>
+                    </details>
                 </div>
             </section>
         </div>
@@ -210,6 +420,33 @@
             yAxis.className = 'axis-line';
             yAxis.style.cssText = `left: 200px; top: 0; width: 2px; height: 100%;`;
             grid.appendChild(yAxis);
+
+            const xLabel = document.createElement('div');
+            xLabel.className = 'axis-label';
+            xLabel.textContent = 'x';
+            xLabel.style.cssText = 'left: 372px; top: 208px;';
+            grid.appendChild(xLabel);
+
+            const yLabel = document.createElement('div');
+            yLabel.className = 'axis-label';
+            yLabel.textContent = 'y';
+            yLabel.style.cssText = 'left: 210px; top: 4px;';
+            grid.appendChild(yLabel);
+
+            for (let i = -5; i <= 5; i++) {
+                if (i === 0) continue;
+                const xTick = document.createElement('div');
+                xTick.className = 'tick-label';
+                xTick.textContent = i;
+                xTick.style.cssText = `left: ${200 + i * 40 - 6}px; top: 208px;`;
+                grid.appendChild(xTick);
+
+                const yTick = document.createElement('div');
+                yTick.className = 'tick-label';
+                yTick.textContent = i;
+                yTick.style.cssText = `left: 210px; top: ${200 - i * 40 - 6}px;`;
+                grid.appendChild(yTick);
+            }
         }
         
         function plotPoint(event) {
@@ -239,6 +476,39 @@
             showNotification(`📍 Plotted point (${coordX}, ${coordY})`, 'success');
             if (window.gamificationSystem) {
                 window.gamificationSystem.awardPoints('point_plotted', 1);
+            }
+        }
+
+        function clearPlottedPoints() {
+            const grid = document.querySelector('.coordinate-grid');
+            grid.querySelectorAll('.coordinate-point, .point-label').forEach((el) => el.remove());
+            showNotification('🧹 Cleared plotted points.', 'success');
+        }
+
+        function checkPracticeAnswer(button) {
+            const task = button.closest('.practice-task');
+            const expected = task.dataset.expected.split(',').map((value) => value.trim());
+            const type = task.dataset.type;
+            let isCorrect = false;
+
+            if (type === 'pair') {
+                const xValue = task.querySelector('.coord-x').value.trim();
+                const yValue = task.querySelector('.coord-y').value.trim();
+                isCorrect = xValue !== '' && yValue !== '' && xValue === expected[0] && yValue === expected[1];
+            } else {
+                const value = task.querySelector('.single-answer').value.trim();
+                isCorrect = value !== '' && value === expected[0];
+            }
+
+            task.classList.remove('correct', 'incorrect');
+            task.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+            const feedback = task.querySelector('.answer-feedback');
+            if (isCorrect) {
+                feedback.textContent = 'Correct! Nice work.';
+                if (window.gamificationSystem) window.gamificationSystem.awardPoints('practice_correct', 3);
+            } else {
+                feedback.textContent = `Not quite. Try again or check the hint: ${expected.join(', ')}`;
             }
         }
         
